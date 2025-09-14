@@ -1,100 +1,242 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="google-site-verification" content="1Ot9i9lyK2dI-pkJhqNMOhWEaCs2sLtynUPW9u4KtNQ" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BHOLA NATH BASAK</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bhola Nath Basak | Appointment Website</title>
+<style>
+  body { margin:0; font-family: Arial,sans-serif; background:#f4f4f4; }
+  header { background:#1a2a6c; color:white; text-align:center; padding:20px; }
+  header img { width:180px; height:180px; border-radius:50%; border:5px solid #fff; object-fit:cover; }
+  header h1 { margin:10px 0 0; font-size:2em; color:#fbd46d; }
+  nav { display:flex; justify-content:center; background:#000; flex-wrap:wrap; }
+  nav a { color:white; text-decoration:none; padding:15px 20px; display:block; }
+  nav a:hover { background:#fbd46d; color:black; border-radius:5px; }
+  section { padding:30px; max-width:900px; margin:20px auto; background:white; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.3); }
+  section h2 { color:#1a2a6c; margin-bottom:15px; }
+  footer { text-align:center; padding:20px; background:#000; color:#ccc; margin-top:20px; }
+  /* Admin Section */
+  #adminSection { display:none; background:#000; color:white; padding:20px; border-radius:10px; }
+  #adminSection table { width:100%; border-collapse:collapse; margin-top:20px; }
+  #adminSection table td, #adminSection table th { border:1px solid #fff; padding:8px; color:white; }
+  #adminSection table th { background:#1a2a6c; }
+  button { padding:5px 10px; cursor:pointer; }
+</style>
 </head>
 <body>
 
-  <header>
-    <img src="myphoto.jpg" alt="Bhola Nath Basak Photo">
-    <h1>BHOLA NATH BASAK</h1>
-  </header>
+<header>
+  <img src="myphoto.jpg" alt="Bhola Nath Basak">
+  <h1>Bhola Nath Basak</h1>
+</header>
 
-  <nav>
-    <a href="#profile">Profile</a>
-    <a href="#education">Education</a>
-    <a href="#culture">Culture</a>
-    <a href="#hobbies">Hobbies</a>
-    <a href="#appointment">Appointment</a>
-    <a href="#thoughts">Thoughts</a>
-    <a href="https://www.linkedin.com/in/bhola-nath-basak-3b6684242?trk=contact-info" target="_blank">LinkedIn</a>
-    <a href="https://www.facebook.com/share/17HAzeWpsW/" target="_blank">Facebook</a>
-  </nav>
+<nav>
+  <a href="#profile">Profile</a>
+  <a href="#appointment">Appointment</a>
+  <a href="#contact">Contact</a>
+  <a href="https://www.linkedin.com/in/bhola-nath-basak-3b6684242?trk=contact-info" target="_blank">LinkedIn</a>
+  <a href="https://www.facebook.com/share/17HAzeWpsW/" target="_blank">Facebook</a>
+</nav>
 
-  <section id="profile">
-    <h2>Profile</h2>
-    <p>I am BHOLA NATH BASAK, a passionate learner and explorer of life’s endless opportunities. With strong roots and a clear vision, I always aim to inspire others while growing myself in every possible field.</p>
-  </section>
+<section id="profile">
+  <h2>Profile</h2>
+  <p>I am Bhola Nath Basak, a passionate learner and explorer. I aim to inspire others while growing myself.</p>
+</section>
 
-  <section id="education">
-    <h2>Education</h2>
-    <p>I believe education is the foundation of growth. Over the years, I have gathered knowledge not only from books but also from real-life experiences, which shaped my way of thinking and problem-solving abilities.</p>
-  </section>
+<section id="appointment">
+  <h2>Request Appointment</h2>
+  <form id="appointmentForm">
+    <label>Name: <input type="text" id="visitorName" required></label><br><br>
+    <label>Email: <input type="email" id="visitorEmail" required></label><br><br>
+    <label>Country Code: 
+      <select id="countryCode">
+        <option value="+971">UAE +971</option>
+        <option value="+91">India +91</option>
+        <option value="+1">USA +1</option>
+        <!-- Add more country codes -->
+      </select>
+    </label><br><br>
+    <label>WhatsApp: <input type="text" id="visitorWhatsapp" required></label><br><br>
+    <label>Purpose: <input type="text" id="visitorPurpose" required></label><br><br>
+    <label>Country: <input type="text" id="visitorCountry" required></label><br><br>
+    <button type="submit">Submit Appointment</button>
+  </form>
+  <p id="apptNumber"></p>
+</section>
 
-  <section id="culture">
-    <h2>Culture</h2>
-    <p>Culture defines who we are. I embrace traditions, values, and respect for diversity while blending it with modern ideas to create a balanced lifestyle.</p>
-  </section>
+<section id="contact">
+  <h2>Contact</h2>
+  <p>Email: starananda24@gmail.com</p>
+  <p>Phone: +971 506309833</p>
+</section>
 
-  <section id="hobbies">
-    <h2>Hobbies</h2>
-    <p>I enjoy engaging in creative and recreational activities, whether it is sports, art, music, or technology. Hobbies give me balance and energy to face daily challenges.</p>
-  </section>
+<!-- Admin login -->
+<section id="admin">
+  <h2>Admin Login</h2>
+  <input type="password" id="adminPass" placeholder="Enter Admin Password">
+  <button onclick="loginAdmin()">Login</button>
+</section>
 
-  <section id="appointment">
-    <h2>Book Appointment</h2>
-    <p>Fill the form to get an appointment:</p>
-    <input type="text" id="visitorName" placeholder="Full Name">
-    <input type="email" id="visitorEmail" placeholder="Email ID">
-    <input type="text" id="visitorWhatsapp" placeholder="Whatsapp Number">
-    <input type="text" id="visitorCountry" placeholder="Country">
-    <input type="date" id="visitorDate">
-    <input type="time" id="visitorTime">
-    <textarea id="visitorPurpose" placeholder="Purpose of Appointment"></textarea>
-    <button onclick="submitAppointment()">Submit Appointment</button>
-    <p id="visitorAppointmentNumber"></p>
-  </section>
+<section id="adminSection">
+  <h2>Admin Panel</h2>
+  <button onclick="logoutAdmin()">Logout</button>
+  <table>
+    <thead>
+      <tr>
+        <th>Appt No.</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>WhatsApp</th>
+        <th>Purpose</th>
+        <th>Country</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody id="adminTableBody"></tbody>
+  </table>
+</section>
 
-  <section id="thoughts">
-    <h2>Thoughts</h2>
-    <p>“Life is not about waiting for opportunities, it is about creating them.” My belief is simple: with determination and honesty, nothing is impossible.</p>
-  </section>
+<footer>
+  © 2025 Bhola Nath Basak | Appointment Website
+</footer>
 
-  <section id="adminLogin">
-    <h2>Admin Login</h2>
-    <input type="password" id="adminPass" placeholder="Enter Password">
-    <button onclick="loginAdmin()">Login</button>
-  </section>
+<script>
+let appointments = [];
+let adminPassword = "admin123"; // change your admin password here
 
-  <section id="adminSection" style="display:none;">
-    <h2>Admin Panel</h2>
-    <button onclick="logoutAdmin()">Logout</button>
-    <table>
-      <thead>
-        <tr>
-          <th>Appointment No</th>
-          <th>Date</th>
-          <th>Time</th>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Whatsapp</th>
-          <th>Country</th>
-          <th>Purpose</th>
-          <th>Action / Status</th>
-        </tr>
-      </thead>
-      <tbody id="adminTableBody"></tbody>
-    </table>
-  </section>
+const appointmentForm = document.getElementById('appointmentForm');
+const apptNumber = document.getElementById('apptNumber');
+const adminSection = document.getElementById('adminSection');
+const adminTableBody = document.getElementById('adminTableBody');
 
-  <footer>
-    <p>© 2025 BHOLA NATH BASAK | Personal Biography & Appointment Website</p>
-  </footer>
+appointmentForm.addEventListener('submit', function(e){
+  e.preventDefault();
+  const appt = {
+    number: 'APTWBNB' + String(appointments.length+1).padStart(2,'0'),
+    date: new Date().toLocaleDateString(),
+    time: new Date().toLocaleTimeString(),
+    name: document.getElementById('visitorName').value,
+    email: document.getElementById('visitorEmail').value,
+    countryCode: document.getElementById('countryCode').value,
+    whatsapp: document.getElementById('visitorWhatsapp').value,
+    purpose: document.getElementById('visitorPurpose').value,
+    country: document.getElementById('visitorCountry').value,
+    status: 'Pending'
+  };
+  appointments.push(appt);
+  apptNumber.textContent = 'Your Appointment Number: ' + appt.number;
+  printAppointment(appt);
+  appointmentForm.reset();
+});
 
-  <script src="script.js"></script>
+function printAppointment(appt){
+  const dateObj = new Date();
+  let hour = dateObj.getHours();
+  const minute = dateObj.getMinutes().toString().padStart(2,'0');
+  const ampm = hour >= 12 ? 'PM' : 'AM';
+  hour = hour % 12; hour = hour ? hour : 12;
+  const timeStr = hour + ':' + minute + ' ' + ampm;
+  const dateStr = dateObj.toLocaleDateString();
+
+  const printContent = `
+  <html>
+  <head><title>E_Appointment Letter</title>
+  <style>
+  body { font-family:"Segoe UI",Arial,sans-serif; padding:30px; }
+  .letter-container { border:2px solid #1a2a6c; border-radius:15px; padding:30px; max-width:700px; margin:auto; }
+  h1 { text-align:center; color:#1a2a6c; }
+  .details table { width:100%; border-collapse:collapse; }
+  .details table td { padding:10px; border:1px solid #ccc; }
+  .footer { text-align:center; margin-top:30px; font-weight:bold; color:#1a2a6c; }
+  </style>
+  </head>
+  <body>
+    <div class="letter-container">
+      <h1>E_Appointment Letter</h1>
+      <p>Date Generated: ${dateStr}</p>
+      <p>Appointment with: <strong>Bhola Nath Basak</strong></p>
+      <div class="details">
+        <table>
+          <tr><td>Appointment No.</td><td>${appt.number}</td></tr>
+          <tr><td>Appointment Date</td><td>${appt.date}</td></tr>
+          <tr><td>Appointment Time</td><td>${timeStr}</td></tr>
+          <tr><td>Visitor Name</td><td>${appt.name}</td></tr>
+          <tr><td>Email</td><td>${appt.email}</td></tr>
+          <tr><td>WhatsApp</td><td>${appt.countryCode} ${appt.whatsapp}</td></tr>
+          <tr><td>Purpose</td><td>${appt.purpose}</td></tr>
+          <tr><td>Country</td><td>${appt.country}</td></tr>
+        </table>
+      </div>
+      <p class="footer">Keep this E-Appointment safe and bring it during your appointment.</p>
+    </div>
+  </body>
+  </html>
+  `;
+  const win = window.open('', '_blank');
+  win.document.write(printContent);
+  win.document.close();
+  win.print();
+}
+
+// Admin Functions
+function loginAdmin(){
+  const pass = document.getElementById('adminPass').value;
+  if(pass === adminPassword){
+    document.getElementById('admin').style.display='none';
+    adminSection.style.display='block';
+    renderAdminTable();
+  } else { alert("Incorrect Password"); }
+}
+
+function logoutAdmin(){
+  adminSection.style.display='none';
+  document.getElementById('admin').style.display='block';
+  document.getElementById('adminPass').value='';
+}
+
+function renderAdminTable(){
+  adminTableBody.innerHTML='';
+  appointments.forEach((appt,index)=>{
+    const row = document.createElement('tr');
+    let statusText = appt.status;
+    let statusColor = 'white';
+    if(appt.status === 'Accepted') statusColor = 'green';
+    else if(appt.status === 'Rejected') statusColor = 'red';
+
+    row.innerHTML = `
+      <td>${appt.number}</td>
+      <td>${appt.date}</td>
+      <td>${appt.time}</td>
+      <td>${appt.name}</td>
+      <td>${appt.email}</td>
+      <td>${appt.countryCode} ${appt.whatsapp}</td>
+      <td>${appt.purpose}</td>
+      <td>${appt.country}</td>
+      <td style="color:${statusColor}; font-weight:bold;">
+        ${appt.status === 'Pending' ? `<button onclick="accept(${index})">Accept</button>
+        <button onclick="reject(${index})">Reject</button>` : statusText}
+      </td>
+    `;
+    adminTableBody.appendChild(row);
+  });
+}
+
+function accept(index){
+  appointments[index].status='Accepted';
+  alert("GOOD LUCK FOR YOUR APPOINTMENT SCREENING");
+  console.log(`SMS to ${appointments[index].countryCode}${appointments[index].whatsapp}: GOOD LUCK FOR YOUR APPOINTMENT SCREENING`);
+  renderAdminTable();
+}
+
+function reject(index){
+  appointments[index].status='Rejected';
+  alert("SORRY FOR REJECTING YOUR APPOINTMENT DUE TO NOT MATCHING YOUR CRITERIA");
+  console.log(`SMS to ${appointments[index].countryCode}${appointments[index].whatsapp}: SORRY FOR REJECTING YOUR APPOINTMENT`);
+  renderAdminTable();
+}
+</script>
+
 </body>
 </html>

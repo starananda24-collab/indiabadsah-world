@@ -1,98 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bhola Nath Basak</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="google-site-verification" content="1Ot9i9lyK2dI-pkJhqNMOhWEaCs2sLtynUPW9u4KtNQ" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BHOLA NATH BASAK</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header>
-  <img src="myphoto.jpg" alt="Bhola Nath Basak Photo">
-  <h1>Bhola Nath Basak</h1>
-</header>
+  <header>
+    <img src="myphoto.jpg" alt="Bhola Nath Basak Photo">
+    <h1>BHOLA NATH BASAK</h1>
+  </header>
 
-<nav>
-  <a href="#profile">Profile</a>
-  <a href="#education">Education</a>
-  <a href="#culture">Culture</a>
-  <a href="#achievements">Achievements</a>
-  <a href="#hobbies">Hobbies</a>
-  <a href="#contact">Contact</a>
-</nav>
+  <nav>
+    <a href="#profile">Profile</a>
+    <a href="#education">Education</a>
+    <a href="#culture">Culture</a>
+    <a href="#hobbies">Hobbies</a>
+    <a href="#appointment">Appointment</a>
+    <a href="#thoughts">Thoughts</a>
+    <a href="https://www.linkedin.com/in/bhola-nath-basak-3b6684242?trk=contact-info" target="_blank">LinkedIn</a>
+    <a href="https://www.facebook.com/share/17HAzeWpsW/" target="_blank">Facebook</a>
+  </nav>
 
-<section id="profile">
-<h2>Profile</h2>
-<p>I am Bhola Nath Basak, a passionate learner and explorer of life’s endless opportunities. I always aim to inspire others while growing myself in every field.</p>
-</section>
+  <section id="profile">
+    <h2>Profile</h2>
+    <p>I am BHOLA NATH BASAK, a passionate learner and explorer of life’s endless opportunities. With strong roots and a clear vision, I always aim to inspire others while growing myself in every possible field.</p>
+  </section>
 
-<section id="education">
-<h2>Education</h2>
-<p>Education is the foundation of growth. I have gathered knowledge from books and real-life experiences which shaped my way of thinking and problem-solving abilities.</p>
-</section>
+  <section id="education">
+    <h2>Education</h2>
+    <p>I believe education is the foundation of growth. Over the years, I have gathered knowledge not only from books but also from real-life experiences, which shaped my way of thinking and problem-solving abilities.</p>
+  </section>
 
-<section id="culture">
-<h2>Culture</h2>
-<p>Culture defines who we are. I embrace traditions, values, and respect for diversity while blending it with modern ideas to create a balanced lifestyle.</p>
-</section>
+  <section id="culture">
+    <h2>Culture</h2>
+    <p>Culture defines who we are. I embrace traditions, values, and respect for diversity while blending it with modern ideas to create a balanced lifestyle.</p>
+  </section>
 
-<section id="achievements">
-<h2>Achievements</h2>
-<p>Every step of life is an achievement — from personal milestones to professional success. My journey reflects perseverance, hard work, and dedication.</p>
-</section>
+  <section id="hobbies">
+    <h2>Hobbies</h2>
+    <p>I enjoy engaging in creative and recreational activities, whether it is sports, art, music, or technology. Hobbies give me balance and energy to face daily challenges.</p>
+  </section>
 
-<section id="hobbies">
-<h2>Hobbies</h2>
-<p>I enjoy creative and recreational activities like sports, art, music, and technology. Hobbies give me balance and energy to face daily challenges.</p>
-</section>
+  <section id="appointment">
+    <h2>Book Appointment</h2>
+    <p>Fill the form to get an appointment:</p>
+    <input type="text" id="visitorName" placeholder="Full Name">
+    <input type="email" id="visitorEmail" placeholder="Email ID">
+    <input type="text" id="visitorWhatsapp" placeholder="Whatsapp Number">
+    <input type="text" id="visitorCountry" placeholder="Country">
+    <input type="date" id="visitorDate">
+    <input type="time" id="visitorTime">
+    <textarea id="visitorPurpose" placeholder="Purpose of Appointment"></textarea>
+    <button onclick="submitAppointment()">Submit Appointment</button>
+    <p id="visitorAppointmentNumber"></p>
+  </section>
 
-<section id="contact">
-<h2>Appointments</h2>
+  <section id="thoughts">
+    <h2>Thoughts</h2>
+    <p>“Life is not about waiting for opportunities, it is about creating them.” My belief is simple: with determination and honesty, nothing is impossible.</p>
+  </section>
 
-<div id="appointmentForm">
-  <h3>Book an Appointment</h3>
-  <input type="text" id="visitorName" placeholder="Full Name">
-  <input type="email" id="visitorEmail" placeholder="Email">
-  <input type="tel" id="visitorWhatsapp" placeholder="Whatsapp">
-  <input type="text" id="visitorCountry" placeholder="Country">
-  <input type="date" id="visitorDate">
-  <input type="time" id="visitorTime">
-  <textarea id="visitorPurpose" placeholder="Purpose"></textarea>
-  <button onclick="submitAppointment()">Submit Appointment</button>
-</div>
+  <section id="adminLogin">
+    <h2>Admin Login</h2>
+    <input type="password" id="adminPass" placeholder="Enter Password">
+    <button onclick="loginAdmin()">Login</button>
+  </section>
 
-<div id="visitorAppointmentNumber"></div>
+  <section id="adminSection" style="display:none;">
+    <h2>Admin Panel</h2>
+    <button onclick="logoutAdmin()">Logout</button>
+    <table>
+      <thead>
+        <tr>
+          <th>Appointment No</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Whatsapp</th>
+          <th>Country</th>
+          <th>Purpose</th>
+          <th>Action / Status</th>
+        </tr>
+      </thead>
+      <tbody id="adminTableBody"></tbody>
+    </table>
+  </section>
 
-<div id="adminLogin">
-<h3>Admin Login</h3>
-<input type="password" id="adminPass" placeholder="Enter Password">
-<button onclick="loginAdmin()">Login</button>
-</div>
+  <footer>
+    <p>© 2025 BHOLA NATH BASAK | Personal Biography & Appointment Website</p>
+  </footer>
 
-<div id="adminSection" style="display:none;">
-<h3>Admin Panel</h3>
-<button onclick="logoutAdmin()">Logout</button>
-<table border="1">
-<thead>
-<tr>
-<th>Appointment #</th>
-<th>Date</th>
-<th>Time</th>
-<th>Name</th>
-<th>Email</th>
-<th>Whatsapp</th>
-<th>Country</th>
-<th>Purpose</th>
-<th>Status</th>
-</tr>
-</thead>
-<tbody id="adminTableBody"></tbody>
-</table>
-</div>
-
-</section>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

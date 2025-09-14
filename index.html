@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bhola Nath Basak | Personal Website</title>
-
   <style>
     * { margin:0; padding:0; box-sizing:border-box; font-family:"Segoe UI", Arial, sans-serif; }
     body { background:#f4f7fb; color:#333; line-height:1.6; }
@@ -21,11 +20,16 @@
     .contact a { display:inline-block; margin:8px; text-decoration:none; padding:10px 15px; border-radius:6px; color:white; font-size:0.95rem; transition:0.3s; }
     .email { background:#d93025; }
     .linkedin { background:#0077b5; }
-    .github { background:#333; }
     .facebook { background:#1877f2; }
-    .instagram { background:#e1306c; }
     .whatsapp { background:#25d366; }
     .contact a:hover { opacity:0.8; }
+    .appointment-btn { margin-top:20px; display:inline-block; background:#1a2a6c; color:white; padding:12px 20px; border-radius:6px; text-decoration:none; transition:0.3s; }
+    .appointment-btn:hover { opacity:0.8; }
+    form label { display:block; margin:10px 0 5px; font-weight:bold; }
+    form input, form select, form button { width:100%; padding:10px; margin-bottom:15px; border-radius:6px; border:1px solid #ccc; font-size:1rem; }
+    form button { background:#1a2a6c; color:white; border:none; cursor:pointer; transition:0.3s; }
+    form button:hover { opacity:0.8; }
+    #confirmation { margin-top:20px; font-weight:bold; color:#1a2a6c; }
   </style>
 </head>
 <body>
@@ -42,6 +46,7 @@
     <a href="#achievements">Achievements</a>
     <a href="#hobbies">Hobbies</a>
     <a href="#contact">Contact</a>
+    <a href="#appointment">Appointment</a>
   </nav>
 
   <section id="about">
@@ -68,15 +73,92 @@
     <h2>Contact</h2>
     <a href="mailto:starananda24@gmail.com" class="email">📧 Email</a>
     <a href="https://www.linkedin.com/in/bhola-nath-basak-3b6684242?trk=contact-info" class="linkedin" target="_blank">🔗 LinkedIn</a>
-    <a href="https://github.com/starananda24-collab" class="github" target="_blank">💻 GitHub</a>
     <a href="https://www.facebook.com/share/17HAzeWpsW/" class="facebook" target="_blank">📘 Facebook</a>
-    <a href="https://instagram.com" class="instagram" target="_blank">📸 Instagram</a>
     <a href="https://wa.me/971506309833" class="whatsapp" target="_blank">💬 WhatsApp</a>
+  </section>
+
+  <!-- Appointment System -->
+  <section id="appointment">
+    <h2>Book an Appointment</h2>
+    <form id="appointmentForm">
+      <label for="apptDate">Select Date:</label>
+      <input type="date" id="apptDate" required>
+
+      <label for="apptTime">Select Time:</label>
+      <input type="time" id="apptTime" required>
+
+      <label for="fullName">Full Name:</label>
+      <input type="text" id="fullName" placeholder="Your Name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" placeholder="you@example.com" required>
+
+      <label for="countryCode">Country Code:</label>
+      <select id="countryCode" required>
+        <option value="+1">+1 USA</option>
+        <option value="+44">+44 UK</option>
+        <option value="+91">+91 India</option>
+        <option value="+971">+971 UAE</option>
+      </select>
+
+      <label for="whatsapp">WhatsApp Number:</label>
+      <input type="tel" id="whatsapp" placeholder="1234567890" required>
+
+      <label for="purpose">Purpose:</label>
+      <input type="text" id="purpose" placeholder="Reason for appointment" required>
+
+      <label for="country">Country:</label>
+      <input type="text" id="country" placeholder="Your country" required>
+
+      <button type="submit">Submit Appointment</button>
+    </form>
+
+    <div id="confirmation"></div>
   </section>
 
   <footer>
     <p>© 2025 Bhola Nath Basak | Personal Website</p>
   </footer>
+
+  <script>
+    let appointmentCounter = 1;
+
+    document.getElementById('appointmentForm').addEventListener('submit', function(e){
+      e.preventDefault();
+
+      const apptNumber = 'APTWBNB' + String(appointmentCounter).padStart(2, '0');
+      appointmentCounter++;
+
+      const data = {
+        number: apptNumber,
+        date: document.getElementById('apptDate').value,
+        time: document.getElementById('apptTime').value,
+        name: document.getElementById('fullName').value,
+        email: document.getElementById('email').value,
+        countryCode: document.getElementById('countryCode').value,
+        whatsapp: document.getElementById('whatsapp').value,
+        purpose: document.getElementById('purpose').value,
+        country: document.getElementById('country').value
+      };
+
+      document.getElementById('confirmation').innerHTML = `
+        Appointment <strong>${data.number}</strong> submitted successfully!<br>
+        Selected: ${data.date} at ${data.time}.<br>
+        <button onclick="acceptAppointment('${data.number}')">Accept</button>
+        <button onclick="rejectAppointment('${data.number}')">Reject</button>
+      `;
+
+      this.reset();
+    });
+
+    function acceptAppointment(apptNumber){
+      alert(`Appointment ${apptNumber} accepted!\nMessage sent: "GOOD LUCK FOR YOUR APPOINTMENT SCREENING"`);
+    }
+
+    function rejectAppointment(apptNumber){
+      alert(`Appointment ${apptNumber} rejected!\nMessage sent: "SORRY FOR REJECTING YOUR APPOINTMENT DUE TO NOT MATCHING YOUR CRITERIA"`);
+    }
+  </script>
 
 </body>
 </html>

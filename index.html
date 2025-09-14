@@ -31,8 +31,16 @@
   table { width:100%; border-collapse:collapse; margin-top:20px; }
   th, td { border:1px solid #ccc; padding:10px; text-align:center; }
   th { background:#1a2a6c; color:white; }
-  .admin-section { display:none; max-width:900px; margin:20px auto; padding:20px; background:#eef; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
+  .admin-section { display:none; max-width:900px; margin:20px auto; padding:20px; background:#000; color:#fff; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.3); }
+  .admin-section table th { background:#333; color:#fff; }
+  .admin-section table td { color:#fff; }
+  .admin-section button { background:#1a2a6c; color:white; border:none; padding:5px 10px; margin:2px; border-radius:5px; cursor:pointer; }
+  .admin-section button:hover { opacity:0.8; }
   .login-container { max-width:400px; margin:20px auto; background:#eef; padding:20px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
+  @media (max-width:600px) {
+    nav { flex-direction:column; }
+    section { margin:20px 10px; padding:20px; }
+  }
 </style>
 </head>
 <body>
@@ -81,7 +89,7 @@
   <a href="https://wa.me/971506309833" class="whatsapp" target="_blank">💬 WhatsApp</a>
 </section>
 
-<!-- Appointment for Visitors -->
+<!-- Appointment Section -->
 <section id="appointment">
   <h2>Book an Appointment</h2>
   <form id="appointmentForm">
@@ -103,6 +111,7 @@
       <option value="+44">+44 UK</option>
       <option value="+91">+91 India</option>
       <option value="+971">+971 UAE</option>
+      <!-- Add more countries if needed -->
     </select>
 
     <label for="whatsapp">WhatsApp Number:</label>
@@ -130,7 +139,10 @@
 
 <!-- Admin Section -->
 <section class="admin-section" id="adminSection">
-  <h2>Manage Appointments</h2>
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+    <h2>Manage Appointments</h2>
+    <button onclick="logoutAdmin()" style="background:#b21f1f;">Logout</button>
+  </div>
   <table>
     <thead>
       <tr>
@@ -145,8 +157,7 @@
         <th>Action</th>
       </tr>
     </thead>
-    <tbody id="adminTableBody">
-    </tbody>
+    <tbody id="adminTableBody"></tbody>
   </table>
 </section>
 
@@ -157,17 +168,15 @@
 <script>
 let appointmentCounter = 1;
 let appointments = [];
-
 const appointmentForm = document.getElementById('appointmentForm');
 const confirmation = document.getElementById('confirmation');
 const adminTableBody = document.getElementById('adminTableBody');
 const adminSection = document.getElementById('adminSection');
-const adminPassword = "admin123"; // change to a strong password
+const adminPassword = "admin123"; // change to strong password
 
-// Visitor submits appointment
 appointmentForm.addEventListener('submit', function(e){
   e.preventDefault();
-  const apptNumber = 'APTWBNB' + String(appointmentCounter).padStart(2, '0');
+  const apptNumber = 'APTWBNB' + String(appointmentCounter).padStart(2,'0');
   appointmentCounter++;
 
   const data = {
@@ -184,27 +193,30 @@ appointmentForm.addEventListener('submit', function(e){
   };
 
   appointments.push(data);
-
   confirmation.innerHTML = `Your appointment number is <strong>${data.number}</strong>. You will be contacted after review.`;
-
   this.reset();
 });
 
-// Admin Login
 function loginAdmin(){
   const pass = document.getElementById('adminPass').value;
   if(pass === adminPassword){
-    adminSection.style.display = 'block';
-    document.getElementById('admin').style.display = 'none';
+    adminSection.style.display='block';
+    document.getElementById('admin').style.display='none';
     renderAdminTable();
   } else {
     alert("Incorrect password!");
   }
 }
 
-// Render admin table
+function logoutAdmin(){
+  adminSection.style.display='none';
+  document.getElementById('admin').style.display='block';
+  document.getElementById('adminPass').value='';
+  alert("Admin logged out!");
+}
+
 function renderAdminTable(){
-  adminTableBody.innerHTML = '';
+  adminTableBody.innerHTML='';
   appointments.forEach((appt,index)=>{
     const row = document.createElement('tr');
     row.innerHTML = `
@@ -228,13 +240,13 @@ function renderAdminTable(){
 }
 
 function acceptAppointment(index){
-  appointments[index].status = "Accepted";
+  appointments[index].status="Accepted";
   alert(`Appointment ${appointments[index].number} accepted!\nMessage sent: "GOOD LUCK FOR YOUR APPOINTMENT SCREENING"`);
   renderAdminTable();
 }
 
 function rejectAppointment(index){
-  appointments[index].status = "Rejected";
+  appointments[index].status="Rejected";
   alert(`Appointment ${appointments[index].number} rejected!\nMessage sent: "SORRY FOR REJECTING YOUR APPOINTMENT DUE TO NOT MATCHING YOUR CRITERIA"`);
   renderAdminTable();
 }

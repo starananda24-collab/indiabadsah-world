@@ -31,12 +31,17 @@
   table { width:100%; border-collapse:collapse; margin-top:20px; }
   th, td { border:1px solid #ccc; padding:10px; text-align:center; }
   th { background:#1a2a6c; color:white; }
+  /* Admin Section Styling */
   .admin-section { display:none; max-width:900px; margin:20px auto; padding:20px; background:#000; color:#fff; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.3); }
   .admin-section table th { background:#333; color:#fff; }
   .admin-section table td { color:#fff; }
   .admin-section button { background:#1a2a6c; color:white; border:none; padding:5px 10px; margin:2px; border-radius:5px; cursor:pointer; }
   .admin-section button:hover { opacity:0.8; }
-  .login-container { max-width:400px; margin:20px auto; background:#eef; padding:20px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
+  /* Admin Login Styling */
+  .login-container { max-width:400px; margin:20px auto; background:#000; color:#fff; padding:20px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.3); }
+  .login-container input { background:#222; color:#fff; border:1px solid #555; }
+  .login-container button { background:#1a2a6c; color:white; border:none; cursor:pointer; }
+  .login-container button:hover { opacity:0.8; }
   @media (max-width:600px) {
     nav { flex-direction:column; }
     section { margin:20px 10px; padding:20px; }
@@ -89,47 +94,35 @@
   <a href="https://wa.me/971506309833" class="whatsapp" target="_blank">💬 WhatsApp</a>
 </section>
 
-<!-- Appointment Section -->
 <section id="appointment">
   <h2>Book an Appointment</h2>
   <form id="appointmentForm">
     <label for="apptDate">Select Date:</label>
     <input type="date" id="apptDate" required>
-
     <label for="apptTime">Select Time:</label>
     <input type="time" id="apptTime" required>
-
     <label for="fullName">Full Name:</label>
     <input type="text" id="fullName" placeholder="Your Name" required>
-
     <label for="email">Email:</label>
     <input type="email" id="email" placeholder="you@example.com" required>
-
     <label for="countryCode">Country Code:</label>
     <select id="countryCode" required>
       <option value="+1">+1 USA</option>
       <option value="+44">+44 UK</option>
       <option value="+91">+91 India</option>
       <option value="+971">+971 UAE</option>
-      <!-- Add more countries if needed -->
     </select>
-
     <label for="whatsapp">WhatsApp Number:</label>
     <input type="tel" id="whatsapp" placeholder="1234567890" required>
-
     <label for="purpose">Purpose:</label>
     <input type="text" id="purpose" placeholder="Reason for appointment" required>
-
     <label for="country">Country:</label>
     <input type="text" id="country" placeholder="Your country" required>
-
     <button type="submit">Submit Appointment</button>
   </form>
-
   <div id="confirmation"></div>
 </section>
 
-<!-- Admin Login -->
 <section id="admin" class="login-container">
   <h2>Admin Login</h2>
   <label for="adminPass">Enter Password:</label>
@@ -137,7 +130,6 @@
   <button onclick="loginAdmin()">Login</button>
 </section>
 
-<!-- Admin Section -->
 <section class="admin-section" id="adminSection">
   <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
     <h2>Manage Appointments</h2>
@@ -172,13 +164,12 @@ const appointmentForm = document.getElementById('appointmentForm');
 const confirmation = document.getElementById('confirmation');
 const adminTableBody = document.getElementById('adminTableBody');
 const adminSection = document.getElementById('adminSection');
-const adminPassword = "admin123"; // change to strong password
+const adminPassword = "admin123";
 
 appointmentForm.addEventListener('submit', function(e){
   e.preventDefault();
   const apptNumber = 'APTWBNB' + String(appointmentCounter).padStart(2,'0');
   appointmentCounter++;
-
   const data = {
     number: apptNumber,
     date: document.getElementById('apptDate').value,
@@ -191,7 +182,6 @@ appointmentForm.addEventListener('submit', function(e){
     country: document.getElementById('country').value,
     status: "Pending"
   };
-
   appointments.push(data);
   confirmation.innerHTML = `Your appointment number is <strong>${data.number}</strong>. You will be contacted after review.`;
   this.reset();
@@ -212,7 +202,6 @@ function logoutAdmin(){
   adminSection.style.display='none';
   document.getElementById('admin').style.display='block';
   document.getElementById('adminPass').value='';
-  alert("Admin logged out!");
 }
 
 function renderAdminTable(){
@@ -225,29 +214,27 @@ function renderAdminTable(){
       <td>${appt.time}</td>
       <td>${appt.name}</td>
       <td>${appt.email}</td>
-      <td>${appt.countryCode}${appt.whatsapp}</td>
+      <td>${appt.countryCode} ${appt.whatsapp}</td>
       <td>${appt.purpose}</td>
       <td>${appt.country}</td>
       <td>
-        ${appt.status === "Pending" ? `
-          <button onclick="acceptAppointment(${index})">Accept</button>
-          <button onclick="rejectAppointment(${index})">Reject</button>
-        ` : appt.status}
+        ${appt.status === 'Pending' ? `<button onclick="accept(${index})">Accept</button>
+        <button onclick="reject(${index})">Reject</button>` : appt.status}
       </td>
     `;
     adminTableBody.appendChild(row);
   });
 }
 
-function acceptAppointment(index){
-  appointments[index].status="Accepted";
-  alert(`Appointment ${appointments[index].number} accepted!\nMessage sent: "GOOD LUCK FOR YOUR APPOINTMENT SCREENING"`);
+function accept(index){
+  appointments[index].status='Accepted';
+  alert("GOOD LUCK FOR YOUR APPOINTMENT SCREENING");
   renderAdminTable();
 }
 
-function rejectAppointment(index){
-  appointments[index].status="Rejected";
-  alert(`Appointment ${appointments[index].number} rejected!\nMessage sent: "SORRY FOR REJECTING YOUR APPOINTMENT DUE TO NOT MATCHING YOUR CRITERIA"`);
+function reject(index){
+  appointments[index].status='Rejected';
+  alert("SORRY FOR REJECTING YOUR APPOINTMENT DUE TO NOT MATCHING YOUR CRITERIA");
   renderAdminTable();
 }
 </script>

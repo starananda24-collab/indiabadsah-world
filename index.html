@@ -14,6 +14,7 @@ nav{display:flex;justify-content:center;background:rgba(0,0,0,0.8);flex-wrap:wra
 nav a{color:white;text-decoration:none;padding:10px 15px;display:block;transition:background 0.3s,color 0.3s;cursor:pointer;}
 nav a:hover{background:#fbd46d;color:black;border-radius:5px;}
 #statusSearch {margin-left:10px;padding:5px;border-radius:5px;border:none;}
+#statusResult {margin-left:10px;}
 section{padding:40px 20px;max-width:900px;margin:auto;background:rgba(255,255,255,0.1);margin-bottom:30px;border-radius:12px;box-shadow:0px 4px 15px rgba(0,0,0,0.5);}
 section h2{color:#ffe66d;margin-bottom:15px;}
 .form-box{background:rgba(0,0,0,0.7);padding:20px;border-radius:12px;color:white;max-width:500px;margin:auto;}
@@ -51,6 +52,7 @@ th, td{padding:8px;text-align:center;}
   <a onclick="showSection('adminLogin')">Admin Login</a>
   <input type="text" id="statusSearch" placeholder="Visitor Status: Enter Appt No" onkeypress="if(event.key==='Enter'){checkStatus();}">
 </nav>
+<div id="statusResult"></div>
 
 <!-- Full Profile Sections -->
 <section id="profile"><h2>Profile</h2><p>I am INDIA BADSAH, a passionate learner and explorer of life’s endless opportunities. I aim to inspire others while growing myself in every possible field.</p></section>
@@ -136,89 +138,86 @@ th, td{padding:8px;text-align:center;}
 
 <script>
 let appointmentCounter = localStorage.getItem("appointmentCounter")?parseInt(localStorage.getItem("appointmentCounter")):1;
-let visitors = JSON.parse(localStorage.getItem("visitors")||"{}");
-const ADMIN_USER="admin", ADMIN_PASS="1234";
+let visitors = JSON.parse(localStorage.getItem("visitors"))||{};
+const ADMIN_USER="admin";
+const ADMIN_PASS="1234";
 
 function showSection(id){
-  document.querySelectorAll("section").forEach(sec=>sec.classList.add("hidden"));
+  document.querySelectorAll("section").forEach(s=>s.classList.add("hidden"));
   document.getElementById(id).classList.remove("hidden");
 }
 
-// Visitor Form Submit
-document.getElementById("appointmentForm")?.addEventListener("submit", function(e){
+// Visitor Form Submission
+document.getElementById("appointmentForm").addEventListener("submit",function(e){
   e.preventDefault();
   const name=document.getElementById("vname").value.trim();
+  const date=document.getElementById("vdate").value;
+  const time=document.getElementById("vtime").value;
   const phone=document.getElementById("vphone").value.trim();
-  const vdate=document.getElementById("vdate").value;
-  const vtime=document.getElementById("vtime").value;
-  if(!name||!phone||!vdate||!vtime){alert("Please fill mandatory fields: Name, Phone, Date, Time"); return;}
-  const apm="APMTWBNB"+String(appointmentCounter).padStart(2,'0');
-  appointmentCounter++;
-  localStorage.setItem("appointmentCounter", appointmentCounter);
+  if(!name || !date || !time || !phone){alert("Please fill mandatory fields"); return;}
+  const number="APMTWBNB"+String(appointmentCounter).padStart(2,"0");
+  appointmentCounter++; localStorage.setItem("appointmentCounter",appointmentCounter);
   const data={
-    number:apm,
+    number:number,
     name:name,
-    dob:document.getElementById("vdob").value,
     address:document.getElementById("vaddress").value,
     country:document.getElementById("vcountry").value,
-    date:vdate,
-    time:vtime,
-    phone:document.getElementById("ccode").value+" "+phone,
+    dob:document.getElementById("vdob").value,
+    date:date,
+    time:time,
+    phone:document.getElementById("ccode").value+phone,
     purpose:document.getElementById("vpurpose").value,
     passport:document.getElementById("vpassport").value||"NA",
     email:document.getElementById("vemail").value+document.getElementById("emaildomain").value,
     status:"Pending",
     submitted:new Date()
   };
-  visitors[apm]=data;
-  localStorage.setItem("visitors", JSON.stringify(visitors));
-  alert("Appointment sent successfully! Your number: "+apm);
+  visitors[number]=data; localStorage.setItem("visitors",JSON.stringify(visitors));
+  alert("Appointment sent successfully: "+number);
+  this.reset();
   printAppointment(data);
-  document.getElementById("appointmentForm").reset();
 });
 
-// Print function
+// Print Layout
 function printAppointment(data){
   const printWin=window.open("","_blank");
   let [hour,minute]=data.time.split(":");
-  hour=parseInt(hour);
-  const ampm=hour>=12?"PM":"AM";
-  hour=hour%12||12;
-  const time12=hour+":"+minute+" "+ampm;
+  hour=parseInt(hour); const ampm=hour>=12?"PM":"AM"; hour=hour%12||12; const time12=hour+":"+minute+" "+ampm;
   printWin.document.write(`<html><head><title>Appointment Letter</title><style>
-    body{font-family:Arial; padding:20px;} h1{color:#fbd46d;}
+    body{font-family:Arial;padding:30px;background:#f4f4f9;}
+    h1{color:#1a2a6c;text-align:center;border-bottom:2px solid #fbd46d;padding-bottom:10px;}
+    p{font-size:16px;margin:5px 0;}
+    .info-box{background:#fff;padding:15px;border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,0.3);}
+    .highlight{color:#fbd46d;font-weight:bold;}
   </style></head><body>`);
-  printWin.document.write("<h1>E_Appointment Letter</h1>");
-  printWin.document.write(`<p><b>Appointment No:</b> ${data.number}</p>`);
-  printWin.document.write(`<p><b>Generated On:</b> ${new Date(data.submitted).toLocaleDateString()} ${new Date(data.submitted).toLocaleTimeString()}</p>`);
-  printWin.document.write(`<p><b>Visitor Name:</b> ${data.name}</p>`);
-  printWin.document.write(`<p><b>Date of Birth:</b> ${data.dob}</p>`);
-  printWin.document.write(`<p><b>Address:</b> ${data.address}</p>`);
-  printWin.document.write(`<p><b>Country:</b> ${data.country}</p>`);
-  printWin.document.write(`<p><b>Visit Date:</b> ${data.date}</p>`);
-  printWin.document.write(`<p><b>Time of Visit:</b> ${time12}</p>`);
-  printWin.document.write(`<p><b>To Meet:</b> BHOLA NATH BASAK</p>`);
-  printWin.document.write(`<p><b>Passport:</b> ${data.passport}</p>`);
-  printWin.document.write(`<p><b>Email:</b> ${data.email}</p>`);
-  printWin.document.write(`<p><b>Contact:</b> ${data.phone}</p>`);
-  printWin.document.write("</body></html>");
-  printWin.print();
+  printWin.document.write("<h1>E_Appointment Letter</h1><div class='info-box'>");
+  printWin.document.write(`<p><span class="highlight">Appointment No:</span> ${data.number}</p>`);
+  printWin.document.write(`<p><span class="highlight">Generated On:</span> ${new Date(data.submitted).toLocaleDateString()} ${new Date(data.submitted).toLocaleTimeString()}</p>`);
+  printWin.document.write(`<p><span class="highlight">Visitor Name:</span> ${data.name}</p>`);
+  printWin.document.write(`<p><span class="highlight">Date of Birth:</span> ${data.dob}</p>`);
+  printWin.document.write(`<p><span class="highlight">Address:</span> ${data.address}</p>`);
+  printWin.document.write(`<p><span class="highlight">Country:</span> ${data.country}</p>`);
+  printWin.document.write(`<p><span class="highlight">Visit Date:</span> ${data.date}</p>`);
+  printWin.document.write(`<p><span class="highlight">Time of Visit:</span> ${time12}</p>`);
+  printWin.document.write(`<p><span class="highlight">To Meet:</span> BHOLA NATH BASAK</p>`);
+  printWin.document.write(`<p><span class="highlight">Passport:</span> ${data.passport}</p>`);
+  printWin.document.write(`<p><span class="highlight">Email:</span> ${data.email}</p>`);
+  printWin.document.write(`<p><span class="highlight">Contact:</span> ${data.phone}</p>`);
+  printWin.document.write('</div></body></html>'); printWin.print();
 }
 
-// Admin login
+// Admin login/logout
 function adminLogin(){
   const u=document.getElementById("adminUser").value;
   const p=document.getElementById("adminPass").value;
-  if(u===ADMIN_USER && p===ADMIN_PASS){
-    showSection("adminDashboard"); loadAdminTable();
-  } else alert("Invalid Credentials!");
+  if(u===ADMIN_USER && p===ADMIN_PASS){showSection("adminDashboard"); loadAdminTable();}
+  else alert("Invalid Credentials!");
 }
 function adminLogout(){showSection("adminLogin");}
 
-// Load admin table
+// Load Admin Table
 function loadAdminTable(){
-  const tbody=document.querySelector("#visitorTable tbody");
-  tbody.innerHTML="";
+  const tbody=document.querySelector("#visitorTable tbody"); tbody.innerHTML="";
   Object.values(visitors).forEach(v=>{
     const tr=document.createElement("tr");
     let acceptBtn=`<button ${v.status!=='Pending'?'disabled':''} style="background:${v.status==='Accepted'?'yellow':'#28a745'};" onclick="updateStatus('${v.number}','Accepted')">Accept</button>`;
@@ -230,27 +229,36 @@ function loadAdminTable(){
   });
 }
 
-// Update status
+// Update Status
 function updateStatus(num,status){
   visitors[num].status=status;
-  localStorage.setItem("visitors", JSON.stringify(visitors));
+  localStorage.setItem("visitors",JSON.stringify(visitors));
   loadAdminTable();
 }
 
-// Visitor status search
+// Visitor Status Search
 function checkStatus(){
   const apn=document.getElementById("statusSearch").value.trim();
+  const resultDiv=document.getElementById("statusResult");
+  resultDiv.innerHTML="";
   if(!apn){alert("Enter Appointment Number"); return;}
   if(visitors[apn]){
     const v=visitors[apn];
-    let msg="";
-    if(v.status==='Accepted'){msg="APPOINTMENT ACCEPTED";}
-    else if(v.status==='Rejected'){msg="APPOINTMENT REJECTED";}
-    else{msg="ADMIN BUSY";}
-    alert(`Appointment Number: ${v.number}\nName: ${v.name}\nDate: ${v.date}\nTime: ${v.time}\nStatus: ${msg}`);
-  } else alert("Appointment number not found!");
+    let btn=document.createElement("button");
+    btn.disabled=true; btn.style.padding="8px 12px"; btn.style.border="none"; btn.style.borderRadius="5px"; btn.style.marginTop="5px"; btn.style.fontWeight="bold";
+    if(v.status==='Accepted'){btn.innerText="APPOINTMENT ACCEPTED"; btn.style.background="#28a745"; btn.style.color="white";}
+    else if(v.status==='Rejected'){btn.innerText="APPOINTMENT REJECTED"; btn.style.background="#dc3545"; btn.style.color="white";}
+    else{btn.innerText="ADMIN BUSY"; btn.style.background="#ff69b4"; btn.style.color="white";}
+    let details=`<div style="color:white;background:rgba(0,0,0,0.6);padding:10px;border-radius:8px;margin-top:5px;">
+      <p><b>Appointment No:</b> ${v.number}</p>
+      <p><b>Name:</b> ${v.name}</p>
+      <p><b>Date:</b> ${v.date}</p>
+      <p><b>Time:</b> ${v.time}</p>
+      <p><b>Purpose:</b> ${v.purpose}</p>
+    </div>`;
+    resultDiv.innerHTML=details; resultDiv.appendChild(btn);
+  } else {resultDiv.innerHTML="<p style='color:white;background:red;padding:5px;border-radius:5px;'>Appointment number not found!</p>";}
 }
 </script>
-
 </body>
 </html>

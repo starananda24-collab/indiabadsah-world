@@ -1,280 +1,237 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bhola Nath Basak | Personal Website</title>
-<style>
-  * { margin:0; padding:0; box-sizing:border-box; font-family:"Segoe UI", Arial, sans-serif; }
-  body { background:#f4f7fb; color:#333; line-height:1.6; }
-  header { background:linear-gradient(135deg,#1a2a6c,#b21f1f,#fdbb2d); color:white; text-align:center; padding:50px 20px; }
-  header img { width:150px; height:150px; border-radius:50%; border:4px solid white; margin-bottom:15px; }
-  header h1 { font-size:2.5rem; margin-bottom:10px; }
-  header p { font-size:1.2rem; opacity:0.9; }
-  nav { display:flex; justify-content:center; background:#222; flex-wrap:wrap; }
-  nav a { color:white; text-decoration:none; padding:15px 20px; display:block; transition:0.3s; }
-  nav a:hover { background:#fdbb2d; color:black; }
-  section { max-width:900px; margin:40px auto; padding:30px; background:white; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
-  section h2 { margin-bottom:15px; color:#1a2a6c; }
-  footer { text-align:center; padding:20px; background:#222; color:#ccc; margin-top:40px; }
-  .contact a { display:inline-block; margin:8px; text-decoration:none; padding:10px 15px; border-radius:6px; color:white; font-size:0.95rem; transition:0.3s; }
-  .email { background:#d93025; }
-  .linkedin { background:#0077b5; }
-  .facebook { background:#1877f2; }
-  .whatsapp { background:#25d366; }
-  .contact a:hover { opacity:0.8; }
-  form label { display:block; margin:10px 0 5px; font-weight:bold; }
-  form input, form select, form button { width:100%; padding:10px; margin-bottom:15px; border-radius:6px; border:1px solid #ccc; font-size:1rem; }
-  form button { background:#1a2a6c; color:white; border:none; cursor:pointer; transition:0.3s; }
-  form button:hover { opacity:0.8; }
-  #confirmation { margin-top:20px; font-weight:bold; color:#1a2a6c; }
-  table { width:100%; border-collapse:collapse; margin-top:20px; }
-  th, td { border:1px solid #ccc; padding:10px; text-align:center; }
-  th { background:#1a2a6c; color:white; }
-  .admin-section { display:none; max-width:900px; margin:20px auto; padding:20px; background:#eef; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
-  .login-container { max-width:400px; margin:20px auto; background:#eef; padding:20px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bhola Nath Basak - Official Website</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: linear-gradient(to right, #f0f8ff, #e6e6fa); margin: 0; padding: 0; }
+    header { background: #004080; color: white; padding: 20px; text-align: center; }
+    section { padding: 20px; margin: 20px; background: white; border-radius: 10px; box-shadow: 0 0 10px gray; }
+    h2 { color: #004080; }
+    label { display: block; margin-top: 10px; font-weight: bold; }
+    input, select, textarea, button { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background: #004080; color: white; }
+    .accepted { background-color: #d4edda !important; color: green; font-weight: bold; }
+    .rejected { background-color: #f8d7da !important; color: red; font-weight: bold; }
+    .social-links { text-align: center; margin-top: 20px; }
+    .social-links a { margin: 0 10px; font-size: 24px; text-decoration: none; }
+    .print-section { display: none; padding: 20px; border: 2px solid black; margin-top: 20px; }
+  </style>
 </head>
 <body>
+  <header>
+    <h1>Bhola Nath Basak</h1>
+    <p>Official Website & Appointment Portal</p>
+  </header>
 
-<header>
-  <img src="myphoto.jpg" alt="Bhola Nath Basak Photo">
-  <h1>Bhola Nath Basak</h1>
-  <p>Passionate Learner | Explorer | Innovator</p>
-</header>
+  <section>
+    <h2>Biography</h2>
+    <p>Hello, I am <b>Bhola Nath Basak</b>. This is my official website where visitors can learn more about my work and request appointments for various purposes including abroad tours, jobs in abroad, and job counselling for abroad.</p>
+  </section>
 
-<nav>
-  <a href="#about">About</a>
-  <a href="#education">Education</a>
-  <a href="#achievements">Achievements</a>
-  <a href="#hobbies">Hobbies</a>
-  <a href="#contact">Contact</a>
-  <a href="#appointment">Appointment</a>
-  <a href="#admin">Admin</a>
-</nav>
+  <section>
+    <h2>Visitor E-Appointment Form</h2>
+    <form id="appointmentForm">
+      <label for="visitorName">Visitor Name:</label>
+      <input type="text" id="visitorName" required>
 
-<section id="about">
-  <h2>About Me</h2>
-  <p>I am Bhola Nath Basak, a passionate learner and explorer of life’s endless opportunities. With strong roots and a clear vision, I always aim to inspire others while growing myself in every possible field.</p>
-</section>
+      <label for="address">Address:</label>
+      <textarea id="address" required></textarea>
 
-<section id="education">
-  <h2>Education</h2>
-  <p>I believe education is the foundation of growth. Over the years, I have gathered knowledge not only from books but also from real-life experiences, which shaped my way of thinking and problem-solving abilities.</p>
-</section>
+      <label for="country">Country:</label>
+      <input list="countryList" id="country" required placeholder="Start typing your country...">
+      <datalist id="countryList">
+        <option value="Afghanistan">
+        <option value="Albania">
+        <option value="Algeria">
+        <option value="Australia">
+        <option value="Bangladesh">
+        <option value="Belgium">
+        <option value="Bhutan">
+        <option value="Brazil">
+        <option value="Canada">
+        <option value="China">
+        <option value="Egypt">
+        <option value="France">
+        <option value="Germany">
+        <option value="India">
+        <option value="Italy">
+        <option value="Japan">
+        <option value="Kuwait">
+        <option value="Malaysia">
+        <option value="Nepal">
+        <option value="Netherlands">
+        <option value="New Zealand">
+        <option value="Pakistan">
+        <option value="Qatar">
+        <option value="Russia">
+        <option value="Saudi Arabia">
+        <option value="Singapore">
+        <option value="South Africa">
+        <option value="Spain">
+        <option value="Sri Lanka">
+        <option value="Sweden">
+        <option value="Switzerland">
+        <option value="Thailand">
+        <option value="Turkey">
+        <option value="UAE">
+        <option value="UK">
+        <option value="USA">
+      </datalist>
 
-<section id="achievements">
-  <h2>Achievements</h2>
-  <p>Every step of life is an achievement — from personal milestones to professional success. My journey reflects perseverance, hard work, and dedication.</p>
-</section>
+      <label for="contactNumber">Contact Number:</label>
+      <input type="tel" id="contactNumber" required placeholder="+971 123456789">
 
-<section id="hobbies">
-  <h2>Hobbies</h2>
-  <p>I enjoy engaging in creative and recreational activities, whether it is sports, art, music, or technology. Hobbies give me balance and energy to face daily challenges.</p>
-</section>
+      <label for="purpose">Purpose of Appointment:</label>
+      <select id="purpose" required>
+        <option value="ABROAD TOUR">ABROAD TOUR</option>
+        <option value="Jobs in Abroad">Jobs in Abroad</option>
+        <option value="Job Counselling for Abroad">Job Counselling for Abroad</option>
+      </select>
 
-<section id="contact" class="contact">
-  <h2>Contact</h2>
-  <a href="mailto:starananda24@gmail.com" class="email">📧 Email</a>
-  <a href="https://www.linkedin.com/in/bhola-nath-basak-3b6684242?trk=contact-info" class="linkedin" target="_blank">🔗 LinkedIn</a>
-  <a href="https://www.facebook.com/share/17HAzeWpsW/" class="facebook" target="_blank">📘 Facebook</a>
-  <a href="https://wa.me/971506309833" class="whatsapp" target="_blank">💬 WhatsApp</a>
-</section>
+      <label for="date">Date of Availability:</label>
+      <input type="date" id="date" required>
 
-<!-- Appointment for Visitors -->
-<section id="appointment">
-  <h2>Book an Appointment</h2>
-  <form id="appointmentForm">
-    <label for="apptDate">Select Date:</label>
-    <input type="date" id="apptDate" required>
+      <label for="time">Time:</label>
+      <input type="time" id="time" required>
 
-    <label for="apptTime">Select Time:</label>
-    <input type="time" id="apptTime" required>
+      <button type="submit">Submit Appointment</button>
+    </form>
+    <p id="appointmentResult"></p>
+  </section>
 
-    <label for="fullName">Full Name:</label>
-    <input type="text" id="fullName" placeholder="Your Name" required>
+  <section>
+    <h2>Admin Panel (Login Required)</h2>
+    <form id="adminLogin">
+      <label for="username">Username:</label>
+      <input type="text" id="username" required>
+      <label for="password">Password:</label>
+      <input type="password" id="password" required>
+      <button type="submit">Login</button>
+    </form>
 
-    <label for="email">Email:</label>
-    <input type="email" id="email" placeholder="you@example.com" required>
+    <div id="adminSection" style="display:none;">
+      <h3>Visitor Appointments</h3>
+      <table id="appointmentsTable">
+        <thead>
+          <tr>
+            <th>Appointment No</th>
+            <th>Name</th>
+            <th>Country</th>
+            <th>Purpose</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
 
-    <label for="countryCode">Country Code:</label>
-    <select id="countryCode" required>
-      <option value="+1">+1 USA</option>
-      <option value="+44">+44 UK</option>
-      <option value="+91">+91 India</option>
-      <option value="+971">+971 UAE</option>
-    </select>
+  <!-- Print Layout Section -->
+  <div id="printSection" class="print-section">
+    <h2>E-Appointment Letter</h2>
+    <p><b>To:</b> Bhola Nath Basak</p>
+    <p id="printDetails"></p>
+    <button onclick="window.print()">Print Letter</button>
+  </div>
 
-    <label for="whatsapp">WhatsApp Number:</label>
-    <input type="tel" id="whatsapp" placeholder="1234567890" required>
+  <div class="social-links">
+    <a href="https://facebook.com" target="_blank">🌐 Facebook</a>
+    <a href="https://wa.me/971XXXXXXXXX" target="_blank">💬 WhatsApp</a>
+    <a href="https://linkedin.com" target="_blank">🔗 LinkedIn</a>
+  </div>
 
-    <label for="purpose">Purpose:</label>
-    <input type="text" id="purpose" placeholder="Reason for appointment" required>
+  <script>
+    let appointmentCounter = 1;
+    const appointments = [];
 
-    <label for="country">Country:</label>
-    <input type="text" id="country" placeholder="Your country" required>
+    document.getElementById('appointmentForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const visitorName = document.getElementById('visitorName').value;
+      const country = document.getElementById('country').value;
+      const purpose = document.getElementById('purpose').value;
+      const date = document.getElementById('date').value;
+      const time = document.getElementById('time').value;
+      const aptNo = "APTWBNB" + (appointmentCounter < 10 ? "0" : "") + appointmentCounter;
 
-    <button type="submit">Submit Appointment</button>
-  </form>
+      appointments.push({ aptNo, visitorName, country, purpose, date, time, status: "Pending" });
 
-  <div id="confirmation"></div>
-  <button id="printBtn" style="display:none; margin-top:10px;">Print E_Appointment</button>
-</section>
+      document.getElementById('appointmentResult').innerText =
+        "Appointment submitted successfully. Your Appointment No: " + aptNo;
 
-<!-- Admin Login -->
-<section id="admin" class="login-container">
-  <h2>Admin Login</h2>
-  <label for="adminPass">Enter Password:</label>
-  <input type="password" id="adminPass" placeholder="Admin Password">
-  <button onclick="loginAdmin()">Login</button>
-</section>
-
-<!-- Admin Section -->
-<section class="admin-section" id="adminSection">
-  <h2>Manage Appointments</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Appointment No.</th>
-        <th>Date</th>
-        <th>Time</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>WhatsApp</th>
-        <th>Purpose</th>
-        <th>Country</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody id="adminTableBody">
-    </tbody>
-  </table>
-</section>
-
-<footer>
-  <p>© 2025 Bhola Nath Basak | Personal Website</p>
-</footer>
-
-<script>
-let appointmentCounter = 1;
-let appointments = [];
-
-const appointmentForm = document.getElementById('appointmentForm');
-const confirmation = document.getElementById('confirmation');
-const adminTableBody = document.getElementById('adminTableBody');
-const adminSection = document.getElementById('adminSection');
-const printBtn = document.getElementById('printBtn');
-const adminPassword = "admin123"; // change to strong password
-
-// Visitor submits appointment
-appointmentForm.addEventListener('submit', function(e){
-  e.preventDefault();
-  const apptNumber = 'APTWBNB' + String(appointmentCounter).padStart(2, '0');
-  appointmentCounter++;
-
-  const data = {
-    number: apptNumber,
-    date: document.getElementById('apptDate').value,
-    time: document.getElementById('apptTime').value,
-    name: document.getElementById('fullName').value,
-    email: document.getElementById('email').value,
-    countryCode: document.getElementById('countryCode').value,
-    whatsapp: document.getElementById('whatsapp').value,
-    purpose: document.getElementById('purpose').value,
-    country: document.getElementById('country').value,
-    status: "Pending"
-  };
-
-  appointments.push(data);
-
-  confirmation.innerHTML = `Your appointment number is <strong>${data.number}</strong>. You will be contacted after review.`;
-
-  // Show print button
-  printBtn.style.display = 'inline-block';
-  printBtn.onclick = () => printAppointment(data);
-
-  this.reset();
-});
-
-// Function to print appointment
-function printAppointment(data){
-  const printWindow = window.open('', '', 'height=600,width=800');
-  printWindow.document.write('<html><head><title>E_Appointment Letter</title>');
-  printWindow.document.write('<style>body{font-family:Arial;padding:20px;} h1{text-align:center;color:#1a2a6c;} table{width:100%;border-collapse:collapse;margin-top:20px;} td, th{border:1px solid #333;padding:10px;} th{background:#1a2a6c;color:white;} </style>');
-  printWindow.document.write('</head><body>');
-  printWindow.document.write('<h1>E_Appointment Letter</h1>');
-  printWindow.document.write('<table>');
-  printWindow.document.write(`<tr><th>Appointment Number</th><td>${data.number}</td></tr>`);
-  printWindow.document.write(`<tr><th>Visitor Name</th><td>${data.name}</td></tr>`);
-  printWindow.document.write(`<tr><th>Email</th><td>${data.email}</td></tr>`);
-  printWindow.document.write(`<tr><th>WhatsApp</th><td>${data.countryCode}${data.whatsapp}</td></tr>`);
-  printWindow.document.write(`<tr><th>Purpose</th><td>${data.purpose}</td></tr>`);
-  printWindow.document.write(`<tr><th>Country</th><td>${data.country}</td></tr>`);
-  printWindow.document.write(`<tr><th>Date</th><td>${data.date}</td></tr>`);
-  printWindow.document.write(`<tr><th>Time</th><td>${data.time}</td></tr>`);
-  printWindow.document.write(`<tr><th>Admin Name</th><td>Bhola Nath Basak</td></tr>`);
-  printWindow.document.write('</table>');
-  printWindow.document.write('</body></html>');
-  printWindow.document.close();
-  printWindow.print();
-}
-
-// Admin Login
-function loginAdmin(){
-  const pass = document.getElementById('adminPass').value;
-  if(pass === adminPassword){
-    adminSection.style.display = 'block';
-    document.getElementById('admin').style.display = 'none';
-    renderAdminTable();
-  } else {
-    alert("Incorrect password!");
-  }
-}
-
-// Render admin table
-function renderAdminTable(){
-  adminTableBody.innerHTML = '';
-  appointments.forEach((appt,index)=>{
-    const row = document.createElement('tr');
-    let rowColor = '';
-    let actions = '';
-    if(appt.status === "Accepted"){
-      rowColor = 'background-color: #c8e6c9;'; // green
-    } else if(appt.status === "Rejected"){
-      rowColor = 'background-color: #f8d7da;'; // red
-    } else {
-      actions = `
-        <button onclick="acceptAppointment(${index})">Accept</button>
-        <button onclick="rejectAppointment(${index})">Reject</button>
+      // Show print layout
+      document.getElementById('printSection').style.display = "block";
+      document.getElementById('printDetails').innerHTML = `
+        <b>Appointment Number:</b> ${aptNo}<br>
+        <b>Visitor Name:</b> ${visitorName}<br>
+        <b>Country:</b> ${country}<br>
+        <b>Purpose:</b> ${purpose}<br>
+        <b>Date:</b> ${date}<br>
+        <b>Time:</b> ${time}<br>
+        <b>To meet with:</b> Bhola Nath Basak
       `;
+
+      appointmentCounter++;
+      alert("Appointment submitted successfully");
+      this.reset();
+    });
+
+    document.getElementById('adminLogin').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      if(username === "admin" && password === "admin123") {
+        document.getElementById('adminSection').style.display = "block";
+        loadAppointments();
+      } else {
+        alert("Invalid login");
+      }
+    });
+
+    function loadAppointments() {
+      const tbody = document.querySelector("#appointmentsTable tbody");
+      tbody.innerHTML = "";
+
+      appointments.forEach((apt, index) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${apt.aptNo}</td>
+          <td>${apt.visitorName}</td>
+          <td>${apt.country}</td>
+          <td>${apt.purpose}</td>
+          <td>${apt.date}</td>
+          <td>${apt.time}</td>
+          <td>${apt.status}</td>
+          <td id="actions-${index}">
+            ${apt.status === "Pending" ? `
+              <button onclick="acceptAppointment(${index})">Accept</button>
+              <button onclick="rejectAppointment(${index})">Reject</button>
+            ` : ""}
+          </td>
+        `;
+        if(apt.status === "Accepted") row.classList.add("accepted");
+        if(apt.status === "Rejected") row.classList.add("rejected");
+        tbody.appendChild(row);
+      });
     }
-    row.innerHTML = `
-      <td style="${rowColor}">${appt.number}</td>
-      <td style="${rowColor}">${appt.date}</td>
-      <td style="${rowColor}">${appt.time}</td>
-      <td style="${rowColor}">${appt.name}</td>
-      <td style="${rowColor}">${appt.email}</td>
-      <td style="${rowColor}">${appt.countryCode}${appt.whatsapp}</td>
-      <td style="${rowColor}">${appt.purpose}</td>
-      <td style="${rowColor}">${appt.country}</td>
-      <td style="${rowColor}">${actions || appt.status}</td>
-    `;
-    adminTableBody.appendChild(row);
-  });
-}
 
-function acceptAppointment(index){
-  appointments[index].status = "Accepted";
-  alert(`Appointment ${appointments[index].number} accepted!\nMessage sent: "GOOD LUCK FOR YOUR APPOINTMENT SCREENING"`);
-  renderAdminTable();
-}
+    function acceptAppointment(index) {
+      appointments[index].status = "Accepted";
+      alert("Good luck for your appointment");
+      loadAppointments();
+    }
 
-function rejectAppointment(index){
-  appointments[index].status = "Rejected";
-  alert(`Appointment ${appointments[index].number} rejected!\nMessage sent: "SORRY FOR REJECTING YOUR APPOINTMENT DUE TO NOT MATCHING YOUR CRITERIA"`);
-  renderAdminTable();
-}
-</script>
-
+    function rejectAppointment(index) {
+      appointments[index].status = "Rejected";
+      alert("Sorry to rejection application due to not matching criteria");
+      loadAppointments();
+    }
+  </script>
 </body>
 </html>

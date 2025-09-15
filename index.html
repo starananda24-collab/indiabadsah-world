@@ -33,6 +33,9 @@
   th { background:#1a2a6c; color:white; }
   .admin-section { display:none; max-width:900px; margin:20px auto; padding:20px; background:#eef; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
   .login-container { max-width:400px; margin:20px auto; background:#eef; padding:20px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
+  .green-row { background:#c7f0c7 !important; }
+  .red-row { background:#f7c7c7 !important; }
+  #printSection { display:none; margin-top:20px; }
 </style>
 </head>
 <body>
@@ -109,7 +112,11 @@
     <input type="tel" id="whatsapp" placeholder="1234567890" required>
 
     <label for="purpose">Purpose:</label>
-    <input type="text" id="purpose" placeholder="Reason for appointment" required>
+    <select id="purpose" required>
+      <option>ABROAD TOUR</option>
+      <option>Jobs in Abroad</option>
+      <option>Job Counselling for Abroad</option>
+    </select>
 
     <label for="country">Country:</label>
     <input type="text" id="country" placeholder="Your country" required>
@@ -118,6 +125,9 @@
   </form>
 
   <div id="confirmation"></div>
+  <div id="printSection">
+    <button onclick="printAppointment()">Print E_Appointment Letter</button>
+  </div>
 </section>
 
 <!-- Admin Login -->
@@ -157,6 +167,7 @@
 <script>
 let appointmentCounter = 1;
 let appointments = [];
+let lastAppointment = null;
 
 const appointmentForm = document.getElementById('appointmentForm');
 const confirmation = document.getElementById('confirmation');
@@ -184,9 +195,10 @@ appointmentForm.addEventListener('submit', function(e){
   };
 
   appointments.push(data);
+  lastAppointment = data;
 
   confirmation.innerHTML = `Your appointment number is <strong>${data.number}</strong>. You will be contacted after review.`;
-
+  document.getElementById('printSection').style.display = 'block';
   this.reset();
 });
 
@@ -207,6 +219,19 @@ function renderAdminTable(){
   adminTableBody.innerHTML = '';
   appointments.forEach((appt,index)=>{
     const row = document.createElement('tr');
+    row.id = `row-${index}`;
+    let actionBtns = '';
+    if(appt.status === "Pending"){
+      actionBtns = `<button onclick="acceptAppointment(${index})">Accept</button>
+                    <button onclick="rejectAppointment(${index})">Reject</button>`;
+    } else if(appt.status === "Accepted"){
+      row.classList.add('green-row');
+      actionBtns = 'Accepted';
+    } else if(appt.status === "Rejected"){
+      row.classList.add('red-row');
+      actionBtns = 'Rejected';
+    }
+
     row.innerHTML = `
       <td>${appt.number}</td>
       <td>${appt.date}</td>
@@ -216,27 +241,76 @@ function renderAdminTable(){
       <td>${appt.countryCode}${appt.whatsapp}</td>
       <td>${appt.purpose}</td>
       <td>${appt.country}</td>
-      <td>
-        ${appt.status === "Pending" ? `
-          <button onclick="acceptAppointment(${index})">Accept</button>
-          <button onclick="rejectAppointment(${index})">Reject</button>
-        ` : appt.status}
-      </td>
+      <td>${actionBtns}</td>
     `;
     adminTableBody.appendChild(row);
   });
 }
 
+// Accept appointment
 function acceptAppointment(index){
   appointments[index].status = "Accepted";
   alert(`Appointment ${appointments[index].number} accepted!\nMessage sent: "GOOD LUCK FOR YOUR APPOINTMENT SCREENING"`);
   renderAdminTable();
 }
 
+// Reject appointment
 function rejectAppointment(index){
   appointments[index].status = "Rejected";
   alert(`Appointment ${appointments[index].number} rejected!\nMessage sent: "SORRY FOR REJECTING YOUR APPOINTMENT DUE TO NOT MATCHING YOUR CRITERIA"`);
   renderAdminTable();
+}
+
+// Print E_Appointment Letter
+function printAppointment(){
+  if(!lastAppointment) return;
+  const printContent = `
+    <html>
+    <head>
+      <title>E_Appointment Letter</title>
+      <style>
+        body { font-family: Arial, sans-serif; padding: 40px; }
+        h2 { text-align:center; color:#1a2a6c; }
+        table { width:100%; border-collapse:collapse; margin-top:20px; }
+        td { padding:10px; border:1px solid #ccc; }
+        .header { text-align:center; margin-bottom:30px; }
+        .footer { text-align:center; margin-top:30px; font-size:0.9rem; color:#555; }
+      </style>
+    </head>
+    <body>
+      <div class="header">
+        <h2>E_Appointment Letter</h2>
+        <p>Appointment Number: <strong>${lastAppointment.number}</strong></p>
+      </div>
+      <table>
+        <tr><td><strong>Visitor Name</strong></td><td>${lastAppointment.name}</td></tr>
+        <tr><td><strong>Email</strong></td><td>${lastAppointment.email}</td></tr>
+        <tr><td><strong>WhatsApp</strong></td><td>${lastAppointment.countryCode}${lastAppointment.whatsapp}</td></tr>
+        <tr><td><strong>Country</strong></td><td>${lastAppointment.country}</td></tr>
+        <tr><td><strong>Purpose</strong></td><td>${lastAppointment.purpose}</td></tr>
+        <tr><td><strong>Appointment Date & Time</strong></td><td>${lastAppointment.date} ${formatTime(lastAppointment.time)}</td></tr>
+        <tr><td><strong>Admin</strong></td><td>Bhola Nath Basak</td></tr>
+      </table>
+      <div class="footer">
+        <p>Generated on: ${new Date().toLocaleString()}</p>
+      </div>
+    </body>
+    </html>
+  `;
+  const printWindow = window.open('', '', 'height=600,width=800');
+  printWindow.document.write(printContent);
+  printWindow.document.close();
+  printWindow.focus();
+  printWindow.print();
+}
+
+// Convert 24-hour to 12-hour AM/PM format
+function formatTime(time){
+  const [hour, minute] = time.split(':');
+  const h = parseInt(hour);
+  const ampm = h >= 12 ? 'PM' : 'AM';
+  const hr12 = h % 12 || 12;
+  return `${hr12}:${minute} ${ampm}`;
 }
 </script>
 

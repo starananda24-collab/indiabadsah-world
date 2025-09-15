@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="google-site-verification" content="1Ot9i9lyK2dI-pkJhqNMOhWEaCs2sLtynUPW9u4KtNQ" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>INDIA BADSAH</title>
@@ -136,8 +135,8 @@ th, td{padding:8px;text-align:center;}
 </footer>
 
 <script>
-let appointmentCounter = 1;
-let visitors = {}; // store appointments
+let appointmentCounter = localStorage.getItem("appointmentCounter")?parseInt(localStorage.getItem("appointmentCounter")):1;
+let visitors = JSON.parse(localStorage.getItem("visitors")||"{}");
 const ADMIN_USER="admin", ADMIN_PASS="1234";
 
 function showSection(id){
@@ -155,6 +154,7 @@ document.getElementById("appointmentForm")?.addEventListener("submit", function(
   if(!name||!phone||!vdate||!vtime){alert("Please fill mandatory fields: Name, Phone, Date, Time"); return;}
   const apm="APMTWBNB"+String(appointmentCounter).padStart(2,'0');
   appointmentCounter++;
+  localStorage.setItem("appointmentCounter", appointmentCounter);
   const data={
     number:apm,
     name:name,
@@ -171,6 +171,7 @@ document.getElementById("appointmentForm")?.addEventListener("submit", function(
     submitted:new Date()
   };
   visitors[apm]=data;
+  localStorage.setItem("visitors", JSON.stringify(visitors));
   alert("Appointment sent successfully! Your number: "+apm);
   printAppointment(data);
   document.getElementById("appointmentForm").reset();
@@ -179,19 +180,23 @@ document.getElementById("appointmentForm")?.addEventListener("submit", function(
 // Print function
 function printAppointment(data){
   const printWin=window.open("","_blank");
-  const ampm = new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit', hour12:true});
+  let [hour,minute]=data.time.split(":");
+  hour=parseInt(hour);
+  const ampm=hour>=12?"PM":"AM";
+  hour=hour%12||12;
+  const time12=hour+":"+minute+" "+ampm;
   printWin.document.write(`<html><head><title>Appointment Letter</title><style>
     body{font-family:Arial; padding:20px;} h1{color:#fbd46d;}
   </style></head><body>`);
   printWin.document.write("<h1>E_Appointment Letter</h1>");
   printWin.document.write(`<p><b>Appointment No:</b> ${data.number}</p>`);
-  printWin.document.write(`<p><b>Generated On:</b> ${data.submitted.toLocaleDateString()} ${data.submitted.toLocaleTimeString()}</p>`);
+  printWin.document.write(`<p><b>Generated On:</b> ${new Date(data.submitted).toLocaleDateString()} ${new Date(data.submitted).toLocaleTimeString()}</p>`);
   printWin.document.write(`<p><b>Visitor Name:</b> ${data.name}</p>`);
   printWin.document.write(`<p><b>Date of Birth:</b> ${data.dob}</p>`);
   printWin.document.write(`<p><b>Address:</b> ${data.address}</p>`);
   printWin.document.write(`<p><b>Country:</b> ${data.country}</p>`);
   printWin.document.write(`<p><b>Visit Date:</b> ${data.date}</p>`);
-  printWin.document.write(`<p><b>Time of Visit:</b> ${data.time} ${ampm}</p>`);
+  printWin.document.write(`<p><b>Time of Visit:</b> ${time12}</p>`);
   printWin.document.write(`<p><b>To Meet:</b> BHOLA NATH BASAK</p>`);
   printWin.document.write(`<p><b>Passport:</b> ${data.passport}</p>`);
   printWin.document.write(`<p><b>Email:</b> ${data.email}</p>`);
@@ -228,6 +233,7 @@ function loadAdminTable(){
 // Update status
 function updateStatus(num,status){
   visitors[num].status=status;
+  localStorage.setItem("visitors", JSON.stringify(visitors));
   loadAdminTable();
 }
 
@@ -237,14 +243,14 @@ function checkStatus(){
   if(!apn){alert("Enter Appointment Number"); return;}
   if(visitors[apn]){
     const v=visitors[apn];
-    let msg="", btnStyle="", btnText="";
-    if(v.status==='Accepted'){btnStyle='yellow'; btnText='APPOINTMENT ACCEPTED';}
-    else if(v.status==='Rejected'){btnStyle='grey'; btnText='APPOINTMENT REJECTED';}
-    else{btnStyle='pink'; btnText='ADMIN BUSY';}
-    alert(`Appointment Number: ${v.number}\nName: ${v.name}\nDate: ${v.date}\nTime: ${v.time}\nStatus: ${v.status}`);
+    let msg="";
+    if(v.status==='Accepted'){msg="APPOINTMENT ACCEPTED";}
+    else if(v.status==='Rejected'){msg="APPOINTMENT REJECTED";}
+    else{msg="ADMIN BUSY";}
+    alert(`Appointment Number: ${v.number}\nName: ${v.name}\nDate: ${v.date}\nTime: ${v.time}\nStatus: ${msg}`);
   } else alert("Appointment number not found!");
 }
-
 </script>
+
 </body>
 </html>

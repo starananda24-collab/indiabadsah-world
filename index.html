@@ -41,6 +41,7 @@ th, td{padding:8px;text-align:center;}
 </style>
 <!-- jsPDF for PDF generation -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body>
 
@@ -143,10 +144,24 @@ th, td{padding:8px;text-align:center;}
 
 <footer>
   <p>© 2025 INDIA BADSAH | Personal Biography Website</p>
+  <div id="socialLinks" style="margin-top:10px;text-align:center;">
+    <a href="https://www.linkedin.com/in/YOUR_LINK" target="_blank" title="LinkedIn">
+      <img src="linkedin-icon.png" alt="LinkedIn" style="width:35px;height:35px;margin:0 8px;vertical-align:middle;">
+    </a>
+    <a href="https://www.facebook.com/YOUR_LINK" target="_blank" title="Facebook">
+      <img src="facebook-icon.png" alt="Facebook" style="width:35px;height:35px;margin:0 8px;vertical-align:middle;">
+    </a>
+    <a href="https://wa.me/YOUR_PHONE_NUMBER" target="_blank" title="WhatsApp">
+      <img src="whatsapp-icon.png" alt="WhatsApp" style="width:35px;height:35px;margin:0 8px;vertical-align:middle;">
+    </a>
+    <a href="mailto:YOUR_EMAIL@example.com" title="Email">
+      <img src="email-icon.png" alt="Email" style="width:35px;height:35px;margin:0 8px;vertical-align:middle;">
+    </a>
+  </div>
 </footer>
 
 <script>
-// ---------------------- Existing JS Program ----------------------
+// ---------------------- Existing JS ----------------------
 let visitors = JSON.parse(localStorage.getItem("visitors")) || {};
 
 function showSection(id){
@@ -189,7 +204,6 @@ document.getElementById("appointmentForm").addEventListener("submit",function(e)
   localStorage.setItem("visitors",JSON.stringify(visitors));
   alert("Appointment sent successfully: " + apptNo);
 
-  // Show Download PDF button
   const resDiv = document.getElementById("statusResult");
   resDiv.innerHTML = `<button class="btn" onclick="downloadPDF('${apptNo}')">Download PDF</button>`;
   document.getElementById("appointmentForm").reset();
@@ -201,10 +215,11 @@ function checkStatus(){
   let resDiv = document.getElementById("statusResult");
   if(visitors[apptNo]){
     let v = visitors[apptNo];
-    let color="pink"; let text="ADMIN BUSY";
-    if(v.status==="Accepted"){color="green"; text="APPOINTMENT ACCEPTED";}
-    else if(v.status==="Rejected"){color="red"; text="APPOINTMENT REJECTED";}
-    resDiv.innerHTML = `<button class="${color}" style="padding:10px 20px;font-size:16px;" disabled>${text}</button>`;
+    let colorClass="pink"; 
+    let text="ADMIN BUSY";
+    if(v.status==="Accepted"){colorClass="green"; text="APPOINTMENT ACCEPTED";}
+    else if(v.status==="Rejected"){colorClass="red"; text="APPOINTMENT REJECTED";}
+    resDiv.innerHTML = `<button class="${colorClass}" style="padding:10px 20px;font-size:16px;" disabled>${text}</button>`;
   } else {resDiv.innerHTML="No Appointment Found";}
 }
 
@@ -235,7 +250,7 @@ function renderTable(){
 function accept(apptNo){ visitors[apptNo].status="Accepted"; localStorage.setItem("visitors",JSON.stringify(visitors)); renderTable();}
 function reject(apptNo){ visitors[apptNo].status="Rejected"; localStorage.setItem("visitors",JSON.stringify(visitors)); renderTable();}
 
-// Download PDF
+// Download PDF with official table layout
 function downloadPDF(apptNo){
   const { jsPDF } = window.jspdf;
   const v = visitors[apptNo];
@@ -246,22 +261,26 @@ function downloadPDF(apptNo){
   const dateStr = currentDate.toLocaleDateString();
   const timeStr = currentDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
 
-  doc.setFontSize(16);
-  doc.text("Appointment Details", 20, 20);
+  doc.setFontSize(18);
+  doc.text("Visitor Appointment Details", 14, 20);
   doc.setFontSize(12);
-  doc.text(`Appt No: ${apptNo}`, 20, 30);
-  doc.text(`Name: ${v.name}`, 20, 38);
-  doc.text(`Address: ${v.address}`, 20, 46);
-  doc.text(`Country: ${v.country}`, 20, 54);
-  doc.text(`Date of Birth: ${v.dob}`, 20, 62);
-  doc.text(`Visit Date: ${v.date}`, 20, 70);
-  doc.text(`Visit Time: ${v.time}`, 20, 78);
-  doc.text(`Contact: ${v.phone}`, 20, 86);
-  doc.text(`Purpose: ${v.purpose}`, 20, 94);
-  doc.text(`Passport: ${v.passport}`, 20, 102);
-  doc.text(`Email: ${v.email}`, 20, 110);
-  doc.text(`Status: ${v.status}`, 20, 118);
-  doc.text(`Generated on: ${dateStr} ${timeStr}`, 20, 126);
+
+  const headers = ["Appt No", "Name", "Address", "Country", "DOB", "Visit Date", "Time", "Contact", "Purpose", "Passport", "Email", "Status"];
+  const data = [
+    [apptNo, v.name, v.address, v.country, v.dob, v.date, v.time, v.phone, v.purpose, v.passport, v.email, v.status]
+  ];
+
+  doc.autoTable({
+    head: [headers],
+    body: data,
+    startY: 30,
+    theme: 'grid',
+    headStyles: { fillColor: [40, 167, 69] },
+    bodyStyles: { fillColor: [255, 255, 255] },
+    styles: { fontSize: 10, cellPadding: 3 }
+  });
+
+  doc.text(`Generated on: ${dateStr} ${timeStr}`, 14, doc.lastAutoTable.finalY + 10);
 
   doc.save(`Appointment_${apptNo}.pdf`);
 }

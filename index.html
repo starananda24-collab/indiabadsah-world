@@ -74,9 +74,14 @@ footer a {
   text-decoration: none;
   font-weight: bold;
 }
-footer a:hover {
-  text-decoration: underline;
-}
+footer a:hover { text-decoration: underline; }
+table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+table, th, td { border: 1px solid white; }
+th, td { padding: 8px; text-align: center; }
+.statusButton { padding: 5px 10px; margin: 2px; cursor: pointer; }
+.accepted { background-color: green; color: white; }
+.rejected { background-color: red; color: white; }
+.disabled { opacity: 0.5; cursor: not-allowed; }
 </style>
 </head>
 <body>
@@ -160,7 +165,7 @@ footer a:hover {
 let visitorData = [];
 let appointmentCounter = 1;
 
-// Open Visitor Form
+// Open Visitor Form Popup
 function openVisitorWindow(){
   const w = window.open("","VisitorForm","width=550,height=700");
   w.document.write(`<html><head><title>Visitor Form</title></head><body style="font-family:Arial;">
@@ -181,11 +186,9 @@ function openVisitorWindow(){
     <option value="Canada" dataCode="+1">Canada</option>
   </select>
   <span id="countryCode">+91</span><br>
-
   <label>Date of Birth *</label><input type="date" id="vDOB"><br>
   <label>Date of Virtual Visit *</label><input type="date" id="vDateVisit"><br>
   <label>Time of Visit *</label><input type="time" id="vTime"><br>
-
   <label>Contact Number *</label><input type="tel" id="vPhone"><br>
   <label>Purpose of Visit *</label>
   <select id="vPurpose">
@@ -195,7 +198,6 @@ function openVisitorWindow(){
     <option value="Education system in Abroad">Education system in Abroad</option>
     <option value="Counseling for Education in Abroad">Counseling for Education in Abroad</option>
   </select><br>
-
   <label>Passport Number</label><input type="text" id="vPassport"><br>
   <label>Email *</label><input type="text" id="vEmailName">@<select id="vEmailDomain">
     <option value="gmail.com">gmail.com</option>

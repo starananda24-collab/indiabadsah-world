@@ -14,7 +14,7 @@ nav{display:flex;justify-content:center;background:rgba(0,0,0,0.8);flex-wrap:wra
 nav a{color:white;text-decoration:none;padding:10px 15px;display:block;transition:background 0.3s,color 0.3s;cursor:pointer;}
 nav a:hover{background:#fbd46d;color:black;border-radius:5px;}
 #statusSearch {margin-left:10px;padding:5px;border-radius:5px;border:none;}
-#statusResult {margin-left:10px;margin-top:10px;}
+#statusResult {margin-left:10px;}
 section{padding:40px 20px;max-width:900px;margin:auto;background:rgba(255,255,255,0.1);margin-bottom:30px;border-radius:12px;box-shadow:0px 4px 15px rgba(0,0,0,0.5);}
 section h2{color:#ffe66d;margin-bottom:15px;}
 .form-box{background:rgba(0,0,0,0.7);padding:20px;border-radius:12px;color:white;max-width:500px;margin:auto;}
@@ -27,19 +27,18 @@ table, th, td{border:1px solid #000;}
 th, td{padding:8px;text-align:center;}
 .green{background:#28a745;color:white;}
 .red{background:#dc3545;color:white;}
-.pink{background:#ff69b4;color:white;}
-.yellow{background:#ffc107;color:white;}
-.grey{background:#6c757d;color:white;}
 .hidden{display:none;}
-
-/* Mobile Support */
 @media (max-width: 600px) {
   .form-box input, .form-box select, .form-box button {width:100% !important; font-size:16px; margin-top:5px;}
   nav {flex-direction: column; align-items: flex-start;}
   #statusSearch {width:90%; margin:10px;}
 }
+#socialLinks a img {transition: transform 0.3s, filter 0.3s;}
+#socialLinks a img:hover {transform: scale(1.2) rotate(10deg); filter: drop-shadow(0 0 5px yellow);}
 </style>
+<!-- jsPDF & AutoTable -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body>
 
@@ -138,124 +137,92 @@ th, td{padding:8px;text-align:center;}
 
 <footer>
   <p>© 2025 INDIA BADSAH | Personal Biography Website</p>
+  <div id="socialLinks" style="margin-top:10px;text-align:center;">
+    <a href="https://www.linkedin.com/in/YOUR_LINK" target="_blank"><img src="linkedin-icon.png" alt="LinkedIn" style="width:35px;height:35px;margin:0 8px;"></a>
+    <a href="https://www.facebook.com/YOUR_LINK" target="_blank"><img src="facebook-icon.png" alt="Facebook" style="width:35px;height:35px;margin:0 8px;"></a>
+    <a href="https://wa.me/YOUR_PHONE_NUMBER" target="_blank"><img src="whatsapp-icon.png" alt="WhatsApp" style="width:35px;height:35px;margin:0 8px;"></a>
+    <a href="mailto:YOUR_EMAIL@example.com"><img src="email-icon.png" alt="Email" style="width:35px;height:35px;margin:0 8px;"></a>
+  </div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
-// Full-time JS - no other code changed
+// ---------------- Existing Programs ----------------
 let visitors = JSON.parse(localStorage.getItem("visitors")) || {};
-
-function showSection(id){
-  document.querySelectorAll("section").forEach(s=>s.classList.add("hidden"));
-  document.getElementById(id).classList.remove("hidden");
-}
-
-function getNextAppointmentNumber() {
-  const keys = Object.keys(visitors);
-  if(keys.length===0) return "APMTWBNB01";
-  const nums = keys.map(k=>parseInt(k.replace("APMTWBNB",""))).filter(n=>!isNaN(n));
-  const maxNum = nums.length ? Math.max(...nums) : 0;
-  return "APMTWBNB" + String(maxNum+1).padStart(2,"0");
-}
+function showSection(id){document.querySelectorAll("section").forEach(s=>s.classList.add("hidden"));document.getElementById(id).classList.remove("hidden");}
+function getNextAppointmentNumber(){const keys=Object.keys(visitors);if(keys.length===0)return "APMTWBNB01";const nums=keys.map(k=>parseInt(k.replace("APMTWBNB",""))).filter(n=>!isNaN(n));const maxNum=nums.length?Math.max(...nums):0;return "APMTWBNB"+String(maxNum+1).padStart(2,"0");}
 
 // Visitor Form Submit
 document.getElementById("appointmentForm").addEventListener("submit",function(e){
   e.preventDefault();
-  let name = document.getElementById("vname").value.trim();
-  let date = document.getElementById("vdate").value;
-  let time = document.getElementById("vtime").value;
-  let phone = document.getElementById("vphone").value.trim();
-  if(!name || !date || !time || !phone){ alert("Please fill mandatory fields"); return; }
-
-  let apptNo = getNextAppointmentNumber();
-  visitors[apptNo] = {
-    name:name,
-    date:date,
-    time:time,
-    phone:document.getElementById("ccode").value + phone,
-    address:document.getElementById("vaddress").value,
-    country:document.getElementById("vcountry").value,
-    dob:document.getElementById("vdob").value,
-    purpose:document.getElementById("vpurpose").value,
-    passport:document.getElementById("vpassport").value||"NA",
-    email:document.getElementById("vemail").value+document.getElementById("emaildomain").value,
-    status:"Pending",
-    submitted:new Date().toLocaleString()
-  };
+  let name=document.getElementById("vname").value.trim();
+  let date=document.getElementById("vdate").value;
+  let time=document.getElementById("vtime").value;
+  let phone=document.getElementById("vphone").value.trim();
+  if(!name||!date||!time||!phone){alert("Please fill mandatory fields");return;}
+  let apptNo=getNextAppointmentNumber();
+  visitors[apptNo]={name:name,date:date,time:time,phone:document.getElementById("ccode").value+phone,address:document.getElementById("vaddress").value,country:document.getElementById("vcountry").value,dob:document.getElementById("vdob").value,purpose:document.getElementById("vpurpose").value,passport:document.getElementById("vpassport").value||"NA",email:document.getElementById("vemail").value+document.getElementById("emaildomain").value,status:"Pending",submitted:new Date().toLocaleString()};
   localStorage.setItem("visitors",JSON.stringify(visitors));
-  alert("Appointment sent successfully: " + apptNo);
-
-  document.getElementById("statusResult").innerHTML = `<button class="btn" onclick="downloadPDF('${apptNo}')">Download E_Appointment Letter</button>`;
+  alert("Appointment sent successfully: "+apptNo);
+  const resDiv=document.getElementById("statusResult");
+  resDiv.innerHTML=`<button class="btn" onclick="downloadPDF('${apptNo}')">Download E_Appointment Letter</button>`;
   document.getElementById("appointmentForm").reset();
 });
 
-// Check Status
+// Status Check
 function checkStatus(){
-  let apptNo = document.getElementById("statusSearch").value.trim();
-  let resDiv = document.getElementById("statusResult");
+  let apptNo=document.getElementById("statusSearch").value.trim();
+  let resDiv=document.getElementById("statusResult");
   if(visitors[apptNo]){
-    let v = visitors[apptNo];
-    let color="pink"; let text="ADMIN BUSY";
-    if(v.status==="Accepted"){color="green"; text="APPOINTMENT ACCEPTED";}
-    else if(v.status==="Rejected"){color="red"; text="APPOINTMENT REJECTED";}
-    resDiv.innerHTML = `<button class="${color}" style="padding:10px 20px;font-size:16px;" disabled>${text}</button>`;
-  } else {resDiv.innerHTML="No Appointment Found";}
+    let v=visitors[apptNo];let color="pink";let text="ADMIN BUSY";
+    if(v.status==="Accepted"){color="green";text="APPOINTMENT ACCEPTED";}
+    else if(v.status==="Rejected"){color="red";text="APPOINTMENT REJECTED";}
+    resDiv.innerHTML=`<button class="${color}" style="padding:10px 20px;font-size:16px;" disabled>${text}</button>`;
+  }else resDiv.innerHTML="No Appointment Found";
 }
 
-// Admin Login
-function adminLogin(){
-  let u=document.getElementById("adminUser").value;
-  let p=document.getElementById("adminPass").value;
-  if(u==="admin" && p==="admin"){ showSection("adminDashboard"); renderTable();}
-  else alert("Invalid Credentials");
-}
-function adminLogout(){ showSection("profile"); }
+// Admin
+function adminLogin(){let u=document.getElementById("adminUser").value;let p=document.getElementById("adminPass").value;if(u==="admin"&&p==="admin"){showSection("adminDashboard");renderTable();}else alert("Invalid Credentials");}
+function adminLogout(){showSection("profile");}
 
-// Render Admin Table with deep green/red buttons
+// Render Table
 function renderTable(){
-  let tbody=document.querySelector("#visitorTable tbody");
-  tbody.innerHTML="";
+  let tbody=document.querySelector("#visitorTable tbody");tbody.innerHTML="";
   for(let apptNo in visitors){
-    let v=visitors[apptNo];
-    let acceptDisabled = v.status!=="Pending" ? 'disabled' : '';
-    let rejectDisabled = v.status!=="Pending" ? 'disabled' : '';
-    let acceptStyle = v.status==="Accepted" ? 'background:#006400;color:white;' : '';
-    let rejectStyle = v.status==="Rejected" ? 'background:#8B0000;color:white;' : '';
-    let row=document.createElement("tr");
-    row.innerHTML=`<td>${apptNo}</td>
-      <td>${v.name}</td><td>${v.date}</td><td>${v.time}</td><td>${v.phone}</td><td>${v.purpose}</td><td>${v.status}</td>
-      <td>
-        <button onclick="accept('${apptNo}')" style="${acceptStyle}" ${acceptDisabled}>Accept</button>
-        <button onclick="reject('${apptNo}')" style="${rejectStyle}" ${rejectDisabled}>Reject</button>
-      </td>`;
+    let v=visitors[apptNo];let row=document.createElement("tr");
+    row.innerHTML=`<td>${apptNo}</td><td>${v.name}</td><td>${v.date}</td><td>${formatAMPM(v.time)}</td><td>${v.phone}</td><td>${v.purpose}</td><td>${v.status}</td>
+    <td><button onclick="accept('${apptNo}')" ${v.status!=="Pending"?'disabled':''}>Accept</button>
+    <button onclick="reject('${apptNo}')" ${v.status!=="Pending"?'disabled':''}>Reject</button></td>`;
     tbody.appendChild(row);
   }
 }
 
-// Accept / Reject
-function accept(apptNo){ visitors[apptNo].status="Accepted"; localStorage.setItem("visitors",JSON.stringify(visitors)); renderTable();}
-function reject(apptNo){ visitors[apptNo].status="Rejected"; localStorage.setItem("visitors",JSON.stringify(visitors)); renderTable();}
+// Format AM/PM
+function formatAMPM(timeStr){if(!timeStr)return "NA";let [hour,minute]=timeStr.split(':');hour=parseInt(hour);let ampm=hour>=12?'PM':'AM';hour=hour%12||12;return `${hour.toString().padStart(2,'0')}:${minute} ${ampm}`;}
 
-// Download E_Appointment Letter PDF
+// Accept / Reject with deep colors + disable
+function accept(apptNo){
+  visitors[apptNo].status="Accepted";localStorage.setItem("visitors",JSON.stringify(visitors));renderTable();
+  const btns=document.querySelectorAll("#visitorTable button");btns.forEach(b=>{if(b.onclick.toString().includes(`'${apptNo}'`)){if(b.textContent==="Accept")b.style.background="#006400";b.disabled=true;}if(b.onclick.toString().includes(`'${apptNo}'`) && b.textContent==="Reject")b.disabled=true;});
+}
+function reject(apptNo){
+  visitors[apptNo].status="Rejected";localStorage.setItem("visitors",JSON.stringify(visitors));renderTable();
+  const btns=document.querySelectorAll("#visitorTable button");btns.forEach(b=>{if(b.onclick.toString().includes(`'${apptNo}'`)){if(b.textContent==="Reject")b.style.background="#8B0000";b.disabled=true;}if(b.onclick.toString().includes(`'${apptNo}'`) && b.textContent==="Accept")b.disabled=true;});
+}
+
+// Download PDF with stylish table & real-time date/time
 function downloadPDF(apptNo){
-  const { jsPDF } = window.jspdf;
-  const v = visitors[apptNo];
-  if(!v){ alert("No appointment found"); return; }
-
-  const doc = new jsPDF();
-  const currentDate = new Date();
-  const dateStr = currentDate.toLocaleDateString();
-  const timeStr = currentDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
-
-  doc.setFontSize(18); doc.text("E_Appointment Letter", 20, 20);
-  doc.setFontSize(12);
-  const startY = 30; const lineHeight = 10;
-  const labels = ["Appt No","Name","Address","Country","Date of Birth","Visit Date","Visit Time","Contact","Purpose","Passport","Email","Status","Generated On"];
-  const values = [apptNo, v.name, v.address, v.country, v.dob, v.date, v.time, v.phone, v.purpose, v.passport, v.email, v.status, `${dateStr} ${timeStr}`];
-  labels.forEach((label,i)=>{ doc.text(`${label}: ${values[i]}`, 20, startY + i*lineHeight); });
+  const { jsPDF }=window.jspdf;
+  const v=visitors[apptNo];if(!v){alert("No appointment found");return;}
+  const doc=new jsPDF();
+  const curDate=new Date();const dateStr=curDate.toLocaleDateString();const timeStr=curDate.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit',hour12:true});
+  doc.setFontSize(18);doc.setFont("helvetica","bold");doc.text("E_Appointment Letter",105,20,null,null,"center");
+  doc.setFontSize(12);doc.setFont("helvetica","normal");
+  doc.text(`Admin: BHOLA NATH BASAK`,20,30);
+  doc.text(`Visit To: BHOLA NATH BASAK`,20,38);
+  doc.text(`Generated On: ${dateStr} ${timeStr}`,20,46);
+  doc.autoTable({startY:55,theme:'grid',head:[['Appt No','Name','Address','Country','DOB','Visit Date','Visit Time','Contact','Purpose','Passport','Email','Status']],body:[[apptNo,v.name,v.address||"NA",v.country||"NA",v.dob||"NA",v.date||"NA",formatAMPM(v.time),v.phone,v.purpose,v.passport||"NA",v.email,v.status]],headStyles:{fillColor:[41,128,185],textColor:255,fontStyle:'bold'},bodyStyles:{fillColor:[245,245,245],textColor:0},alternateRowStyles:{fillColor:[220,220,220]}});
   doc.save(`E_Appointment_${apptNo}.pdf`);
 }
 </script>
-
 </body>
 </html>

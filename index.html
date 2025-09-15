@@ -4,9 +4,7 @@
 <meta name="google-site-verification" content="1Ot9i9lyK2dI-pkJhqNMOhWEaCs2sLtynUPW9u4KtNQ" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>INDIA BADSAH</title>
-
 <style>
 body {
   margin: 0;
@@ -78,8 +76,7 @@ footer {
   background: rgba(0, 0, 0, 0.7);
   color: #ccc;
 }
-
-/* Social panel */
+/* Social Panel */
 #socialPanel {
   position: fixed;
   top: 50%;
@@ -107,14 +104,33 @@ footer {
   #socialPanel {top:auto; bottom:0; left:50%; transform: translateX(-50%); flex-direction: row; padding:5px;}
   #socialPanel a {margin:0 10px;}
 }
-
-/* Admin login & visitor search styles */
+/* Admin login & Visitor Search */
 #adminPanel, #visitorSearch { text-align:center; margin:15px; }
 #adminPanel input, #visitorSearch input { padding:8px; border-radius:5px; border:none; margin:0 5px; }
 #adminPanel button, #visitorSearch button { padding:8px 12px; border-radius:5px; border:none; cursor:pointer; margin-left:5px; }
 #adminPanel button { background:#fbd46d; color:black; }
 #visitorSearch button { background:#fbd46d; color:black; }
 #visitorStatusResult button { padding:8px 12px; border:none; border-radius:5px; color:white; }
+/* Visitor Form Modal */
+#visitorModal { display:none; position:fixed; z-index:2000; left:0; top:0; width:100%; height:100%; overflow:auto; background: rgba(0,0,0,0.8); }
+#visitorFormContainer { background:white; color:black; margin:50px auto; padding:20px; border-radius:10px; max-width:500px; position:relative; }
+#visitorFormContainer h2 { text-align:center; }
+#visitorFormContainer input, #visitorFormContainer select { width:100%; padding:8px; margin:5px 0; border-radius:5px; border:1px solid #ccc; }
+#visitorFormContainer button { background:#fbd46d; color:black; border:none; padding:10px; width:100%; border-radius:5px; cursor:pointer; margin-top:10px; }
+#closeVisitor { position:absolute; top:10px; right:15px; cursor:pointer; font-size:20px; font-weight:bold; }
+/* Admin Table */
+#adminTable { display:none; width:90%; margin:auto; background:rgba(255,255,255,0.1); padding:15px; border-radius:10px; overflow-x:auto; }
+#adminTable table { width:100%; border-collapse:collapse; color:white; }
+#adminTable th, #adminTable td { border:1px solid white; padding:8px; text-align:center; }
+#adminTable th { background:#333; }
+.statusButton { padding:5px 10px; border:none; border-radius:5px; color:white; cursor:pointer; }
+.accepted { background:green; }
+.rejected { background:red; }
+.pending { background:deeppink; }
+.disabled { background:gold; cursor:not-allowed; }
+/* Print layout */
+#printLayout { display:none; position:fixed; top:0; left:0; width:100%; height:100%; overflow:auto; background:white; color:black; padding:20px; z-index:3000; }
+#printLayout h2 { text-align:center; color:#1a2a6c; }
 </style>
 </head>
 <body>
@@ -134,7 +150,7 @@ footer {
   <div id="visitorStatusResult"></div>
 </div>
 
-<!-- Left-side Social Panel -->
+<!-- Social Panel -->
 <div id="socialPanel">
   <a href="https://www.linkedin.com/in/bhola-nath-basak-3b6684242?trk=contact-info" target="_blank" title="LinkedIn">
     <svg viewBox="0 0 24 24" fill="yellow"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8h4V24h-4V8zm7.5 0h3.78v2.18h.05c.53-1 1.82-2.18 3.74-2.18 4 0 4.75 2.64 4.75 6.08V24h-4v-7.5c0-1.8-.03-4.12-2.5-4.12-2.5 0-2.88 1.95-2.88 3.98V24h-4V8z"/></svg>
@@ -163,6 +179,7 @@ footer {
   <a href="#hobbies">Hobbies</a>
   <a href="#interested">Interested About</a>
   <a href="#thoughts">Thoughts</a>
+  <a href="#" onclick="openVisitorForm()">Visitor Form</a>
 </nav>
 
 <section id="profile">
@@ -200,51 +217,135 @@ footer {
   <p>“Life is not about waiting for opportunities, it is about creating them.” My belief is simple: with determination and honesty, nothing is impossible.</p>
 </section>
 
+<!-- Visitor Form Modal -->
+<div id="visitorModal">
+  <div id="visitorFormContainer">
+    <span id="closeVisitor" onclick="closeVisitorForm()">×</span>
+    <h2>E_Appointment Form</h2>
+    <input type="text" id="vName" placeholder="Visitor Name *">
+    <input type="text" id="vAddress" placeholder="Visitor Address *">
+    <select id="vCountry">
+      <option value="">Select Country *</option>
+      <option value="India">India</option>
+      <option value="USA">USA</option>
+      <option value="Bangladesh">Bangladesh</option>
+      <option value="Pakistan">Pakistan</option>
+      <option value="Srilanka">Srilanka</option>
+      <option value="Malaysia">Malaysia</option>
+      <option value="Singapore">Singapore</option>
+      <option value="UK">UK</option>
+      <option value="Australia">Australia</option>
+      <option value="Canada">Canada</option>
+    </select>
+    <input type="date" id="vDOB" placeholder="Date of Birth *">
+    <input type="time" id="vTime" placeholder="Time Availability *">
+    <input type="tel" id="vPhone" placeholder="Contact Number *">
+    <select id="vPurpose">
+      <option value="">Purpose of Visit *</option>
+      <option value="Visit Abroad">Visit Abroad</option>
+      <option value="Student Visa in Abroad">Student Visa in Abroad</option>
+      <option value="Job in Abroad">Job in Abroad</option>
+      <option value="Education system in Abroad">Education system in Abroad</option>
+      <option value="Counseling for Education in Abroad">Counseling for Education in Abroad</option>
+    </select>
+    <input type="text" id="vPassport" placeholder="Passport Number (Optional)">
+    <select id="vEmail">
+      <option value="">Select Email Domain *</option>
+      <option value="@gmail.com">@gmail.com</option>
+      <option value="@yahoo.com">@yahoo.com</option>
+      <option value="@rediffmail.com">@rediffmail.com</option>
+    </select>
+    <input type="text" id="vEmailName" placeholder="Email name before @">
+    <button onclick="submitVisitorForm()">Submit Appointment</button>
+  </div>
+</div>
+
+<!-- Admin Table -->
+<div id="adminTable">
+  <h2>Admin Visitor Submissions</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Appointment No</th><th>Name</th><th>Country</th><th>Time</th><th>Status</th><th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="adminTableBody"></tbody>
+  </table>
+</div>
+
+<!-- Print Layout -->
+<div id="printLayout"></div>
+
 <footer>
   <p>© 2025 INDIA BADSAH | Personal Biography Website</p>
 </footer>
 
 <script>
-// Admin Login / Logout
-function adminLogin() {
-  const user = document.getElementById('adminUser').value;
-  const pass = document.getElementById('adminPass').value;
-  if(user === "admin" && pass === "password") {
-    alert("Admin logged in");
-    // show admin panel / visitor table logic
-  } else {
-    alert("Invalid credentials");
+let visitorData = [];
+let appointmentCounter = 1;
+
+function openVisitorForm(){document.getElementById('visitorModal').style.display='block';}
+function closeVisitorForm(){document.getElementById('visitorModal').style.display='none';}
+
+function submitVisitorForm(){
+  const name = document.getElementById('vName').value.trim();
+  const address = document.getElementById('vAddress').value.trim();
+  const country = document.getElementById('vCountry').value;
+  const dob = document.getElementById('vDOB').value;
+  const time = document.getElementById('vTime').value;
+  const phone = document.getElementById('vPhone').value.trim();
+  const purpose = document.getElementById('vPurpose').value;
+  const passport = document.getElementById('vPassport').value.trim() || "NA";
+  const emailDomain = document.getElementById('vEmail').value;
+  const emailName = document.getElementById('vEmailName').value.trim();
+  if(!name || !address || !country || !dob || !time || !phone || !purpose || !emailDomain || !emailName){
+    alert("Please fill mandatory fields"); return;
   }
-}
-function adminLogout() {
-  alert("Admin logged out");
-  // hide admin panel / visitor table logic
+  const appointmentNo = "APMTWBNB"+String(appointmentCounter).padStart(2,'0');
+  appointmentCounter++;
+  const email = emailName+emailDomain;
+  const newVisitor = {appointmentNo,name,address,country,dob,time,phone,purpose,passport,email,status:"pending"};
+  visitorData.push(newVisitor);
+  updateAdminTable();
+  alert("Appointment sent successfully\nYour Appointment No: "+appointmentNo);
+  closeVisitorForm();
 }
 
-// Visitor Search
-let visitorData = []; // your visitor submission array
-function searchVisitor() {
+function updateAdminTable(){
+  const tbody = document.getElementById('adminTableBody');
+  tbody.innerHTML="";
+  visitorData.forEach((v,i)=>{
+    const tr = document.createElement('tr');
+    tr.innerHTML=`<td>${v.appointmentNo}</td>
+    <td>${v.name}</td>
+    <td>${v.country}</td>
+    <td>${v.time}</td>
+    <td id="status${i}">${v.status}</td>
+    <td>
+      <button id="accept${i}" class="statusButton accepted" onclick="accept(${i})" ${v.status!=='pending'?'disabled class=disabled':''}>Accept</button>
+      <button id="reject${i}" class="statusButton rejected" onclick="reject(${i})" ${v.status!=='pending'?'disabled class=disabled':''}>Reject</button>
+    </td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+function accept(index){visitorData[index].status="accepted"; updateAdminTable();}
+function reject(index){visitorData[index].status="rejected"; updateAdminTable();}
+
+function searchVisitor(){
   const apptNo = document.getElementById('searchApptNo').value.trim();
   const resultDiv = document.getElementById('visitorStatusResult');
-  if(!apptNo) { resultDiv.innerHTML = "Please enter appointment number"; return; }
-
-  const visitor = visitorData.find(v => v.appointmentNo === apptNo);
-  if(!visitor) {
-    resultDiv.innerHTML = "<button style='background:deeppink;'>ADMIN BUSY</button>";
-    return;
-  }
-
-  if(visitor.status === "accepted") {
-    resultDiv.innerHTML = "<button style='background:green;'>APPOINTMENT ACCEPTED</button>";
-  } else if(visitor.status === "rejected") {
-    resultDiv.innerHTML = "<button style='background:darkred;'>APPOINTMENT REJECTED</button>";
-  } else {
-    resultDiv.innerHTML = "<button style='background:deeppink;'>ADMIN BUSY</button>";
-  }
+  if(!apptNo){ resultDiv.innerHTML="Please enter appointment number"; return;}
+  const visitor = visitorData.find(v=>v.appointmentNo===apptNo);
+  if(!visitor){ resultDiv.innerHTML="<button class='statusButton pending'>ADMIN BUSY</button>"; return;}
+  if(visitor.status==="accepted"){ resultDiv.innerHTML="<button class='statusButton accepted' disabled>APPOINTMENT ACCEPTED</button>";}
+  else if(visitor.status==="rejected"){ resultDiv.innerHTML="<button class='statusButton rejected' disabled>APPOINTMENT REJECTED</button>";}
+  else{ resultDiv.innerHTML="<button class='statusButton pending' disabled>ADMIN BUSY</button>";}
 }
 
-// Your existing visitor form / admin functions / print layout remain here
-// submitVisitorForm(), accept(), reject(), printAppointment() etc.
+// Admin Login / Logout (dummy)
+function adminLogin(){alert("Admin logged in"); document.getElementById('adminTable').style.display='block';}
+function adminLogout(){alert("Admin logged out"); document.getElementById('adminTable').style.display='none';}
 </script>
 
 </body>

@@ -5,38 +5,77 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>INDIA BADSAH</title>
 <style>
-body {margin:0; font-family: Arial, sans-serif; background:linear-gradient(to right,#1a2a6c,#b21f1f,#fdbb2d); color:white; line-height:1.6;}
-header{text-align:center; padding:20px; background:rgba(0,0,0,0.6);}
-header img{width:180px;height:180px;object-fit:cover;border-radius:50%;border:5px solid #fff;transition: transform 0.4s;}
-header img:hover{transform: scale(1.05) rotate(2deg);}
-header h1{margin:15px 0 0; font-size:2.5em;color:#fbd46d;text-shadow:2px 2px 5px black;}
-nav{display:flex;justify-content:center;background:rgba(0,0,0,0.8);flex-wrap:wrap;align-items:center;}
-nav a{color:white;text-decoration:none;padding:10px 15px;display:block;transition:background 0.3s,color 0.3s;cursor:pointer;}
-nav a:hover{background:#fbd46d;color:black;border-radius:5px;}
-#statusSearch {margin-left:10px;padding:5px;border-radius:5px;border:none;}
-#statusResult {margin-left:10px;}
-section{padding:40px 20px;max-width:900px;margin:auto;background:rgba(255,255,255,0.1);margin-bottom:30px;border-radius:12px;box-shadow:0px 4px 15px rgba(0,0,0,0.5);}
-section h2{color:#ffe66d;margin-bottom:15px;}
-.form-box{background:rgba(0,0,0,0.7);padding:20px;border-radius:12px;color:white;max-width:500px;margin:auto;}
-.form-box label{display:block;margin-bottom:10px;}
-.form-box input, .form-box select{width:100%;padding:5px;margin-top:3px;border-radius:5px;border:none;}
-.btn{background:#fbd46d;color:black;padding:8px 12px;border:none;border-radius:5px;cursor:pointer;margin-top:10px;}
-.btn:hover{background:white;}
-table{width:100%;border-collapse:collapse;color:black;background:white;margin-top:20px;}
-table, th, td{border:1px solid #000;}
-th, td{padding:8px;text-align:center;}
-.green{background:#28a745;color:white;}
-.red{background:#dc3545;color:white;}
-.pink{background:#ff69b4;color:white;}
-.yellow{background:#ffc107;color:white;}
-.grey{background:#6c757d;color:white;}
-.hidden{display:none;}
-
-/* Mobile Support */
-@media (max-width: 600px) {
-  .form-box input, .form-box select, .form-box button {width:100% !important; font-size:16px; margin-top:5px;}
-  nav {flex-direction: column; align-items: flex-start;}
-  #statusSearch {width:90%; margin:10px;}
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right,#1a2a6c,#b21f1f,#fdbb2d);
+  color: white;
+  line-height: 1.6;
+}
+header {
+  text-align: center;
+  padding: 20px;
+  background: rgba(0,0,0,0.6);
+}
+header img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 5px solid #fff;
+  transition: transform 0.4s;
+}
+header img:hover { transform: scale(1.05) rotate(2deg); }
+header h1 {
+  margin: 15px 0 0;
+  font-size: 2.5em;
+  color: #fbd46d;
+  text-shadow: 2px 2px 5px black;
+}
+nav {
+  display: flex;
+  justify-content: center;
+  background: rgba(0,0,0,0.8);
+  flex-wrap: wrap;
+}
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 15px 20px;
+  display: block;
+  transition: background 0.3s, color 0.3s;
+}
+nav a:hover {
+  background: #fbd46d;
+  color: black;
+  border-radius: 5px;
+}
+section {
+  padding: 40px 20px;
+  max-width: 900px;
+  margin: auto;
+  background: rgba(255,255,255,0.1);
+  margin-bottom: 30px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 15px rgba(0,0,0,0.5);
+  transition: transform 0.3s;
+}
+section:hover { transform: translateY(-5px); }
+section h2 { color: #ffe66d; margin-bottom: 15px; }
+footer {
+  text-align: center;
+  padding: 20px;
+  background: rgba(0,0,0,0.7);
+  color: #ccc;
+}
+footer a {
+  color: yellow;
+  margin: 0 10px;
+  text-decoration: none;
+  font-weight: bold;
+}
+footer a:hover {
+  text-decoration: underline;
 }
 </style>
 </head>
@@ -48,228 +87,173 @@ th, td{padding:8px;text-align:center;}
 </header>
 
 <nav>
-  <a onclick="showSection('profile')">Profile</a>
-  <a onclick="showSection('education')">Education</a>
-  <a onclick="showSection('culture')">Culture</a>
-  <a onclick="showSection('achievements')">Achievements</a>
-  <a onclick="showSection('hobbies')">Hobbies</a>
-  <a onclick="showSection('interested')">Interested About</a>
-  <a onclick="showSection('thoughts')">Thoughts</a>
-  <a onclick="showSection('visitor')">Visitor Form</a>
-  <a onclick="showSection('adminLogin')">Admin Login</a>
-  <input type="text" id="statusSearch" placeholder="Visitor Status: Enter Appt No" onkeypress="if(event.key==='Enter'){checkStatus();}">
+  <a href="#profile">Profile</a>
+  <a href="#education">Education</a>
+  <a href="#culture">Culture</a>
+  <a href="#achievements">Achievements</a>
+  <a href="#hobbies">Hobbies</a>
+  <a href="#interested">Interested About</a>
+  <a href="#thoughts">Thoughts</a>
+  <a href="#" onclick="openVisitorWindow()">Visitor Form</a>
 </nav>
-<div id="statusResult"></div>
 
-<!-- Profile Sections -->
-<section id="profile"><h2>Profile</h2><p>I am INDIA BADSAH, a passionate learner and explorer of life’s endless opportunities. I aim to inspire others while growing myself in every possible field.</p></section>
-<section id="education"><h2>Education</h2><p>Education is the foundation of growth. I gather knowledge from books and real-life experiences shaping problem-solving abilities.</p></section>
-<section id="culture"><h2>Culture</h2><p>I embrace traditions, values, and respect for diversity while blending it with modern ideas for a balanced lifestyle.</p></section>
-<section id="achievements"><h2>Achievements</h2><p>Every step of life is an achievement — from personal milestones to professional success, reflecting perseverance, hard work, and dedication.</p></section>
-<section id="hobbies"><h2>Hobbies</h2><p>I enjoy creative and recreational activities — sports, art, music, technology. Hobbies give me balance and energy.</p></section>
-<section id="interested"><h2>Interested About</h2><p>Deeply interested in innovation, leadership, and cultural understanding. Exploring new ideas and connecting with people excites me.</p></section>
-<section id="thoughts"><h2>Thoughts</h2><p>“Life is not about waiting for opportunities, it is about creating them.” Determination and honesty make anything possible.</p></section>
-
-<!-- Visitor Form -->
-<section id="visitor" class="hidden">
-  <h2>E_Appointment Visitor Form</h2>
-  <form id="appointmentForm" class="form-box">
-    <label>Visitor Name* <input type="text" id="vname" required></label>
-    <label>Visitor Address <input type="text" id="vaddress"></label>
-    <label>From Country <input type="text" id="vcountry"></label>
-    <label>Date of Birth <input type="date" id="vdob"></label>
-    <label>Virtual Visit Date* <input type="date" id="vdate" required></label>
-    <label>Time Availability* <input type="time" id="vtime" required></label>
-    <label>Contact Number* 
-      <select id="ccode">
-        <option value="+91">India (+91)</option>
-        <option value="+1">USA (+1)</option>
-        <option value="+880">Bangladesh (+880)</option>
-        <option value="+92">Pakistan (+92)</option>
-        <option value="+94">Sri Lanka (+94)</option>
-        <option value="+60">Malaysia (+60)</option>
-        <option value="+65">Singapore (+65)</option>
-        <option value="+44">UK (+44)</option>
-        <option value="+61">Australia (+61)</option>
-        <option value="+1">Canada (+1)</option>
-      </select>
-      <input type="tel" id="vphone" required>
-    </label>
-    <label>Purpose of Visit
-      <select id="vpurpose">
-        <option value="Visit Abroad">Visit Abroad</option>
-        <option value="Student Visa in Abroad">Student Visa in Abroad</option>
-        <option value="Job in Abroad">Job in Abroad</option>
-        <option value="Education system in Abroad">Education system in Abroad</option>
-        <option value="Counseling for Education in Abroad">Counseling for Education in Abroad</option>
-      </select>
-    </label>
-    <label>Passport Number <input type="text" id="vpassport"></label>
-    <label>Email ID 
-      <input type="text" id="vemail" placeholder="yourname" required>
-      <select id="emaildomain">
-        <option value="@gmail.com">@gmail.com</option>
-        <option value="@rediffmail.com">@rediffmail.com</option>
-        <option value="@yahoo.com">@yahoo.com</option>
-      </select>
-    </label>
-    <button type="submit" class="btn">Submit</button>
-  </form>
+<section id="profile">
+  <h2>Profile</h2>
+  <p>I am INDIA BADSAH, a passionate learner and explorer of life’s endless opportunities. With strong roots and a clear vision, I always aim to inspire others while growing myself in every possible field.</p>
 </section>
 
-<!-- Admin Login -->
-<section id="adminLogin" class="hidden">
-  <h2>Admin Login</h2>
-  <div class="form-box">
-    <label>Username <input type="text" id="adminUser"></label>
-    <label>Password <input type="password" id="adminPass"></label>
-    <button onclick="adminLogin()" class="btn">Login</button>
-  </div>
+<section id="education">
+  <h2>Education</h2>
+  <p>I believe education is the foundation of growth. Over the years, I have gathered knowledge not only from books but also from real-life experiences, which shaped my way of thinking and problem-solving abilities.</p>
 </section>
 
-<!-- Admin Dashboard -->
-<section id="adminDashboard" class="hidden">
-  <h2>Admin Dashboard</h2>
-  <button onclick="adminLogout()" class="btn">Logout</button>
-  <table id="visitorTable">
-    <thead><tr>
-      <th>Appt No</th><th>Name</th><th>Date</th><th>Time</th><th>Contact</th><th>Purpose</th><th>Status</th><th>Action</th>
-    </tr></thead>
-    <tbody></tbody>
+<section id="culture">
+  <h2>Culture</h2>
+  <p>Culture defines who we are. I embrace traditions, values, and respect for diversity while blending it with modern ideas to create a balanced lifestyle.</p>
+</section>
+
+<section id="achievements">
+  <h2>Achievements</h2>
+  <p>Every step of life is an achievement — from personal milestones to professional success. My journey reflects perseverance, hard work, and dedication.</p>
+</section>
+
+<section id="hobbies">
+  <h2>Hobbies</h2>
+  <p>I enjoy engaging in creative and recreational activities, whether it is sports, art, music, or technology. Hobbies give me balance and energy to face daily challenges.</p>
+</section>
+
+<section id="interested">
+  <h2>Interested About</h2>
+  <p>I am deeply interested in innovation, leadership, and cultural understanding. Exploring new ideas and connecting with people from all walks of life always excites me.</p>
+</section>
+
+<section id="thoughts">
+  <h2>Thoughts</h2>
+  <p>“Life is not about waiting for opportunities, it is about creating them.” My belief is simple: with determination and honesty, nothing is impossible.</p>
+</section>
+
+<!-- Admin Table -->
+<div id="adminTable">
+  <h2>Admin Visitor Submissions</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Appointment No</th><th>Name</th><th>Country</th><th>Date of Visit</th><th>Time</th><th>Status</th><th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="adminTableBody"></tbody>
   </table>
-</section>
+</div>
 
-<footer><p>© 2025 INDIA BADSAH | Personal Biography Website</p></footer>
+<footer>
+  <p>© 2025 INDIA BADSAH | Personal Biography Website</p>
+  <div>
+    <a href="mailto:starananda24@gmail.com" target="_blank">Email</a> |
+    <a href="https://wa.me/971506309833" target="_blank">WhatsApp</a> |
+    <a href="https://www.facebook.com/share/17HAzeWpsW/" target="_blank">Facebook</a> |
+    <a href="https://www.linkedin.com/in/bhola-nath-basak-3b6684242?trk=contact-info" target="_blank">LinkedIn</a>
+  </div>
+</footer>
 
 <script>
-let visitors = JSON.parse(localStorage.getItem("visitors")) || {};
+// Visitor Data
+let visitorData = [];
+let appointmentCounter = 1;
 
-function showSection(id){
-  document.querySelectorAll("section").forEach(s=>s.classList.add("hidden"));
-  document.getElementById(id).classList.remove("hidden");
+// Open Visitor Form
+function openVisitorWindow(){
+  const w = window.open("","VisitorForm","width=550,height=700");
+  w.document.write(`<html><head><title>Visitor Form</title></head><body style="font-family:Arial;">
+  <h2>E_Appointment Form</h2>
+  <label>Visitor Name *</label><input type="text" id="vName"><br>
+  <label>Visitor Address *</label><input type="text" id="vAddress"><br>
+  <label>From Country *</label>
+  <select id="vCountry" onchange="updateCode()">
+    <option value="India" dataCode="+91">India</option>
+    <option value="USA" dataCode="+1">USA</option>
+    <option value="Bangladesh" dataCode="+880">Bangladesh</option>
+    <option value="Pakistan" dataCode="+92">Pakistan</option>
+    <option value="Sri Lanka" dataCode="+94">Sri Lanka</option>
+    <option value="Malaysia" dataCode="+60">Malaysia</option>
+    <option value="Singapore" dataCode="+65">Singapore</option>
+    <option value="UK" dataCode="+44">UK</option>
+    <option value="Australia" dataCode="+61">Australia</option>
+    <option value="Canada" dataCode="+1">Canada</option>
+  </select>
+  <span id="countryCode">+91</span><br>
+
+  <label>Date of Birth *</label><input type="date" id="vDOB"><br>
+  <label>Date of Virtual Visit *</label><input type="date" id="vDateVisit"><br>
+  <label>Time of Visit *</label><input type="time" id="vTime"><br>
+
+  <label>Contact Number *</label><input type="tel" id="vPhone"><br>
+  <label>Purpose of Visit *</label>
+  <select id="vPurpose">
+    <option value="Visit Abroad">Visit Abroad</option>
+    <option value="Student Visa in Abroad">Student Visa in Abroad</option>
+    <option value="Job in Abroad">Job in Abroad</option>
+    <option value="Education system in Abroad">Education system in Abroad</option>
+    <option value="Counseling for Education in Abroad">Counseling for Education in Abroad</option>
+  </select><br>
+
+  <label>Passport Number</label><input type="text" id="vPassport"><br>
+  <label>Email *</label><input type="text" id="vEmailName">@<select id="vEmailDomain">
+    <option value="gmail.com">gmail.com</option>
+    <option value="yahoo.com">yahoo.com</option>
+    <option value="rediffmail.com">rediffmail.com</option>
+  </select><br>
+  <button onclick="submitVisitor()">Submit Appointment</button>
+
+<script>
+function updateCode(){
+  const sel=document.getElementById('vCountry');
+  document.getElementById('countryCode').innerText=sel.options[sel.selectedIndex].dataset.code;
+}
+function submitVisitor(){
+  const name=document.getElementById('vName').value.trim();
+  const address=document.getElementById('vAddress').value.trim();
+  const country=document.getElementById('vCountry').value;
+  const code=document.getElementById('countryCode').innerText;
+  const dob=document.getElementById('vDOB').value;
+  const dateVisit=document.getElementById('vDateVisit').value;
+  const time=document.getElementById('vTime').value;
+  const phone=document.getElementById('vPhone').value.trim();
+  const purpose=document.getElementById('vPurpose').value;
+  const passport=document.getElementById('vPassport').value.trim() || 'NA';
+  const emailName=document.getElementById('vEmailName').value.trim();
+  const emailDomain=document.getElementById('vEmailDomain').value;
+  if(!name||!address||!country||!dob||!dateVisit||!time||!phone||!purpose||!emailName){alert('Please fill mandatory fields'); return;}
+  const apptNo='APMTWBNB'+String(window.opener.appointmentCounter).padStart(2,'0');
+  window.opener.appointmentCounter++;
+  const email=emailName+'@'+emailDomain;
+  const newVisitor={appointmentNo:apptNo,name,address,country,code,dob,dateVisit,time,phone,purpose,passport,email,status:'pending'};
+  window.opener.visitorData.push(newVisitor);
+  window.opener.updateAdminTable();
+  alert('Appointment sent successfully\\nAppointment No: '+apptNo);
+  window.close();
+}
+</script>
+
+</body></html>`);
 }
 
-// Centralized appointment number generator
-function getNextAppointmentNumber() {
-  const keys = Object.keys(visitors);
-  if(keys.length===0) return "APMTWBNB01";
-  const nums = keys.map(k=>parseInt(k.replace("APMTWBNB",""))).filter(n=>!isNaN(n));
-  const maxNum = nums.length ? Math.max(...nums) : 0;
-  const nextNum = maxNum + 1;
-  return "APMTWBNB" + String(nextNum).padStart(2,"0");
-}
-
-// Visitor Form Submission
-document.getElementById("appointmentForm").addEventListener("submit",function(e){
-  e.preventDefault();
-  const name=document.getElementById("vname").value.trim();
-  const date=document.getElementById("vdate").value;
-  const time=document.getElementById("vtime").value;
-  const phone=document.getElementById("vphone").value.trim();
-  if(!name || !date || !time || !phone){alert("Please fill mandatory fields"); return;}
-  const number=getNextAppointmentNumber();
-  const data={
-    number:number,
-    name:name,
-    address:document.getElementById("vaddress").value,
-    country:document.getElementById("vcountry").value,
-    dob:document.getElementById("vdob").value,
-    date:date,
-    time:time,
-    phone:document.getElementById("ccode").value+phone,
-    purpose:document.getElementById("vpurpose").value,
-    passport:document.getElementById("vpassport").value||"NA",
-    email:document.getElementById("vemail").value+document.getElementById("emaildomain").value,
-    status:"Pending",
-    submitted:new Date()
-  };
-  visitors[number]=data; localStorage.setItem("visitors",JSON.stringify(visitors));
-  alert("Appointment sent successfully: "+number);
-  this.reset();
-  printAppointment(data);
-});
-
-// Print Layout
-function printAppointment(data){
-  const printWin=window.open("","_blank");
-  let [hour,minute]=data.time.split(":"); hour=parseInt(hour); const ampm=hour>=12?"PM":"AM"; hour=hour%12||12; const time12=hour+":"+minute+" "+ampm;
-  printWin.document.write(`<html><head><title>Appointment Letter</title><style>
-    body{font-family:Arial;padding:30px;background:#f4f4f9;}
-    h1{color:#1a2a6c;text-align:center;border-bottom:2px solid #fbd46d;padding-bottom:10px;}
-    p{font-size:16px;margin:5px 0;}
-    .info-box{background:#fff;padding:15px;border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,0.3);}
-    .highlight{color:#fbd46d;font-weight:bold;}
-  </style></head><body>`);
-  printWin.document.write("<h1>E_Appointment Letter</h1><div class='info-box'>");
-  printWin.document.write(`<p><span class="highlight">Appointment No:</span> ${data.number}</p>`);
-  printWin.document.write(`<p><span class="highlight">Generated On:</span> ${new Date(data.submitted).toLocaleDateString()} ${new Date(data.submitted).toLocaleTimeString()}</p>`);
-  printWin.document.write(`<p><span class="highlight">Visitor Name:</span> ${data.name}</p>`);
-  printWin.document.write(`<p><span class="highlight">Date of Birth:</span> ${data.dob}</p>`);
-  printWin.document.write(`<p><span class="highlight">Address:</span> ${data.address}</p>`);
-  printWin.document.write(`<p><span class="highlight">Country:</span> ${data.country}</p>`);
-  printWin.document.write(`<p><span class="highlight">Visit Date:</span> ${data.date}</p>`);
-  printWin.document.write(`<p><span class="highlight">Time of Visit:</span> ${time12}</p>`);
-  printWin.document.write(`<p><span class="highlight">To Meet:</span> BHOLA NATH BASAK</p>`);
-  printWin.document.write(`<p><span class="highlight">Passport:</span> ${data.passport}</p>`);
-  printWin.document.write(`<p><span class="highlight">Email:</span> ${data.email}</p>`);
-  printWin.document.write(`<p><span class="highlight">Contact:</span> ${data.phone}</p>`);
-  printWin.document.write('</div></body></html>'); printWin.print();
-}
-
-// Admin login/logout
-const ADMIN_USER="admin"; const ADMIN_PASS="1234";
-function adminLogin(){
-  const u=document.getElementById("adminUser").value;
-  const p=document.getElementById("adminPass").value;
-  if(u===ADMIN_USER && p===ADMIN_PASS){showSection("adminDashboard"); loadAdminTable();}
-  else alert("Invalid Credentials!");
-}
-function adminLogout(){showSection("adminLogin");}
-
-// Load Admin Table
-function loadAdminTable(){
-  const tbody=document.querySelector("#visitorTable tbody"); tbody.innerHTML="";
-  Object.values(visitors).forEach(v=>{
-    const tr=document.createElement("tr");
-    let acceptBtn=`<button ${v.status!=='Pending'?'disabled':''} style="background:${v.status==='Accepted'?'yellow':'#28a745'};" onclick="updateStatus('${v.number}','Accepted')">Accept</button>`;
-    let rejectBtn=`<button ${v.status!=='Pending'?'disabled':''} style="background:${v.status==='Rejected'?'grey':'#dc3545'};" onclick="updateStatus('${v.number}','Rejected')">Reject</button>`;
-    tr.innerHTML=`<td>${v.number}</td><td>${v.name}</td><td>${v.date}</td><td>${v.time}</td><td>${v.phone}</td><td>${v.purpose}</td>
-    <td class="${v.status==='Accepted'?'green':v.status==='Rejected'?'red':'pink'}">${v.status}</td>
-    <td>${acceptBtn} ${rejectBtn}</td>`;
+// Admin Table Update
+function updateAdminTable(){
+  const tbody=document.getElementById('adminTableBody');
+  tbody.innerHTML='';
+  visitorData.forEach((v,i)=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${v.appointmentNo}</td><td>${v.name}</td><td>${v.country} (${v.code})</td><td>${v.dateVisit}</td><td>${v.time}</td><td>${v.status}</td><td>
+      <button id="accept${i}" class="statusButton accepted" onclick="accept(${i})" ${v.status!=='pending'?'disabled class=disabled':''}>Accept</button>
+      <button id="reject${i}" class="statusButton rejected" onclick="reject(${i})" ${v.status!=='pending'?'disabled class=disabled':''}>Reject</button>
+    </td>`;
     tbody.appendChild(tr);
   });
 }
 
-// Update Status
-function updateStatus(num,status){
-  visitors[num].status=status;
-  localStorage.setItem("visitors",JSON.stringify(visitors));
-  loadAdminTable();
-}
-
-// Visitor Status Search
-function checkStatus(){
-  const apn=document.getElementById("statusSearch").value.trim();
-  const resultDiv=document.getElementById("statusResult");
-  resultDiv.innerHTML="";
-  if(!apn){alert("Enter Appointment Number"); return;}
-  if(visitors[apn]){
-    const v=visitors[apn];
-    let btn=document.createElement("button");
-    btn.disabled=true; btn.style.padding="8px 12px"; btn.style.border="none"; btn.style.borderRadius="5px"; btn.style.marginTop="5px"; btn.style.fontWeight="bold";
-    if(v.status==='Accepted'){btn.innerText="APPOINTMENT ACCEPTED"; btn.style.background="#28a745"; btn.style.color="white";}
-    else if(v.status==='Rejected'){btn.innerText="APPOINTMENT REJECTED"; btn.style.background="#dc3545"; btn.style.color="white";}
-    else{btn.innerText="ADMIN BUSY"; btn.style.background="#ff69b4"; btn.style.color="white";}
-    let details=`<div style="color:white;background:rgba(0,0,0,0.6);padding:10px;border-radius:8px;margin-top:5px;">
-      <p><b>Appointment No:</b> ${v.number}</p>
-      <p><b>Name:</b> ${v.name}</p>
-      <p><b>Date:</b> ${v.date}</p>
-      <p><b>Time:</b> ${v.time}</p>
-      <p><b>Purpose:</b> ${v.purpose}</p>
-    </div>`;
-    resultDiv.innerHTML=details; resultDiv.appendChild(btn);
-  } else {resultDiv.innerHTML="<p style='color:white;background:red;padding:5px;border-radius:5px;'>Appointment number not found!</p>";}
-}
+function accept(index){visitorData[index].status='accepted'; updateAdminTable();}
+function reject(index){visitorData[index].status='rejected'; updateAdminTable();}
 </script>
+
 </body>
 </html>

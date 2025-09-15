@@ -38,16 +38,9 @@ th, td{padding:8px;text-align:center;}
   nav {flex-direction: column; align-items: flex-start;}
   #statusSearch {width:90%; margin:10px;}
 }
-
-/* Social Icons Hover */
-#socialLinks a img {
-  transition: transform 0.3s, filter 0.3s;
-}
-#socialLinks a img:hover {
-  transform: scale(1.2) rotate(10deg);
-  filter: drop-shadow(0 0 5px yellow);
-}
 </style>
+<!-- jsPDF for PDF generation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
 
@@ -123,7 +116,6 @@ th, td{padding:8px;text-align:center;}
       </select>
     </label>
     <button type="submit" class="btn">Submit</button>
-    <button type="button" id="printAppointment" class="btn hidden">Download Appointment</button>
   </form>
 </section>
 
@@ -170,6 +162,7 @@ function getNextAppointmentNumber() {
   return "APMTWBNB" + String(maxNum+1).padStart(2,"0");
 }
 
+// Visitor Form Submit
 document.getElementById("appointmentForm").addEventListener("submit",function(e){
   e.preventDefault();
   let name = document.getElementById("vname").value.trim();
@@ -195,40 +188,14 @@ document.getElementById("appointmentForm").addEventListener("submit",function(e)
   };
   localStorage.setItem("visitors",JSON.stringify(visitors));
   alert("Appointment sent successfully: " + apptNo);
+
+  // Show Download PDF button
+  const resDiv = document.getElementById("statusResult");
+  resDiv.innerHTML = `<button class="btn" onclick="downloadPDF('${apptNo}')">Download PDF</button>`;
   document.getElementById("appointmentForm").reset();
-  document.getElementById("printAppointment").classList.remove("hidden");
-  document.getElementById("printAppointment").onclick = function(){ printAppointment(apptNo); };
 });
 
-// ---------------------- Print Appointment ----------------------
-function printAppointment(apptNo){
-  let v = visitors[apptNo];
-  let printWindow = window.open('','PRINT','height=600,width=800');
-  let d = new Date();
-  let ampm = d.getHours()>=12?'PM':'AM';
-  let hours = d.getHours()%12||12;
-  let minutes = d.getMinutes().toString().padStart(2,'0');
-  printWindow.document.write(`<html><head><title>Appointment ${apptNo}</title></head><body style="font-family:Arial;padding:20px;">
-  <h1 style="text-align:center;">E_Appointment Letter</h1>
-  <p><strong>Appointment No:</strong> ${apptNo}</p>
-  <p><strong>Name:</strong> ${v.name}</p>
-  <p><strong>Date of Birth:</strong> ${v.dob||'NA'}</p>
-  <p><strong>Address:</strong> ${v.address||'NA'}</p>
-  <p><strong>Country:</strong> ${v.country||'NA'}</p>
-  <p><strong>Visit Date & Time:</strong> ${v.date} ${v.time} ${ampm}</p>
-  <p><strong>Purpose:</strong> ${v.purpose}</p>
-  <p><strong>Passport:</strong> ${v.passport}</p>
-  <p><strong>Email:</strong> ${v.email}</p>
-  <p><strong>Phone:</strong> ${v.phone}</p>
-  <p><strong>Generated On:</strong> ${d.toLocaleDateString()} ${hours}:${minutes} ${ampm}</p>
-  </body></html>`);
-  printWindow.document.close();
-  printWindow.focus();
-  printWindow.print();
-  printWindow.close();
-}
-
-// ---------------------- Visitor Status ----------------------
+// Check Status
 function checkStatus(){
   let apptNo = document.getElementById("statusSearch").value.trim();
   let resDiv = document.getElementById("statusResult");
@@ -237,11 +204,11 @@ function checkStatus(){
     let color="pink"; let text="ADMIN BUSY";
     if(v.status==="Accepted"){color="green"; text="APPOINTMENT ACCEPTED";}
     else if(v.status==="Rejected"){color="red"; text="APPOINTMENT REJECTED";}
-    resDiv.innerHTML = `<button style="width:100%;padding:10px 0;font-size:16px;background:${color};color:white;border:none;border-radius:5px;" disabled>${text}</button>`;
+    resDiv.innerHTML = `<button class="${color}" style="padding:10px 20px;font-size:16px;" disabled>${text}</button>`;
   } else {resDiv.innerHTML="No Appointment Found";}
 }
 
-// ---------------------- Admin ----------------------
+// Admin
 function adminLogin(){
   let u=document.getElementById("adminUser").value;
   let p=document.getElementById("adminPass").value;
@@ -249,6 +216,8 @@ function adminLogin(){
   else alert("Invalid Credentials");
 }
 function adminLogout(){ showSection("profile"); }
+
+// Render Table
 function renderTable(){
   let tbody=document.querySelector("#visitorTable tbody");
   tbody.innerHTML="";
@@ -261,8 +230,41 @@ function renderTable(){
     tbody.appendChild(row);
   }
 }
+
+// Accept / Reject
 function accept(apptNo){ visitors[apptNo].status="Accepted"; localStorage.setItem("visitors",JSON.stringify(visitors)); renderTable();}
 function reject(apptNo){ visitors[apptNo].status="Rejected"; localStorage.setItem("visitors",JSON.stringify(visitors)); renderTable();}
+
+// Download PDF
+function downloadPDF(apptNo){
+  const { jsPDF } = window.jspdf;
+  const v = visitors[apptNo];
+  if(!v){ alert("No appointment found"); return; }
+
+  const doc = new jsPDF();
+  const currentDate = new Date();
+  const dateStr = currentDate.toLocaleDateString();
+  const timeStr = currentDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
+
+  doc.setFontSize(16);
+  doc.text("Appointment Details", 20, 20);
+  doc.setFontSize(12);
+  doc.text(`Appt No: ${apptNo}`, 20, 30);
+  doc.text(`Name: ${v.name}`, 20, 38);
+  doc.text(`Address: ${v.address}`, 20, 46);
+  doc.text(`Country: ${v.country}`, 20, 54);
+  doc.text(`Date of Birth: ${v.dob}`, 20, 62);
+  doc.text(`Visit Date: ${v.date}`, 20, 70);
+  doc.text(`Visit Time: ${v.time}`, 20, 78);
+  doc.text(`Contact: ${v.phone}`, 20, 86);
+  doc.text(`Purpose: ${v.purpose}`, 20, 94);
+  doc.text(`Passport: ${v.passport}`, 20, 102);
+  doc.text(`Email: ${v.email}`, 20, 110);
+  doc.text(`Status: ${v.status}`, 20, 118);
+  doc.text(`Generated on: ${dateStr} ${timeStr}`, 20, 126);
+
+  doc.save(`Appointment_${apptNo}.pdf`);
+}
 </script>
 
 </body>

@@ -31,6 +31,13 @@ th, td{padding:8px;text-align:center;}
 .yellow{background:#ffc107;color:white;}
 .grey{background:#6c757d;color:white;}
 .hidden{display:none;}
+
+/* Mobile Support */
+@media (max-width: 600px) {
+  .form-box input, .form-box select, .form-box button {width:100% !important; font-size:16px; margin-top:5px;}
+  nav {flex-direction: column; align-items: flex-start;}
+  #statusSearch {width:90%; margin:10px;}
+}
 </style>
 </head>
 <body>
@@ -54,7 +61,7 @@ th, td{padding:8px;text-align:center;}
 </nav>
 <div id="statusResult"></div>
 
-<!-- Full Profile Sections -->
+<!-- Profile Sections -->
 <section id="profile"><h2>Profile</h2><p>I am INDIA BADSAH, a passionate learner and explorer of life’s endless opportunities. I aim to inspire others while growing myself in every possible field.</p></section>
 <section id="education"><h2>Education</h2><p>Education is the foundation of growth. I gather knowledge from books and real-life experiences shaping problem-solving abilities.</p></section>
 <section id="culture"><h2>Culture</h2><p>I embrace traditions, values, and respect for diversity while blending it with modern ideas for a balanced lifestyle.</p></section>
@@ -132,19 +139,24 @@ th, td{padding:8px;text-align:center;}
   </table>
 </section>
 
-<footer>
-<p>© 2025 INDIA BADSAH | Personal Biography Website</p>
-</footer>
+<footer><p>© 2025 INDIA BADSAH | Personal Biography Website</p></footer>
 
 <script>
-let appointmentCounter = localStorage.getItem("appointmentCounter")?parseInt(localStorage.getItem("appointmentCounter")):1;
-let visitors = JSON.parse(localStorage.getItem("visitors"))||{};
-const ADMIN_USER="admin";
-const ADMIN_PASS="1234";
+let visitors = JSON.parse(localStorage.getItem("visitors")) || {};
 
 function showSection(id){
   document.querySelectorAll("section").forEach(s=>s.classList.add("hidden"));
   document.getElementById(id).classList.remove("hidden");
+}
+
+// Centralized appointment number generator
+function getNextAppointmentNumber() {
+  const keys = Object.keys(visitors);
+  if(keys.length===0) return "APMTWBNB01";
+  const nums = keys.map(k=>parseInt(k.replace("APMTWBNB",""))).filter(n=>!isNaN(n));
+  const maxNum = nums.length ? Math.max(...nums) : 0;
+  const nextNum = maxNum + 1;
+  return "APMTWBNB" + String(nextNum).padStart(2,"0");
 }
 
 // Visitor Form Submission
@@ -155,8 +167,7 @@ document.getElementById("appointmentForm").addEventListener("submit",function(e)
   const time=document.getElementById("vtime").value;
   const phone=document.getElementById("vphone").value.trim();
   if(!name || !date || !time || !phone){alert("Please fill mandatory fields"); return;}
-  const number="APMTWBNB"+String(appointmentCounter).padStart(2,"0");
-  appointmentCounter++; localStorage.setItem("appointmentCounter",appointmentCounter);
+  const number=getNextAppointmentNumber();
   const data={
     number:number,
     name:name,
@@ -181,8 +192,7 @@ document.getElementById("appointmentForm").addEventListener("submit",function(e)
 // Print Layout
 function printAppointment(data){
   const printWin=window.open("","_blank");
-  let [hour,minute]=data.time.split(":");
-  hour=parseInt(hour); const ampm=hour>=12?"PM":"AM"; hour=hour%12||12; const time12=hour+":"+minute+" "+ampm;
+  let [hour,minute]=data.time.split(":"); hour=parseInt(hour); const ampm=hour>=12?"PM":"AM"; hour=hour%12||12; const time12=hour+":"+minute+" "+ampm;
   printWin.document.write(`<html><head><title>Appointment Letter</title><style>
     body{font-family:Arial;padding:30px;background:#f4f4f9;}
     h1{color:#1a2a6c;text-align:center;border-bottom:2px solid #fbd46d;padding-bottom:10px;}
@@ -207,6 +217,7 @@ function printAppointment(data){
 }
 
 // Admin login/logout
+const ADMIN_USER="admin"; const ADMIN_PASS="1234";
 function adminLogin(){
   const u=document.getElementById("adminUser").value;
   const p=document.getElementById("adminPass").value;

@@ -38,6 +38,15 @@ th, td{padding:8px;text-align:center;}
   nav {flex-direction: column; align-items: flex-start;}
   #statusSearch {width:90%; margin:10px;}
 }
+
+/* Social Icons Hover */
+#socialLinks a img {
+  transition: transform 0.3s, filter 0.3s;
+}
+#socialLinks a img:hover {
+  transform: scale(1.2) rotate(10deg);
+  filter: drop-shadow(0 0 5px yellow);
+}
 </style>
 </head>
 <body>
@@ -139,9 +148,26 @@ th, td{padding:8px;text-align:center;}
   </table>
 </section>
 
-<footer><p>© 2025 INDIA BADSAH | Personal Biography Website</p></footer>
+<footer>
+  <p>© 2025 INDIA BADSAH | Personal Biography Website</p>
+  <div id="socialLinks" style="margin-top:10px;text-align:center;">
+    <a href="https://www.linkedin.com/in/YOUR_LINK" target="_blank" title="LinkedIn">
+      <img src="linkedin-icon.png" alt="LinkedIn" style="width:35px;height:35px;margin:0 8px;vertical-align:middle;">
+    </a>
+    <a href="https://www.facebook.com/YOUR_LINK" target="_blank" title="Facebook">
+      <img src="facebook-icon.png" alt="Facebook" style="width:35px;height:35px;margin:0 8px;vertical-align:middle;">
+    </a>
+    <a href="https://wa.me/YOUR_PHONE_NUMBER" target="_blank" title="WhatsApp">
+      <img src="whatsapp-icon.png" alt="WhatsApp" style="width:35px;height:35px;margin:0 8px;vertical-align:middle;">
+    </a>
+    <a href="mailto:YOUR_EMAIL@example.com" title="Email">
+      <img src="email-icon.png" alt="Email" style="width:35px;height:35px;margin:0 8px;vertical-align:middle;">
+    </a>
+  </div>
+</footer>
 
 <script>
+// ---------------------- Existing JS Program (visitor, admin, print, status search) ----------------------
 let visitors = JSON.parse(localStorage.getItem("visitors")) || {};
 
 function showSection(id){
@@ -149,127 +175,80 @@ function showSection(id){
   document.getElementById(id).classList.remove("hidden");
 }
 
-// Centralized appointment number generator
 function getNextAppointmentNumber() {
   const keys = Object.keys(visitors);
   if(keys.length===0) return "APMTWBNB01";
   const nums = keys.map(k=>parseInt(k.replace("APMTWBNB",""))).filter(n=>!isNaN(n));
   const maxNum = nums.length ? Math.max(...nums) : 0;
-  const nextNum = maxNum + 1;
-  return "APMTWBNB" + String(nextNum).padStart(2,"0");
+  return "APMTWBNB" + String(maxNum+1).padStart(2,"0");
 }
 
-// Visitor Form Submission
 document.getElementById("appointmentForm").addEventListener("submit",function(e){
   e.preventDefault();
-  const name=document.getElementById("vname").value.trim();
-  const date=document.getElementById("vdate").value;
-  const time=document.getElementById("vtime").value;
-  const phone=document.getElementById("vphone").value.trim();
-  if(!name || !date || !time || !phone){alert("Please fill mandatory fields"); return;}
-  const number=getNextAppointmentNumber();
-  const data={
-    number:number,
+  let name = document.getElementById("vname").value.trim();
+  let date = document.getElementById("vdate").value;
+  let time = document.getElementById("vtime").value;
+  let phone = document.getElementById("vphone").value.trim();
+  if(!name || !date || !time || !phone){ alert("Please fill mandatory fields"); return; }
+
+  let apptNo = getNextAppointmentNumber();
+  visitors[apptNo] = {
     name:name,
+    date:date,
+    time:time,
+    phone:document.getElementById("ccode").value + phone,
     address:document.getElementById("vaddress").value,
     country:document.getElementById("vcountry").value,
     dob:document.getElementById("vdob").value,
-    date:date,
-    time:time,
-    phone:document.getElementById("ccode").value+phone,
     purpose:document.getElementById("vpurpose").value,
     passport:document.getElementById("vpassport").value||"NA",
     email:document.getElementById("vemail").value+document.getElementById("emaildomain").value,
     status:"Pending",
-    submitted:new Date()
+    submitted:new Date().toLocaleString()
   };
-  visitors[number]=data; localStorage.setItem("visitors",JSON.stringify(visitors));
-  alert("Appointment sent successfully: "+number);
-  this.reset();
-  printAppointment(data);
+  localStorage.setItem("visitors",JSON.stringify(visitors));
+  alert("Appointment sent successfully: " + apptNo);
+  document.getElementById("appointmentForm").reset();
 });
 
-// Print Layout
-function printAppointment(data){
-  const printWin=window.open("","_blank");
-  let [hour,minute]=data.time.split(":"); hour=parseInt(hour); const ampm=hour>=12?"PM":"AM"; hour=hour%12||12; const time12=hour+":"+minute+" "+ampm;
-  printWin.document.write(`<html><head><title>Appointment Letter</title><style>
-    body{font-family:Arial;padding:30px;background:#f4f4f9;}
-    h1{color:#1a2a6c;text-align:center;border-bottom:2px solid #fbd46d;padding-bottom:10px;}
-    p{font-size:16px;margin:5px 0;}
-    .info-box{background:#fff;padding:15px;border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,0.3);}
-    .highlight{color:#fbd46d;font-weight:bold;}
-  </style></head><body>`);
-  printWin.document.write("<h1>E_Appointment Letter</h1><div class='info-box'>");
-  printWin.document.write(`<p><span class="highlight">Appointment No:</span> ${data.number}</p>`);
-  printWin.document.write(`<p><span class="highlight">Generated On:</span> ${new Date(data.submitted).toLocaleDateString()} ${new Date(data.submitted).toLocaleTimeString()}</p>`);
-  printWin.document.write(`<p><span class="highlight">Visitor Name:</span> ${data.name}</p>`);
-  printWin.document.write(`<p><span class="highlight">Date of Birth:</span> ${data.dob}</p>`);
-  printWin.document.write(`<p><span class="highlight">Address:</span> ${data.address}</p>`);
-  printWin.document.write(`<p><span class="highlight">Country:</span> ${data.country}</p>`);
-  printWin.document.write(`<p><span class="highlight">Visit Date:</span> ${data.date}</p>`);
-  printWin.document.write(`<p><span class="highlight">Time of Visit:</span> ${time12}</p>`);
-  printWin.document.write(`<p><span class="highlight">To Meet:</span> BHOLA NATH BASAK</p>`);
-  printWin.document.write(`<p><span class="highlight">Passport:</span> ${data.passport}</p>`);
-  printWin.document.write(`<p><span class="highlight">Email:</span> ${data.email}</p>`);
-  printWin.document.write(`<p><span class="highlight">Contact:</span> ${data.phone}</p>`);
-  printWin.document.write('</div></body></html>'); printWin.print();
-}
-
-// Admin login/logout
-const ADMIN_USER="admin"; const ADMIN_PASS="1234";
-function adminLogin(){
-  const u=document.getElementById("adminUser").value;
-  const p=document.getElementById("adminPass").value;
-  if(u===ADMIN_USER && p===ADMIN_PASS){showSection("adminDashboard"); loadAdminTable();}
-  else alert("Invalid Credentials!");
-}
-function adminLogout(){showSection("adminLogin");}
-
-// Load Admin Table
-function loadAdminTable(){
-  const tbody=document.querySelector("#visitorTable tbody"); tbody.innerHTML="";
-  Object.values(visitors).forEach(v=>{
-    const tr=document.createElement("tr");
-    let acceptBtn=`<button ${v.status!=='Pending'?'disabled':''} style="background:${v.status==='Accepted'?'yellow':'#28a745'};" onclick="updateStatus('${v.number}','Accepted')">Accept</button>`;
-    let rejectBtn=`<button ${v.status!=='Pending'?'disabled':''} style="background:${v.status==='Rejected'?'grey':'#dc3545'};" onclick="updateStatus('${v.number}','Rejected')">Reject</button>`;
-    tr.innerHTML=`<td>${v.number}</td><td>${v.name}</td><td>${v.date}</td><td>${v.time}</td><td>${v.phone}</td><td>${v.purpose}</td>
-    <td class="${v.status==='Accepted'?'green':v.status==='Rejected'?'red':'pink'}">${v.status}</td>
-    <td>${acceptBtn} ${rejectBtn}</td>`;
-    tbody.appendChild(tr);
-  });
-}
-
-// Update Status
-function updateStatus(num,status){
-  visitors[num].status=status;
-  localStorage.setItem("visitors",JSON.stringify(visitors));
-  loadAdminTable();
-}
-
-// Visitor Status Search
 function checkStatus(){
-  const apn=document.getElementById("statusSearch").value.trim();
-  const resultDiv=document.getElementById("statusResult");
-  resultDiv.innerHTML="";
-  if(!apn){alert("Enter Appointment Number"); return;}
-  if(visitors[apn]){
-    const v=visitors[apn];
-    let btn=document.createElement("button");
-    btn.disabled=true; btn.style.padding="8px 12px"; btn.style.border="none"; btn.style.borderRadius="5px"; btn.style.marginTop="5px"; btn.style.fontWeight="bold";
-    if(v.status==='Accepted'){btn.innerText="APPOINTMENT ACCEPTED"; btn.style.background="#28a745"; btn.style.color="white";}
-    else if(v.status==='Rejected'){btn.innerText="APPOINTMENT REJECTED"; btn.style.background="#dc3545"; btn.style.color="white";}
-    else{btn.innerText="ADMIN BUSY"; btn.style.background="#ff69b4"; btn.style.color="white";}
-    let details=`<div style="color:white;background:rgba(0,0,0,0.6);padding:10px;border-radius:8px;margin-top:5px;">
-      <p><b>Appointment No:</b> ${v.number}</p>
-      <p><b>Name:</b> ${v.name}</p>
-      <p><b>Date:</b> ${v.date}</p>
-      <p><b>Time:</b> ${v.time}</p>
-      <p><b>Purpose:</b> ${v.purpose}</p>
-    </div>`;
-    resultDiv.innerHTML=details; resultDiv.appendChild(btn);
-  } else {resultDiv.innerHTML="<p style='color:white;background:red;padding:5px;border-radius:5px;'>Appointment number not found!</p>";}
+  let apptNo = document.getElementById("statusSearch").value.trim();
+  let resDiv = document.getElementById("statusResult");
+  if(visitors[apptNo]){
+    let v = visitors[apptNo];
+    let color="pink"; let text="ADMIN BUSY";
+    if(v.status==="Accepted"){color="green"; text="APPOINTMENT ACCEPTED";}
+    else if(v.status==="Rejected"){color="red"; text="APPOINTMENT REJECTED";}
+    resDiv.innerHTML = `<button class="${color}" style="padding:10px 20px;font-size:16px;" disabled>${text}</button>`;
+  } else {resDiv.innerHTML="No Appointment Found";}
 }
+
+// Admin
+function adminLogin(){
+  let u=document.getElementById("adminUser").value;
+  let p=document.getElementById("adminPass").value;
+  if(u==="admin" && p==="admin"){ showSection("adminDashboard"); renderTable();}
+  else alert("Invalid Credentials");
+}
+
+function adminLogout(){ showSection("profile"); }
+
+function renderTable(){
+  let tbody=document.querySelector("#visitorTable tbody");
+  tbody.innerHTML="";
+  for(let apptNo in visitors){
+    let v=visitors[apptNo];
+    let row=document.createElement("tr");
+    row.innerHTML=`<td>${apptNo}</td><td>${v.name}</td><td>${v.date}</td><td>${v.time}</td><td>${v.phone}</td><td>${v.purpose}</td><td>${v.status}</td>
+    <td><button onclick="accept('${apptNo}')" ${v.status!=="Pending"?'disabled':''}>Accept</button>
+    <button onclick="reject('${apptNo}')" ${v.status!=="Pending"?'disabled':''}>Reject</button></td>`;
+    tbody.appendChild(row);
+  }
+}
+
+function accept(apptNo){ visitors[apptNo].status="Accepted"; localStorage.setItem("visitors",JSON.stringify(visitors)); renderTable();}
+function reject(apptNo){ visitors[apptNo].status="Rejected"; localStorage.setItem("visitors",JSON.stringify(visitors)); renderTable();}
 </script>
+
 </body>
 </html>

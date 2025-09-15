@@ -107,9 +107,32 @@ footer {
   #socialPanel {top:auto; bottom:0; left:50%; transform: translateX(-50%); flex-direction: row; padding:5px;}
   #socialPanel a {margin:0 10px;}
 }
+
+/* Admin login & visitor search styles */
+#adminPanel, #visitorSearch { text-align:center; margin:15px; }
+#adminPanel input, #visitorSearch input { padding:8px; border-radius:5px; border:none; margin:0 5px; }
+#adminPanel button, #visitorSearch button { padding:8px 12px; border-radius:5px; border:none; cursor:pointer; margin-left:5px; }
+#adminPanel button { background:#fbd46d; color:black; }
+#visitorSearch button { background:#fbd46d; color:black; }
+#visitorStatusResult button { padding:8px 12px; border:none; border-radius:5px; color:white; }
 </style>
 </head>
 <body>
+
+<!-- Admin Login / Logout -->
+<div id="adminPanel">
+  <input type="text" id="adminUser" placeholder="Username">
+  <input type="password" id="adminPass" placeholder="Password">
+  <button onclick="adminLogin()">Log In</button>
+  <button onclick="adminLogout()">Log Out</button>
+</div>
+
+<!-- Visitor Status Search -->
+<div id="visitorSearch">
+  <input type="text" id="searchApptNo" placeholder="Enter Appointment Number">
+  <button onclick="searchVisitor()">Visitor Status</button>
+  <div id="visitorStatusResult"></div>
+</div>
 
 <!-- Left-side Social Panel -->
 <div id="socialPanel">
@@ -181,9 +204,47 @@ footer {
   <p>© 2025 INDIA BADSAH | Personal Biography Website</p>
 </footer>
 
-<!-- Existing visitor/admin functionality scripts go here -->
 <script>
-// Your full visitor/admin scripts remain unchanged
+// Admin Login / Logout
+function adminLogin() {
+  const user = document.getElementById('adminUser').value;
+  const pass = document.getElementById('adminPass').value;
+  if(user === "admin" && pass === "password") {
+    alert("Admin logged in");
+    // show admin panel / visitor table logic
+  } else {
+    alert("Invalid credentials");
+  }
+}
+function adminLogout() {
+  alert("Admin logged out");
+  // hide admin panel / visitor table logic
+}
+
+// Visitor Search
+let visitorData = []; // your visitor submission array
+function searchVisitor() {
+  const apptNo = document.getElementById('searchApptNo').value.trim();
+  const resultDiv = document.getElementById('visitorStatusResult');
+  if(!apptNo) { resultDiv.innerHTML = "Please enter appointment number"; return; }
+
+  const visitor = visitorData.find(v => v.appointmentNo === apptNo);
+  if(!visitor) {
+    resultDiv.innerHTML = "<button style='background:deeppink;'>ADMIN BUSY</button>";
+    return;
+  }
+
+  if(visitor.status === "accepted") {
+    resultDiv.innerHTML = "<button style='background:green;'>APPOINTMENT ACCEPTED</button>";
+  } else if(visitor.status === "rejected") {
+    resultDiv.innerHTML = "<button style='background:darkred;'>APPOINTMENT REJECTED</button>";
+  } else {
+    resultDiv.innerHTML = "<button style='background:deeppink;'>ADMIN BUSY</button>";
+  }
+}
+
+// Your existing visitor form / admin functions / print layout remain here
+// submitVisitorForm(), accept(), reject(), printAppointment() etc.
 </script>
 
 </body>

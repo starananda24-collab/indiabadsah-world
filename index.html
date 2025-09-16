@@ -1,226 +1,262 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>E-Appointment System</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f5f5f5; }
-    header { background: #333; color: #fff; padding: 15px; text-align: center; }
-    nav { background: #444; padding: 10px; text-align: center; }
-    nav a { color: #fff; margin: 0 10px; text-decoration: none; font-weight: bold; }
-    section { padding: 20px; }
-    .hidden { display: none; }
-    .btn { padding: 8px 14px; border: none; cursor: pointer; font-weight: bold; border-radius: 5px; margin: 5px; }
-    .btn-green { background: green; color: #fff; }
-    .btn-red { background: red; color: #fff; }
-    .btn-yellow { background: gold; color: #000; }
-    .btn-grey { background: grey; color: #fff; }
-    #visitorStatus { margin-top: 20px; padding: 10px; }
-    .status-box { padding: 15px; margin-top: 10px; font-size: 18px; font-weight: bold; border-radius: 5px; text-align: center; }
-    .accepted { background: green; color: white; }
-    .rejected { background: red; color: white; }
-    .busy { background: deeppink; color: white; }
-    #printSection { display: none; background: white; padding: 20px; border: 2px solid black; }
-    #printSection h2 { text-align: center; text-decoration: underline; }
-    table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-    table, th, td { border: 1px solid black; }
-    th, td { padding: 8px; text-align: left; }
-    footer { background: #000; color: yellow; text-align: center; padding: 15px; margin-top: 20px; }
-    footer a { color: yellow; margin: 0 10px; font-size: 20px; text-decoration: none; }
-    /* Chat Box */
-    .chat-box { border: 1px solid #ccc; padding: 10px; margin-top: 10px; max-width: 400px; background: #fff; }
-    .chat-messages { height: 150px; overflow-y: auto; border: 1px solid #ddd; padding: 5px; margin-bottom: 5px; }
-    .chat-input { width: 80%; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INDIA BADSAH</title>
+<style>
+body {margin:0; font-family: Arial, sans-serif; background:linear-gradient(to right,#1a2a6c,#b21f1f,#fdbb2d); color:white; line-height:1.6;}
+header{text-align:center; padding:20px; background:rgba(0,0,0,0.6);}
+header img{width:180px;height:180px;object-fit:cover;border-radius:50%;border:5px solid #fff;transition: transform 0.4s;}
+header img:hover{transform: scale(1.05) rotate(2deg);}
+header h1{margin:15px 0 0; font-size:2.5em;color:#fbd46d;text-shadow:2px 2px 5px black;}
+nav{display:flex;justify-content:center;background:rgba(0,0,0,0.8);flex-wrap:wrap;align-items:center;}
+nav a{color:white;text-decoration:none;padding:10px 15px;display:block;transition:background 0.3s,color 0.3s;cursor:pointer;}
+nav a:hover{background:#fbd46d;color:black;border-radius:5px;}
+#statusSearch {margin-left:10px;padding:5px;border-radius:5px;border:none;}
+#statusResult {margin-left:10px;}
+section{padding:40px 20px;max-width:900px;margin:auto;background:rgba(255,255,255,0.1);margin-bottom:30px;border-radius:12px;box-shadow:0px 4px 15px rgba(0,0,0,0.5);}
+section h2{color:#ffe66d;margin-bottom:15px;}
+.form-box{background:rgba(0,0,0,0.7);padding:20px;border-radius:12px;color:white;max-width:500px;margin:auto;}
+.form-box label{display:block;margin-bottom:10px;}
+.form-box input, .form-box select{width:100%;padding:5px;margin-top:3px;border-radius:5px;border:none;}
+.btn{background:#fbd46d;color:black;padding:8px 12px;border:none;border-radius:5px;cursor:pointer;margin-top:10px;}
+.btn:hover{background:white;}
+table{width:100%;border-collapse:collapse;color:black;background:white;margin-top:20px;}
+table, th, td{border:1px solid #000;}
+th, td{padding:8px;text-align:center;}
+.green{background:#28a745;color:white;}
+.red{background:#dc3545;color:white;}
+.pink{background:#ff69b4;color:white;}
+.yellow{background:#ffc107;color:white;}
+.grey{background:#6c757d;color:white;}
+.hidden{display:none;}
+textarea{width:100%;padding:5px;border-radius:5px;margin-top:5px;border:none;resize:none;}
+.chat-box{max-height:200px;overflow-y:auto;background:#fff;color:#000;padding:5px;border-radius:5px;margin-top:5px;}
+.chat-msg{padding:2px 5px;margin-bottom:2px;border-radius:3px;}
+.chat-admin{background:#ffc107;text-align:left;}
+.chat-visitor{background:#28a745;text-align:right;}
+.locked{opacity:0.6;pointer-events:none;}
+
+/* Mobile Support */
+@media (max-width: 600px) {
+  .form-box input, .form-box select, .form-box button, textarea {width:100% !important; font-size:16px; margin-top:5px;}
+  nav {flex-direction: column; align-items: flex-start;}
+  #statusSearch {width:90%; margin:10px;}
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
-  <header><h1>E-Appointment System</h1></header>
-  <nav>
-    <a href="#" onclick="showSection('visitorForm')">Visitor Form</a>
-    <a href="#" onclick="showSection('adminLogin')">Admin Login</a>
-    <a href="#" onclick="showSection('visitorSearch')">Visitor Status</a>
-  </nav>
 
-  <!-- Visitor Form -->
-  <section id="visitorForm" class="hidden">
-    <h2>Visitor Form</h2>
-    <form id="visitorFormElement">
-      <label>Name: <input type="text" id="vName" required></label><br><br>
-      <label>Email: <input type="email" id="vEmail" required></label><br><br>
-      <label>Country: <input type="text" id="vCountry" required></label><br><br>
-      <label>Country Code: <input type="text" id="vCountryCode" required></label><br><br>
-      <label>Date of Birth: <input type="date" id="vDob" required></label><br><br>
-      <label>Visit Date: <input type="date" id="vDate" required></label><br><br>
-      <label>Visit Time: <input type="time" id="vTime" required></label><br><br>
-      <button type="submit" class="btn btn-yellow">Submit</button>
-    </form>
-  </section>
+<header>
+  <img src="myphoto.jpg" alt="India Badsah Photo">
+  <h1>INDIA BADSAH</h1>
+</header>
 
-  <!-- Visitor Search -->
-  <section id="visitorSearch" class="hidden">
-    <h2>Search Appointment Status</h2>
-    <input type="text" id="searchAppNo" placeholder="Enter Appointment Number">
-    <button class="btn btn-yellow" onclick="searchStatus()">Search</button>
-    <div id="visitorStatus"></div>
-  </section>
+<nav>
+  <a onclick="showSection('profile')">Profile</a>
+  <a onclick="showSection('education')">Education</a>
+  <a onclick="showSection('culture')">Culture</a>
+  <a onclick="showSection('achievements')">Achievements</a>
+  <a onclick="showSection('hobbies')">Hobbies</a>
+  <a onclick="showSection('interested')">Interested About</a>
+  <a onclick="showSection('thoughts')">Thoughts</a>
+  <a onclick="showSection('visitor')">Visitor Form</a>
+  <a onclick="showSection('adminLogin')">Admin Login</a>
+  <input type="text" id="statusSearch" placeholder="Visitor Status: Enter Appt No" onkeypress="if(event.key==='Enter'){checkStatus();}">
+</nav>
+<div id="statusResult"></div>
 
-  <!-- Admin Login -->
-  <section id="adminLogin" class="hidden">
-    <h2>Admin Login</h2>
-    <form id="adminLoginForm">
-      <label>Username: <input type="text" id="adminUser" required></label><br><br>
-      <label>Password: <input type="password" id="adminPass" required></label><br><br>
-      <button type="submit" class="btn btn-yellow">Login</button>
-    </form>
-  </section>
+<!-- Profile Sections -->
+<section id="profile"><h2>Profile</h2><p>I am INDIA BADSAH, a passionate learner and explorer of life’s endless opportunities. I aim to inspire others while growing myself in every possible field.</p></section>
+<section id="education"><h2>Education</h2><p>Education is the foundation of growth. I gather knowledge from books and real-life experiences shaping problem-solving abilities.</p></section>
+<section id="culture"><h2>Culture</h2><p>I embrace traditions, values, and respect for diversity while blending it with modern ideas for a balanced lifestyle.</p></section>
+<section id="achievements"><h2>Achievements</h2><p>Every step of life is an achievement — from personal milestones to professional success, reflecting perseverance, hard work, and dedication.</p></section>
+<section id="hobbies"><h2>Hobbies</h2><p>I enjoy creative and recreational activities — sports, art, music, technology. Hobbies give me balance and energy.</p></section>
+<section id="interested"><h2>Interested About</h2><p>Deeply interested in innovation, leadership, and cultural understanding. Exploring new ideas and connecting with people excites me.</p></section>
+<section id="thoughts"><h2>Thoughts</h2><p>“Life is not about waiting for opportunities, it is about creating them.” Determination and honesty make anything possible.</p></section>
 
-  <!-- Admin Dashboard -->
-  <section id="adminDashboard" class="hidden">
-    <h2>Welcome Admin - Bhola Nath Basak</h2>
-    <button onclick="logout()" class="btn btn-grey">Logout</button>
-    <div id="visitorList"></div>
-  </section>
+<!-- Visitor Form -->
+<section id="visitor" class="hidden">
+  <h2>E_Appointment Visitor Form</h2>
+  <form id="appointmentForm" class="form-box">
+    <label>Visitor Name* <input type="text" id="vname" required></label>
+    <label>Visitor Address <input type="text" id="vaddress"></label>
+    <label>From Country 
+      <select id="vcountry">
+        <option value="India">India</option>
+        <option value="USA">USA</option>
+        <option value="Bangladesh">Bangladesh</option>
+        <option value="Pakistan">Pakistan</option>
+        <option value="Sri Lanka">Sri Lanka</option>
+        <option value="Malaysia">Malaysia</option>
+        <option value="Singapore">Singapore</option>
+        <option value="UK">UK</option>
+        <option value="Australia">Australia</option>
+        <option value="Canada">Canada</option>
+      </select>
+    </label>
+    <label>Date of Birth <input type="date" id="vdob"></label>
+    <label>Virtual Visit Date* <input type="date" id="vdate" required></label>
+    <label>Time Availability* <input type="time" id="vtime" required></label>
+    <label>Contact Number* 
+      <select id="ccode">
+        <option value="+91">India (+91)</option>
+        <option value="+1">USA (+1)</option>
+        <option value="+880">Bangladesh (+880)</option>
+        <option value="+92">Pakistan (+92)</option>
+        <option value="+94">Sri Lanka (+94)</option>
+        <option value="+60">Malaysia (+60)</option>
+        <option value="+65">Singapore (+65)</option>
+        <option value="+44">UK (+44)</option>
+        <option value="+61">Australia (+61)</option>
+        <option value="+1">Canada (+1)</option>
+      </select>
+      <input type="tel" id="vphone" required>
+    </label>
+    <label>Purpose of Visit
+      <select id="vpurpose">
+        <option value="Visit Abroad">Visit Abroad</option>
+        <option value="Student Visa in Abroad">Student Visa in Abroad</option>
+        <option value="Job in Abroad">Job in Abroad</option>
+        <option value="Education system in Abroad">Education system in Abroad</option>
+        <option value="Counseling for Education in Abroad">Counseling for Education in Abroad</option>
+      </select>
+    </label>
+    <label>Passport Number <input type="text" id="vpassport"></label>
+    <label>Email ID 
+      <input type="text" id="vemail" placeholder="yourname" required>
+      <select id="emaildomain">
+        <option value="@gmail.com">@gmail.com</option>
+        <option value="@rediffmail.com">@rediffmail.com</option>
+        <option value="@yahoo.com">@yahoo.com</option>
+      </select>
+    </label>
+    <button type="submit" class="btn">Submit</button>
+  </form>
+</section>
 
-  <!-- Print Layout -->
-  <section id="printSection"></section>
+<!-- Admin Login -->
+<section id="adminLogin" class="hidden">
+  <h2>Admin Login</h2>
+  <div class="form-box">
+    <label>Username <input type="text" id="adminUser"></label>
+    <label>Password <input type="password" id="adminPass"></label>
+    <button onclick="adminLogin()" class="btn">Login</button>
+  </div>
+</section>
 
-  <!-- Footer Social Links -->
-  <footer>
-    <p>Connect with me:</p>
-    <a href="mailto:starananda24@gmail.com">📧</a>
-    <a href="https://wa.me/971506309833" target="_blank">📱</a>
-    <a href="https://www.facebook.com/share/17HAzeWpsW/" target="_blank">📘</a>
-    <a href="https://www.linkedin.com/in/bhola-nath-basak-3b6684242?trk=contact-info" target="_blank">💼</a>
-  </footer>
+<!-- Admin Dashboard -->
+<section id="adminDashboard" class="hidden">
+  <h2>Admin Dashboard</h2>
+  <button onclick="adminLogout()" class="btn">Logout</button>
+  <table id="visitorTable">
+    <thead><tr>
+      <th>Appt No</th><th>Name</th><th>Date</th><th>Time</th><th>Contact</th><th>Purpose</th><th>Status</th><th>Action</th><th>Lock</th>
+    </tr></thead>
+    <tbody></tbody>
+  </table>
+</section>
 
-  <script>
-    let appointmentCounter = 1;
-    let appointments = {};
-    let loggedIn = false;
+<footer>
+  <p>© 2025 INDIA BADSAH | Personal Biography Website</p>
+  <div style="text-align:center;margin-top:10px;">
+    <a href="#"><img src="linkedin.png" width="35" height="35"></a>
+    <a href="#"><img src="facebook.png" width="35" height="35"></a>
+    <a href="#"><img src="whatsapp.png" width="35" height="35"></a>
+    <a href="#"><img src="email.png" width="35" height="35"></a>
+  </div>
+</footer>
 
-    function showSection(id) {
-      document.querySelectorAll("section").forEach(sec => sec.classList.add("hidden"));
-      document.getElementById(id).classList.remove("hidden");
-    }
+<script>
+let visitors = JSON.parse(localStorage.getItem("visitors")) || {};
+let messages = JSON.parse(localStorage.getItem("messages")) || {};
 
-    // Visitor Form
-    document.getElementById("visitorFormElement").addEventListener("submit", function(e){
-      e.preventDefault();
-      const appNo = "APP-" + appointmentCounter++;
-      const visitor = {
-        name: vName.value,
-        email: vEmail.value,
-        country: vCountry.value,
-        code: vCountryCode.value,
-        dob: vDob.value,
-        date: vDate.value,
-        time: vTime.value,
-        status: "BUSY",
-        chat: [],
-        locked: false
-      };
-      appointments[appNo] = visitor;
-      alert("Appointment Submitted! Your Appointment No: " + appNo);
-      generatePrintLayout(appNo, visitor);
-    });
+function showSection(id){
+  document.querySelectorAll("section").forEach(s=>s.classList.add("hidden"));
+  document.getElementById(id).classList.remove("hidden");
+}
 
-    function generatePrintLayout(appNo, visitor) {
-      const now = new Date();
-      const printSection = document.getElementById("printSection");
-      printSection.innerHTML = `
-        <h2>E-Appointment Letter</h2>
-        <p><strong>Appointment Number:</strong> ${appNo}</p>
-        <p><strong>Generated Date:</strong> ${now.toLocaleString()}</p>
-        <table>
-          <tr><th>Name</th><td>${visitor.name}</td></tr>
-          <tr><th>Email</th><td>${visitor.email}</td></tr>
-          <tr><th>Country</th><td>${visitor.country} (+${visitor.code})</td></tr>
-          <tr><th>Date of Birth</th><td>${visitor.dob}</td></tr>
-          <tr><th>Visit Date</th><td>${visitor.date}</td></tr>
-          <tr><th>Visit Time</th><td>${visitor.time}</td></tr>
-          <tr><th>Visit To</th><td>BHOLA NATH BASAK</td></tr>
-        </table>
-        <button onclick="window.print()" class="btn btn-yellow">Print</button>
-      `;
-      printSection.style.display = "block";
-    }
+function getNextAppointmentNumber() {
+  const keys = Object.keys(visitors);
+  if(keys.length===0) return "APMTWBNB01";
+  const nums = keys.map(k=>parseInt(k.replace("APMTWBNB",""))).filter(n=>!isNaN(n));
+  const maxNum = nums.length ? Math.max(...nums) : 0;
+  return "APMTWBNB" + String(maxNum+1).padStart(2,"0");
+}
 
-    // Admin Login
-    document.getElementById("adminLoginForm").addEventListener("submit", function(e){
-      e.preventDefault();
-      if(adminUser.value === "admin" && adminPass.value === "password") {
-        loggedIn = true;
-        showSection("adminDashboard");
-        loadVisitors();
-      } else { alert("Invalid login!"); }
-    });
+// Visitor Form Submit
+document.getElementById("appointmentForm").addEventListener("submit",function(e){
+  e.preventDefault();
+  let name = document.getElementById("vname").value.trim();
+  let date = document.getElementById("vdate").value;
+  let time = document.getElementById("vtime").value;
+  let phone = document.getElementById("vphone").value.trim();
+  if(!name || !date || !time || !phone){ alert("Please fill mandatory fields"); return; }
 
-    function logout() { loggedIn = false; showSection("adminLogin"); }
+  let apptNo = getNextAppointmentNumber();
+  visitors[apptNo] = {
+    name,name,date,time,
+    phone:document.getElementById("ccode").value+phone,
+    address:document.getElementById("vaddress").value,
+    country:document.getElementById("vcountry").value,
+    dob:document.getElementById("vdob").value,
+    purpose:document.getElementById("vpurpose").value,
+    passport:document.getElementById("vpassport").value||"NA",
+    email:document.getElementById("vemail").value+document.getElementById("emaildomain").value,
+    status:"Pending",
+    submitted:new Date().toLocaleString(),
+    locked:false
+  };
+  localStorage.setItem("visitors",JSON.stringify(visitors));
+  alert("Appointment sent successfully: "+apptNo);
+  document.getElementById("appointmentForm").reset();
+  renderTable();
+});
 
-    function loadVisitors() {
-      const container = document.getElementById("visitorList");
-      container.innerHTML = "<h3>Visitor Appointments</h3>";
-      for (let appNo in appointments) {
-        const v = appointments[appNo];
-        container.innerHTML += `
-          <div style="border:1px solid #ccc; padding:10px; margin:10px;">
-            <p><strong>${appNo}</strong> - ${v.name} (${v.email})</p>
-            <button class="btn btn-green" onclick="updateStatus('${appNo}','ACCEPTED')">Accept</button>
-            <button class="btn btn-red" onclick="updateStatus('${appNo}','REJECTED')">Reject</button>
-            <button class="btn btn-grey" onclick="lockVisitor('${appNo}')" ${v.locked ? "disabled" : ""}>Lock Visitor</button>
-            ${v.status === "ACCEPTED" && !v.locked ? renderChatBox(appNo,true) : ""}
-          </div>
-        `;
-      }
-    }
+// Admin
+function adminLogin(){
+  let u=document.getElementById("adminUser").value;
+  let p=document.getElementById("adminPass").value;
+  if(u==="admin" && p==="admin"){ showSection("adminDashboard"); renderTable();}
+  else alert("Invalid Credentials");
+}
 
-    function updateStatus(appNo, status) {
-      appointments[appNo].status = status;
-      loadVisitors();
-    }
+function adminLogout(){ showSection("profile"); }
 
-    function lockVisitor(appNo) {
-      appointments[appNo].locked = true;
-      alert(appNo + " has been locked.");
-      loadVisitors();
-    }
+function renderTable(){
+  let tbody=document.querySelector("#visitorTable tbody");
+  tbody.innerHTML="";
+  for(let apptNo in visitors){
+    let v=visitors[apptNo];
+    let row=document.createElement("tr");
+    let acceptBtn=`<button onclick="accept('${apptNo}')" ${v.status!=="Pending" || v.locked?'disabled':''} style="background:${v.status==='Accepted'?'darkgreen':''}">Accept</button>`;
+    let rejectBtn=`<button onclick="reject('${apptNo}')" ${v.status!=="Pending" || v.locked?'disabled':''} style="background:${v.status==='Rejected'?'darkred':''}">Reject</button>`;
+    let lockBtn=`<button onclick="lockVisitor('${apptNo}')" ${v.locked?'disabled':''}>Lock</button>`;
+    row.innerHTML=`<td>${apptNo}</td><td>${v.name}</td><td>${v.date}</td><td>${v.time}</td><td>${v.phone}</td><td>${v.purpose}</td><td>${v.status}</td>
+    <td>${acceptBtn} ${rejectBtn}</td>
+    <td>${lockBtn}</td>`;
+    tbody.appendChild(row);
+  }
+}
 
-    function searchStatus() {
-      const appNo = searchAppNo.value;
-      const resultDiv = document.getElementById("visitorStatus");
-      if(appointments[appNo]) {
-        const v = appointments[appNo];
-        let cls="", msg="";
-        if(v.status === "ACCEPTED" && !v.locked) { cls="accepted"; msg="APPOINTMENT ACCEPTED"; }
-        else if(v.status === "REJECTED") { cls="rejected"; msg="APPOINTMENT REJECTED"; }
-        else if(v.locked) { cls="busy"; msg="VISITOR LOCKED"; }
-        else { cls="busy"; msg="ADMIN BUSY"; }
-        resultDiv.innerHTML = `<div class="status-box ${cls}">${msg}</div>`;
-        if(v.status === "ACCEPTED" && !v.locked) {
-          resultDiv.innerHTML += renderChatBox(appNo,false);
-        }
-      } else { resultDiv.innerHTML = "<p>No appointment found!</p>"; }
-    }
+function accept(apptNo){ visitors[apptNo].status="Accepted"; localStorage.setItem("visitors",JSON.stringify(visitors)); renderTable();}
+function reject(apptNo){ visitors[apptNo].status="Rejected"; localStorage.setItem("visitors",JSON.stringify(visitors)); renderTable();}
+function lockVisitor(apptNo){ visitors[apptNo].locked=true; localStorage.setItem("visitors",JSON.stringify(visitors)); renderTable(); }
 
-    function renderChatBox(appNo,isAdmin) {
-      const v = appointments[appNo];
-      let chatHTML = `<div class="chat-box">
-        <div class="chat-messages" id="chat-${appNo}">${v.chat.map(c=>`<p><strong>${c.from}:</strong> ${c.msg}</p>`).join("")}</div>
-        <input class="chat-input" id="chatInput-${appNo}">
-        <button onclick="sendMessage('${appNo}',${isAdmin})" class="btn btn-yellow">Send</button>
-      </div>`;
-      return chatHTML;
-    }
+function checkStatus(){
+  let apptNo=document.getElementById("statusSearch").value.trim();
+  let resDiv=document.getElementById("statusResult");
+  if(visitors[apptNo]){
+    let v=visitors[apptNo];
+    let color="pink",text="ADMIN BUSY";
+    if(v.status==="Accepted"){color="green";text="APPOINTMENT ACCEPTED";}
+    else if(v.status==="Rejected"){color="red";text="APPOINTMENT REJECTED";}
+    resDiv.innerHTML=`<button class="${color}" style="padding:10px 20px;font-size:16px;" disabled>${text}</button>`;
+  } else {resDiv.innerHTML="No Appointment Found";}
+}
+</script>
 
-    function sendMessage(appNo,isAdmin) {
-      const input = document.getElementById("chatInput-"+appNo);
-      const msg = input.value.trim();
-      if(msg) {
-        appointments[appNo].chat.push({from: isAdmin ? "Admin" : "Visitor", msg});
-        input.value="";
-        if(isAdmin) loadVisitors(); else searchStatus();
-      }
-    }
-  </script>
 </body>
 </html>

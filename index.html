@@ -19,8 +19,7 @@ section{padding:40px 20px;max-width:900px;margin:auto;background:rgba(255,255,25
 section h2{color:#ffe66d;margin-bottom:15px;}
 .form-box{background:rgba(0,0,0,0.7);padding:20px;border-radius:12px;color:white;max-width:500px;margin:auto;}
 .form-box label{display:block;margin-bottom:10px;}
-.form-box input, .form-box select, .form-box textarea{width:100%;padding:5px;margin-top:3px;border-radius:5px;border:none;}
-textarea{resize:none;height:80px;}
+.form-box input, .form-box select{width:100%;padding:5px;margin-top:3px;border-radius:5px;border:none;}
 .btn{background:#fbd46d;color:black;padding:8px 12px;border:none;border-radius:5px;cursor:pointer;margin-top:10px;}
 .btn:hover{background:white;}
 table{width:100%;border-collapse:collapse;color:black;background:white;margin-top:20px;}
@@ -28,24 +27,21 @@ table, th, td{border:1px solid #000;}
 th, td{padding:8px;text-align:center;}
 .green{background:#28a745;color:white;}
 .red{background:#dc3545;color:white;}
-.deepgreen{background:#1c7c54;color:white;}
-.deepred{background:#b22222;color:white;}
 .pink{background:#ff69b4;color:white;}
 .yellow{background:#ffc107;color:white;}
 .grey{background:#6c757d;color:white;}
+.deep-green{background:#196619;color:white;}
+.deep-red{background:#8b0000;color:white;}
 .hidden{display:none;}
-.chat-box{background:#fff;color:#000;padding:10px;margin-top:10px;max-height:200px;overflow:auto;border-radius:5px;}
-.chat-input{margin-top:5px; display:flex;}
-.chat-input textarea{flex:1;height:50px;}
-.chat-input button{margin-left:5px;padding:5px 10px;}
 
 /* Mobile Support */
 @media (max-width: 600px) {
-  .form-box input, .form-box select, .form-box button, .form-box textarea {width:100% !important; font-size:16px; margin-top:5px;}
+  .form-box input, .form-box select, .form-box button {width:100% !important; font-size:16px; margin-top:5px;}
   nav {flex-direction: column; align-items: flex-start;}
   #statusSearch {width:90%; margin:10px;}
 }
 </style>
+<!-- jsPDF for PDF generation -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
@@ -69,6 +65,7 @@ th, td{padding:8px;text-align:center;}
 </nav>
 <div id="statusResult"></div>
 
+<!-- Profile Sections -->
 <section id="profile"><h2>Profile</h2><p>I am INDIA BADSAH, a passionate learner and explorer of life’s endless opportunities. I aim to inspire others while growing myself in every possible field.</p></section>
 <section id="education"><h2>Education</h2><p>Education is the foundation of growth. I gather knowledge from books and real-life experiences shaping problem-solving abilities.</p></section>
 <section id="culture"><h2>Culture</h2><p>I embrace traditions, values, and respect for diversity while blending it with modern ideas for a balanced lifestyle.</p></section>
@@ -77,6 +74,7 @@ th, td{padding:8px;text-align:center;}
 <section id="interested"><h2>Interested About</h2><p>Deeply interested in innovation, leadership, and cultural understanding. Exploring new ideas and connecting with people excites me.</p></section>
 <section id="thoughts"><h2>Thoughts</h2><p>“Life is not about waiting for opportunities, it is about creating them.” Determination and honesty make anything possible.</p></section>
 
+<!-- Visitor Form -->
 <section id="visitor" class="hidden">
   <h2>E_Appointment Visitor Form</h2>
   <form id="appointmentForm" class="form-box">
@@ -123,6 +121,7 @@ th, td{padding:8px;text-align:center;}
   </form>
 </section>
 
+<!-- Admin Login -->
 <section id="adminLogin" class="hidden">
   <h2>Admin Login</h2>
   <div class="form-box">
@@ -132,12 +131,13 @@ th, td{padding:8px;text-align:center;}
   </div>
 </section>
 
+<!-- Admin Dashboard -->
 <section id="adminDashboard" class="hidden">
   <h2>Admin Dashboard</h2>
   <button onclick="adminLogout()" class="btn">Logout</button>
   <table id="visitorTable">
     <thead><tr>
-      <th>Appt No</th><th>Name</th><th>Date</th><th>Time</th><th>Contact</th><th>Purpose</th><th>Status</th><th>Action</th><th>Chat</th>
+      <th>Appt No</th><th>Name</th><th>Date</th><th>Time</th><th>Contact</th><th>Purpose</th><th>Status</th><th>Action</th>
     </tr></thead>
     <tbody></tbody>
   </table>
@@ -146,121 +146,167 @@ th, td{padding:8px;text-align:center;}
 <footer>
   <p>© 2025 INDIA BADSAH | Personal Biography Website</p>
   <div id="socialLinks" style="margin-top:10px;text-align:center;">
-    <a href="#"><img src="linkedin-icon.png" alt="LinkedIn" width="35"></a>
-    <a href="#"><img src="facebook-icon.png" alt="Facebook" width="35"></a>
-    <a href="#"><img src="whatsapp-icon.png" alt="WhatsApp" width="35"></a>
-    <a href="#"><img src="email-icon.png" alt="Email" width="35"></a>
+    <a href="https://www.linkedin.com/in/YOUR_LINK" target="_blank"><img src="linkedin-icon.png" style="width:35px;height:35px;margin:0 8px;"></a>
+    <a href="https://www.facebook.com/YOUR_LINK" target="_blank"><img src="facebook-icon.png" style="width:35px;height:35px;margin:0 8px;"></a>
+    <a href="https://wa.me/YOUR_PHONE_NUMBER" target="_blank"><img src="whatsapp-icon.png" style="width:35px;height:35px;margin:0 8px;"></a>
+    <a href="mailto:YOUR_EMAIL@example.com"><img src="email-icon.png" style="width:35px;height:35px;margin:0 8px;"></a>
   </div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
+// ------------------- Existing Programs + New Features -------------------
 let visitors = JSON.parse(localStorage.getItem("visitors")) || {};
-let chatMessages = JSON.parse(localStorage.getItem("chatMessages")) || {};
 
-function showSection(id){ document.querySelectorAll("section").forEach(s=>s.classList.add("hidden")); document.getElementById(id).classList.remove("hidden"); }
-
-function getNextAppointmentNumber(){ 
-  const keys = Object.keys(visitors); if(keys.length===0) return "APMTWBNB01";
-  const nums = keys.map(k=>parseInt(k.replace("APMTWBNB",""))).filter(n=>!isNaN(n));
-  return "APMTWBNB" + String(nums.length?Math.max(...nums)+1:1).padStart(2,"0");
+function showSection(id){
+  document.querySelectorAll("section").forEach(s=>s.classList.add("hidden"));
+  document.getElementById(id).classList.remove("hidden");
 }
 
+function getNextAppointmentNumber() {
+  const keys = Object.keys(visitors);
+  if(keys.length===0) return "APMTWBNB01";
+  const nums = keys.map(k=>parseInt(k.replace("APMTWBNB",""))).filter(n=>!isNaN(n));
+  const maxNum = nums.length ? Math.max(...nums) : 0;
+  return "APMTWBNB" + String(maxNum+1).padStart(2,"0");
+}
+
+// ------------------- Visitor Form Submit -------------------
 document.getElementById("appointmentForm").addEventListener("submit",function(e){
   e.preventDefault();
-  let name=document.getElementById("vname").value.trim();
-  let date=document.getElementById("vdate").value;
-  let time=document.getElementById("vtime").value;
-  let phone=document.getElementById("vphone").value.trim();
-  if(!name||!date||!time||!phone){alert("Please fill mandatory fields"); return;}
-  let apptNo=getNextAppointmentNumber();
-  visitors[apptNo]={name,date,time,phone:document.getElementById("ccode").value+phone,address:document.getElementById("vaddress").value,country:document.getElementById("vcountry").value,dob:document.getElementById("vdob").value,purpose:document.getElementById("vpurpose").value,passport:document.getElementById("vpassport").value||"NA",email:document.getElementById("vemail").value+document.getElementById("emaildomain").value,status:"Pending",submitted:new Date().toLocaleString(),chatLocked:false};
+  let name = document.getElementById("vname").value.trim();
+  let date = document.getElementById("vdate").value;
+  let time = document.getElementById("vtime").value;
+  let phone = document.getElementById("vphone").value.trim();
+  if(!name || !date || !time || !phone){ alert("Please fill mandatory fields"); return; }
+
+  let apptNo = getNextAppointmentNumber();
+  visitors[apptNo] = {
+    name:name,
+    date:date,
+    time:time,
+    phone:document.getElementById("ccode").value + phone,
+    address:document.getElementById("vaddress").value,
+    country:document.getElementById("vcountry").value,
+    dob:document.getElementById("vdob").value,
+    purpose:document.getElementById("vpurpose").value,
+    passport:document.getElementById("vpassport").value||"NA",
+    email:document.getElementById("vemail").value+document.getElementById("emaildomain").value,
+    status:"Pending",
+    submitted:new Date().toLocaleString(),
+    chat: []
+  };
   localStorage.setItem("visitors",JSON.stringify(visitors));
-  alert("Appointment sent successfully: "+apptNo);
+  alert("Appointment sent successfully: " + apptNo);
   document.getElementById("appointmentForm").reset();
 });
 
-function checkStatus(){
-  let apptNo=document.getElementById("statusSearch").value.trim();
-  let resDiv=document.getElementById("statusResult");
-  if(visitors[apptNo]){
-    let v=visitors[apptNo];
-    let color="pink"; let text="ADMIN BUSY";
-    if(v.status==="Accepted"){color="green"; text="APPOINTMENT ACCEPTED";}
-    else if(v.status==="Rejected"){color="red"; text="APPOINTMENT REJECTED";}
-    resDiv.innerHTML=`<button class="${color}" style="padding:10px 20px;font-size:16px;" disabled>${text}</button>`;
-    if(v.status==="Accepted" && !v.chatLocked){
-      resDiv.innerHTML+=`<div class="chat-box" id="visitorChatBox"><div id="chatHistory"></div><div class="chat-input"><textarea id="visitorMessage" placeholder="Write message to Admin"></textarea><button class="btn" onclick="sendVisitorMessage('${apptNo}')">Send</button></div></div>`;
-      renderChat(apptNo); autoLockChat(apptNo);
+// ------------------- Check Visitor Status -------------------
+function showVisitorDetails(apptNo){
+  let resDiv = document.getElementById("statusResult");
+  if(!visitors[apptNo]){
+    resDiv.innerHTML = "No Appointment Found"; return;
+  }
+
+  let v = visitors[apptNo];
+  let color="pink", text="ADMIN BUSY";
+  if(v.status==="Accepted"){ color="green"; text="APPOINTMENT ACCEPTED";}
+  else if(v.status==="Rejected"){ color="red"; text="APPOINTMENT REJECTED";}
+
+  let detailsHTML = `
+    <div style="padding:15px;border-radius:8px;background:white;color:black;">
+      <p><strong>Appt No:</strong> ${apptNo}</p>
+      <p><strong>Name:</strong> ${v.name}</p>
+      <p><strong>Address:</strong> ${v.address}</p>
+      <p><strong>Country:</strong> ${v.country}</p>
+      <p><strong>DOB:</strong> ${v.dob}</p>
+      <p><strong>Visit to:</strong> BHOLA NATH BASAK</p>
+      <p><strong>Visit Date:</strong> ${v.date}</p>
+      <p><strong>Visit Time:</strong> ${v.time}</p>
+      <p><strong>Phone:</strong> ${v.phone}</p>
+      <p><strong>Purpose:</strong> ${v.purpose}</p>
+      <p><strong>Passport:</strong> ${v.passport}</p>
+      <p><strong>Email:</strong> ${v.email}</p>
+      <p><strong>Status:</strong> ${v.status}</p>
+    </div>
+  `;
+
+  let chatHTML = `
+    <div id="visitorChat" style="display:none;margin-top:10px;">
+      <h4>Messenger with Admin</h4>
+      <div id="chatBox" style="width:100%;height:150px;border:1px solid #ccc;padding:5px;overflow-y:auto;background:white;color:black;"></div>
+      <input type="text" id="chatInput" placeholder="Type message..." style="width:80%;padding:5px;">
+      <button onclick="sendVisitorMessage('${apptNo}')">Send</button>
+    </div>
+  `;
+
+  resDiv.innerHTML = detailsHTML + chatHTML;
+
+  // Activate chat if accepted and meet time passed
+  if(v.status === "Accepted"){
+    let meetDateTime = new Date(v.date + " " + v.time);
+    let now = new Date();
+    if(now >= meetDateTime){
+      setTimeout(()=>{ document.getElementById("visitorChat").style.display="block"; renderChat(apptNo); }, 1000);
     }
-  }else{resDiv.innerHTML="No Appointment Found";}
+  }
 }
 
-function adminLogin(){let u=document.getElementById("adminUser").value; let p=document.getElementById("adminPass").value; if(u==="admin"&&p==="admin"){showSection("adminDashboard");renderTable();}else alert("Invalid Credentials");}
-function adminLogout(){showSection("profile");}
+function sendVisitorMessage(apptNo){
+  let input = document.getElementById("chatInput");
+  if(input.value.trim()==="") return;
+  visitors[apptNo].chat.push({sender:"Visitor",msg:input.value});
+  localStorage.setItem("visitors",JSON.stringify(visitors));
+  renderChat(apptNo);
+  input.value="";
+}
+
+function renderChat(apptNo){
+  let chatBox = document.getElementById("chatBox");
+  chatBox.innerHTML="";
+  visitors[apptNo].chat.forEach(c=>{
+    chatBox.innerHTML+=`<p><strong>${c.sender}:</strong> ${c.msg}</p>`;
+  });
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+function checkStatus(){
+  let apptNo = document.getElementById("statusSearch").value.trim();
+  showVisitorDetails(apptNo);
+}
+
+// ------------------- Admin Functions -------------------
+function adminLogin(){
+  let u=document.getElementById("adminUser").value;
+  let p=document.getElementById("adminPass").value;
+  if(u==="admin" && p==="admin"){ showSection("adminDashboard"); renderTable(); }
+  else alert("Invalid Credentials");
+}
+function adminLogout(){ showSection("profile"); }
 
 function renderTable(){
   let tbody=document.querySelector("#visitorTable tbody");
   tbody.innerHTML="";
   for(let apptNo in visitors){
     let v=visitors[apptNo];
-    let acceptClass=v.status==="Accepted"?"deepgreen":"";
-    let rejectClass=v.status==="Rejected"?"deepred":"";
     let row=document.createElement("tr");
     row.innerHTML=`<td>${apptNo}</td><td>${v.name}</td><td>${v.date}</td><td>${v.time}</td><td>${v.phone}</td><td>${v.purpose}</td><td>${v.status}</td>
-    <td><button class="${acceptClass}" onclick="accept('${apptNo}')" ${v.status!=="Pending"?'disabled':''}>Accept</button>
-    <button class="${rejectClass}" onclick="reject('${apptNo}')" ${v.status!=="Pending"?'disabled':''}>Reject</button>
-    <button onclick="lockVisitor('${apptNo}')">Lock</button></td>
-    <td><button onclick="showAdminChat('${apptNo}')">Chat</button></td>`;
+    <td>
+      <button onclick="accept('${apptNo}')" ${v.status!=="Pending"?'disabled':''}>Accept</button>
+      <button onclick="reject('${apptNo}')" ${v.status!=="Pending"?'disabled':''}>Reject</button>
+    </td>`;
     tbody.appendChild(row);
   }
 }
 
-function accept(apptNo){visitors[apptNo].status="Accepted"; localStorage.setItem("visitors",JSON.stringify(visitors)); renderTable();}
-function reject(apptNo){visitors[apptNo].status="Rejected"; localStorage.setItem("visitors",JSON.stringify(visitors)); renderTable();}
-
-function sendVisitorMessage(apptNo){
-  let msg=document.getElementById("visitorMessage").value.trim();
-  if(!msg) return;
-  if(!chatMessages[apptNo]) chatMessages[apptNo]=[];
-  chatMessages[apptNo].push({sender:"Visitor",message:msg,time:new Date().toLocaleTimeString()});
-  localStorage.setItem("chatMessages",JSON.stringify(chatMessages));
-  document.getElementById("visitorMessage").value="";
-  renderChat(apptNo);
+function accept(apptNo){
+  visitors[apptNo].status="Accepted";
+  localStorage.setItem("visitors",JSON.stringify(visitors));
+  renderTable();
 }
-
-function renderChat(apptNo){
-  let chatDiv=document.getElementById("chatHistory");
-  if(!chatDiv) return;
-  chatDiv.innerHTML="";
-  if(chatMessages[apptNo]){
-    chatMessages[apptNo].forEach(m=>{chatDiv.innerHTML+=`<div><strong>${m.sender}:</strong> ${m.message} <em>${m.time}</em></div>`;});
-  }
-}
-
-function showAdminChat(apptNo){
-  let msg=prompt("Reply to Visitor");
-  if(msg){
-    if(!chatMessages[apptNo]) chatMessages[apptNo]=[];
-    chatMessages[apptNo].push({sender:"Admin",message:msg,time:new Date().toLocaleTimeString()});
-    localStorage.setItem("chatMessages",JSON.stringify(chatMessages));
-  }
-}
-
-function lockVisitor(apptNo){
-  let v=visitors[apptNo];
-  if(!v) return;
-  let meetDateTime=new Date(v.date+" "+v.time);
-  let now=new Date();
-  if(now>=meetDateTime){v.chatLocked=true; localStorage.setItem("visitors",JSON.stringify(visitors)); alert("Visitor Locked Permanently after meeting.");}else{alert("Meeting date/time not passed yet.");}
-}
-
-function autoLockChat(apptNo){
-  let v=visitors[apptNo];
-  if(!v || v.chatLocked) return;
-  let meetDateTime=new Date(v.date+" "+v.time);
-  let now=new Date();
-  if(now>=meetDateTime){v.chatLocked=true; localStorage.setItem("visitors",JSON.stringify(visitors)); document.getElementById("visitorChatBox").classList.add("hidden");}
+function reject(apptNo){
+  visitors[apptNo].status="Rejected";
+  localStorage.setItem("visitors",JSON.stringify(visitors));
+  renderTable();
 }
 
 // ------------------- PDF Generation -------------------
@@ -268,26 +314,30 @@ function downloadPDF(apptNo){
   const { jsPDF } = window.jspdf;
   const v = visitors[apptNo];
   if(!v){ alert("No appointment found"); return; }
+
   const doc = new jsPDF();
   const currentDate = new Date();
   const dateStr = currentDate.toLocaleDateString();
   const timeStr = currentDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
+
   doc.setFontSize(16);
   doc.text("E_Appointment Letter", 20, 20);
   doc.setFontSize(12);
-  doc.text(`Visitor: ${v.name}`, 20, 30);
-  doc.text(`Visit To: BHOLA NATH BASAK`, 20, 38);
+  doc.text(`Appointment No: ${apptNo}`, 20, 30);
+  doc.text(`Visitor Name: ${v.name}`, 20, 38);
   doc.text(`Address: ${v.address}`, 20, 46);
   doc.text(`Country: ${v.country}`, 20, 54);
   doc.text(`DOB: ${v.dob}`, 20, 62);
-  doc.text(`Visit Date: ${v.date}`, 20, 70);
-  doc.text(`Visit Time: ${v.time}`, 20, 78);
-  doc.text(`Contact: ${v.phone}`, 20, 86);
-  doc.text(`Purpose: ${v.purpose}`, 20, 94);
-  doc.text(`Passport: ${v.passport}`, 20, 102);
-  doc.text(`Email: ${v.email}`, 20, 110);
-  doc.text(`Status: ${v.status}`, 20, 118);
-  doc.text(`Generated on: ${dateStr} ${timeStr}`, 20, 126);
+  doc.text(`Visit to: BHOLA NATH BASAK`, 20, 70);
+  doc.text(`Visit Date: ${v.date}`, 20, 78);
+  doc.text(`Visit Time: ${v.time}`, 20, 86);
+  doc.text(`Phone: ${v.phone}`, 20, 94);
+  doc.text(`Purpose: ${v.purpose}`, 20, 102);
+  doc.text(`Passport: ${v.passport}`, 20, 110);
+  doc.text(`Email: ${v.email}`, 20, 118);
+  doc.text(`Status: ${v.status}`, 20, 126);
+  doc.text(`Generated on: ${dateStr} ${timeStr}`, 20, 134);
+
   doc.save(`E_Appointment_${apptNo}.pdf`);
 }
 </script>

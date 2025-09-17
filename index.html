@@ -28,19 +28,17 @@ th, td{padding:8px;text-align:center;}
 .green{background:#28a745;color:white;}
 .red{background:#dc3545;color:white;}
 .pink{background:#ff69b4;color:white;}
-.yellow{background:#ffc107;color:white;}
-.grey{background:#6c757d;color:white;}
-.deep-green{background:#196619;color:white;}
-.deep-red{background:#8b0000;color:white;}
 .hidden{display:none;}
-
-/* Mobile Support */
 @media (max-width: 600px) {
   .form-box input, .form-box select, .form-box button {width:100% !important; font-size:16px; margin-top:5px;}
   nav {flex-direction: column; align-items: flex-start;}
   #statusSearch {width:90%; margin:10px;}
 }
 </style>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 <!-- jsPDF for PDF generation -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
@@ -145,137 +143,101 @@ th, td{padding:8px;text-align:center;}
 
 <footer>
   <p>© 2025 INDIA BADSAH | Personal Biography Website</p>
-  <div id="socialLinks" style="margin-top:10px;text-align:center;">
-    <a href="https://www.linkedin.com/in/YOUR_LINK" target="_blank"><img src="linkedin-icon.png" style="width:35px;height:35px;margin:0 8px;"></a>
-    <a href="https://www.facebook.com/YOUR_LINK" target="_blank"><img src="facebook-icon.png" style="width:35px;height:35px;margin:0 8px;"></a>
-    <a href="https://wa.me/YOUR_PHONE_NUMBER" target="_blank"><img src="whatsapp-icon.png" style="width:35px;height:35px;margin:0 8px;"></a>
-    <a href="mailto:YOUR_EMAIL@example.com"><img src="email-icon.png" style="width:35px;height:35px;margin:0 8px;"></a>
-  </div>
 </footer>
 
 <script>
-// ------------------- Existing Programs + Corrected Features -------------------
-let visitors = JSON.parse(localStorage.getItem("visitors")) || {};
+// ------------------- Firebase Configuration -------------------
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+  databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT_ID.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
 
-// ------------------- Section Show -------------------
+// ------------------- Sections -------------------
 function showSection(id){
   document.querySelectorAll("section").forEach(s=>s.classList.add("hidden"));
   document.getElementById(id).classList.remove("hidden");
 }
 
-// ------------------- Unique Appointment Number (Global) -------------------
-function getNextAppointmentNumber() {
-  let lastNo = localStorage.getItem("lastApptNo") || "0";
-  let nextNo = parseInt(lastNo) + 1;
-  localStorage.setItem("lastApptNo", nextNo);
-  return "APMTWBNB" + String(nextNo).padStart(2,"0");
+// ------------------- Generate Unique Appointment Number -------------------
+function getNextAppointmentNumber(callback){
+  const apptRef = db.ref('lastApptNo');
+  apptRef.transaction(last=>{
+    return (last || 0) + 1;
+  }, (err, committed, snapshot)=>{
+    if(err){ alert("Error generating Appt No"); return; }
+    callback("APMTWBNB" + String(snapshot.val()).padStart(2,"0"));
+  });
 }
 
 // ------------------- Visitor Form Submit -------------------
 document.getElementById("appointmentForm").addEventListener("submit",function(e){
   e.preventDefault();
-  let name = document.getElementById("vname").value.trim();
-  let date = document.getElementById("vdate").value;
-  let time = document.getElementById("vtime").value;
-  let phone = document.getElementById("vphone").value.trim();
-  if(!name || !date || !time || !phone){ alert("Please fill mandatory fields"); return; }
+  let name=document.getElementById("vname").value.trim();
+  let date=document.getElementById("vdate").value;
+  let time=document.getElementById("vtime").value;
+  let phone=document.getElementById("vphone").value.trim();
+  if(!name||!date||!time||!phone){ alert("Please fill mandatory fields"); return; }
 
-  let apptNo = getNextAppointmentNumber();
-  visitors[apptNo] = {
-    name:name,
-    date:date,
-    time:time,
-    phone:document.getElementById("ccode").value + phone,
-    address:document.getElementById("vaddress").value,
-    country:document.getElementById("vcountry").value,
-    dob:document.getElementById("vdob").value,
-    purpose:document.getElementById("vpurpose").value,
-    passport:document.getElementById("vpassport").value||"NA",
-    email:document.getElementById("vemail").value+document.getElementById("emaildomain").value,
-    status:"Pending",
-    submitted:new Date().toLocaleString(),
-    chat: []
-  };
-  localStorage.setItem("visitors",JSON.stringify(visitors));
-  alert("Appointment sent successfully: " + apptNo);
-  document.getElementById("appointmentForm").reset();
+  getNextAppointmentNumber(apptNo=>{
+    const visitorData = {
+      name:name,
+      date:date,
+      time:time,
+      phone:document.getElementById("ccode").value+phone,
+      address:document.getElementById("vaddress").value,
+      country:document.getElementById("vcountry").value,
+      dob:document.getElementById("vdob").value,
+      purpose:document.getElementById("vpurpose").value,
+      passport:document.getElementById("vpassport").value||"NA",
+      email:document.getElementById("vemail").value+document.getElementById("emaildomain").value,
+      status:"Pending",
+      submitted:new Date().toLocaleString(),
+      chat:[]
+    };
+    db.ref('visitors/'+apptNo).set(visitorData, err=>{
+      if(!err){
+        alert("Appointment sent successfully: "+apptNo);
+        document.getElementById("appointmentForm").reset();
+      }
+    });
+  });
 });
 
-// ------------------- Check Visitor Status -------------------
-function showVisitorDetails(apptNo){
-  let resDiv = document.getElementById("statusResult");
-  if(!visitors[apptNo]){
-    resDiv.innerHTML = "❌ No Appointment Found"; return;
-  }
-  let v = visitors[apptNo];
-  let colorClass = "pink";
-  if(v.status === "Accepted"){ colorClass="green"; }
-  else if(v.status === "Rejected"){ colorClass="red"; }
+// ------------------- Load Visitors for Admin -------------------
+function renderTable(){
+  db.ref('visitors').once('value', snapshot=>{
+    const visitors = snapshot.val()||{};
+    let tbody=document.querySelector("#visitorTable tbody");
+    tbody.innerHTML="";
+    Object.keys(visitors).forEach(apptNo=>{
+      let v=visitors[apptNo];
+      let colorClass="pink";
+      if(v.status==="Accepted") colorClass="green";
+      else if(v.status==="Rejected") colorClass="red";
 
-  let detailsHTML = `
-    <div style="padding:15px;border-radius:8px;background:white;color:black;">
-      <p><strong>Appt No:</strong> ${apptNo}</p>
-      <p><strong>Name:</strong> ${v.name}</p>
-      <p><strong>Address:</strong> ${v.address}</p>
-      <p><strong>Country:</strong> ${v.country}</p>
-      <p><strong>DOB:</strong> ${v.dob}</p>
-      <p><strong>Visit to:</strong> BHOLA NATH BASAK</p>
-      <p><strong>Visit Date:</strong> ${v.date}</p>
-      <p><strong>Visit Time:</strong> ${v.time}</p>
-      <p><strong>Phone:</strong> ${v.phone}</p>
-      <p><strong>Purpose:</strong> ${v.purpose}</p>
-      <p><strong>Passport:</strong> ${v.passport}</p>
-      <p><strong>Email:</strong> ${v.email}</p>
-      <p><strong>Status:</strong> ${v.status}</p>
-    </div>
-  `;
-
-  let chatHTML = `
-    <div id="visitorChat" style="display:none;margin-top:10px;">
-      <h4>Messenger with Admin</h4>
-      <div id="chatBox" style="width:100%;height:150px;border:1px solid #ccc;padding:5px;overflow-y:auto;background:white;color:black;"></div>
-      <input type="text" id="chatInput" placeholder="Type message..." style="width:80%;padding:5px;">
-      <button onclick="sendVisitorMessage('${apptNo}')">Send</button>
-    </div>
-  `;
-
-  resDiv.innerHTML = detailsHTML + chatHTML;
-
-  // Activate chat if accepted and meet time passed
-  if(v.status === "Accepted"){
-    let meetDateTime = new Date(v.date + " " + v.time);
-    let now = new Date();
-    if(now >= meetDateTime){
-      setTimeout(()=>{ document.getElementById("visitorChat").style.display="block"; renderChat(apptNo); }, 1000);
-    }
-  }
-}
-
-function sendVisitorMessage(apptNo){
-  let input = document.getElementById("chatInput");
-  if(!input || input.value.trim()==="") return;
-  visitors[apptNo].chat.push({sender:"Visitor",msg:input.value});
-  localStorage.setItem("visitors",JSON.stringify(visitors));
-  renderChat(apptNo);
-  input.value="";
-}
-
-function renderChat(apptNo){
-  let chatBox = document.getElementById("chatBox");
-  if(!chatBox) return;
-  chatBox.innerHTML="";
-  visitors[apptNo].chat.forEach(c=>{
-    chatBox.innerHTML+=`<p><strong>${c.sender}:</strong> ${c.msg}</p>`;
+      let row=document.createElement("tr");
+      row.innerHTML=`<td>${apptNo}</td><td>${v.name}</td><td>${v.date}</td><td>${v.time}</td><td>${v.phone}</td><td>${v.purpose}</td><td><button class="${colorClass}">${v.status}</button></td>
+      <td>
+        <button onclick="updateStatus('${apptNo}','Accepted')" ${v.status!=="Pending"?'disabled':''}>Accept</button>
+        <button onclick="updateStatus('${apptNo}','Rejected')" ${v.status!=="Pending"?'disabled':''}>Reject</button>
+      </td>`;
+      tbody.appendChild(row);
+    });
   });
-  chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-function checkStatus(){
-  let apptNo = document.getElementById("statusSearch").value.trim();
-  showVisitorDetails(apptNo);
+function updateStatus(apptNo,status){
+  db.ref('visitors/'+apptNo+'/status').set(status,()=>{ renderTable(); });
 }
 
-// ------------------- Admin Functions -------------------
+// ------------------- Admin Login -------------------
 function adminLogin(){
   let u=document.getElementById("adminUser").value;
   let p=document.getElementById("adminPass").value;
@@ -284,66 +246,35 @@ function adminLogin(){
 }
 function adminLogout(){ showSection("profile"); }
 
-function renderTable(){
-  let tbody=document.querySelector("#visitorTable tbody");
-  tbody.innerHTML="";
-  for(let apptNo in visitors){
-    let v=visitors[apptNo];
-    let colorClass = "pink";
+// ------------------- Visitor Status Check -------------------
+function checkStatus(){
+  let apptNo=document.getElementById("statusSearch").value.trim();
+  db.ref('visitors/'+apptNo).once('value', snapshot=>{
+    const v=snapshot.val();
+    const resDiv=document.getElementById("statusResult");
+    if(!v){ resDiv.innerHTML="❌ No Appointment Found"; return; }
+
+    let colorClass="pink";
     if(v.status==="Accepted") colorClass="green";
     else if(v.status==="Rejected") colorClass="red";
 
-    let row=document.createElement("tr");
-    row.innerHTML=`<td>${apptNo}</td><td>${v.name}</td><td>${v.date}</td><td>${v.time}</td><td>${v.phone}</td><td>${v.purpose}</td><td><button class="${colorClass}">${v.status}</button></td>
-    <td>
-      <button onclick="accept('${apptNo}')" ${v.status!=="Pending"?'disabled':''}>Accept</button>
-      <button onclick="reject('${apptNo}')" ${v.status!=="Pending"?'disabled':''}>Reject</button>
-    </td>`;
-    tbody.appendChild(row);
-  }
-}
-
-function accept(apptNo){
-  visitors[apptNo].status="Accepted";
-  localStorage.setItem("visitors",JSON.stringify(visitors));
-  renderTable();
-}
-function reject(apptNo){
-  visitors[apptNo].status="Rejected";
-  localStorage.setItem("visitors",JSON.stringify(visitors));
-  renderTable();
-}
-
-// ------------------- PDF Generation -------------------
-function downloadPDF(apptNo){
-  const { jsPDF } = window.jspdf;
-  const v = visitors[apptNo];
-  if(!v){ alert("No appointment found"); return; }
-
-  const doc = new jsPDF();
-  const currentDate = new Date();
-  const dateStr = currentDate.toLocaleDateString();
-  const timeStr = currentDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
-
-  doc.setFontSize(16);
-  doc.text("E_Appointment Letter", 20, 20);
-  doc.setFontSize(12);
-  doc.text(`Appointment No: ${apptNo}`, 20, 30);
-  doc.text(`Visitor Name: ${v.name}`, 20, 38);
-  doc.text(`Address: ${v.address}`, 20, 46);
-  doc.text(`Country: ${v.country}`, 20, 54);
-  doc.text(`DOB: ${v.dob}`, 20, 62);
-  doc.text(`Visit to: BHOLA NATH BASAK`, 20, 70);
-  doc.text(`Visit Date: ${v.date}`, 20, 78);
-  doc.text(`Visit Time: ${v.time}`, 20, 86);
-  doc.text(`Phone: ${v.phone}`, 20, 94);
-  doc.text(`Purpose: ${v.purpose}`, 20, 102);
-  doc.text(`Passport: ${v.passport}`, 20, 110);
-  doc.text(`Email: ${v.email}`, 20, 118);
-  doc.text(`Status: ${v.status}`, 20, 126);
-  doc.text(`Generated on: ${dateStr} ${timeStr}`, 20, 134);
-
-  doc.save(`E_Appointment_${apptNo}.pdf`);
+    resDiv.innerHTML=`
+      <div style="padding:15px;border-radius:8px;background:white;color:black;">
+        <p><strong>Appt No:</strong> ${apptNo}</p>
+        <p><strong>Name:</strong> ${v.name}</p>
+        <p><strong>Address:</strong> ${v.address}</p>
+        <p><strong>Country:</strong> ${v.country}</p>
+        <p><strong>DOB:</strong> ${v.dob}</p>
+        <p><strong>Visit Date:</strong> ${v.date}</p>
+        <p><strong>Visit Time:</strong> ${v.time}</p>
+        <p><strong>Phone:</strong> ${v.phone}</p>
+        <p><strong>Purpose:</strong> ${v.purpose}</p>
+        <p><strong>Passport:</strong> ${v.passport}</p>
+        <p><strong>Email:</strong> ${v.email}</p>
+        <p><strong>Status:</strong> ${v.status}</p>
+      </div>
+    `;
+  });
 }
 </script>
 </body>

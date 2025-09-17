@@ -146,37 +146,53 @@ th, td{padding:8px;text-align:center;}
 </footer>
 
 <script>
-// ------------------- Visitor Storage -------------------
-let visitors = JSON.parse(localStorage.getItem("visitors")) || {};
-
 // ------------------- Section Show -------------------
 function showSection(id){
   document.querySelectorAll("section").forEach(s=>s.classList.add("hidden"));
   document.getElementById(id).classList.remove("hidden");
 }
 
-// ------------------- Unique Appointment Number -------------------
-function getNextAppointmentNumber() {
-  let lastNo = localStorage.getItem("lastApptNo") || "0";
-  let nextNo = parseInt(lastNo) + 1;
-  localStorage.setItem("lastApptNo", nextNo);
-  return "APMTWBNB" + String(nextNo).padStart(2,"0");
+// ------------------- Global Variables -------------------
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyN6p6HwR77BPsocKActnhniMLrvbZjHWZIXN1ppDsiSsN-nzzC3bSEWR102Gwyw2tqXQ/exec";
+let visitors = {}; // will load from Google Sheet
+
+// ------------------- Load Visitors from Google Sheet -------------------
+async function loadVisitors(){
+  try{
+    const response = await fetch(WEB_APP_URL+"?action=getAll");
+    visitors = await response.json();
+    renderTable();
+  }catch(e){
+    console.log("Error loading visitors",e);
+  }
+}
+
+// ------------------- Generate Unique Appointment Number -------------------
+function getNextAppointmentNumber(){
+  let maxNo=0;
+  Object.keys(visitors).forEach(a=>{
+    let n = parseInt(a.replace("APMTWBNB",""));
+    if(n>maxNo) maxNo=n;
+  });
+  return "APMTWBNB"+String(maxNo+1).padStart(2,"0");
 }
 
 // ------------------- Visitor Form Submit -------------------
-document.getElementById("appointmentForm").addEventListener("submit", function(e){
+document.getElementById("appointmentForm").addEventListener("submit",async function(e){
   e.preventDefault();
-  let name = document.getElementById("vname").value.trim();
-  let date = document.getElementById("vdate").value;
-  let time = document.getElementById("vtime").value;
-  let phone = document.getElementById("vphone").value.trim();
+  let name=document.getElementById("vname").value.trim();
+  let date=document.getElementById("vdate").value;
+  let time=document.getElementById("vtime").value;
+  let phone=document.getElementById("vphone").value.trim();
   if(!name || !date || !time || !phone){ alert("Please fill mandatory fields"); return; }
 
   let apptNo = getNextAppointmentNumber();
-  visitors[apptNo] = {
-    name:name,
-    date:date,
-    time:time,
+
+  let data={
+    apptNo,
+    name,
+    date,
+    time,
     phone:document.getElementById("ccode").value + phone,
     address:document.getElementById("vaddress").value,
     country:document.getElementById("vcountry").value,
@@ -188,93 +204,69 @@ document.getElementById("appointmentForm").addEventListener("submit", function(e
     submitted:new Date().toLocaleString(),
     chat:[]
   };
-  localStorage.setItem("visitors",JSON.stringify(visitors));
-  alert("Appointment sent successfully: " + apptNo);
-  document.getElementById("appointmentForm").reset();
+
+  // Send to Web App to store in Google Sheet
+  try{
+    await fetch(WEB_APP_URL+"?action=add",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(data)
+    });
+    alert("Appointment sent successfully: "+apptNo);
+    document.getElementById("appointmentForm").reset();
+    await loadVisitors();
+  }catch(e){ alert("Error submitting form"); console.log(e);}
 });
 
-// ------------------- Visitor Status -------------------
-function showVisitorDetails(apptNo){
-  let resDiv = document.getElementById("statusResult");
-  if(!visitors[apptNo]){
-    resDiv.innerHTML = "❌ No Appointment Found"; return;
-  }
-  let v = visitors[apptNo];
-  let colorClass = v.status==="Accepted"?"green":v.status==="Rejected"?"red":"pink";
-
-  let detailsHTML = `
-    <div style="padding:15px;border-radius:8px;background:white;color:black;">
-      <p><strong>Appt No:</strong> ${apptNo}</p>
-      <p><strong>Name:</strong> ${v.name}</p>
-      <p><strong>Address:</strong> ${v.address}</p>
-      <p><strong>Country:</strong> ${v.country}</p>
-      <p><strong>DOB:</strong> ${v.dob}</p>
-      <p><strong>Visit to:</strong> BHOLA NATH BASAK</p>
-      <p><strong>Visit Date:</strong> ${v.date}</p>
-      <p><strong>Visit Time:</strong> ${v.time}</p>
-      <p><strong>Phone:</strong> ${v.phone}</p>
-      <p><strong>Purpose:</strong> ${v.purpose}</p>
-      <p><strong>Passport:</strong> ${v.passport}</p>
-      <p><strong>Email:</strong> ${v.email}</p>
-      <p><strong>Status:</strong> ${v.status}</p>
-    </div>
-  `;
-  resDiv.innerHTML = detailsHTML;
-}
-
-function checkStatus(){
-  let apptNo = document.getElementById("statusSearch").value.trim();
-  showVisitorDetails(apptNo);
-}
-
-// ------------------- Admin Dashboard -------------------
-function renderTable(){
-  let tbody=document.querySelector("#visitorTable tbody");
-  tbody.innerHTML="";
-  for(let apptNo in visitors){
-    let v = visitors[apptNo];
-    let colorClass = v.status==="Accepted"?"green":v.status==="Rejected"?"red":"pink";
-    let row = document.createElement("tr");
-    row.innerHTML = `
-      <td>${apptNo}</td>
-      <td>${v.name}</td>
-      <td>${v.date}</td>
-      <td>${v.time}</td>
-      <td>${v.phone}</td>
-      <td>${v.purpose}</td>
-      <td><button class="${colorClass}" disabled>${v.status}</button></td>
-      <td>
-        <button onclick="accept('${apptNo}')" ${v.status!=="Pending"?'disabled':''}>Accept</button>
-        <button onclick="reject('${apptNo}')" ${v.status!=="Pending"?'disabled':''}>Reject</button>
-      </td>`;
-    tbody.appendChild(row);
-  }
-}
-
-function accept(apptNo){
-  visitors[apptNo].status = "Accepted";
-  localStorage.setItem("visitors", JSON.stringify(visitors));
-  renderTable();
-}
-
-function reject(apptNo){
-  visitors[apptNo].status = "Rejected";
-  localStorage.setItem("visitors", JSON.stringify(visitors));
-  renderTable();
-}
-
+// ------------------- Admin Functions -------------------
 function adminLogin(){
   let u=document.getElementById("adminUser").value;
   let p=document.getElementById("adminPass").value;
-  if(u==="admin" && p==="admin"){
-    showSection("adminDashboard");
-    renderTable();
-  } else { alert("Invalid Credentials"); }
+  if(u==="admin" && p==="admin"){ showSection("adminDashboard"); loadVisitors(); }
+  else alert("Invalid Credentials");
+}
+function adminLogout(){ showSection("profile"); }
+
+function renderTable(){
+  let tbody=document.querySelector("#visitorTable tbody");
+  tbody.innerHTML="";
+  Object.keys(visitors).forEach(apptNo=>{
+    let v=visitors[apptNo];
+    let colorClass=v.status==="Accepted"?"green":v.status==="Rejected"?"red":"pink";
+    let row=document.createElement("tr");
+    row.innerHTML=`<td>${apptNo}</td><td>${v.name}</td><td>${v.date}</td><td>${v.time}</td><td>${v.phone}</td><td>${v.purpose}</td><td><button class="${colorClass}">${v.status}</button></td>
+      <td>
+        <button onclick="updateStatus('${apptNo}','Accepted')" ${v.status!=="Pending"?'disabled':''}>Accept</button>
+        <button onclick="updateStatus('${apptNo}','Rejected')" ${v.status!=="Pending"?'disabled':''}>Reject</button>
+      </td>`;
+    tbody.appendChild(row);
+  });
 }
 
-function adminLogout(){
-  showSection("profile");
+// Update status on Google Sheet
+async function updateStatus(apptNo,status){
+  try{
+    await fetch(WEB_APP_URL+"?action=update",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({apptNo,status})
+    });
+    await loadVisitors();
+  }catch(e){ alert("Error updating status"); console.log(e);}
 }
+
+// ------------------- Check Visitor Status -------------------
+function checkStatus(){
+  let apptNo=document.getElementById("statusSearch").value.trim();
+  if(visitors[apptNo]){
+    let v=visitors[apptNo];
+    alert(`Status of ${apptNo}: ${v.status}`);
+  } else alert("❌ No Appointment Found");
+}
+
+// ------------------- Initial Load -------------------
+loadVisitors();
 </script>
+
 </body>
 </html>

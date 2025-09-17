@@ -154,20 +154,21 @@ th, td{padding:8px;text-align:center;}
 </footer>
 
 <script>
-// ------------------- Existing Programs + New Features -------------------
+// ------------------- Existing Programs + Corrected Features -------------------
 let visitors = JSON.parse(localStorage.getItem("visitors")) || {};
 
+// ------------------- Section Show -------------------
 function showSection(id){
   document.querySelectorAll("section").forEach(s=>s.classList.add("hidden"));
   document.getElementById(id).classList.remove("hidden");
 }
 
+// ------------------- Unique Appointment Number (Global) -------------------
 function getNextAppointmentNumber() {
-  const keys = Object.keys(visitors);
-  if(keys.length===0) return "APMTWBNB01";
-  const nums = keys.map(k=>parseInt(k.replace("APMTWBNB",""))).filter(n=>!isNaN(n));
-  const maxNum = nums.length ? Math.max(...nums) : 0;
-  return "APMTWBNB" + String(maxNum+1).padStart(2,"0");
+  let lastNo = localStorage.getItem("lastApptNo") || "0";
+  let nextNo = parseInt(lastNo) + 1;
+  localStorage.setItem("lastApptNo", nextNo);
+  return "APMTWBNB" + String(nextNo).padStart(2,"0");
 }
 
 // ------------------- Visitor Form Submit -------------------
@@ -204,13 +205,12 @@ document.getElementById("appointmentForm").addEventListener("submit",function(e)
 function showVisitorDetails(apptNo){
   let resDiv = document.getElementById("statusResult");
   if(!visitors[apptNo]){
-    resDiv.innerHTML = "No Appointment Found"; return;
+    resDiv.innerHTML = "❌ No Appointment Found"; return;
   }
-
   let v = visitors[apptNo];
-  let color="pink", text="ADMIN BUSY";
-  if(v.status==="Accepted"){ color="green"; text="APPOINTMENT ACCEPTED";}
-  else if(v.status==="Rejected"){ color="red"; text="APPOINTMENT REJECTED";}
+  let colorClass = "pink";
+  if(v.status === "Accepted"){ colorClass="green"; }
+  else if(v.status === "Rejected"){ colorClass="red"; }
 
   let detailsHTML = `
     <div style="padding:15px;border-radius:8px;background:white;color:black;">
@@ -253,7 +253,7 @@ function showVisitorDetails(apptNo){
 
 function sendVisitorMessage(apptNo){
   let input = document.getElementById("chatInput");
-  if(input.value.trim()==="") return;
+  if(!input || input.value.trim()==="") return;
   visitors[apptNo].chat.push({sender:"Visitor",msg:input.value});
   localStorage.setItem("visitors",JSON.stringify(visitors));
   renderChat(apptNo);
@@ -262,6 +262,7 @@ function sendVisitorMessage(apptNo){
 
 function renderChat(apptNo){
   let chatBox = document.getElementById("chatBox");
+  if(!chatBox) return;
   chatBox.innerHTML="";
   visitors[apptNo].chat.forEach(c=>{
     chatBox.innerHTML+=`<p><strong>${c.sender}:</strong> ${c.msg}</p>`;
@@ -288,8 +289,12 @@ function renderTable(){
   tbody.innerHTML="";
   for(let apptNo in visitors){
     let v=visitors[apptNo];
+    let colorClass = "pink";
+    if(v.status==="Accepted") colorClass="green";
+    else if(v.status==="Rejected") colorClass="red";
+
     let row=document.createElement("tr");
-    row.innerHTML=`<td>${apptNo}</td><td>${v.name}</td><td>${v.date}</td><td>${v.time}</td><td>${v.phone}</td><td>${v.purpose}</td><td>${v.status}</td>
+    row.innerHTML=`<td>${apptNo}</td><td>${v.name}</td><td>${v.date}</td><td>${v.time}</td><td>${v.phone}</td><td>${v.purpose}</td><td><button class="${colorClass}">${v.status}</button></td>
     <td>
       <button onclick="accept('${apptNo}')" ${v.status!=="Pending"?'disabled':''}>Accept</button>
       <button onclick="reject('${apptNo}')" ${v.status!=="Pending"?'disabled':''}>Reject</button>

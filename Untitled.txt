@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INDIA BADSAH</title>
+<style>
+body {margin:0; font-family: Arial, sans-serif; background:linear-gradient(to right,#1a2a6c,#b21f1f,#fdbb2d); color:white; line-height:1.6;}
+header{text-align:center; padding:20px; background:rgba(0,0,0,0.6);}
+header img{width:180px;height:180px;object-fit:cover;border-radius:50%;border:5px solid #fff;transition: transform 0.4s;}
+header img:hover{transform: scale(1.05) rotate(2deg);}
+header h1{margin:15px 0 0; font-size:2.5em;color:#fbd46d;text-shadow:2px 2px 5px black;}
+nav{display:flex;justify-content:center;background:rgba(0,0,0,0.8);flex-wrap:wrap;align-items:center;}
+nav a{color:white;text-decoration:none;padding:10px 15px;display:block;transition:background 0.3s,color 0.3s;cursor:pointer;}
+nav a:hover{background:#fbd46d;color:black;border-radius:5px;}
+#statusSearch {margin-left:10px;padding:5px;border-radius:5px;border:none;}
+#statusResult {margin-left:10px;}
+section{padding:40px 20px;max-width:900px;margin:auto;background:rgba(255,255,255,0.1);margin-bottom:30px;border-radius:12px;box-shadow:0px 4px 15px rgba(0,0,0,0.5);}
+section h2{color:#ffe66d;margin-bottom:15px;}
+.form-box{background:rgba(0,0,0,0.7);padding:20px;border-radius:12px;color:white;max-width:500px;margin:auto;}
+.form-box label{display:block;margin-bottom:10px;}
+.form-box input, .form-box select{width:100%;padding:5px;margin-top:3px;border-radius:5px;border:none;}
+.btn{background:#fbd46d;color:black;padding:8px 12px;border:none;border-radius:5px;cursor:pointer;margin-top:10px;}
+.btn:hover{background:white;}
+table{width:100%;border-collapse:collapse;color:black;background:white;margin-top:20px;}
+table, th, td{border:1px solid #000;}
+th, td{padding:8px;text-align:center;}
+.green{background:#28a745;color:white;}
+.red{background:#dc3545;color:white;}
+.pink{background:#ff69b4;color:white;}
+.yellow{background:#ffc107;color:white;}
+.grey{background:#6c757d;color:white;}
+.deep-green{background:#196619;color:white;}
+.deep-red{background:#8b0000;color:white;}
+.hidden{display:none;}
+@media (max-width: 600px) {
+  .form-box input, .form-box select, .form-box button {width:100% !important; font-size:16px; margin-top:5px;}
+  nav {flex-direction: column; align-items: flex-start;}
+  #statusSearch {width:90%; margin:10px;}
+}
+</style>
+
+<!-- jsPDF for PDF generation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+</head>
+<body>
+
+<header>
+  <img src="myphoto.jpg" alt="India Badsah Photo">
+  <h1>INDIA BADSAH</h1>
+</header>
+
+<nav>
+  <a onclick="showSection('profile')">Profile</a>
+  <a onclick="showSection('education')">Education</a>
+  <a onclick="showSection('culture')">Culture</a>
+  <a onclick="showSection('achievements')">Achievements</a>
+  <a onclick="showSection('hobbies')">Hobbies</a>
+  <a onclick="showSection('interested')">Interested About</a>
+  <a onclick="showSection('thoughts')">Thoughts</a>
+  <a onclick="showSection('visitor')">Visitor Form</a>
+  <a onclick="showSection('adminLogin')">Admin Login</a>
+  <input type="text" id="statusSearch" placeholder="Visitor Status: Enter Appt No" onkeypress="if(event.key==='Enter'){checkStatus();}">
+</nav>
+<div id="statusResult"></div>
+
+<!-- Profile Sections -->
+<section id="profile"><h2>Profile</h2><p>I am INDIA BADSAH, a passionate learner and explorer of life’s endless opportunities. I aim to inspire others while growing myself in every possible field.</p></section>
+<section id="education"><h2>Education</h2><p>Education is the foundation of growth. I gather knowledge from books and real-life experiences shaping problem-solving abilities.</p></section>
+<section id="culture"><h2>Culture</h2><p>I embrace traditions, values, and respect for diversity while blending it with modern ideas for a balanced lifestyle.</p></section>
+<section id="achievements"><h2>Achievements</h2><p>Every step of life is an achievement — from personal milestones to professional success, reflecting perseverance, hard work, and dedication.</p></section>
+<section id="hobbies"><h2>Hobbies</h2><p>I enjoy creative and recreational activities — sports, art, music, technology. Hobbies give me balance and energy.</p></section>
+<section id="interested"><h2>Interested About</h2><p>Deeply interested in innovation, leadership, and cultural understanding. Exploring new ideas and connecting with people excites me.</p></section>
+<section id="thoughts"><h2>Thoughts</h2><p>“Life is not about waiting for opportunities, it is about creating them.” Determination and honesty make anything possible.</p></section>
+
+<!-- Visitor Form -->
+<section id="visitor" class="hidden">
+  <h2>E_Appointment Visitor Form</h2>
+  <form id="appointmentForm" class="form-box">
+    <label>Visitor Name* <input type="text" id="vname" required></label>
+    <label>Visitor Address <input type="text" id="vaddress"></label>
+    <label>From Country <input type="text" id="vcountry"></label>
+    <label>Date of Birth <input type="date" id="vdob"></label>
+    <label>Virtual Visit Date* <input type="date" id="vdate" required></label>
+    <label>Time Availability* <input type="time" id="vtime" required></label>
+    <label>Contact Number* 
+      <select id="ccode">
+        <option value="+91">India (+91)</option>
+        <option value="+1">USA (+1)</option>
+        <option value="+880">Bangladesh (+880)</option>
+        <option value="+92">Pakistan (+92)</option>
+        <option value="+94">Sri Lanka (+94)</option>
+        <option value="+60">Malaysia (+60)</option>
+        <option value="+65">Singapore (+65)</option>
+        <option value="+44">UK (+44)</option>
+        <option value="+61">Australia (+61)</option>
+        <option value="+1">Canada (+1)</option>
+      </select>
+      <input type="tel" id="vphone" required>
+    </label>
+    <label>Purpose of Visit
+      <select id="vpurpose">
+        <option value="Visit Abroad">Visit Abroad</option>
+        <option value="Student Visa in Abroad">Student Visa in Abroad</option>
+        <option value="Job in Abroad">Job in Abroad</option>
+        <option value="Education system in Abroad">Education system in Abroad</option>
+        <option value="Counseling for Education in Abroad">Counseling for Education in Abroad</option>
+      </select>
+    </label>
+    <label>Passport Number <input type="text" id="vpassport"></label>
+    <label>Email ID 
+      <input type="text" id="vemail" placeholder="yourname" required>
+      <select id="emaildomain">
+        <option value="@gmail.com">@gmail.com</option>
+        <option value="@rediffmail.com">@rediffmail.com</option>
+        <option value="@yahoo.com">@yahoo.com</option>
+      </select>
+    </label>
+    <button type="submit" class="btn">Submit</button>
+  </form>
+</section>
+
+<!-- Admin Login -->
+<section id="adminLogin" class="hidden">
+  <h2>Admin Login</h2>
+  <div class="form-box">
+    <label>Username <input type="text" id="adminUser"></label>
+    <label>Password <input type="password" id="adminPass"></label>
+    <button onclick="adminLogin()" class="btn">Login</button>
+  </div>
+</section>
+
+<!-- Admin Dashboard -->
+<section id="adminDashboard" class="hidden">
+  <h2>Admin Dashboard</h2>
+  <button onclick="adminLogout()" class="btn">Logout</button>
+  <table id="visitorTable">
+    <thead><tr>
+      <th>Appt No</th><th>Name</th><th>Date</th><th>Time</th><th>Contact</th><th>Purpose</th><th>Status</th><th>Action</th>
+    </tr></thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+<footer>
+  <p>© 2025 INDIA BADSAH | Personal Biography Website</p>
+</footer>
+
+<script>
+// ------------------- Firebase Configuration -------------------
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+  databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT_ID.appspot.com",
+  messagingSenderId: "SENDER_ID",
+  appId: "APP_ID"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+// ------------------- Section Show -------------------
+function showSection(id){
+  document.querySelectorAll("section").forEach(s=>s.classList.add("hidden"));
+  document.getElementById(id).classList.remove("hidden");
+}
+
+// ------------------- Unique Appointment Number -------------------
+function getNextAppointmentNumber(callback){
+  const counterRef = db.ref("counter/lastApptNo");
+  counterRef.transaction(current => {
+    return (current||0) + 1;
+  }, (err, committed, snapshot) => {
+    if(err){ alert("Error generating Appt No"); return; }
+    callback("APMTWBNB" + String(snapshot.val()).padStart(2,"0"));
+  });
+}
+
+// ------------------- Visitor Form Submit -------------------
+document.getElementById("appointmentForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  let name = document.getElementById("vname").value.trim();
+  let date = document.getElementById("vdate").value;
+  let time = document.getElementById("vtime").value;
+  let phone = document.getElementById("vphone").value.trim();
+  if(!name || !date || !time || !phone){ alert("Please fill mandatory fields"); return; }
+
+  getNextAppointmentNumber(apptNo => {
+    let visitorData = {
+      name:name,
+      date:date,
+      time:time,
+      phone:document.getElementById("ccode").value + phone,
+      address:document.getElementById("vaddress").value,
+      country:document.getElementById("vcountry").value,
+      dob:document.getElementById("vdob").value,
+      purpose:document.getElementById("vpurpose").value,
+      passport:document.getElementById("vpassport").value||"NA",
+      email:document.getElementById("vemail").value+document.getElementById("emaildomain").value,
+      status:"Pending",
+      submitted:new Date().toLocaleString(),
+      chat:[]
+    };
+    db.ref("visitors/"+apptNo).set(visitorData);
+    alert("Appointment sent successfully: " + apptNo);
+    document.getElementById("appointmentForm").reset();
+  });
+});
+
+// ------------------- Check Visitor Status -------------------
+function showVisitorDetails(apptNo){
+  const resDiv = document.getElementById("statusResult");
+  db.ref("visitors/"+apptNo).once("value", snapshot => {
+    const v = snapshot.val();
+    if(!v){ resDiv.innerHTML = "❌ No Appointment Found"; return; }
+    let colorClass = "pink";
+    if(v.status==="Accepted") colorClass="green";
+    else if(v.status==="Rejected") colorClass="red";
+
+    resDiv.innerHTML = `
+      <div style="padding:15px;border-radius:8px;background:white;color:black;">
+        <p><strong>Appt No:</strong> ${apptNo}</p>
+        <p><strong>Name:</strong> ${v.name}</p>
+        <p><strong>Address:</strong> ${v.address}</p>
+        <p><strong>Country:</strong> ${v.country}</p>
+        <p><strong>DOB:</strong> ${v.dob}</p>
+        <p><strong>Visit to:</strong> BHOLA NATH BASAK</p>
+        <p><strong>Visit Date:</strong> ${v.date}</p>
+        <p><strong>Visit Time:</strong> ${v.time}</p>
+        <p><strong>Phone:</strong> ${v.phone}</p>
+        <p><strong>Purpose:</strong> ${v.purpose}</p>
+        <p><strong>Passport:</strong> ${v.passport}</p>
+        <p><strong>Email:</strong> ${v.email}</p>
+        <p><strong>Status:</strong> ${v.status}</p>
+      </div>
+      <div id="visitorChat" style="display:none;margin-top:10px;">
+        <h4>Messenger with Admin</h4>
+        <div id="chatBox" style="width:100%;height:150px;border:1px solid #ccc;padding:5px;overflow-y:auto;background:white;color:black;"></div>
+        <input type="text" id="chatInput" placeholder="Type message..." style="width:80%;padding:5px;">
+        <button onclick="sendVisitorMessage('${apptNo}')">Send</button>
+      </div>
+    `;
+    // Activate chat if accepted and meet time passed
+    if(v.status==="Accepted"){
+      let meetDateTime = new Date(v.date + " " + v.time);
+      let now = new Date();
+      if(now >= meetDateTime){
+        setTimeout(()=>{ document.getElementById("visitorChat").style.display="block"; renderChat(apptNo); }, 1000);
+      }
+    }
+  });
+}
+
+function checkStatus(){ 
+  const apptNo = document.getElementById("statusSearch").value.trim();
+  showVisitorDetails(apptNo);
+}
+
+// ------------------- Chat -------------------
+function sendVisitorMessage(apptNo){
+  let input = document.getElementById("chatInput");
+  if(!input || input.value.trim()==="") return;
+  let chatRef = db.ref("visitors/"+apptNo+"/chat");
+  chatRef.push({sender:"Visitor",msg:input.value});
+  input.value="";
+  renderChat(apptNo);
+}
+
+function renderChat(apptNo){
+  const chatBox = document.getElementById("chatBox");
+  if(!chatBox) return;
+  chatBox.innerHTML="";
+  db.ref("visitors/"+apptNo+"/chat").once("value", snapshot=>{
+    snapshot.forEach(snap=>{
+      let c = snap.val();
+      chatBox.innerHTML+=`<p><strong>${c.sender}:</strong> ${c.msg}</p>`;
+    });
+    chatBox.scrollTop = chatBox.scrollHeight;
+  });
+}
+
+// ------------------- Admin -------------------
+function adminLogin(){
+  let u = document.getElementById("adminUser").value;
+  let p = document.getElementById("adminPass").value;
+  if(u==="admin" && p==="admin"){ showSection("adminDashboard"); renderTable(); }
+  else alert("Invalid Credentials");
+}
+function adminLogout(){ showSection("profile"); }
+
+function renderTable(){
+  const tbody = document.querySelector("#visitorTable tbody");
+  tbody.innerHTML="";
+  db.ref("visitors").once("value", snapshot=>{
+    snapshot.forEach(snap=>{
+      let apptNo = snap.key;
+      let v = snap.val();
+      let colorClass = "pink";
+      if(v.status==="Accepted") colorClass="green";
+      else if(v.status==="Rejected") colorClass="red";
+
+      let row=document.createElement("tr");
+      row.innerHTML = `<td>${apptNo}</td><td>${v.name}</td><td>${v.date}</td><td>${v.time}</td><td>${v.phone}</td><td>${v.purpose}</td>
+        <td><button class="${colorClass}">${v.status}</button></td>
+        <td>
+          <button onclick="accept('${apptNo}')" ${v.status!=="Pending"?'disabled':''}>Accept</button>
+          <button onclick="reject('${apptNo}')" ${v.status!=="Pending"?'disabled':''}>Reject</button>
+        </td>`;
+      tbody.appendChild(row);
+    });
+  });
+}
+
+function accept(apptNo){
+  db.ref("visitors/"+apptNo).update({status:"Accepted"});
+  renderTable();
+}
+function reject(apptNo){
+  db.ref("visitors/"+apptNo).update({status:"Rejected"});
+  renderTable();
+}
+</script>
+</body>
+</html>

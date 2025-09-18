@@ -3,243 +3,160 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>INDIA BADSAH</title>
+<title>Visitor Appointments - BNB</title>
 <style>
-body {margin:0; font-family: Arial, sans-serif; background:linear-gradient(to right,#1a2a6c,#b21f1f,#fdbb2d); color:white; line-height:1.6;}
-header{text-align:center; padding:20px; background:rgba(0,0,0,0.6);}
-header img{width:180px;height:180px;object-fit:cover;border-radius:50%;border:5px solid #fff;transition: transform 0.4s;}
-header img:hover{transform: scale(1.05) rotate(2deg);}
-header h1{margin:15px 0 0; font-size:2.5em;color:#fbd46d;text-shadow:2px 2px 5px black;}
-nav{display:flex;justify-content:center;background:rgba(0,0,0,0.8);flex-wrap:wrap;align-items:center;}
-nav a{color:white;text-decoration:none;padding:10px 15px;display:block;transition:background 0.3s,color 0.3s;cursor:pointer;}
-nav a:hover{background:#fbd46d;color:black;border-radius:5px;}
-#statusSearch {margin-left:10px;padding:5px;border-radius:5px;border:none;}
-#statusResult {margin-left:10px;}
-section{padding:40px 20px;max-width:900px;margin:auto;background:rgba(255,255,255,0.1);margin-bottom:30px;border-radius:12px;box-shadow:0px 4px 15px rgba(0,0,0,0.5);}
-section h2{color:#ffe66d;margin-bottom:15px;}
-.form-box{background:rgba(0,0,0,0.7);padding:20px;border-radius:12px;color:white;max-width:500px;margin:auto;}
-.form-box label{display:block;margin-bottom:10px;}
-.form-box input, .form-box select{width:100%;padding:5px;margin-top:3px;border-radius:5px;border:none;}
-.btn{background:#fbd46d;color:black;padding:8px 12px;border:none;border-radius:5px;cursor:pointer;margin-top:10px;}
-.btn:hover{background:white;}
-table{width:100%;border-collapse:collapse;color:black;background:white;margin-top:20px;}
-table, th, td{border:1px solid #000;}
-th, td{padding:8px;text-align:center;}
-.green{background:#28a745;color:white;}
-.red{background:#dc3545;color:white;}
-.pink{background:#ff69b4;color:white;}
-.yellow{background:#ffc107;color:white;}
-.grey{background:#6c757d;color:white;}
-.deep-green{background:#196619;color:white;}
-.deep-red{background:#8b0000;color:white;}
-.hidden{display:none;}
-
-/* Mobile Support */
-@media (max-width: 600px) {
-  .form-box input, .form-box select, .form-box button {width:100% !important; font-size:16px; margin-top:5px;}
-  nav {flex-direction: column; align-items: flex-start;}
-  #statusSearch {width:90%; margin:10px;}
-}
+  body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f7f7f7; }
+  header { background:#0b6efa; color:white; padding:1rem; text-align:center; font-size:1.5rem; font-weight:bold; }
+  .container { max-width:900px; margin:2rem auto; padding:1rem; background:white; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.1); }
+  h2 { color:#0b6efa; }
+  input, select, textarea, button { width:100%; padding:0.5rem; margin:0.5rem 0; border-radius:4px; border:1px solid #ccc; }
+  button { cursor:pointer; background:#0b6efa; color:white; border:none; }
+  table { width:100%; border-collapse:collapse; margin-top:1rem; }
+  th, td { border:1px solid #ccc; padding:0.5rem; text-align:left; }
+  th { background:#0b6efa; color:white; }
+  .status-pending { color:#d9534f; font-weight:bold; }
+  .status-accepted { color:#28a745; font-weight:bold; }
+  .status-rejected { color:#ff66cc; font-weight:bold; }
 </style>
 </head>
 <body>
 
-<header>
-  <img src="myphoto.jpg" alt="India Badsah Photo">
-  <h1>INDIA BADSAH</h1>
-</header>
+<header>BNB Visitor Appointment System</header>
 
-<nav>
-  <a onclick="showSection('profile')">Profile</a>
-  <a onclick="showSection('education')">Education</a>
-  <a onclick="showSection('culture')">Culture</a>
-  <a onclick="showSection('achievements')">Achievements</a>
-  <a onclick="showSection('hobbies')">Hobbies</a>
-  <a onclick="showSection('interested')">Interested About</a>
-  <a onclick="showSection('thoughts')">Thoughts</a>
-  <a onclick="showSection('visitor')">Visitor Form</a>
-  <a onclick="showSection('adminLogin')">Admin Login</a>
-  <input type="text" id="statusSearch" placeholder="Visitor Status: Enter Appt No" onkeypress="if(event.key==='Enter'){checkStatus();}">
-</nav>
-<div id="statusResult"></div>
-
-<!-- Sections -->
-<section id="profile"><h2>Profile</h2><p>I am INDIA BADSAH, passionate learner and explorer. I aim to inspire others and grow in every field.</p></section>
-<section id="education"><h2>Education</h2><p>Education is the foundation of growth, combining books and real-life experiences.</p></section>
-<section id="culture"><h2>Culture</h2><p>I embrace traditions while blending with modern ideas for balance.</p></section>
-<section id="achievements"><h2>Achievements</h2><p>Every step in life is an achievement reflecting perseverance and dedication.</p></section>
-<section id="hobbies"><h2>Hobbies</h2><p>Sports, art, music, technology – hobbies keep me balanced and energized.</p></section>
-<section id="interested"><h2>Interested About</h2><p>Innovation, leadership, culture – exploring new ideas excites me.</p></section>
-<section id="thoughts"><h2>Thoughts</h2><p>“Life is about creating opportunities, not waiting for them.”</p></section>
-
-<!-- Visitor Form -->
-<section id="visitor" class="hidden">
-  <h2>E_Appointment Visitor Form</h2>
-  <form id="appointmentForm" class="form-box">
-    <label>Visitor Name* <input type="text" id="vname" required></label>
-    <label>Visitor Address <input type="text" id="vaddress"></label>
-    <label>From Country <input type="text" id="vcountry"></label>
-    <label>Date of Birth <input type="date" id="vdob"></label>
-    <label>Virtual Visit Date* <input type="date" id="vdate" required></label>
-    <label>Time Availability* <input type="time" id="vtime" required></label>
-    <label>Contact Number* 
-      <select id="ccode">
-        <option value="+91">India (+91)</option>
-        <option value="+1">USA (+1)</option>
-        <option value="+880">Bangladesh (+880)</option>
-        <option value="+92">Pakistan (+92)</option>
-        <option value="+94">Sri Lanka (+94)</option>
-        <option value="+60">Malaysia (+60)</option>
-        <option value="+65">Singapore (+65)</option>
-        <option value="+44">UK (+44)</option>
-        <option value="+61">Australia (+61)</option>
-        <option value="+1">Canada (+1)</option>
-      </select>
-      <input type="tel" id="vphone" required>
-    </label>
-    <label>Purpose of Visit
-      <select id="vpurpose">
-        <option value="Visit Abroad">Visit Abroad</option>
-        <option value="Student Visa in Abroad">Student Visa Abroad</option>
-        <option value="Job in Abroad">Job Abroad</option>
-        <option value="Education system in Abroad">Education Abroad</option>
-        <option value="Counseling for Education in Abroad">Education Counseling</option>
-      </select>
-    </label>
-    <label>Passport Number <input type="text" id="vpassport"></label>
-    <label>Email ID 
-      <input type="text" id="vemail" placeholder="yourname" required>
-      <select id="emaildomain">
-        <option value="@gmail.com">@gmail.com</option>
-        <option value="@yahoo.com">@yahoo.com</option>
-        <option value="@rediffmail.com">@rediffmail.com</option>
-      </select>
-    </label>
-    <button type="submit" class="btn">Submit</button>
+<div class="container">
+  <h2>Visitor Submission Form</h2>
+  <form id="visitorForm">
+    <input type="text" id="name" placeholder="Full Name" required>
+    <input type="text" id="address" placeholder="Address" required>
+    <input type="text" id="country" placeholder="Country" required>
+    <input type="date" id="dob" placeholder="Date of Birth" required>
+    <input type="date" id="date" placeholder="Visit Date" required>
+    <input type="time" id="time" placeholder="Visit Time" required>
+    <input type="text" id="contact" placeholder="Contact Number" required>
+    <input type="text" id="purpose" placeholder="Purpose of Visit" required>
+    <input type="email" id="email" placeholder="Email" required>
+    <button type="submit">Submit Appointment</button>
   </form>
-</section>
+  <p id="formMessage"></p>
+</div>
 
-<!-- Admin Login -->
-<section id="adminLogin" class="hidden">
-  <h2>Admin Login</h2>
-  <div class="form-box">
-    <label>Username <input type="text" id="adminUser"></label>
-    <label>Password <input type="password" id="adminPass"></label>
-    <button onclick="adminLogin()" class="btn">Login</button>
-  </div>
-</section>
-
-<!-- Admin Dashboard -->
-<section id="adminDashboard" class="hidden">
+<div class="container">
   <h2>Admin Dashboard</h2>
-  <button onclick="adminLogout()" class="btn">Logout</button>
-  <table id="visitorTable">
-    <thead><tr>
-      <th>Appt No</th><th>Name</th><th>Date</th><th>Time</th><th>Contact</th><th>Purpose</th><th>Status</th><th>Action</th>
-    </tr></thead>
+  <table id="adminTable">
+    <thead>
+      <tr>
+        <th>Appointment No</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Country</th>
+        <th>DOB</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Contact</th>
+        <th>Purpose</th>
+        <th>Email</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
     <tbody></tbody>
   </table>
-</section>
-
-<footer>
-  <p>© 2025 INDIA BADSAH | Personal Biography Website</p>
-</footer>
+</div>
 
 <script>
-// ------------------- Visitors Data -------------------
-let visitors = JSON.parse(localStorage.getItem("visitors")) || {};
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyU-aycefMRE9htioaZ5RrTFMus7n89PNl6NiXwRmeSuitwiePk0qxsuCQkwLKKTI6i/exec";
 
-// ------------------- Show Sections -------------------
-function showSection(id){
-  document.querySelectorAll("section").forEach(s=>s.classList.add("hidden"));
-  document.getElementById(id).classList.remove("hidden");
-}
-
-// ------------------- Appointment Number -------------------
-function getNextAppointmentNumber() {
-  let lastNo = localStorage.getItem("lastApptNo") || "0";
-  let nextNo = parseInt(lastNo)+1;
-  localStorage.setItem("lastApptNo", nextNo);
-  return "APMTWBNB"+String(nextNo).padStart(2,"0");
-}
-
-// ------------------- Visitor Form Submit -------------------
-document.getElementById("appointmentForm").addEventListener("submit", function(e){
+// Visitor form submit
+document.getElementById("visitorForm").addEventListener("submit", async function(e){
   e.preventDefault();
-  let name = document.getElementById("vname").value.trim();
-  let date = document.getElementById("vdate").value;
-  let time = document.getElementById("vtime").value;
-  let phone = document.getElementById("vphone").value.trim();
-  if(!name||!date||!time||!phone){ alert("Please fill mandatory fields"); return; }
-  
-  let apptNo = getNextAppointmentNumber();
-  visitors[apptNo]={
-    name:name,
-    address:document.getElementById("vaddress").value,
-    country:document.getElementById("vcountry").value,
-    dob:document.getElementById("vdob").value,
-    date:date,
-    time:time,
-    phone:document.getElementById("ccode").value+phone,
-    purpose:document.getElementById("vpurpose").value,
-    passport:document.getElementById("vpassport").value||"NA",
-    email:document.getElementById("vemail").value+document.getElementById("emaildomain").value,
-    status:"Pending",
-    chat:[]
+  const data = {
+    name: document.getElementById("name").value,
+    address: document.getElementById("address").value,
+    country: document.getElementById("country").value,
+    dob: document.getElementById("dob").value,
+    date: document.getElementById("date").value,
+    time: document.getElementById("time").value,
+    contact: document.getElementById("contact").value,
+    purpose: document.getElementById("purpose").value,
+    email: document.getElementById("email").value
   };
-  localStorage.setItem("visitors", JSON.stringify(visitors));
-  alert("Appointment sent successfully: "+apptNo);
-  document.getElementById("appointmentForm").reset();
+  try {
+    const res = await fetch(WEB_APP_URL, {
+      method:"POST",
+      body: JSON.stringify(data),
+      headers: { "Content-Type":"application/json" }
+    });
+    const result = await res.json();
+    if(result.success){
+      document.getElementById("formMessage").innerText = `Appointment submitted! Your No: ${result.appointmentNo}`;
+      this.reset();
+      loadAdminData();
+    } else {
+      document.getElementById("formMessage").innerText = "Error: " + result.error;
+    }
+  } catch(err){
+    document.getElementById("formMessage").innerText = "Failed to submit form";
+    console.error(err);
+  }
 });
 
-// ------------------- Check Visitor Status -------------------
-function checkStatus(){
-  let apptNo = document.getElementById("statusSearch").value.trim();
-  let resDiv = document.getElementById("statusResult");
-  if(!visitors[apptNo]){ resDiv.innerHTML="❌ No Appointment Found"; return; }
-  let v = visitors[apptNo];
-  let colorClass = v.status==="Accepted"?"green":v.status==="Rejected"?"red":"pink";
-  resDiv.innerHTML=`<strong>Appointment: ${apptNo}</strong> | Name: ${v.name} | Status: <span class="${colorClass}">${v.status}</span>`;
+// Load admin data
+async function loadAdminData(){
+  try{
+    const res = await fetch(WEB_APP_URL + "?action=all");
+    const result = await res.json();
+    const tbody = document.querySelector("#adminTable tbody");
+    tbody.innerHTML = "";
+    if(result.success && result.data){
+      result.data.forEach(row => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${row["Appointment No"]}</td>
+          <td>${row["Name"]}</td>
+          <td>${row["Address"]}</td>
+          <td>${row["Country"]}</td>
+          <td>${row["DOB"]}</td>
+          <td>${row["Date"]}</td>
+          <td>${row["Time"]}</td>
+          <td>${row["Contact"]}</td>
+          <td>${row["Purpose"]}</td>
+          <td>${row["Email"]}</td>
+          <td class="status-${row.Status.toLowerCase()}">${row.Status}</td>
+          <td>
+            <button onclick="updateStatus('${row['Appointment No']}','Accepted')">Accept</button>
+            <button onclick="updateStatus('${row['Appointment No']}','Rejected')">Reject</button>
+            <button onclick="updateStatus('${row['Appointment No']}','Pending')">Pending</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+  } catch(err){
+    console.error(err);
+  }
 }
 
-// ------------------- Admin -------------------
-function adminLogin(){
-  let u=document.getElementById("adminUser").value;
-  let p=document.getElementById("adminPass").value;
-  if(u==="admin"&&p==="1234"){ showSection("adminDashboard"); loadVisitorTable(); }
-  else{ alert("Invalid credentials"); }
-}
-function adminLogout(){ showSection("adminLogin"); }
-function loadVisitorTable(){
-  let tbody=document.querySelector("#visitorTable tbody");
-  tbody.innerHTML="";
-  Object.keys(visitors).forEach(apptNo=>{
-    let v=visitors[apptNo];
-    let colorClass=v.status==="Accepted"?"green":v.status==="Rejected"?"red":"pink";
-    let tr=document.createElement("tr");
-    tr.innerHTML=`
-      <td>${apptNo}</td>
-      <td>${v.name}</td>
-      <td>${v.date}</td>
-      <td>${v.time}</td>
-      <td>${v.phone}</td>
-      <td>${v.purpose}</td>
-      <td class="${colorClass}">${v.status}</td>
-      <td>
-        <button onclick="updateStatus('${apptNo}','Accepted')" class="btn green">Accept</button>
-        <button onclick="updateStatus('${apptNo}','Rejected')" class="btn red">Reject</button>
-      </td>`;
-    tbody.appendChild(tr);
-  });
-}
-function updateStatus(apptNo,status){
-  visitors[apptNo].status=status;
-  localStorage.setItem("visitors",JSON.stringify(visitors));
-  loadVisitorTable();
-  alert("Status updated for "+apptNo);
+// Update status
+async function updateStatus(apptNo, status){
+  try{
+    const res = await fetch(WEB_APP_URL, {
+      method:"POST",
+      body: JSON.stringify({appointmentNo: apptNo, status: status}),
+      headers: {"Content-Type":"application/json"}
+    });
+    const result = await res.json();
+    if(result.success){
+      loadAdminData();
+    } else {
+      alert("Error updating status: "+result.error);
+    }
+  } catch(err){
+    console.error(err);
+  }
 }
 
+// Initial load
+loadAdminData();
 </script>
-
 </body>
 </html>

@@ -3,44 +3,41 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Visitor Appointments - BNB</title>
+<title>Visitor Management System</title>
 <style>
-  body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f7f7f7; }
-  header { background:#0b6efa; color:white; padding:1rem; text-align:center; font-size:1.5rem; font-weight:bold; }
-  .container { max-width:900px; margin:2rem auto; padding:1rem; background:white; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.1); }
-  h2 { color:#0b6efa; }
-  input, select, textarea, button { width:100%; padding:0.5rem; margin:0.5rem 0; border-radius:4px; border:1px solid #ccc; }
-  button { cursor:pointer; background:#0b6efa; color:white; border:none; }
-  table { width:100%; border-collapse:collapse; margin-top:1rem; }
-  th, td { border:1px solid #ccc; padding:0.5rem; text-align:left; }
-  th { background:#0b6efa; color:white; }
-  .status-pending { color:#d9534f; font-weight:bold; }
-  .status-accepted { color:#28a745; font-weight:bold; }
-  .status-rejected { color:#ff66cc; font-weight:bold; }
+body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f5f5f5; }
+header { background: #0b3d91; color: white; padding: 1rem; display: flex; align-items: center; }
+header h1 { margin: 0; flex: 1; font-size: 1.5rem; }
+.container { padding: 1rem; max-width: 1000px; margin: auto; }
+form { background: white; padding: 1rem; border-radius: 8px; margin-bottom: 2rem; }
+form input, form select { width: 100%; padding: 0.5rem; margin: 0.5rem 0; }
+button { padding: 0.5rem 1rem; margin-top: 1rem; cursor: pointer; }
+table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; }
+th, td { padding: 0.5rem; border-bottom: 1px solid #ccc; text-align: left; }
+.status-pending { background: pink; color: black; font-weight: bold; }
+.status-accepted { background: lightgreen; color: black; font-weight: bold; }
+.status-rejected { background: red; color: white; font-weight: bold; }
 </style>
 </head>
 <body>
-
-<header>BNB Visitor Appointment System</header>
-
+<header>
+  <h1>Visitor Management System</h1>
+</header>
 <div class="container">
-  <h2>Visitor Submission Form</h2>
+  <h2>Visitor Form</h2>
   <form id="visitorForm">
-    <input type="text" id="name" placeholder="Full Name" required>
+    <input type="text" id="name" placeholder="Visitor Name" required>
     <input type="text" id="address" placeholder="Address" required>
     <input type="text" id="country" placeholder="Country" required>
     <input type="date" id="dob" placeholder="Date of Birth" required>
     <input type="date" id="date" placeholder="Visit Date" required>
     <input type="time" id="time" placeholder="Visit Time" required>
     <input type="text" id="contact" placeholder="Contact Number" required>
-    <input type="text" id="purpose" placeholder="Purpose of Visit" required>
+    <input type="text" id="purpose" placeholder="Purpose" required>
     <input type="email" id="email" placeholder="Email" required>
-    <button type="submit">Submit Appointment</button>
+    <button type="submit">Submit</button>
   </form>
-  <p id="formMessage"></p>
-</div>
 
-<div class="container">
   <h2>Admin Dashboard</h2>
   <table id="adminTable">
     <thead>
@@ -56,7 +53,7 @@
         <th>Purpose</th>
         <th>Email</th>
         <th>Status</th>
-        <th>Actions</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody></tbody>
@@ -66,10 +63,13 @@
 <script>
 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyU-aycefMRE9htioaZ5RrTFMus7n89PNl6NiXwRmeSuitwiePk0qxsuCQkwLKKTI6i/exec";
 
-// Visitor form submit
-document.getElementById("visitorForm").addEventListener("submit", async function(e){
+const visitorForm = document.getElementById("visitorForm");
+const adminTableBody = document.querySelector("#adminTable tbody");
+
+// Submit visitor form
+visitorForm.addEventListener("submit", async (e) => {
   e.preventDefault();
-  const data = {
+  const formData = {
     name: document.getElementById("name").value,
     address: document.getElementById("address").value,
     country: document.getElementById("country").value,
@@ -82,76 +82,75 @@ document.getElementById("visitorForm").addEventListener("submit", async function
   };
   try {
     const res = await fetch(WEB_APP_URL, {
-      method:"POST",
-      body: JSON.stringify(data),
-      headers: { "Content-Type":"application/json" }
+      method: "POST",
+      body: JSON.stringify(formData),
+      headers: { "Content-Type": "application/json" }
     });
-    const result = await res.json();
-    if(result.success){
-      document.getElementById("formMessage").innerText = `Appointment submitted! Your No: ${result.appointmentNo}`;
-      this.reset();
+    const data = await res.json();
+    if(data.success) {
+      alert("Form submitted! Appointment No: " + data.appointmentNo);
+      visitorForm.reset();
       loadAdminData();
     } else {
-      document.getElementById("formMessage").innerText = "Error: " + result.error;
+      alert("Error: " + data.error);
     }
-  } catch(err){
-    document.getElementById("formMessage").innerText = "Failed to submit form";
-    console.error(err);
+  } catch(err) {
+    alert("Failed to submit: " + err.message);
   }
 });
 
-// Load admin data
-async function loadAdminData(){
-  try{
+// Load admin table
+async function loadAdminData() {
+  try {
     const res = await fetch(WEB_APP_URL + "?action=all");
-    const result = await res.json();
-    const tbody = document.querySelector("#adminTable tbody");
-    tbody.innerHTML = "";
-    if(result.success && result.data){
-      result.data.forEach(row => {
+    const data = await res.json();
+    if(data.success) {
+      adminTableBody.innerHTML = "";
+      data.data.forEach(record => {
         const tr = document.createElement("tr");
         tr.innerHTML = `
-          <td>${row["Appointment No"]}</td>
-          <td>${row["Name"]}</td>
-          <td>${row["Address"]}</td>
-          <td>${row["Country"]}</td>
-          <td>${row["DOB"]}</td>
-          <td>${row["Date"]}</td>
-          <td>${row["Time"]}</td>
-          <td>${row["Contact"]}</td>
-          <td>${row["Purpose"]}</td>
-          <td>${row["Email"]}</td>
-          <td class="status-${row.Status.toLowerCase()}">${row.Status}</td>
+          <td>${record['Appointment No']}</td>
+          <td>${record['Name']}</td>
+          <td>${record['Address']}</td>
+          <td>${record['Country']}</td>
+          <td>${record['DOB']}</td>
+          <td>${record['Date']}</td>
+          <td>${record['Time']}</td>
+          <td>${record['Contact']}</td>
+          <td>${record['Purpose']}</td>
+          <td>${record['Email']}</td>
+          <td class="${record['Status'] === 'Pending' ? 'status-pending' : record['Status'] === 'Accepted' ? 'status-accepted' : 'status-rejected'}">${record['Status']}</td>
           <td>
-            <button onclick="updateStatus('${row['Appointment No']}','Accepted')">Accept</button>
-            <button onclick="updateStatus('${row['Appointment No']}','Rejected')">Reject</button>
-            <button onclick="updateStatus('${row['Appointment No']}','Pending')">Pending</button>
+            <button onclick="updateStatus('${record['Appointment No']}', 'Accepted')">Accept</button>
+            <button onclick="updateStatus('${record['Appointment No']}', 'Rejected')">Reject</button>
+            <button onclick="updateStatus('${record['Appointment No']}', 'Pending')">Pending</button>
           </td>
         `;
-        tbody.appendChild(tr);
+        adminTableBody.appendChild(tr);
       });
     }
-  } catch(err){
-    console.error(err);
+  } catch(err) {
+    console.error("Failed to load admin data:", err);
   }
 }
 
 // Update status
-async function updateStatus(apptNo, status){
-  try{
+async function updateStatus(appointmentNo, status) {
+  try {
     const res = await fetch(WEB_APP_URL, {
-      method:"POST",
-      body: JSON.stringify({appointmentNo: apptNo, status: status}),
-      headers: {"Content-Type":"application/json"}
+      method: "POST",
+      body: JSON.stringify({ appointmentNo, status }),
+      headers: { "Content-Type": "application/json" }
     });
-    const result = await res.json();
-    if(result.success){
+    const data = await res.json();
+    if(data.success) {
+      alert("Status updated!");
       loadAdminData();
     } else {
-      alert("Error updating status: "+result.error);
+      alert("Error updating status: " + data.error);
     }
-  } catch(err){
-    console.error(err);
+  } catch(err) {
+    alert("Failed to update status: " + err.message);
   }
 }
 

@@ -2,251 +2,170 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>INDIA BADSAH</title>
+  <title>Visitor Appointment System</title>
   <style>
-    body { margin:0; font-family: Arial, sans-serif; background:linear-gradient(to right,#1a2a6c,#b21f1f,#fdbb2d); color:white; line-height:1.6; }
-    header { text-align:center; padding:20px; background:rgba(0,0,0,0.6); }
-    header img { width:180px; height:180px; object-fit:cover; border-radius:50%; border:5px solid #fff; transition: transform 0.4s; }
-    header img:hover { transform: scale(1.05) rotate(2deg); }
-    header h1 { margin:15px 0 0; font-size:2.5em; color:#fbd46d; text-shadow:2px 2px 5px black; }
-    nav { display:flex; justify-content:center; background:rgba(0,0,0,0.8); flex-wrap:wrap; align-items:center; }
-    nav a { color:white; text-decoration:none; padding:10px 15px; display:block; transition:background 0.3s,color 0.3s; cursor:pointer; }
-    nav a:hover { background:#fbd46d; color:black; border-radius:5px; }
-    #statusSearch { margin-left:10px; padding:5px; border-radius:5px; border:none; }
-    #statusResult { margin-left:10px; }
-    section { padding:40px 20px; max-width:900px; margin:auto; background:rgba(255,255,255,0.1); margin-bottom:30px; border-radius:12px; box-shadow:0px 4px 15px rgba(0,0,0,0.5); }
-    section h2 { color:#ffe66d; margin-bottom:15px; }
-    .form-box { background:rgba(0,0,0,0.7); padding:20px; border-radius:12px; color:white; max-width:500px; margin:auto; }
-    .form-box label { display:block; margin-bottom:10px; }
-    .form-box input, .form-box select { width:100%; padding:5px; margin-top:3px; border-radius:5px; border:none; }
-    .btn { background:#fbd46d; color:black; padding:8px 12px; border:none; border-radius:5px; cursor:pointer; margin-top:10px; }
-    .btn:hover { background:white; }
-    table { width:100%; border-collapse:collapse; color:black; background:white; margin-top:20px; }
-    table, th, td { border:1px solid #000; }
-    th, td { padding:8px; text-align:center; }
-    .green { background:#28a745; color:white; }
-    .red { background:#dc3545; color:white; }
-    .pink { background:#ff69b4; color:white; }
-    .hidden { display:none; }
-    @media (max-width: 600px) {
-      .form-box input, .form-box select, .form-box button { width:100% !important; font-size:16px; margin-top:5px; }
-      nav { flex-direction: column; align-items: flex-start; }
-      #statusSearch { width:90%; margin:10px; }
+    body { font-family: Arial, sans-serif; margin: 20px; background: #f4f4f4; }
+    h2 { color: #333; }
+    form, .admin, .status-check {
+      background: #fff; padding: 20px; margin: 20px 0; border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
+    input, select, textarea {
+      width: 100%; padding: 8px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px;
+    }
+    button {
+      background: #007BFF; color: #fff; padding: 10px 15px;
+      border: none; border-radius: 4px; cursor: pointer;
+    }
+    button:hover { background: #0056b3; }
+    table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+    table, th, td { border: 1px solid #ddd; }
+    th, td { padding: 8px; text-align: left; }
   </style>
 </head>
 <body>
 
-<header>
-  <img src="myphoto.jpg" alt="India Badsah Photo">
-  <h1>INDIA BADSAH</h1>
-</header>
-
-<nav>
-  <a onclick="showSection('profile')">Profile</a>
-  <a onclick="showSection('education')">Education</a>
-  <a onclick="showSection('culture')">Culture</a>
-  <a onclick="showSection('achievements')">Achievements</a>
-  <a onclick="showSection('hobbies')">Hobbies</a>
-  <a onclick="showSection('interested')">Interested About</a>
-  <a onclick="showSection('thoughts')">Thoughts</a>
-  <a onclick="showSection('visitor')">Visitor Form</a>
-  <a onclick="showSection('adminLogin')">Admin Login</a>
-  <input type="text" id="statusSearch" placeholder="Visitor Status: Enter Appt No" onkeypress="if(event.key==='Enter'){checkStatus();}">
-</nav>
-<div id="statusResult"></div>
-
-<section id="profile"><h2>Profile</h2><p>I am INDIA BADSAH, a passionate learner and explorer.</p></section>
-<section id="education"><h2>Education</h2><p>Details here about education.</p></section>
-<section id="culture"><h2>Culture</h2><p>Your culture content here.</p></section>
-<section id="achievements"><h2>Achievements</h2><p>Your achievements here.</p></section>
-<section id="hobbies"><h2>Hobbies</h2><p>Your hobbies here.</p></section>
-<section id="interested"><h2>Interested About</h2><p>What you are interested in.</p></section>
-<section id="thoughts"><h2>Thoughts</h2><p>Your thoughts here.</p></section>
-
-<section id="visitor" class="hidden">
-  <h2>E_Appointment Visitor Form</h2>
-  <form id="appointmentForm" class="form-box">
-    <label>Visitor Name* <input type="text" id="vname" required></label>
-    <label>Visitor Address <input type="text" id="vaddress"></label>
-    <label>From Country <input type="text" id="vcountry"></label>
-    <label>Date of Birth <input type="date" id="vdob"></label>
-    <label>Virtual Visit Date* <input type="date" id="vdate" required></label>
-    <label>Time Availability* <input type="time" id="vtime" required></label>
-    <label>Contact Number* <input type="tel" id="vphone" required></label>
-    <label>Purpose of Visit
-      <select id="vpurpose">
-        <option value="Visit Abroad">Visit Abroad</option>
-        <option value="Student Visa in Abroad">Student Visa in Abroad</option>
-        <option value="Job in Abroad">Job in Abroad</option>
-        <option value="Education system in Abroad">Education system in Abroad</option>
-      </select>
-    </label>
-    <label>Email ID <input type="email" id="vemail"></label>
-    <button type="submit" class="btn">Submit</button>
+  <h2>Visitor Appointment Form</h2>
+  <form id="visitorForm">
+    <input type="text" name="name" placeholder="Full Name" required>
+    <input type="text" name="address" placeholder="Address" required>
+    <input type="text" name="country" placeholder="Country" required>
+    <input type="date" name="dob" required>
+    <input type="date" name="date" required>
+    <input type="time" name="time" required>
+    <input type="text" name="contact" placeholder="Contact Number" required>
+    <textarea name="purpose" placeholder="Purpose of Visit" required></textarea>
+    <input type="email" name="email" placeholder="Email" required>
+    <button type="submit">Submit</button>
   </form>
-</section>
 
-<section id="adminLogin" class="hidden">
-  <h2>Admin Login</h2>
-  <div class="form-box">
-    <label>Username <input type="text" id="adminUser"></label>
-    <label>Password <input type="password" id="adminPass"></label>
-    <button onclick="adminLogin()" class="btn">Login</button>
+  <div id="formMessage"></div>
+
+  <div class="status-check">
+    <h2>Check Appointment Status</h2>
+    <input type="text" id="apptNo" placeholder="Enter Appointment No">
+    <button onclick="checkStatus()">Check Status</button>
+    <div id="statusResult"></div>
   </div>
-</section>
 
-<section id="adminDashboard" class="hidden">
-  <h2>Admin Dashboard</h2>
-  <button onclick="adminLogout()" class="btn">Logout</button>
-  <table id="visitorTable">
-    <thead><tr>
-      <th>Appt No</th><th>Name</th><th>Date</th><th>Time</th><th>Contact</th><th>Purpose</th><th>Status</th><th>Action</th>
-    </tr></thead>
-    <tbody></tbody>
-  </table>
-</section>
-
-<footer>
-  <p>© 2025 INDIA BADSAH | Personal Biography Website</p>
-</footer>
+  <div class="admin">
+    <h2>Admin Login</h2>
+    <input type="text" id="adminUser" placeholder="Username">
+    <input type="password" id="adminPass" placeholder="Password">
+    <button onclick="adminLogin()">Login</button>
+    <div id="adminSection" style="display:none;">
+      <h3>Visitor Records</h3>
+      <table id="visitorTable">
+        <thead>
+          <tr>
+            <th>Appt No</th><th>Name</th><th>Date</th><th>Time</th>
+            <th>Contact</th><th>Email</th><th>Status</th><th>Action</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
 
 <script>
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw3pUVT75NCqxWEQAv2W-UoMKuQOd8fbaETnfncs7GrgPISVeNyT1OMJFT6YgO3Zst0Qw/exec";
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxY8lDl3BXUtY3_kuRT-rC4JbRJvPQU5pusYgU-xCPb0JKgkspEVSWojq79PXnhxy8QNA/exec";
 
-// Utility: show section
-function showSection(id){
-  document.querySelectorAll("section").forEach(s=>s.classList.add("hidden"));
-  document.getElementById(id).classList.remove("hidden");
-}
-
-// Visitor form submit
-document.getElementById("appointmentForm").addEventListener("submit", async function(e){
+// ---- Submit visitor form ----
+document.getElementById("visitorForm").addEventListener("submit", e => {
   e.preventDefault();
-  let formData = {
-    name: document.getElementById("vname").value.trim(),
-    address: document.getElementById("vaddress").value.trim(),
-    country: document.getElementById("vcountry").value.trim(),
-    dob: document.getElementById("vdob").value,
-    date: document.getElementById("vdate").value,
-    time: document.getElementById("vtime").value,
-    contact: document.getElementById("vphone").value.trim(),
-    purpose: document.getElementById("vpurpose").value,
-    email: document.getElementById("vemail").value.trim()
-  };
-  try {
-    let resp = await fetch(WEB_APP_URL, {
-      method: "POST",
-      body: JSON.stringify(formData),
-      headers: { "Content-Type": "application/json" }
-    });
-    let result = await resp.json();
-    if(result.success){
-      alert("Appointment submitted! Your No: " + result.appointmentNo);
-      document.getElementById("appointmentForm").reset();
+  const formData = Object.fromEntries(new FormData(e.target).entries());
+  fetch(WEB_APP_URL, {
+    method: "POST",
+    body: JSON.stringify(formData),
+    headers: { "Content-Type": "application/json" }
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      document.getElementById("formMessage").innerText =
+        "✅ Appointment submitted. Your No: " + data.appointmentNo;
+      e.target.reset();
     } else {
-      alert("Error: " + result.error);
+      document.getElementById("formMessage").innerText = "❌ " + data.error;
     }
-  } catch(err) {
-    alert("Error submitting form: " + err);
-  }
+  })
+  .catch(() => {
+    document.getElementById("formMessage").innerText = "❌ Failed to submit.";
+  });
 });
 
-// Check visitor status
-async function checkStatus(){
-  let apptNo = document.getElementById("statusSearch").value.trim();
-  if(!apptNo){
-    alert("Enter appointment number");
-    return;
-  }
-  try {
-    let resp = await fetch(WEB_APP_URL + "?action=status&apptNo=" + encodeURIComponent(apptNo));
-    let data = await resp.json();
-    if(data.success && data.record){
-      let v = data.record;
-      let color = v.Status === "Accepted" ? "green" : v.Status === "Rejected" ? "red" : "pink";
-      document.getElementById("statusResult").innerHTML = `
-        <div style="padding:15px;background:white;color:black;border-radius:8px;">
-          <p><strong>Appt No:</strong> ${apptNo}</p>
-          <p><strong>Name:</strong> ${v.Name}</p>
-          <p><strong>Status:</strong> <button class="${color}">${v.Status}</button></p>
-        </div>`;
+// ---- Check appointment status ----
+function checkStatus() {
+  const apptNo = document.getElementById("apptNo").value;
+  fetch(`${WEB_APP_URL}?action=status&apptNo=${encodeURIComponent(apptNo)}`)
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      document.getElementById("statusResult").innerText =
+        "Status: " + data.record.Status;
     } else {
-      document.getElementById("statusResult").innerHTML = "❌ Appointment not found";
+      document.getElementById("statusResult").innerText = "❌ " + data.error;
     }
-  } catch(err){
-    alert("Error fetching status: " + err);
-  }
+  })
+  .catch(() => {
+    document.getElementById("statusResult").innerText = "❌ Failed to fetch.";
+  });
 }
 
-// Admin login & dashboard
-async function adminLogin(){
-  let u = document.getElementById("adminUser").value;
-  let p = document.getElementById("adminPass").value;
-  if(u === "admin" && p === "admin"){
-    showSection("adminDashboard");
-    await loadAdminTable();
+// ---- Admin login ----
+function adminLogin() {
+  const u = document.getElementById("adminUser").value;
+  const p = document.getElementById("adminPass").value;
+  if (u === "admin" && p === "admin") {
+    document.getElementById("adminSection").style.display = "block";
+    loadVisitors();
   } else {
-    alert("Invalid Credentials");
+    alert("Invalid credentials");
   }
 }
-function adminLogout(){
-  showSection("profile");
-}
 
-// Load admin table
-async function loadAdminTable(){
-  try {
-    let resp = await fetch(WEB_APP_URL + "?action=all");
-    let data = await resp.json();
-    if(data.success){
-      let rows = data.data; // array of records
-      let tbody = document.querySelector("#visitorTable tbody");
+// ---- Load all visitors ----
+function loadVisitors() {
+  fetch(`${WEB_APP_URL}?action=all`)
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      const tbody = document.querySelector("#visitorTable tbody");
       tbody.innerHTML = "";
-      rows.forEach(record => {
-        let colorClass = record.Status === "Accepted" ? "green" : record.Status === "Rejected" ? "red" : "pink";
-        let tr = document.createElement("tr");
+      data.data.forEach(row => {
+        const tr = document.createElement("tr");
         tr.innerHTML = `
-          <td>${record["Appointment No"]}</td>
-          <td>${record["Name"]}</td>
-          <td>${record["Date"]}</td>
-          <td>${record["Time"]}</td>
-          <td>${record["Contact"]}</td>
-          <td>${record["Purpose"]}</td>
-          <td><button class="${colorClass}">${record["Status"]}</button></td>
+          <td>${row.AppointmentNo}</td>
+          <td>${row.Name}</td>
+          <td>${row.Date}</td>
+          <td>${row.Time}</td>
+          <td>${row.Contact}</td>
+          <td>${row.Email}</td>
+          <td>${row.Status}</td>
           <td>
-            <button onclick="updateStatus('${record["Appointment No"]}', 'Accepted')" ${record["Status"] !== "Pending" ? "disabled" : ""}>Accept</button>
-            <button onclick="updateStatus('${record["Appointment No"]}', 'Rejected')" ${record["Status"] !== "Pending" ? "disabled" : ""}>Reject</button>
+            <button onclick="updateStatus('${row.AppointmentNo}','Accepted')">Accept</button>
+            <button onclick="updateStatus('${row.AppointmentNo}','Rejected')">Reject</button>
           </td>`;
         tbody.appendChild(tr);
       });
-    } else {
-      alert("Error loading data: " + data.error);
     }
-  } catch(err){
-    alert("Error loading table: " + err);
-  }
+  });
 }
 
-// Update status by admin
-async function updateStatus(apptNo, newStatus){
-  try {
-    let resp = await fetch(WEB_APP_URL, {
-      method: "POST",
-      body: JSON.stringify({ appointmentNo: apptNo, status: newStatus }),
-      headers: { "Content-Type": "application/json" }
-    });
-    let result = await resp.json();
-    if(result.success){
-      await loadAdminTable();
-    } else {
-      alert("Error updating status: " + result.error);
-    }
-  } catch(err){
-    alert("Error updating status: " + err);
-  }
+// ---- Update visitor status ----
+function updateStatus(apptNo, status) {
+  fetch(WEB_APP_URL, {
+    method: "POST",
+    body: JSON.stringify({ appointmentNo: apptNo, status: status }),
+    headers: { "Content-Type": "application/json" }
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) loadVisitors();
+    else alert("Error: " + data.error);
+  });
 }
 </script>
+
 </body>
 </html>

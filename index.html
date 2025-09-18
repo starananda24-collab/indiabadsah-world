@@ -29,12 +29,7 @@ th, td{padding:8px;text-align:center;}
 .red{background:#dc3545;color:white;}
 .pink{background:#ff69b4;color:white;}
 .yellow{background:#ffc107;color:white;}
-.grey{background:#6c757d;color:white;}
-.deep-green{background:#196619;color:white;}
-.deep-red{background:#8b0000;color:white;}
 .hidden{display:none;}
-
-/* Mobile Support */
 @media (max-width: 600px) {
   .form-box input, .form-box select, .form-box button {width:100% !important; font-size:16px; margin-top:5px;}
   nav {flex-direction: column; align-items: flex-start;}
@@ -143,6 +138,12 @@ th, td{padding:8px;text-align:center;}
 
 <footer>
   <p>© 2025 INDIA BADSAH | Personal Biography Website</p>
+  <div id="socialLinks" style="margin-top:10px;text-align:center;">
+    <a href="https://www.linkedin.com/in/YOUR_LINK" target="_blank"><img src="linkedin-icon.png" style="width:35px;height:35px;margin:0 8px;"></a>
+    <a href="https://www.facebook.com/YOUR_LINK" target="_blank"><img src="facebook-icon.png" style="width:35px;height:35px;margin:0 8px;"></a>
+    <a href="https://wa.me/YOUR_PHONE_NUMBER" target="_blank"><img src="whatsapp-icon.png" style="width:35px;height:35px;margin:0 8px;"></a>
+    <a href="mailto:YOUR_EMAIL@example.com"><img src="email-icon.png" style="width:35px;height:35px;margin:0 8px;"></a>
+  </div>
 </footer>
 
 <script>
@@ -152,121 +153,97 @@ function showSection(id){
   document.getElementById(id).classList.remove("hidden");
 }
 
-// ------------------- Global Variables -------------------
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyN6p6HwR77BPsocKActnhniMLrvbZjHWZIXN1ppDsiSsN-nzzC3bSEWR102Gwyw2tqXQ/exec";
-let visitors = {}; // will load from Google Sheet
-
-// ------------------- Load Visitors from Google Sheet -------------------
-async function loadVisitors(){
-  try{
-    const response = await fetch(WEB_APP_URL+"?action=getAll");
-    visitors = await response.json();
-    renderTable();
-  }catch(e){
-    console.log("Error loading visitors",e);
-  }
-}
-
-// ------------------- Generate Unique Appointment Number -------------------
-function getNextAppointmentNumber(){
-  let maxNo=0;
-  Object.keys(visitors).forEach(a=>{
-    let n = parseInt(a.replace("APMTWBNB",""));
-    if(n>maxNo) maxNo=n;
-  });
-  return "APMTWBNB"+String(maxNo+1).padStart(2,"0");
-}
+// ------------------- Web App URL -------------------
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyRT3jYHkjRUx5A5PRSebrVxCf8RD_bs0pV3XQKKnaj9eMxAna5ThJ5LCzLBIl0OhTuqg/exec";
 
 // ------------------- Visitor Form Submit -------------------
-document.getElementById("appointmentForm").addEventListener("submit",async function(e){
+document.getElementById("appointmentForm").addEventListener("submit", async function(e){
   e.preventDefault();
-  let name=document.getElementById("vname").value.trim();
-  let date=document.getElementById("vdate").value;
-  let time=document.getElementById("vtime").value;
-  let phone=document.getElementById("vphone").value.trim();
-  if(!name || !date || !time || !phone){ alert("Please fill mandatory fields"); return; }
-
-  let apptNo = getNextAppointmentNumber();
-
-  let data={
-    apptNo,
-    name,
-    date,
-    time,
-    phone:document.getElementById("ccode").value + phone,
-    address:document.getElementById("vaddress").value,
-    country:document.getElementById("vcountry").value,
-    dob:document.getElementById("vdob").value,
-    purpose:document.getElementById("vpurpose").value,
-    passport:document.getElementById("vpassport").value||"NA",
-    email:document.getElementById("vemail").value+document.getElementById("emaildomain").value,
-    status:"Pending",
-    submitted:new Date().toLocaleString(),
-    chat:[]
+  let data = {
+    name: document.getElementById("vname").value.trim(),
+    address: document.getElementById("vaddress").value.trim(),
+    country: document.getElementById("vcountry").value.trim(),
+    dob: document.getElementById("vdob").value,
+    date: document.getElementById("vdate").value,
+    time: document.getElementById("vtime").value,
+    phone: document.getElementById("ccode").value + document.getElementById("vphone").value.trim(),
+    purpose: document.getElementById("vpurpose").value,
+    passport: document.getElementById("vpassport").value,
+    email: document.getElementById("vemail").value + document.getElementById("emaildomain").value
   };
-
-  // Send to Web App to store in Google Sheet
-  try{
-    await fetch(WEB_APP_URL+"?action=add",{
+  try {
+    let resp = await fetch(WEB_APP_URL+"?action=submit", {
       method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify(data)
+      body: JSON.stringify(data),
+      headers: {"Content-Type":"application/json"}
     });
-    alert("Appointment sent successfully: "+apptNo);
+    let result = await resp.text();
+    alert(result);
     document.getElementById("appointmentForm").reset();
-    await loadVisitors();
-  }catch(e){ alert("Error submitting form"); console.log(e);}
+  } catch(err){
+    alert("Error submitting form: "+err);
+  }
 });
 
-// ------------------- Admin Functions -------------------
+// ------------------- Visitor Status Check -------------------
+function checkStatus(){
+  let apptNo = document.getElementById("statusSearch").value.trim();
+  if(!apptNo){ alert("Enter Appointment No"); return; }
+  fetch(WEB_APP_URL+"?action=status&apptNo="+apptNo)
+    .then(r=>r.json())
+    .then(v=>{
+      if(!v.name){ alert("Appointment Not Found"); return; }
+      let resDiv = document.getElementById("statusResult");
+      let colorClass = "pink";
+      if(v.status==="Accepted") colorClass="green";
+      else if(v.status==="Rejected") colorClass="red";
+      resDiv.innerHTML = `<div style="padding:15px;border-radius:8px;background:white;color:black;">
+        <p><strong>Appt No:</strong> ${v.apptNo}</p>
+        <p><strong>Name:</strong> ${v.name}</p>
+        <p><strong>Date:</strong> ${v.date}</p>
+        <p><strong>Time:</strong> ${v.time}</p>
+        <p><strong>Phone:</strong> ${v.phone}</p>
+        <p><strong>Purpose:</strong> ${v.purpose}</p>
+        <p><strong>Status:</strong> <button class="${colorClass}">${v.status}</button></p>
+      </div>`;
+    });
+}
+
+// ------------------- Admin Login -------------------
 function adminLogin(){
-  let u=document.getElementById("adminUser").value;
-  let p=document.getElementById("adminPass").value;
-  if(u==="admin" && p==="admin"){ showSection("adminDashboard"); loadVisitors(); }
+  let u = document.getElementById("adminUser").value;
+  let p = document.getElementById("adminPass").value;
+  if(u==="admin" && p==="admin"){ showSection("adminDashboard"); loadAdminTable(); }
   else alert("Invalid Credentials");
 }
 function adminLogout(){ showSection("profile"); }
 
-function renderTable(){
+// ------------------- Admin Table -------------------
+async function loadAdminTable(){
   let tbody=document.querySelector("#visitorTable tbody");
   tbody.innerHTML="";
-  Object.keys(visitors).forEach(apptNo=>{
-    let v=visitors[apptNo];
-    let colorClass=v.status==="Accepted"?"green":v.status==="Rejected"?"red":"pink";
-    let row=document.createElement("tr");
-    row.innerHTML=`<td>${apptNo}</td><td>${v.name}</td><td>${v.date}</td><td>${v.time}</td><td>${v.phone}</td><td>${v.purpose}</td><td><button class="${colorClass}">${v.status}</button></td>
+  let resp = await fetch(WEB_APP_URL+"?action=list");
+  let visitors = await resp.json();
+  for(let apptNo in visitors){
+    let v = visitors[apptNo];
+    let colorClass="pink";
+    if(v.status==="Accepted") colorClass="green";
+    else if(v.status==="Rejected") colorClass="red";
+    let row = document.createElement("tr");
+    row.innerHTML=`<td>${apptNo}</td><td>${v.name}</td><td>${v.date}</td><td>${v.time}</td><td>${v.phone}</td><td>${v.purpose}</td>
+      <td><button class="${colorClass}">${v.status}</button></td>
       <td>
         <button onclick="updateStatus('${apptNo}','Accepted')" ${v.status!=="Pending"?'disabled':''}>Accept</button>
         <button onclick="updateStatus('${apptNo}','Rejected')" ${v.status!=="Pending"?'disabled':''}>Reject</button>
       </td>`;
     tbody.appendChild(row);
-  });
+  }
 }
 
-// Update status on Google Sheet
 async function updateStatus(apptNo,status){
-  try{
-    await fetch(WEB_APP_URL+"?action=update",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({apptNo,status})
-    });
-    await loadVisitors();
-  }catch(e){ alert("Error updating status"); console.log(e);}
+  await fetch(WEB_APP_URL+"?action=update&apptNo="+apptNo+"&status="+status);
+  loadAdminTable();
 }
-
-// ------------------- Check Visitor Status -------------------
-function checkStatus(){
-  let apptNo=document.getElementById("statusSearch").value.trim();
-  if(visitors[apptNo]){
-    let v=visitors[apptNo];
-    alert(`Status of ${apptNo}: ${v.status}`);
-  } else alert("❌ No Appointment Found");
-}
-
-// ------------------- Initial Load -------------------
-loadVisitors();
 </script>
-
 </body>
 </html>

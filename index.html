@@ -1,151 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Visitor Appointments</title>
-<style>
-  body { font-family: Arial, sans-serif; margin: 20px; }
-  h2 { margin-top: 30px; }
-  form { max-width: 500px; margin-bottom: 40px; }
-  label { display: block; margin-top: 10px; }
-  input, select { width: 100%; padding: 8px; margin-top: 4px; }
-  button { margin-top: 10px; padding: 10px 15px; cursor: pointer; }
-  table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-  th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
-  th { background-color: #f2f2f2; }
-  .status-Pending { background-color: pink; }
-  .status-Accepted { background-color: lightgreen; }
-  .status-Rejected { background-color: red; color: white; }
-</style>
+  <meta name="google-site-verification" content="1Ot9i9lyK2dI-pkJhqNMOhWEaCs2sLtynUPW9u4KtNQ" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>INDIA BADSAH</title>
+  <meta name="description" content="Personal biography website of INDIA BADSAH. Profile, education, culture, achievements, hobbies, and thoughts.">
+
+  <style>
+    /* General Style */
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d);
+      color: white;
+      line-height: 1.6;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.6);
+    }
+    header img {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 5px solid #fff;
+      transition: transform 0.4s;
+      max-width: 100%;
+    }
+    header img:hover {
+      transform: scale(1.05) rotate(2deg);
+    }
+    header h1 {
+      margin: 15px 0 0;
+      font-size: 2.5em;
+      color: #fbd46d;
+      text-shadow: 2px 2px 5px black;
+    }
+
+    /* Navigation */
+    nav {
+      display: flex;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.8);
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 15px 20px;
+      display: block;
+      transition: background 0.3s, color 0.3s;
+    }
+    nav a:hover, nav a.active {
+      background: #fbd46d;
+      color: black;
+      border-radius: 5px;
+    }
+
+    /* Sections */
+    section {
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.1);
+      margin-bottom: 30px;
+      border-radius: 12px;
+      box-shadow: 0px 4px 15px rgba(0,0,0,0.5);
+      transition: transform 0.3s;
+    }
+    section:hover {
+      transform: translateY(-5px);
+    }
+    section h2 {
+      color: #ffe66d;
+      margin-bottom: 15px;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.7);
+      color: #ccc;
+    }
+    footer a {
+      color: #fbd46d;
+      text-decoration: none;
+      margin: 0 10px;
+      transition: color 0.3s;
+    }
+    footer a:hover {
+      color: white;
+    }
+  </style>
 </head>
 <body>
 
-<h1>Visitor Appointments</h1>
+  <header>
+    <img src="myphoto.jpg" alt="India Badsah Photo">
+    <h1>INDIA BADSAH</h1>
+  </header>
 
-<h2>Submit Appointment</h2>
-<form id="visitorForm">
-  <label>Name:<input type="text" id="name" required></label>
-  <label>Address:<input type="text" id="address" required></label>
-  <label>Country:<input type="text" id="country" required></label>
-  <label>Date of Birth:<input type="date" id="dob" required></label>
-  <label>Visit Date:<input type="date" id="date" required></label>
-  <label>Visit Time:<input type="time" id="time" required></label>
-  <label>Contact:<input type="text" id="contact" required></label>
-  <label>Purpose:<input type="text" id="purpose" required></label>
-  <label>Email:<input type="email" id="email" required></label>
-  <button type="submit">Submit</button>
-</form>
+  <nav>
+    <a href="#profile">Profile</a>
+    <a href="#education">Education</a>
+    <a href="#culture">Culture</a>
+    <a href="#achievements">Achievements</a>
+    <a href="#hobbies">Hobbies</a>
+    <a href="#interested">Interested About</a>
+    <a href="#thoughts">Thoughts</a>
+  </nav>
 
-<h2>Admin Panel</h2>
-<table id="adminTable">
-  <thead>
-    <tr>
-      <th>Appointment No</th>
-      <th>Name</th>
-      <th>Address</th>
-      <th>Country</th>
-      <th>DOB</th>
-      <th>Date</th>
-      <th>Time</th>
-      <th>Contact</th>
-      <th>Purpose</th>
-      <th>Email</th>
-      <th>Status</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody></tbody>
-</table>
+  <section id="profile">
+    <h2>Profile</h2>
+    <p>I am INDIA BADSAH, a passionate learner and explorer of life’s endless opportunities. With strong roots and a clear vision, I always aim to inspire others while growing myself in every possible field.</p>
+  </section>
 
-<script>
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyU-aycefMRE9htioaZ5RrTFMus7n89PNl6NiXwRmeSuitwiePk0qxsuCQkwLKKTI6i/exec";
+  <section id="education">
+    <h2>Education</h2>
+    <p>I believe education is the foundation of growth. Over the years, I have gathered knowledge not only from books but also from real-life experiences, which shaped my way of thinking and problem-solving abilities.</p>
+  </section>
 
-// ---- Visitor Form Submission ----
-document.getElementById("visitorForm").addEventListener("submit", function(e){
-  e.preventDefault();
-  const formData = {
-    name: document.getElementById("name").value,
-    address: document.getElementById("address").value,
-    country: document.getElementById("country").value,
-    dob: document.getElementById("dob").value,
-    date: document.getElementById("date").value,
-    time: document.getElementById("time").value,
-    contact: document.getElementById("contact").value,
-    purpose: document.getElementById("purpose").value,
-    email: document.getElementById("email").value
-  };
-  fetch(WEB_APP_URL, {
-    method: 'POST',
-    body: JSON.stringify(formData)
-  })
-  .then(res => res.json())
-  .then(data => {
-    if(data.success){
-      alert("Appointment submitted: " + data.appointmentNo);
-      document.getElementById("visitorForm").reset();
-      loadAdminTable();
-    } else {
-      alert("Error: " + data.error);
-    }
-  })
-  .catch(err => alert("Failed to submit form: " + err));
-});
+  <section id="culture">
+    <h2>Culture</h2>
+    <p>Culture defines who we are. I embrace traditions, values, and respect for diversity while blending it with modern ideas to create a balanced lifestyle.</p>
+  </section>
 
-// ---- Load Admin Table ----
-function loadAdminTable(){
-  fetch(WEB_APP_URL + "?action=all")
-    .then(res => res.json())
-    .then(data => {
-      const tbody = document.querySelector("#adminTable tbody");
-      tbody.innerHTML = "";
-      if(data.success){
-        data.data.forEach(row => {
-          const tr = document.createElement("tr");
-          tr.innerHTML = `
-            <td>${row["Appointment No"]}</td>
-            <td>${row["Name"]}</td>
-            <td>${row["Address"]}</td>
-            <td>${row["Country"]}</td>
-            <td>${row["DOB"]}</td>
-            <td>${row["Date"]}</td>
-            <td>${row["Time"]}</td>
-            <td>${row["Contact"]}</td>
-            <td>${row["Purpose"]}</td>
-            <td>${row["Email"]}</td>
-            <td class="status-${row["Status"]}">${row["Status"]}</td>
-            <td>
-              <button onclick="updateStatus('${row['Appointment No']}','Accepted')">Accept</button>
-              <button onclick="updateStatus('${row['Appointment No']}','Rejected')">Reject</button>
-            </td>
-          `;
-          tbody.appendChild(tr);
-        });
-      }
+  <section id="achievements">
+    <h2>Achievements</h2>
+    <p>Every step of life is an achievement — from personal milestones to professional success. My journey reflects perseverance, hard work, and dedication.</p>
+  </section>
+
+  <section id="hobbies">
+    <h2>Hobbies</h2>
+    <p>I enjoy engaging in creative and recreational activities, whether it is sports, art, music, or technology. Hobbies give me balance and energy to face daily challenges.</p>
+  </section>
+
+  <section id="interested">
+    <h2>Interested About</h2>
+    <p>I am deeply interested in innovation, leadership, and cultural understanding. Exploring new ideas and connecting with people from all walks of life always excites me.</p>
+  </section>
+
+  <section id="thoughts">
+    <h2>Thoughts</h2>
+    <p>“Life is not about waiting for opportunities, it is about creating them.” My belief is simple: with determination and honesty, nothing is impossible.</p>
+  </section>
+
+  <footer>
+    <p>© 2025 INDIA BADSAH | Personal Biography Website</p>
+    <p>
+      <a href="https://facebook.com" target="_blank">Facebook</a> | 
+      <a href="https://instagram.com" target="_blank">Instagram</a> | 
+      <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+    </p>
+  </footer>
+
+  <script>
+    // Highlight active menu link on scroll
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll("nav a");
+
+    window.addEventListener("scroll", () => {
+      let current = "";
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 60;
+        if (pageYOffset >= sectionTop) {
+          current = section.getAttribute("id");
+        }
+      });
+      navLinks.forEach(link => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === "#" + current) {
+          link.classList.add("active");
+        }
+      });
     });
-}
-
-// ---- Update Status ----
-function updateStatus(apptNo, status){
-  fetch(WEB_APP_URL, {
-    method: 'POST',
-    body: JSON.stringify({ appointmentNo: apptNo, status: status })
-  })
-  .then(res => res.json())
-  .then(data => {
-    if(data.success){
-      alert("Status updated: " + status);
-      loadAdminTable();
-    } else {
-      alert("Error: " + data.error);
-    }
-  })
-  .catch(err => alert("Failed to update status: " + err));
-}
-
-// ---- Initial Load ----
-loadAdminTable();
-</script>
+  </script>
 
 </body>
 </html>

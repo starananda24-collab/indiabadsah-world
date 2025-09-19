@@ -1,18 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="google-site-verification" content="1Ot9i9lyK2dI-pkJhqNMOhWEaCs2sLtynUPW9u4KtNQ" />
+    <meta name="google-site-verification" content="1Ot9i9lyK2dI-pkJhqNMOhWEaCs2sLtynUPW9u4KtNQ" />
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>INDIA BADSAH</title>
-  <meta name="description" content="Personal biography website of INDIA BADSAH. Profile, education, culture, achievements, hobbies, and thoughts.">
-
   <style>
-    /* General Style */
-    html {
-      scroll-behavior: smooth;
-    }
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -20,8 +15,6 @@
       color: white;
       line-height: 1.6;
     }
-
-    /* Header */
     header {
       text-align: center;
       padding: 20px;
@@ -34,7 +27,6 @@
       border-radius: 50%;
       border: 5px solid #fff;
       transition: transform 0.4s;
-      max-width: 100%;
     }
     header img:hover {
       transform: scale(1.05) rotate(2deg);
@@ -45,16 +37,11 @@
       color: #fbd46d;
       text-shadow: 2px 2px 5px black;
     }
-
-    /* Navigation */
     nav {
       display: flex;
       justify-content: center;
       background: rgba(0, 0, 0, 0.8);
       flex-wrap: wrap;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
     }
     nav a {
       color: white;
@@ -63,13 +50,11 @@
       display: block;
       transition: background 0.3s, color 0.3s;
     }
-    nav a:hover, nav a.active {
+    nav a:hover {
       background: #fbd46d;
       color: black;
       border-radius: 5px;
     }
-
-    /* Sections */
     section {
       padding: 40px 20px;
       max-width: 900px;
@@ -87,8 +72,6 @@
       color: #ffe66d;
       margin-bottom: 15px;
     }
-
-    /* Footer */
     footer {
       text-align: center;
       padding: 20px;
@@ -97,12 +80,7 @@
     }
     footer a {
       color: #fbd46d;
-      text-decoration: none;
-      margin: 0 10px;
-      transition: color 0.3s;
-    }
-    footer a:hover {
-      color: white;
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -160,34 +138,8 @@
 
   <footer>
     <p>© 2025 INDIA BADSAH | Personal Biography Website</p>
-    <p>
-      <a href="https://facebook.com" target="_blank">Facebook</a> | 
-      <a href="https://instagram.com" target="_blank">Instagram</a> | 
-      <a href="https://linkedin.com" target="_blank">LinkedIn</a>
-    </p>
+    <p><a href="admin.html">Admin Login</a></p>
   </footer>
-
-  <script>
-    // Highlight active menu link on scroll
-    const sections = document.querySelectorAll("section");
-    const navLinks = document.querySelectorAll("nav a");
-
-    window.addEventListener("scroll", () => {
-      let current = "";
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop - 60;
-        if (pageYOffset >= sectionTop) {
-          current = section.getAttribute("id");
-        }
-      });
-      navLinks.forEach(link => {
-        link.classList.remove("active");
-        if (link.getAttribute("href") === "#" + current) {
-          link.classList.add("active");
-        }
-      });
-    });
-  </script>
 
 </body>
 </html>

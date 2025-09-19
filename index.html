@@ -144,56 +144,59 @@
     <p><a href="admin.html">Admin Login</a></p>
   </footer>
 
-  <!-- Visitor Form Modal -->
-  <div id="visitorModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); justify-content:center; align-items:center;">
-    <div style="background:white; color:black; padding:20px; border-radius:10px; width:400px; max-width:90%; position:relative;">
-      <span id="closeModal" style="position:absolute; top:10px; right:15px; cursor:pointer; font-weight:bold;">&times;</span>
-      <h2>Visitor Form</h2>
+  <!-- ========================= -->
+  <!-- Updated Visitor Form Modal -->
+  <!-- ========================= -->
+  <div id="visitorModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); justify-content:center; align-items:center; overflow:auto; padding:20px; z-index:9999;">
+    <div style="background:#222236; color:white; padding:25px; border-radius:15px; width:480px; max-width:95%; position:relative; box-shadow:0 0 25px rgba(0,0,0,0.8);">
+      <span id="closeModal" style="position:absolute; top:10px; right:15px; cursor:pointer; font-weight:bold; color:#fbd46d; font-size:24px;">&times;</span>
+      <h2 style="color:#fbd46d; text-align:center; margin-bottom:20px;">Visitor Form</h2>
       <form id="visitorForm">
         <label>Visitor Name*</label><br>
-        <input type="text" id="visitorName" required><br><br>
+        <input type="text" id="visitorName" required style="width:100%; padding:10px; border-radius:6px; border:none; margin-bottom:10px;"><br>
 
         <label>Visitor DOB (dd/mm/yyyy)*</label><br>
-        <input type="date" id="visitorDOB" required><br><br>
+        <input type="date" id="visitorDOB" required style="width:100%; padding:10px; border-radius:6px; border:none; margin-bottom:10px;"><br>
 
         <label>Father's Name</label><br>
-        <input type="text" id="fatherName"><br><br>
+        <input type="text" id="fatherName" style="width:100%; padding:10px; border-radius:6px; border:none; margin-bottom:10px;"><br>
 
         <label>Visitor Address</label><br>
-        <input type="text" id="visitorAddress"><br><br>
+        <input type="text" id="visitorAddress" style="width:100%; padding:10px; border-radius:6px; border:none; margin-bottom:10px;"><br>
 
         <label>From Country*</label><br>
-        <select id="visitorCountry" required>
+        <select id="visitorCountry" required style="width:100%; padding:10px; border-radius:6px; border:none; margin-bottom:10px;">
           <option value="">Select Country</option>
           <option value="IN">India</option>
           <option value="US">United States</option>
           <option value="UK">United Kingdom</option>
           <option value="AE">UAE</option>
-          <!-- Add more countries if needed -->
-        </select><br><br>
+        </select><br>
 
         <label>Visit Date*</label><br>
-        <input type="date" id="visitDate" required><br><br>
+        <input type="date" id="visitDate" required style="width:100%; padding:10px; border-radius:6px; border:none; margin-bottom:10px;"><br>
 
         <label>Visit Time*</label><br>
-        <input type="time" id="visitTime" required><br><br>
+        <input type="time" id="visitTime" required style="width:100%; padding:10px; border-radius:6px; border:none; margin-bottom:10px;"><br>
 
         <label>Contact Number*</label><br>
-        <input type="text" id="contactNumber" required><br><br>
+        <input type="text" id="contactNumber" required style="width:100%; padding:10px; border-radius:6px; border:none; margin-bottom:10px;"><br>
 
         <label>Passport Number</label><br>
-        <input type="text" id="passportNumber"><br><br>
+        <input type="text" id="passportNumber" style="width:100%; padding:10px; border-radius:6px; border:none; margin-bottom:10px;"><br>
 
         <label>Email*</label><br>
-        <input type="text" id="emailUser" placeholder="example" required>
-        <select id="emailDomain">
-          <option value="@gmail.com">@gmail.com</option>
-          <option value="@yahoo.com">@yahoo.com</option>
-        </select><br><br>
+        <div style="display:flex; gap:5px; margin-bottom:10px;">
+          <input type="text" id="emailUser" placeholder="example" required style="flex:1; padding:10px; border-radius:6px; border:none;">
+          <select id="emailDomain" style="flex:1; padding:10px; border-radius:6px; border:none;">
+            <option value="@gmail.com">@gmail.com</option>
+            <option value="@yahoo.com">@yahoo.com</option>
+          </select>
+        </div>
 
-        <button type="submit" style="background:#fbd46d; border:none; padding:10px 20px; border-radius:5px; cursor:pointer;">Submit</button>
+        <button type="submit" style="background:#fbd46d; border:none; padding:12px; border-radius:6px; cursor:pointer; width:100%; font-weight:bold;">Submit</button>
       </form>
-      <p id="visitorMessage" style="color:green;"></p>
+      <p id="visitorMessage" style="color:#4ce78a; text-align:center; margin-top:15px;"></p>
     </div>
   </div>
 

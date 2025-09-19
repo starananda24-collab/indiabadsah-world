@@ -5,76 +5,123 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Dashboard</title>
 <style>
-  body {
+body {
     margin:0;
     font-family: Arial, sans-serif;
     background: linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d);
-    color:white;
-  }
-  .header {
+    color: white;
+}
+header {
     background: rgba(0,0,0,0.7);
-    padding:20px;
-    text-align:center;
-  }
-  h1 { color:#fbd46d; }
-  .logout-btn {
-    position:absolute;
-    right:20px;
-    top:20px;
-    padding:8px 15px;
+    padding: 20px;
+    text-align: center;
+}
+header h1 {
+    margin:0;
+    font-size:2em;
+    color: #fbd46d;
+}
+button#logout {
+    padding: 10px 20px;
     border:none;
     border-radius:5px;
     background:#fbd46d;
+    color:black;
+    font-weight:bold;
     cursor:pointer;
-  }
-  .logout-btn:hover { background:#e5c14b; }
-  .content { padding:20px; max-width:1200px; margin:auto; }
-  table { width:100%; border-collapse: collapse; }
-  th, td { border:1px solid #fff; padding:10px; text-align:left; }
-  th { background: rgba(0,0,0,0.6); }
+    float:right;
+    margin-top:-40px;
+    margin-right:20px;
+}
+button#logout:hover {background:#ffe66d;}
+table {
+    width: 95%;
+    margin:20px auto;
+    border-collapse: collapse;
+    background: rgba(0,0,0,0.5);
+    border-radius: 10px;
+    overflow:hidden;
+}
+table th, table td {
+    padding: 10px;
+    border-bottom:1px solid #fff;
+    text-align:left;
+}
+table th {
+    background: rgba(255,255,255,0.2);
+}
 </style>
 </head>
 <body>
 
-<div class="header">
-  <h1>Admin Dashboard</h1>
-  <button class="logout-btn" id="logoutBtn">Logout</button>
-</div>
+<header>
+<h1>Admin Dashboard</h1>
+<button id="logout">Logout</button>
+</header>
 
-<div class="content">
-  <p>Here you can view all visitor appointments (integration with Google Sheet will display data).</p>
-  <!-- Table placeholder -->
-  <table id="visitorTable">
-    <tr>
-      <th>Appointment No</th>
-      <th>Name</th>
-      <th>DOB</th>
-      <th>Father Name</th>
-      <th>Address</th>
-      <th>Country</th>
-      <th>Date</th>
-      <th>Time</th>
-      <th>Contact</th>
-      <th>Passport</th>
-      <th>Email</th>
-    </tr>
-  </table>
-</div>
+<table id="visitorTable">
+<thead>
+<tr>
+<th>Appointment No</th>
+<th>Visitor Name</th>
+<th>DOB</th>
+<th>Father's Name</th>
+<th>Address</th>
+<th>Country</th>
+<th>Visit Date</th>
+<th>Visit Time</th>
+<th>Contact Number</th>
+<th>Passport</th>
+<th>Email</th>
+<th>Timestamp</th>
+</tr>
+</thead>
+<tbody>
+<tr><td colspan="12" style="text-align:center;">Loading...</td></tr>
+</tbody>
+</table>
 
 <script>
-// Check if admin is logged in
-if(sessionStorage.getItem('isAdmin') !== 'true'){
-  window.location.href = "admin.html"; // redirect to login if not logged in
-}
+// Logout button
+document.getElementById('logout').addEventListener('click', function(){
+    window.location.href = "index.html";
+});
 
-// Logout function
-document.getElementById('logoutBtn').onclick = function(){
-  sessionStorage.removeItem('isAdmin'); // clear session
-  window.location.href = "index.html"; // redirect to main website
-};
+// Fetch visitor data from Google Apps Script
+fetch('https://script.google.com/macros/s/AKfycbyTMQV6WISmi1Qu7ULbruAO3Sq7AJ-xnqzMskOivqLNRPhAgM6EZxeZNUB6qKgpif4G/exec')
+.then(res => res.json())
+.then(data => {
+    const tableBody = document.querySelector('#visitorTable tbody');
+    tableBody.innerHTML = ''; // clear loading
 
-// Fetch visitor data from Google Sheet (example)
-// You can integrate your fetch from web app here
+    if(data.length === 0){
+        tableBody.innerHTML = '<tr><td colspan="12" style="text-align:center;">No records found</td></tr>';
+        return;
+    }
+
+    data.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${row.apmtNo}</td>
+            <td>${row.visitorName}</td>
+            <td>${row.dob}</td>
+            <td>${row.fatherName}</td>
+            <td>${row.address}</td>
+            <td>${row.country}</td>
+            <td>${row.visitDate}</td>
+            <td>${row.visitTime}</td>
+            <td>${row.contactNumber}</td>
+            <td>${row.passport}</td>
+            <td>${row.email}</td>
+            <td>${row.timestamp}</td>
+        `;
+        tableBody.appendChild(tr);
+    });
+})
+.catch(err=>{
+    console.error(err);
+    document.querySelector('#visitorTable tbody').innerHTML='<tr><td colspan="12" style="text-align:center;color:red;">Error loading data</td></tr>';
+});
 </script>
 
 </body>

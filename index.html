@@ -82,6 +82,7 @@
       color: #fbd46d;
       text-decoration: underline;
     }
+    button { cursor:pointer; }
   </style>
 </head>
 <body>
@@ -104,6 +105,8 @@
   <section id="profile">
     <h2>Profile</h2>
     <p>I am INDIA BADSAH, a passionate learner and explorer of life’s endless opportunities. With strong roots and a clear vision, I always aim to inspire others while growing myself in every possible field.</p>
+    <!-- Visitor Form Button -->
+    <button id="openVisitorForm" style="padding:10px 20px; background:#fbd46d; border:none; border-radius:5px; cursor:pointer;">Visitor Form</button>
   </section>
 
   <section id="education">
@@ -140,6 +143,118 @@
     <p>© 2025 INDIA BADSAH | Personal Biography Website</p>
     <p><a href="admin.html">Admin Login</a></p>
   </footer>
+
+  <!-- Visitor Form Modal -->
+  <div id="visitorModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); justify-content:center; align-items:center;">
+    <div style="background:white; color:black; padding:20px; border-radius:10px; width:400px; max-width:90%; position:relative;">
+      <span id="closeModal" style="position:absolute; top:10px; right:15px; cursor:pointer; font-weight:bold;">&times;</span>
+      <h2>Visitor Form</h2>
+      <form id="visitorForm">
+        <label>Visitor Name*</label><br>
+        <input type="text" id="visitorName" required><br><br>
+
+        <label>Visitor DOB (dd/mm/yyyy)*</label><br>
+        <input type="date" id="visitorDOB" required><br><br>
+
+        <label>Father's Name</label><br>
+        <input type="text" id="fatherName"><br><br>
+
+        <label>Visitor Address</label><br>
+        <input type="text" id="visitorAddress"><br><br>
+
+        <label>From Country*</label><br>
+        <select id="visitorCountry" required>
+          <option value="">Select Country</option>
+          <option value="IN">India</option>
+          <option value="US">United States</option>
+          <option value="UK">United Kingdom</option>
+          <option value="AE">UAE</option>
+          <!-- Add more countries if needed -->
+        </select><br><br>
+
+        <label>Visit Date*</label><br>
+        <input type="date" id="visitDate" required><br><br>
+
+        <label>Visit Time*</label><br>
+        <input type="time" id="visitTime" required><br><br>
+
+        <label>Contact Number*</label><br>
+        <input type="text" id="contactNumber" required><br><br>
+
+        <label>Passport Number</label><br>
+        <input type="text" id="passportNumber"><br><br>
+
+        <label>Email*</label><br>
+        <input type="text" id="emailUser" placeholder="example" required>
+        <select id="emailDomain">
+          <option value="@gmail.com">@gmail.com</option>
+          <option value="@yahoo.com">@yahoo.com</option>
+        </select><br><br>
+
+        <button type="submit" style="background:#fbd46d; border:none; padding:10px 20px; border-radius:5px; cursor:pointer;">Submit</button>
+      </form>
+      <p id="visitorMessage" style="color:green;"></p>
+    </div>
+  </div>
+
+  <script>
+  // Modal open/close
+  const modal = document.getElementById('visitorModal');
+  const openBtn = document.getElementById('openVisitorForm');
+  const closeBtn = document.getElementById('closeModal');
+  const form = document.getElementById('visitorForm');
+  const message = document.getElementById('visitorMessage');
+
+  openBtn.onclick = () => { modal.style.display = 'flex'; }
+  closeBtn.onclick = () => { modal.style.display = 'none'; }
+  window.onclick = (e) => { if(e.target === modal) modal.style.display = 'none'; }
+
+  // Form submit
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    // Validation for date & time
+    const today = new Date();
+    const visitDate = new Date(document.getElementById('visitDate').value);
+    const visitTime = document.getElementById('visitTime').value;
+    const visitDateTime = new Date(visitDate.toDateString() + ' ' + visitTime);
+
+    if(visitDateTime < today) {
+      alert("Visit date/time cannot be in the past");
+      return;
+    }
+
+    // Auto-generate appointment number
+    const appointmentNo = "APMTWBNB" + String(Date.now()).slice(-5); // last 5 digits of timestamp
+
+    // Collect data
+    const data = {
+      "Appointment No": appointmentNo,
+      "Visitor Name": document.getElementById('visitorName').value,
+      "Visitor DOB": document.getElementById('visitorDOB').value,
+      "Father Name": document.getElementById('fatherName').value,
+      "Visitor Address": document.getElementById('visitorAddress').value,
+      "Visitor Country": document.getElementById('visitorCountry').value,
+      "Visit Date": document.getElementById('visitDate').value,
+      "Visit Time": document.getElementById('visitTime').value,
+      "Contact Number": document.getElementById('contactNumber').value,
+      "Passport Number": document.getElementById('passportNumber').value,
+      "Email": document.getElementById('emailUser').value + document.getElementById('emailDomain').value
+    };
+
+    // Send data to Google Sheet Web App
+    fetch('https://script.google.com/macros/s/AKfycbwBqbSnh8nhQQH_eTy-m9Bcl0H8njadywsZlvRyQHqjyXn63pbdpafzwHugVWkbj2tAFg/exec', {
+      method: 'POST',
+      body: JSON.stringify(data)
+    }).then(res => res.json())
+      .then(res => {
+        message.textContent = "Appointment sent successfully! Your No: " + appointmentNo;
+        form.reset();
+        setTimeout(() => { modal.style.display = 'none'; message.textContent = ''; }, 5000);
+      })
+      .catch(err => alert("Error sending appointment!"));
+  });
+  </script>
 
 </body>
 </html>

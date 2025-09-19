@@ -1,64 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard</title>
-  <style>
-    body { font-family:Arial,sans-serif; background:linear-gradient(to right,#1a2a6c,#b21f1f,#fdbb2d); color:white; margin:0; padding:0; }
-    .container { padding:20px; }
-    h2 { color:#fbd46d; }
-    table { width:100%; border-collapse:collapse; margin-top:20px; }
-    th,td { padding:10px; text-align:left; border:1px solid #ddd; color:black; }
-    th { background:#1a2a6c; color:white; }
-    tr:nth-child(even) { background:#f4f4f4; }
-    button { padding:10px 20px; background:#fbd46d; border:none; border-radius:5px; color:black; cursor:pointer; font-size:16px; margin-top:20px; }
-    button:hover { background:#ffe66d; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard</title>
+<style>
+  body {
+    margin:0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d);
+    color:white;
+  }
+  .header {
+    background: rgba(0,0,0,0.7);
+    padding:20px;
+    text-align:center;
+  }
+  h1 { color:#fbd46d; }
+  .logout-btn {
+    position:absolute;
+    right:20px;
+    top:20px;
+    padding:8px 15px;
+    border:none;
+    border-radius:5px;
+    background:#fbd46d;
+    cursor:pointer;
+  }
+  .logout-btn:hover { background:#e5c14b; }
+  .content { padding:20px; max-width:1200px; margin:auto; }
+  table { width:100%; border-collapse: collapse; }
+  th, td { border:1px solid #fff; padding:10px; text-align:left; }
+  th { background: rgba(0,0,0,0.6); }
+</style>
 </head>
 <body>
 
-  <div class="container">
-    <h2>Visitor Appointments</h2>
-    <table id="visitorTable">
-      <thead>
-        <tr>
-          <th>Appointment No</th>
-          <th>Visitor Name</th>
-          <th>Visit Date</th>
-          <th>Visit Time</th>
-          <th>Contact Number</th>
-          <th>Email</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-    <button onclick="logout()">Logout</button>
-  </div>
+<div class="header">
+  <h1>Admin Dashboard</h1>
+  <button class="logout-btn" id="logoutBtn">Logout</button>
+</div>
 
-  <script>
-    const webAppUrl = 'https://script.google.com/macros/s/AKfycbwBqbSnh8nhQQH_eTy-m9Bcl0H8njadywsZlvRyQHqjyXn63pbdpafzwHugVWkbj2tAFg/exec';
+<div class="content">
+  <p>Here you can view all visitor appointments (integration with Google Sheet will display data).</p>
+  <!-- Table placeholder -->
+  <table id="visitorTable">
+    <tr>
+      <th>Appointment No</th>
+      <th>Name</th>
+      <th>DOB</th>
+      <th>Father Name</th>
+      <th>Address</th>
+      <th>Country</th>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Contact</th>
+      <th>Passport</th>
+      <th>Email</th>
+    </tr>
+  </table>
+</div>
 
-    fetch(webAppUrl)
-      .then(response => response.json())
-      .then(data => {
-        const tableBody = document.getElementById('visitorTable').getElementsByTagName('tbody')[0];
-        data.forEach(visitor => {
-          const row = tableBody.insertRow();
-          row.insertCell(0).textContent = visitor['Appointment No'];
-          row.insertCell(1).textContent = visitor['Visitor Name'];
-          row.insertCell(2).textContent = visitor['Visit Date'];
-          row.insertCell(3).textContent = visitor['Visit Time'];
-          row.insertCell(4).textContent = visitor['Contact Number'];
-          row.insertCell(5).textContent = visitor['Email'];
-        });
-      })
-      .catch(err => console.error('Error fetching visitor data:', err));
+<script>
+// Check if admin is logged in
+if(sessionStorage.getItem('isAdmin') !== 'true'){
+  window.location.href = "admin.html"; // redirect to login if not logged in
+}
 
-    function logout() {
-      window.location.href = 'admin.html';
-    }
-  </script>
+// Logout function
+document.getElementById('logoutBtn').onclick = function(){
+  sessionStorage.removeItem('isAdmin'); // clear session
+  window.location.href = "index.html"; // redirect to main website
+};
+
+// Fetch visitor data from Google Sheet (example)
+// You can integrate your fetch from web app here
+</script>
 
 </body>
 </html>

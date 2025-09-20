@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Dashboard - INDIA BADSAH</title>
 <style>
-body { font-family: Arial, sans-serif; margin:0; background: linear-gradient(to right,#1a2a6c,#b21f1f,#fdbb2d); color: #fff;}
+body { font-family: Arial,sans-serif; margin:0; background: linear-gradient(to right,#1a2a6c,#b21f1f,#fdbb2d); color: #fff;}
 header { background: rgba(0,0,0,0.6); padding: 20px; text-align: center; position: relative;}
 header h1 { margin:0; font-size:2em; color:#fbd46d; text-shadow:1px 1px 3px black;}
 .logout-btn { position: absolute; right: 20px; top: 20px; padding:10px 20px; background:#fbd46d; color:black; border:none; border-radius:5px; cursor:pointer;}
@@ -19,76 +19,74 @@ tr:hover { background: rgba(255,255,255,0.1);}
 <body>
 
 <header>
-  <h1>Admin Dashboard</h1>
-  <button class="logout-btn" onclick="adminLogout()">Logout</button>
+<h1>Admin Dashboard</h1>
+<button class="logout-btn" onclick="adminLogout()">Logout</button>
 </header>
 
 <main>
-  <h2 style="text-align:center; margin-top:20px;">Visitor Appointments</h2>
-  <table id="visitorTable">
-    <thead>
-      <tr>
-        <th>Visitor Name</th>
-        <th>DOB</th>
-        <th>Father Name</th>
-        <th>Address</th>
-        <th>Country</th>
-        <th>Visit Date</th>
-        <th>Visit Time</th>
-        <th>Contact Number</th>
-        <th>Passport</th>
-        <th>Email</th>
-        <th>Appointment No</th>
-        <th>Timestamp</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Visitor data will load here -->
-    </tbody>
-  </table>
+<h2 style="text-align:center; margin-top:20px;">Visitor Appointments</h2>
+<table id="visitorTable">
+  <thead>
+    <tr>
+      <th>Visitor Name</th>
+      <th>DOB</th>
+      <th>Father Name</th>
+      <th>Address</th>
+      <th>Country</th>
+      <th>Visit Date</th>
+      <th>Visit Time</th>
+      <th>Contact Number</th>
+      <th>Passport</th>
+      <th>Email</th>
+      <th>Appointment No</th>
+      <th>Timestamp</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Visitor data will load here -->
+  </tbody>
+</table>
 </main>
 
 <script>
 const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbxTmCvsw2GY1Ceyx5yUAptHN0lAr6cs-DAPm71CtoiScCXpditZpKk653G7xkYNddCEYA/exec";
 
-// Logout button
-function adminLogout() {
+// Logout
+function adminLogout(){
   alert("You have been logged out.");
   window.location.href = "index.html";
 }
 
 // Fetch visitor data
-function loadVisitorData() {
+function loadVisitorData(){
   fetch(WEBAPP_URL)
-    .then(res => res.json())
-    .then(data => {
-      const tbody = document.querySelector("#visitorTable tbody");
-      tbody.innerHTML = "";
-      data.forEach(visitor => {
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td>${visitor["Visitor Name"] || ""}</td>
-          <td>${visitor["Visitor DOB"] || ""}</td>
-          <td>${visitor["Father Name"] || ""}</td>
-          <td>${visitor["Visitor Address"] || ""}</td>
-          <td>${visitor["Country"] || ""}</td>
-          <td>${visitor["Visit Date"] || ""}</td>
-          <td>${visitor["Visit Time"] || ""}</td>
-          <td>${visitor["Contact Number"] || ""}</td>
-          <td>${visitor["Passport Number"] || ""}</td>
-          <td>${visitor["Email"] || ""}</td>
-          <td>${visitor["Appointment Number"] || ""}</td>
-          <td>${visitor["Timestamp"] || ""}</td>
-        `;
-        tbody.appendChild(tr);
-      });
-    })
-    .catch(err => {
-      alert("Error loading visitor data: " + err.message);
+  .then(res => res.json())
+  .then(data => {
+    const tbody = document.querySelector("#visitorTable tbody");
+    tbody.innerHTML = "";
+    data.forEach(visitor => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${visitor["Visitor Name"] || ""}</td>
+        <td>${visitor["Visitor DOB"] || ""}</td>
+        <td>${visitor["Father Name"] || ""}</td>
+        <td>${visitor["Visitor Address"] || ""}</td>
+        <td>${visitor["Country"] || ""}</td>
+        <td>${visitor["Visit Date"] || ""}</td>
+        <td>${visitor["Visit Time"] || ""}</td>
+        <td>${visitor["Contact Number"] || ""}</td>
+        <td>${visitor["Passport Number"] || ""}</td>
+        <td>${visitor["Email"] || ""}</td>
+        <td>${visitor["Appointment Number"] || ""}</td>
+        <td>${visitor["Timestamp"] || ""}</td>
+      `;
+      tbody.appendChild(tr);
     });
+  })
+  .catch(err => alert("Error loading visitor data: " + err.message));
 }
 
-// Load visitor data when page loads
+// Load data on page load
 window.onload = loadVisitorData;
 </script>
 

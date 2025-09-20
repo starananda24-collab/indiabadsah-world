@@ -5,67 +5,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Dashboard</title>
 <style>
-body {
-    margin:0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d);
-    color: white;
-}
-header {
-    background: rgba(0,0,0,0.7);
-    padding: 20px;
-    text-align: center;
-}
-header h1 {
-    margin:0;
-    font-size:2em;
-    color: #fbd46d;
-}
-button#logout {
-    padding: 10px 20px;
-    border:none;
-    border-radius:5px;
-    background:#fbd46d;
-    color:black;
-    font-weight:bold;
-    cursor:pointer;
-    float:right;
-    margin-top:-40px;
-    margin-right:20px;
-}
-button#logout:hover {background:#ffe66d;}
-table {
-    width: 95%;
-    margin:20px auto;
-    border-collapse: collapse;
-    background: rgba(0,0,0,0.5);
-    border-radius: 10px;
-    overflow:hidden;
-}
-table th, table td {
-    padding: 10px;
-    border-bottom:1px solid #fff;
-    text-align:left;
-}
-table th {
-    background: rgba(255,255,255,0.2);
-}
+body { font-family: Arial, sans-serif; margin:0; background:linear-gradient(to right,#1a2a6c,#b21f1f,#fdbb2d); color:white;}
+header {text-align:center; padding:20px; background:rgba(0,0,0,0.7);}
+header h1 {margin:0; color:#fbd46d; text-shadow: 2px 2px 5px black;}
+button {padding:10px 20px; margin:10px 0; border:none; border-radius:5px; cursor:pointer; background:#fbd46d; color:black; font-weight:bold;}
+button:hover {background:#ffe66d;}
+table {width:100%; border-collapse: collapse; margin-top:20px;}
+table th, table td {border:1px solid #fff; padding:10px; text-align:center;}
+table th {background:rgba(255,255,255,0.2);}
+.logout {float:right; margin-right:20px;}
 </style>
 </head>
 <body>
 
 <header>
 <h1>Admin Dashboard</h1>
-<button id="logout">Logout</button>
+<button class="logout" id="logoutBtn">Logout</button>
 </header>
 
+<div id="visitorContainer">
 <table id="visitorTable">
 <thead>
 <tr>
-<th>Appointment No</th>
 <th>Visitor Name</th>
 <th>DOB</th>
-<th>Father's Name</th>
+<th>Father Name</th>
 <th>Address</th>
 <th>Country</th>
 <th>Visit Date</th>
@@ -73,55 +37,71 @@ table th {
 <th>Contact Number</th>
 <th>Passport</th>
 <th>Email</th>
+<th>Appointment No</th>
 <th>Timestamp</th>
 </tr>
 </thead>
-<tbody>
-<tr><td colspan="12" style="text-align:center;">Loading...</td></tr>
-</tbody>
+<tbody></tbody>
 </table>
+</div>
 
 <script>
-// Logout button
-document.getElementById('logout').addEventListener('click', function(){
-    window.location.href = "index.html";
-});
+const webAppUrl = 'https://script.google.com/macros/s/AKfycbyccMt0PU2ukMEwQl76qmWTVvU0iFgk9NW_SK10JA5-Qmi-rAneOUmUd76-oSde7xk7qA/exec';
 
-// Fetch visitor data from Google Apps Script
-fetch('https://script.google.com/macros/s/AKfycbyTMQV6WISmi1Qu7ULbruAO3Sq7AJ-xnqzMskOivqLNRPhAgM6EZxeZNUB6qKgpif4G/exec')
-.then(res => res.json())
-.then(data => {
-    const tableBody = document.querySelector('#visitorTable tbody');
-    tableBody.innerHTML = ''; // clear loading
+// Simple login simulation
+const adminPassword = 'admin123'; // Set your password here
+let isLoggedIn = false;
 
-    if(data.length === 0){
-        tableBody.innerHTML = '<tr><td colspan="12" style="text-align:center;">No records found</td></tr>';
-        return;
-    }
+function loginAdmin() {
+  const pwd = prompt("Enter Admin Password:");
+  if(pwd === adminPassword){
+    isLoggedIn = true;
+    fetchVisitors();
+  } else {
+    alert("Access Denied!");
+    window.location.href = "index.html"; // redirect to main page
+  }
+}
 
-    data.forEach(row => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-            <td>${row.apmtNo}</td>
-            <td>${row.visitorName}</td>
-            <td>${row.dob}</td>
-            <td>${row.fatherName}</td>
-            <td>${row.address}</td>
-            <td>${row.country}</td>
-            <td>${row.visitDate}</td>
-            <td>${row.visitTime}</td>
-            <td>${row.contactNumber}</td>
-            <td>${row.passport}</td>
-            <td>${row.email}</td>
-            <td>${row.timestamp}</td>
-        `;
-        tableBody.appendChild(tr);
+function logoutAdmin() {
+  isLoggedIn = false;
+  alert("Logged out successfully");
+  window.location.href = "index.html";
+}
+
+document.getElementById('logoutBtn').onclick = logoutAdmin;
+
+// Fetch visitor data
+function fetchVisitors(){
+  fetch(webAppUrl)
+  .then(res => res.json())
+  .then(data => {
+    const tbody = document.querySelector('#visitorTable tbody');
+    tbody.innerHTML = '';
+    data.forEach(visitor => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${visitor["Visitor Name"] || ''}</td>
+        <td>${visitor["Visitor DOB"] || ''}</td>
+        <td>${visitor["Father Name"] || ''}</td>
+        <td>${visitor["Address"] || ''}</td>
+        <td>${visitor["Country"] || ''}</td>
+        <td>${visitor["Visit Date"] || ''}</td>
+        <td>${visitor["Visit Time"] || ''}</td>
+        <td>${visitor["Contact Number"] || ''}</td>
+        <td>${visitor["Passport"] || ''}</td>
+        <td>${visitor["Email"] || ''}</td>
+        <td>${visitor["Appointment No"] || ''}</td>
+        <td>${visitor["Timestamp"] || ''}</td>
+      `;
+      tbody.appendChild(tr);
     });
-})
-.catch(err=>{
-    console.error(err);
-    document.querySelector('#visitorTable tbody').innerHTML='<tr><td colspan="12" style="text-align:center;color:red;">Error loading data</td></tr>';
-});
+  })
+  .catch(err => alert("Failed to fetch visitor data: "+err.message));
+}
+
+// Run login on page load
+window.onload = loginAdmin;
 </script>
 
 </body>

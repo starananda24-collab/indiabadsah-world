@@ -3,49 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Dashboard</title>
+<title>Admin Dashboard - INDIA BADSAH</title>
 <style>
-  body {
-    font-family: Arial, sans-serif;
-    background: #1a2a6c;
-    color: #fff;
-    margin: 0;
-    padding: 0;
-  }
-  header {
-    background: #b21f1f;
-    padding: 20px;
-    text-align: center;
-    position: relative;
-  }
-  header h1 {
-    margin: 0;
-  }
-  .logout-btn {
-    position: absolute;
-    right: 20px;
-    top: 20px;
-    padding: 10px 20px;
-    background: #fbd46d;
-    color: black;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  table {
-    width: 95%;
-    margin: 20px auto;
-    border-collapse: collapse;
-    background: rgba(255,255,255,0.1);
-  }
-  th, td {
-    padding: 10px;
-    border: 1px solid #fff;
-    text-align: left;
-  }
-  th {
-    background: rgba(0,0,0,0.6);
-  }
+body { font-family: Arial, sans-serif; margin:0; background: #1a2a6c; color: #fff;}
+header { background: #b21f1f; padding: 20px; text-align: center; position: relative;}
+header h1 { margin:0; font-size:2em;}
+.logout-btn { position: absolute; right: 20px; top: 20px; padding:10px 20px; background:#fbd46d; color:black; border:none; border-radius:5px; cursor:pointer;}
+.logout-btn:hover { background:#fff; }
+table { width:95%; margin: 20px auto; border-collapse: collapse; background: rgba(255,255,255,0.1);}
+th, td { padding: 10px; border:1px solid #fff; text-align:left;}
+th { background: rgba(0,0,0,0.6);}
+tr:hover { background: rgba(255,255,255,0.1); }
 </style>
 </head>
 <body>
@@ -75,45 +43,42 @@
       </tr>
     </thead>
     <tbody>
-      <!-- Visitor data will load here -->
+      <!-- Data will load here -->
     </tbody>
   </table>
 </main>
 
 <script>
-// -------------------- Logout Redirect --------------------
-function adminLogout() {
+const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbxTmCvsw2GY1Ceyx5yUAptHN0lAr6cs-DAPm71CtoiScCXpditZpKk653G7xkYNddCEYA/exec";
+
+// ----------------- Logout -----------------
+function adminLogout(){
   alert("You have been logged out.");
-  window.location.href = "index.html";
+  window.location.href = "admin.html"; // redirect to admin login
 }
 
-// -------------------- Fetch Visitor Data --------------------
-// Replace with your actual Google Apps Script Web App URL
-const sheetURL = 'https://script.google.com/macros/s/AKfycbwB07Hrru5j8oLDJaojuR-2QWgXsTZDhPRUlRu5E-FF1nrXuqIadCynxJC-3JCYcALauA/exec';
-
+// ----------------- Fetch Visitor Data -----------------
 function loadVisitorData() {
-  fetch(sheetURL)
+  fetch(WEBAPP_URL)
     .then(res => res.json())
     .then(data => {
-      const tbody = document.getElementById('visitorTable').querySelector('tbody');
-      tbody.innerHTML = '';
-      
+      const tbody = document.querySelector("#visitorTable tbody");
+      tbody.innerHTML = "";
       data.forEach(visitor => {
-        // Map JSON keys from Apps Script to table columns
-        const tr = document.createElement('tr');
+        const tr = document.createElement("tr");
         tr.innerHTML = `
-          <td>${visitor.visitorName || ''}</td>
-          <td>${visitor.dob || ''}</td>
-          <td>${visitor.fatherName || ''}</td>
-          <td>${visitor.address || ''}</td>
-          <td>${visitor.country || ''}</td>
-          <td>${visitor.visitDate || ''}</td>
-          <td>${visitor.visitTime || ''}</td>
-          <td>${visitor.contactNumber || ''}</td>
-          <td>${visitor.passport || ''}</td>
-          <td>${visitor.email || ''}</td>
-          <td>${visitor.appointmentNo || ''}</td>
-          <td>${visitor.timestamp || ''}</td>
+          <td>${visitor["Visitor Name"] || ""}</td>
+          <td>${visitor["Visitor DOB"] || ""}</td>
+          <td>${visitor["Father Name"] || ""}</td>
+          <td>${visitor["Visitor Address"] || ""}</td>
+          <td>${visitor["Country"] || ""}</td>
+          <td>${visitor["Visit Date"] || ""}</td>
+          <td>${visitor["Visit Time"] || ""}</td>
+          <td>${visitor["Contact Number"] || ""}</td>
+          <td>${visitor["Passport Number"] || ""}</td>
+          <td>${visitor["Email"] || ""}</td>
+          <td>${visitor["Appointment Number"] || ""}</td>
+          <td>${visitor["Timestamp"] || ""}</td>
         `;
         tbody.appendChild(tr);
       });
@@ -123,7 +88,7 @@ function loadVisitorData() {
     });
 }
 
-// Load data when page loads
+// Load visitor data on page load
 window.onload = loadVisitorData;
 </script>
 

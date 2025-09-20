@@ -76,15 +76,11 @@ footer .social-links a:hover { color:#fff;}
 <div id="visitorModal">
 <div id="visitorModalContent">
 <h2>Visitor Form</h2>
-<label for="visitorName">Visitor Name</label>
-<input type="text" id="visitorName" required>
-<label for="visitorDOB">DOB</label>
-<input type="date" id="visitorDOB" required>
-<label for="fatherName">Father Name</label>
-<input type="text" id="fatherName">
-<label for="visitorAddress">Visitor Address</label>
-<input type="text" id="visitorAddress" required>
-<label for="visitorCountry">Country</label>
+<label>Visitor Name</label><input type="text" id="visitorName" required>
+<label>DOB</label><input type="date" id="visitorDOB" required>
+<label>Father Name</label><input type="text" id="fatherName">
+<label>Visitor Address</label><input type="text" id="visitorAddress" required>
+<label>Country</label>
 <select id="visitorCountry" required>
 <option value="">Select Country</option>
 <option value="+91">India (+91)</option>
@@ -97,16 +93,11 @@ footer .social-links a:hover { color:#fff;}
 <option value="+971">UAE (+971)</option>
 <option value="+44">England (+44)</option>
 </select>
-<label for="visitDate">Visit Date</label>
-<input type="date" id="visitDate" required>
-<label for="visitTime">Visit Time</label>
-<input type="time" id="visitTime" required>
-<label for="contactNumber">Contact Number</label>
-<input type="tel" id="contactNumber" required>
-<label for="passportNumber">Passport Number</label>
-<input type="text" id="passportNumber">
-<label for="email">Email</label>
-<input type="email" id="email" required>
+<label>Visit Date</label><input type="date" id="visitDate" required>
+<label>Visit Time</label><input type="time" id="visitTime" required>
+<label>Contact Number</label><input type="tel" id="contactNumber" required>
+<label>Passport Number</label><input type="text" id="passportNumber">
+<label>Email</label><input type="email" id="email" required>
 <button onclick="submitVisitorForm()">Submit</button>
 <button onclick="closeVisitorForm()">Cancel</button>
 </div>
@@ -116,46 +107,43 @@ footer .social-links a:hover { color:#fff;}
 <div id="adminModal">
 <div id="adminModalContent">
 <h2>Admin Login</h2>
-<label for="username">Username</label>
-<input type="text" id="username" required>
-<label for="password">Password</label>
-<input type="password" id="password" required>
+<label>Username</label><input type="text" id="username" required>
+<label>Password</label><input type="password" id="password" required>
 <button onclick="submitAdminLogin()">Login</button>
 <button onclick="closeAdminForm()">Cancel</button>
 </div>
 </div>
 
 <script>
-const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbxTmCvsw2GY1Ceyx5yUAptHN0lAr6cs-DAPm71CtoiScCXpditZpKk653G7xkYNddCEYA/exec";
+const WEBAPP_URL="https://script.google.com/macros/s/AKfycbxTmCvsw2GY1Ceyx5yUAptHN0lAr6cs-DAPm71CtoiScCXpditZpKk653G7xkYNddCEYA/exec";
 
 /* Visitor Form */
 function openVisitorForm(){document.getElementById("visitorModal").style.display="block";}
 function closeVisitorForm(){document.getElementById("visitorModal").style.display="none";}
-function validateVisitorForm(dob, visitDate, visitTime){
-  const now = new Date();
-  const dobDate = new Date(dob);
-  const visitDateTime = new Date(visitDate + "T" + visitTime);
-  if(dobDate > now){ alert("DOB cannot be in the future."); return false; }
-  if(visitDateTime < now){ alert("Visit Date & Time cannot be in the past."); return false; }
-  return true;
-}
 function submitVisitorForm(){
-  const visitorName=document.getElementById("visitorName").value;
-  const dob=document.getElementById("visitorDOB").value;
-  const fatherName=document.getElementById("fatherName").value;
-  const address=document.getElementById("visitorAddress").value;
-  const country=document.getElementById("visitorCountry").value;
-  const visitDate=document.getElementById("visitDate").value;
-  const visitTime=document.getElementById("visitTime").value;
-  const contactNumber=document.getElementById("contactNumber").value;
-  const passport=document.getElementById("passportNumber").value;
-  const email=document.getElementById("email").value;
-  if(!validateVisitorForm(dob, visitDate, visitTime)) return;
-  const data={visitorName,dob,fatherName,address,country,visitDate,visitTime,contactNumber,passport,email};
-  fetch(WEBAPP_URL,{method:'POST',body:JSON.stringify(data),headers:{'Content-Type':'application/json'}})
-  .then(res=>res.json())
-  .then(d=>{alert("Appointment sent successfully\nAppointment No: "+d.appointmentNo); closeVisitorForm();})
-  .catch(err=>alert("Error sending appointment: "+err.message));
+const visitorName=document.getElementById("visitorName").value;
+const dob=document.getElementById("visitorDOB").value;
+const fatherName=document.getElementById("fatherName").value;
+const address=document.getElementById("visitorAddress").value;
+const country=document.getElementById("visitorCountry").value;
+const visitDate=document.getElementById("visitDate").value;
+const visitTime=document.getElementById("visitTime").value;
+const contactNumber=document.getElementById("contactNumber").value;
+const passport=document.getElementById("passportNumber").value;
+const email=document.getElementById("email").value;
+
+const now=new Date();
+if(new Date(dob)>now){alert("DOB cannot be in the future."); return;}
+if(new Date(visitDate+"T"+visitTime)<now){alert("Visit date/time cannot be past."); return;}
+
+fetch(WEBAPP_URL,{
+method:'POST',
+body:JSON.stringify({visitorName,dob,fatherName,address,country,visitDate,visitTime,contactNumber,passport,email}),
+headers:{'Content-Type':'application/json'}
+})
+.then(res=>res.json())
+.then(d=>{alert("Appointment sent successfully\nAppointment No: "+d.appointmentNo); closeVisitorForm();})
+.catch(err=>alert("Error sending appointment: "+err.message));
 }
 
 /* Admin Login */
@@ -163,16 +151,19 @@ let attempts=0;
 function openAdminForm(){document.getElementById("adminModal").style.display="block";}
 function closeAdminForm(){document.getElementById("adminModal").style.display="none";}
 function submitAdminLogin(){
-  const username=document.getElementById("username").value;
-  const password=document.getElementById("password").value;
-  const credentials={type:"adminLogin",username,password};
-  fetch(WEBAPP_URL,{method:'POST',body:JSON.stringify(credentials),headers:{'Content-Type':'application/json'}})
-  .then(res=>res.text())
-  .then(res=>{
-    if(res.includes("PERMISSION DENIED")){alert("Access Denied: Incorrect credentials."); attempts++; if(attempts>=2){location.reload(); attempts=0;}}
-    else{window.location.href="admin_dashboard.html";}
-  })
-  .catch(err=>alert("Error logging in: "+err.message));
+const username=document.getElementById("username").value;
+const password=document.getElementById("password").value;
+fetch(WEBAPP_URL,{
+method:'POST',
+body:JSON.stringify({type:"adminLogin",username,password}),
+headers:{'Content-Type':'application/json'}
+})
+.then(res=>res.text())
+.then(res=>{
+if(res=="SUCCESS"){window.location.href="admin_dashboard.html";}
+else{alert("Access Denied: Incorrect credentials");}
+})
+.catch(err=>alert("Error logging in: "+err.message));
 }
 </script>
 

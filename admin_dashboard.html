@@ -5,15 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Dashboard - INDIA BADSAH</title>
 <style>
-body { font-family: Arial, sans-serif; margin:0; background: #1a2a6c; color: #fff;}
-header { background: #b21f1f; padding: 20px; text-align: center; position: relative;}
-header h1 { margin:0; font-size:2em;}
+body { font-family: Arial, sans-serif; margin:0; background: linear-gradient(to right,#1a2a6c,#b21f1f,#fdbb2d); color: #fff;}
+header { background: rgba(0,0,0,0.6); padding: 20px; text-align: center; position: relative;}
+header h1 { margin:0; font-size:2em; color:#fbd46d; text-shadow:1px 1px 3px black;}
 .logout-btn { position: absolute; right: 20px; top: 20px; padding:10px 20px; background:#fbd46d; color:black; border:none; border-radius:5px; cursor:pointer;}
 .logout-btn:hover { background:#fff; }
-table { width:95%; margin: 20px auto; border-collapse: collapse; background: rgba(255,255,255,0.1);}
-th, td { padding: 10px; border:1px solid #fff; text-align:left;}
+table { width:95%; margin:20px auto; border-collapse: collapse; background: rgba(255,255,255,0.1);}
+th, td { padding:10px; border:1px solid #fff; text-align:left;}
 th { background: rgba(0,0,0,0.6);}
-tr:hover { background: rgba(255,255,255,0.1); }
+tr:hover { background: rgba(255,255,255,0.1);}
 </style>
 </head>
 <body>
@@ -43,7 +43,7 @@ tr:hover { background: rgba(255,255,255,0.1); }
       </tr>
     </thead>
     <tbody>
-      <!-- Data will load here -->
+      <!-- Visitor data will load here -->
     </tbody>
   </table>
 </main>
@@ -51,13 +51,13 @@ tr:hover { background: rgba(255,255,255,0.1); }
 <script>
 const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbxTmCvsw2GY1Ceyx5yUAptHN0lAr6cs-DAPm71CtoiScCXpditZpKk653G7xkYNddCEYA/exec";
 
-// ----------------- Logout -----------------
-function adminLogout(){
+// Logout button
+function adminLogout() {
   alert("You have been logged out.");
-  window.location.href = "admin.html"; // redirect to admin login
+  window.location.href = "index.html";
 }
 
-// ----------------- Fetch Visitor Data -----------------
+// Fetch visitor data
 function loadVisitorData() {
   fetch(WEBAPP_URL)
     .then(res => res.json())
@@ -88,7 +88,7 @@ function loadVisitorData() {
     });
 }
 
-// Load visitor data on page load
+// Load visitor data when page loads
 window.onload = loadVisitorData;
 </script>
 

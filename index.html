@@ -1,177 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>INDIA BADSAH</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d);
-      color: white;
-      line-height: 1.6;
-    }
-    header {
-      text-align: center;
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.6);
-    }
-    header img {
-      width: 180px;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 5px solid #fff;
-      transition: transform 0.4s;
-    }
-    header img:hover {
-      transform: scale(1.05) rotate(2deg);
-    }
-    header h1 {
-      margin: 15px 0 0;
-      font-size: 2.5em;
-      color: #fbd46d;
-      text-shadow: 2px 2px 5px black;
-    }
-    nav {
-      display: flex;
-      justify-content: center;
-      background: rgba(0, 0, 0, 0.8);
-      flex-wrap: wrap;
-    }
-    nav a {
-      color: white;
-      text-decoration: none;
-      padding: 15px 20px;
-      display: block;
-      transition: background 0.3s, color 0.3s;
-    }
-    nav a:hover {
-      background: #fbd46d;
-      color: black;
-      border-radius: 5px;
-    }
-    section {
-      padding: 40px 20px;
-      max-width: 900px;
-      margin: auto;
-      background: rgba(255, 255, 255, 0.1);
-      margin-bottom: 30px;
-      border-radius: 12px;
-      box-shadow: 0px 4px 15px rgba(0,0,0,0.5);
-      transition: transform 0.3s;
-    }
-    section:hover {
-      transform: translateY(-5px);
-    }
-    section h2 {
-      color: #ffe66d;
-      margin-bottom: 15px;
-    }
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.7);
-      color: #ccc;
-    }
-    /* Visitor Form Modal */
-    #visitorFormModal {
-      display: none;
-      position: fixed;
-      top:0; left:0; right:0; bottom:0;
-      background: rgba(0,0,0,0.7);
-      justify-content: center;
-      align-items: center;
-    }
-    #visitorFormModal .modal-content {
-      background: #1a2a6c;
-      padding: 20px;
-      border-radius: 10px;
-      width: 90%;
-      max-width: 500px;
-      color: white;
-    }
-    #visitorFormModal input, #visitorFormModal select {
-      width: 100%;
-      padding: 8px;
-      margin: 5px 0 15px;
-      border-radius: 5px;
-      border: none;
-    }
-    #visitorFormModal button {
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      background: #fbd46d;
-      color: black;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INDIA BADSAH</title>
+<style>
+body { margin:0; font-family: Arial, sans-serif; background: linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d); color:white; line-height:1.6; }
+header { text-align:center; padding:20px; background:rgba(0,0,0,0.6);}
+header img { width:180px; height:180px; object-fit:cover; border-radius:50%; border:5px solid #fff; transition: transform 0.4s;}
+header img:hover { transform: scale(1.05) rotate(2deg);}
+header h1 { margin:15px 0 0; font-size:2.5em; color:#fbd46d; text-shadow:2px 2px 5px black;}
+nav { display:flex; justify-content:center; background:rgba(0,0,0,0.8); flex-wrap:wrap;}
+nav a { color:white; text-decoration:none; padding:15px 20px; display:block; transition: background 0.3s, color 0.3s;}
+nav a:hover { background:#fbd46d; color:black; border-radius:5px;}
+section { padding:40px 20px; max-width:900px; margin:auto; background: rgba(255,255,255,0.1); margin-bottom:30px; border-radius:12px; box-shadow:0px 4px 15px rgba(0,0,0,0.5); transition: transform 0.3s;}
+section:hover { transform: translateY(-5px);}
+section h2 { color:#ffe66d; margin-bottom:15px;}
+footer { text-align:center; padding:20px; background: rgba(0,0,0,0.7); color:#ccc;}
+#visitorFormModal { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.7); justify-content:center; align-items:center;}
+#visitorFormModal .modal-content { background:#1a2a6c; padding:20px; border-radius:10px; width:90%; max-width:500px; color:white;}
+#visitorFormModal input, #visitorFormModal select { width:100%; padding:8px; margin:5px 0 15px; border-radius:5px; border:none;}
+#visitorFormModal button { padding:10px 20px; border:none; border-radius:5px; cursor:pointer; background:#fbd46d; color:black;}
+</style>
 </head>
 <body>
 
 <header>
-  <img src="myphoto.jpg" alt="India Badsah Photo">
-  <h1>INDIA BADSAH</h1>
+<img src="myphoto.jpg" alt="India Badsah Photo">
+<h1>INDIA BADSAH</h1>
 </header>
 
 <nav>
-  <a href="#profile">Profile</a>
-  <a href="#education">Education</a>
-  <a href="#culture">Culture</a>
-  <a href="#achievements">Achievements</a>
-  <a href="#hobbies">Hobbies</a>
-  <a href="#interested">Interested About</a>
-  <a href="#thoughts">Thoughts</a>
-  <a href="#" id="adminLoginBtn">Admin Login</a>
+<a href="#profile">Profile</a>
+<a href="#education">Education</a>
+<a href="#culture">Culture</a>
+<a href="#achievements">Achievements</a>
+<a href="#hobbies">Hobbies</a>
+<a href="#interested">Interested About</a>
+<a href="#thoughts">Thoughts</a>
+<a href="#" id="adminLoginBtn">Admin Login</a>
+<a href="#" onclick="openVisitorForm()">Visitor Form</a>
 </nav>
 
-<section id="profile">
-  <h2>Profile</h2>
-  <p>I am INDIA BADSAH, a passionate learner and explorer of life’s endless opportunities...</p>
-</section>
+<section id="profile"><h2>Profile</h2><p>I am INDIA BADSAH, a passionate learner and explorer of life’s endless opportunities...</p></section>
+<section id="education"><h2>Education</h2><p>I believe education is the foundation of growth...</p></section>
+<section id="culture"><h2>Culture</h2><p>Culture defines who we are...</p></section>
+<section id="achievements"><h2>Achievements</h2><p>Every step of life is an achievement...</p></section>
+<section id="hobbies"><h2>Hobbies</h2><p>I enjoy engaging in creative and recreational activities...</p></section>
+<section id="interested"><h2>Interested About</h2><p>I am deeply interested in innovation, leadership, and cultural understanding...</p></section>
+<section id="thoughts"><h2>Thoughts</h2><p>“Life is not about waiting for opportunities, it is about creating them.”</p></section>
 
-<section id="education">
-  <h2>Education</h2>
-  <p>I believe education is the foundation of growth...</p>
-</section>
-
-<section id="culture">
-  <h2>Culture</h2>
-  <p>Culture defines who we are...</p>
-</section>
-
-<section id="achievements">
-  <h2>Achievements</h2>
-  <p>Every step of life is an achievement...</p>
-</section>
-
-<section id="hobbies">
-  <h2>Hobbies</h2>
-  <p>I enjoy engaging in creative and recreational activities...</p>
-</section>
-
-<section id="interested">
-  <h2>Interested About</h2>
-  <p>I am deeply interested in innovation, leadership, and cultural understanding...</p>
-</section>
-
-<section id="thoughts">
-  <h2>Thoughts</h2>
-  <p>“Life is not about waiting for opportunities, it is about creating them.”</p>
-</section>
-
-<footer>
-  <p>© 2025 INDIA BADSAH | Personal Biography Website</p>
-</footer>
+<footer><p>© 2025 INDIA BADSAH | Personal Biography Website</p></footer>
 
 <!-- Visitor Form Modal -->
 <div id="visitorFormModal">
   <div class="modal-content">
     <h2>Visitor Form</h2>
     <input type="text" id="visitorName" placeholder="Visitor Name" required>
-    <input type="date" id="visitorDOB" placeholder="DOB" required>
+    <input type="date" id="visitorDOB" required>
     <input type="text" id="fatherName" placeholder="Father's Name">
     <input type="text" id="visitorAddress" placeholder="Address" required>
     <select id="visitorCountry" required>
@@ -185,8 +71,8 @@
       <option value="+971">UAE (+971)</option>
       <option value="+44">England (+44)</option>
     </select>
-    <input type="date" id="visitDate" placeholder="Visit Date" required>
-    <input type="time" id="visitTime" placeholder="Visit Time" required>
+    <input type="date" id="visitDate" required>
+    <input type="time" id="visitTime" required>
     <input type="text" id="contactNumber" placeholder="Contact Number" required>
     <input type="text" id="passportNumber" placeholder="Passport Number (optional)">
     <input type="email" id="email" placeholder="Email @gmail.com/@yahoo.com" required>
@@ -196,29 +82,28 @@
 </div>
 
 <script>
-// -------------------- Admin Login --------------------
+// ----------- Admin Login Secure -----------
 document.getElementById("adminLoginBtn").addEventListener("click", function(){
   const mainPage = "index.html";
   const adminUser = "admin";
-  const adminPass = "password123"; // change as needed
+  const adminPass = "password123";
+  const enteredUser = prompt("Enter Admin Username:");
+  if(!enteredUser){ alert("Login cancelled."); window.location.href=mainPage; return; }
+  if(enteredUser !== adminUser){ alert("PERMISSION DENIED"); window.location.href=mainPage; return; }
   let attempts = 2;
-
   while(attempts > 0){
-    const username = prompt("Enter Admin Username:");
-    if(!username){ alert("Login cancelled."); window.location.href=mainPage; return; }
-    if(username !== adminUser){ alert("PERMISSION DENIED"); window.location.href=mainPage; return; }
-    const password = prompt("Enter Admin Password:");
-    if(password === adminPass){ alert("Login Successful"); window.location.href="admin-dashboard.html"; return; }
-    else { attempts--; if(attempts>0){ alert("Incorrect password. "+attempts+" attempt(s) left."); } 
-           else { alert("No attempts left. Returning main page."); window.location.href=mainPage; return; } }
+    const enteredPass = prompt("Enter Admin Password:");
+    if(!enteredPass){ alert("Login cancelled."); window.location.href=mainPage; return; }
+    if(enteredPass === adminPass){ alert("Login Successful"); window.location.href="admin-dashboard.html"; return; }
+    else{ attempts--; if(attempts>0){ alert("Incorrect password. "+attempts+" attempt(s) left."); } else{ alert("No attempts left. Returning main page."); window.location.href=mainPage; return; } }
   }
 });
 
-// -------------------- Visitor Form --------------------
-function openVisitorForm() { document.getElementById("visitorFormModal").style.display = "flex"; }
-function closeVisitorForm() { document.getElementById("visitorFormModal").style.display = "none"; }
+// ----------- Visitor Form Functions -----------
+function openVisitorForm(){ document.getElementById("visitorFormModal").style.display="flex"; }
+function closeVisitorForm(){ document.getElementById("visitorFormModal").style.display="none"; }
 
-function submitVisitorForm() {
+function submitVisitorForm(){
   const visitor = {
     "Visitor Name": document.getElementById("visitorName").value,
     "Visitor DOB": document.getElementById("visitorDOB").value,
@@ -231,14 +116,13 @@ function submitVisitorForm() {
     "Passport Number": document.getElementById("passportNumber").value,
     "Email": document.getElementById("email").value
   };
-
-  fetch('https://script.google.com/macros/s/AKfycbwB07Hrru5j8oLDJaojuR-2QWgXsTZDhPRUlRu5E-FF1nrXuqIadCynxJC-3JCYcALauA/exec', {
+  fetch('https://script.google.com/macros/s/AKfycbwB07Hrru5j8oLDJaojuR-2QWgXsTZDhPRUlRu5E-FF1nrXuqIadCynxJC-3JCYcALauA/exec',{
     method:'POST',
-    body: JSON.stringify(visitor)
+    body:JSON.stringify(visitor)
   })
-  .then(res => res.json())
-  .then(data => { alert(`${data.message}\nAppointment No: ${data.appointmentNo}`); closeVisitorForm(); })
-  .catch(err => { alert("Error sending appointment: "+err.message); });
+  .then(res=>res.json())
+  .then(data=>{ alert(`${data.message}\nAppointment No: ${data.appointmentNo}`); closeVisitorForm(); })
+  .catch(err=>{ alert("Error sending appointment: "+err.message); });
 }
 </script>
 

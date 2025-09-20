@@ -50,43 +50,43 @@ th { background: rgba(0,0,0,0.8);}
 <script>
 const WEBAPP_URL="https://script.google.com/macros/s/AKfycbxTmCvsw2GY1Ceyx5yUAptHN0lAr6cs-DAPm71CtoiScCXpditZpKk653G7xkYNddCEYA/exec";
 
-// Logout
+// Logout function
 function adminLogout(){
-alert("You have been logged out.");
-window.location.href="index.html";
+  alert("You have been logged out.");
+  window.location.href="index.html";
 }
 
-// Load Visitor Data
+// Fetch and display visitor data
 function loadVisitorData(){
-fetch(WEBAPP_URL)
-.then(res=>res.json())
-.then(data=>{
-const tbody=document.getElementById('visitorTable').querySelector('tbody');
-tbody.innerHTML='';
-data.forEach(visitor=>{
-const tr=document.createElement('tr');
-tr.innerHTML=`
-<td>${visitor['Visitor Name']}</td>
-<td>${visitor['Visitor DOB']}</td>
-<td>${visitor['Father Name']}</td>
-<td>${visitor['Visitor Address']}</td>
-<td>${visitor['Country']}</td>
-<td>${visitor['Visit Date']}</td>
-<td>${visitor['Visit Time']}</td>
-<td>${visitor['Contact Number']}</td>
-<td>${visitor['Passport Number']}</td>
-<td>${visitor['Email']}</td>
-<td>${visitor['Appointment Number']}</td>
-<td>${visitor['Timestamp']}</td>
-`;
-tbody.appendChild(tr);
-});
-})
-.catch(err=>alert("Error loading visitor data: "+err.message));
+  fetch(WEBAPP_URL)
+  .then(res => res.json())
+  .then(data => {
+    const tbody = document.getElementById('visitorTable').querySelector('tbody');
+    tbody.innerHTML = '';
+    data.forEach(visitor => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${visitor['Visitor Name']}</td>
+        <td>${visitor['DOB']}</td>
+        <td>${visitor['Father Name']}</td>
+        <td>${visitor['Visitor Address']}</td>
+        <td>${visitor['Country']}</td>
+        <td>${visitor['Visit Date']}</td>
+        <td>${visitor['Visit Time']}</td>
+        <td>${visitor['Contact Number']}</td>
+        <td>${visitor['Passport Number']}</td>
+        <td>${visitor['Email']}</td>
+        <td>${visitor['Appointment Number']}</td>
+        <td>${visitor['Timestamp']}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  })
+  .catch(err => alert("Error loading visitor data: "+err.message));
 }
 
 // Load data on page load
-window.onload=loadVisitorData;
+window.onload = loadVisitorData;
 </script>
 
 </body>

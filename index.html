@@ -109,7 +109,8 @@ function openVisitorForm(){document.getElementById("visitorModal").style.display
 function closeVisitorForm(){document.getElementById("visitorModal").style.display="none";}
 
 function submitVisitorForm(){
-const data={visitorName:document.getElementById("visitorName").value,
+const data={
+visitorName:document.getElementById("visitorName").value,
 dob:document.getElementById("visitorDOB").value,
 fatherName:document.getElementById("fatherName").value,
 address:document.getElementById("visitorAddress").value,
@@ -118,7 +119,8 @@ visitDate:document.getElementById("visitDate").value,
 visitTime:document.getElementById("visitTime").value,
 contactNumber:document.getElementById("contactNumber").value,
 passport:document.getElementById("passportNumber").value,
-email:document.getElementById("email").value};
+email:document.getElementById("email").value
+};
 fetch('https://script.google.com/macros/s/AKfycbzz3IXXuqEz9digVoHzUB1d2E-pOo2bACKZh44idgcgMuTmaieEJ_wHKTQ7j1Zkc8QnUg/exec',{
 method:'POST',
 body:JSON.stringify(data),
@@ -133,11 +135,11 @@ closeVisitorForm();
 let attempts=0;
 function openAdminForm(){document.getElementById("adminModal").style.display="block";}
 function closeAdminForm(){document.getElementById("adminModal").style.display="none";}
+
 function submitAdminLogin(){
 const username=document.getElementById("username").value;
 const password=document.getElementById("password").value;
-// Replace with your admin credentials
-const adminUser="admin";
+const adminUser="admin"; // local fallback
 const adminPass="password123";
 
 if(username!==adminUser || password!==adminPass){
@@ -146,8 +148,24 @@ alert("PERMISSION DENIED");
 if(attempts>=2){closeAdminForm(); attempts=0;}
 return;
 }
-// success, open admin dashboard
-window.location.href="admin_dashboard.html";
+
+// Success: redirect to admin login fetch page
+fetch('https://script.google.com/macros/s/AKfycbzz3IXXuqEz9digVoHzUB1d2E-pOo2bACKZh44idgcgMuTmaieEJ_wHKTQ7j1Zkc8QnUg/exec',{
+method:'POST',
+body:JSON.stringify({type:"adminLogin", username, password}),
+headers:{'Content-Type':'application/json'}
+}).then(res=>res.text())
+.then(html=>{
+if(html.includes("PERMISSION DENIED")){
+alert("Access Denied: Incorrect credentials.");
+}else{
+document.open();
+document.write(html);
+document.close();
+}
+}).catch(err=>alert("Error logging in: "+err.message));
+
+closeAdminForm();
 }
 </script>
 

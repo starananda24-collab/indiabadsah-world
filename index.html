@@ -82,44 +82,22 @@ footer { text-align:center; padding:20px; background: rgba(0,0,0,0.7); color:#cc
 </div>
 
 <script>
-// ----------- Admin Login Secure -----------
+// ----------- Admin Login Secure (Automatic Detection) -----------
 document.getElementById("adminLoginBtn").addEventListener("click", function(){
   const mainPage = "index.html";
+  // Secret key stored in URL ?adminKey=12345
+  const urlParams = new URLSearchParams(window.location.search);
+  const adminKey = urlParams.get("adminKey");
+  const secretKey = "12345"; // Only admin knows this
 
-  // Block non-admin immediately
-  const isAdmin = confirm("Are you Admin?"); // Only admin clicks 'OK'
-  if(!isAdmin){ 
-    alert("PERMISSION DENIED"); 
-    window.location.href = mainPage; 
-    return; 
+  if(adminKey !== secretKey){
+    alert("PERMISSION DENIED");
+    window.location.href = mainPage;
+    return;
   }
 
-  const adminUser = "admin";
-  const adminPass = "password123";
-  
-  let enteredUser = prompt("Enter Admin Username:");
-  if(!enteredUser){ alert("Login cancelled."); window.location.href=mainPage; return; }
-  if(enteredUser !== adminUser){ alert("PERMISSION DENIED"); window.location.href=mainPage; return; }
-
-  let attempts = 2;
-  while(attempts > 0){
-    const enteredPass = prompt("Enter Admin Password:");
-    if(!enteredPass){ alert("Login cancelled."); window.location.href=mainPage; return; }
-    if(enteredPass === adminPass){ 
-      alert("Login Successful"); 
-      window.location.href="admin-dashboard.html"; 
-      return; 
-    } else { 
-      attempts--; 
-      if(attempts>0){ 
-        alert("Incorrect password. "+attempts+" attempt(s) left."); 
-      } else { 
-        alert("No attempts left. Returning to main page."); 
-        window.location.href=mainPage; 
-        return; 
-      } 
-    }
-  }
+  // Admin with correct key goes directly to dashboard
+  window.location.href = "admin-dashboard.html";
 });
 
 // ----------- Visitor Form Functions -----------

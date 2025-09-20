@@ -1,32 +1,54 @@
-<form id="adminLoginForm">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login - INDIA BADSAH</title>
+<style>
+body { font-family: Arial, sans-serif; background: linear-gradient(to right,#1a2a6c,#b21f1f,#fdbb2d); color:white; display:flex; justify-content:center; align-items:center; height:100vh; margin:0;}
+.login-container { background: rgba(0,0,0,0.8); padding:40px; border-radius:10px; box-shadow:0 4px 15px rgba(0,0,0,0.5); width:90%; max-width:400px; text-align:center;}
+.login-container h2 { margin-bottom:20px; color:#fbd46d;}
+.login-container input { width:100%; padding:12px; margin:10px 0; border:none; border-radius:5px;}
+.login-container button { width:100%; padding:12px; border:none; border-radius:5px; background:#fbd46d; color:black; cursor:pointer; margin-top:10px;}
+.login-container button:hover { background:#fff; }
+</style>
+</head>
+<body>
+
+<div class="login-container">
+  <h2>Admin Login</h2>
   <input type="text" id="username" placeholder="Username" required>
   <input type="password" id="password" placeholder="Password" required>
-  <button type="submit">Login</button>
-</form>
+  <button onclick="submitAdminLogin()">Login</button>
+</div>
 
 <script>
-document.getElementById("adminLoginForm").addEventListener("submit", function(event) {
-  event.preventDefault();
+const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbxTmCvsw2GY1Ceyx5yUAptHN0lAr6cs-DAPm71CtoiScCXpditZpKk653G7xkYNddCEYA/exec";
+
+function submitAdminLogin() {
   const username = document.getElementById("username").value;
   const password = document.getElementById("password").value;
 
-  const credentials = {type: "adminLogin", username, password};
+  const data = { type: "adminLogin", username, password };
 
-  fetch('https://script.google.com/macros/s/AKfycbzz3IXXuqEz9digVoHzUB1d2E-pOo2bACKZh44idgcgMuTmaieEJ_wHKTQ7j1Zkc8QnUg/exec', {
+  fetch(WEBAPP_URL, {
     method: 'POST',
-    body: JSON.stringify(credentials),
-    headers: {'Content-Type': 'application/json'}
+    body: JSON.stringify(data),
+    headers: { 'Content-Type': 'application/json' }
   })
-  .then(res => res.text())
-  .then(html => {
-    if(html.includes("PERMISSION DENIED")){
+  .then(response => response.text())
+  .then(res => {
+    if (res.includes("PERMISSION DENIED")) {
       alert("Access Denied: Incorrect credentials.");
-    }else{
-      document.open();
-      document.write(html);
-      document.close();
+    } else {
+      window.location.href = "admin_dashboard.html";
     }
   })
-  .catch(err => alert("Error logging in: " + err.message));
-});
+  .catch(err => {
+    alert("Error logging in: " + err.message);
+  });
+}
 </script>
+
+</body>
+</html>

@@ -7,32 +7,26 @@
 <script>
 document.getElementById("adminLoginForm").addEventListener("submit", function(event) {
   event.preventDefault();
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
 
-  const credentials = {
-    type: "adminLogin",
-    username: document.getElementById("username").value,
-    password: document.getElementById("password").value
-  };
+  const credentials = {type: "adminLogin", username, password};
 
   fetch('https://script.google.com/macros/s/AKfycbzz3IXXuqEz9digVoHzUB1d2E-pOo2bACKZh44idgcgMuTmaieEJ_wHKTQ7j1Zkc8QnUg/exec', {
     method: 'POST',
     body: JSON.stringify(credentials),
-    headers: {
-      'Content-Type': 'application/json'
-    }
+    headers: {'Content-Type': 'application/json'}
   })
-  .then(response => response.text())
+  .then(res => res.text())
   .then(html => {
-    if (html.includes("PERMISSION DENIED")) {
+    if(html.includes("PERMISSION DENIED")){
       alert("Access Denied: Incorrect credentials.");
-    } else {
+    }else{
       document.open();
       document.write(html);
       document.close();
     }
   })
-  .catch(error => {
-    alert("Error logging in: " + error.message);
-  });
+  .catch(err => alert("Error logging in: " + err.message));
 });
 </script>

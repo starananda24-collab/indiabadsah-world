@@ -17,23 +17,21 @@ section { padding:40px 20px; max-width:900px; margin:auto; background:rgba(255,2
 section:hover { transform: translateY(-5px);}
 section h2 { color:#ffe66d; margin-bottom:15px;}
 footer { text-align:center; padding:20px; background:rgba(0,0,0,0.7); color:#ccc;}
-footer .social-links a { margin:0 10px; color:#fbd46d; text-decoration:none; font-weight:bold;}
-footer .social-links a:hover { color:#fff;}
 
 /* Visitor Form Modal */
 #visitorModal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.7);}
 #visitorModalContent { background:#222; margin:5% auto; padding:20px; border-radius:10px; width:90%; max-width:500px; color:white;}
-#visitorModalContent label { display:block; margin:5px 0 3px 0; font-weight:bold; }
+#visitorModalContent label { font-weight:bold; display:block; margin:5px 0 2px 0; }
 #visitorModalContent input, #visitorModalContent select { width:100%; padding:10px; margin:0 0 15px 0; border:none; border-radius:5px;}
-#visitorModalContent button { background:#fbd46d; color:black; border:none; padding:12px 20px; border-radius:5px; cursor:pointer; margin-right:5px;}
+#visitorModalContent button { background:#fbd46d; color:black; border:none; padding:12px 20px; border-radius:5px; cursor:pointer;}
 #visitorModalContent button:hover { background:#fff; }
 
 /* Admin Login Modal */
 #adminModal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.7);}
 #adminModalContent { background:#222; margin:5% auto; padding:20px; border-radius:10px; width:90%; max-width:400px; color:white;}
-#adminModalContent label { display:block; margin:5px 0 3px 0; font-weight:bold; }
+#adminModalContent label { font-weight:bold; display:block; margin:5px 0 2px 0; }
 #adminModalContent input { width:100%; padding:10px; margin:0 0 15px 0; border:none; border-radius:5px;}
-#adminModalContent button { background:#fbd46d; color:black; border:none; padding:12px 20px; border-radius:5px; cursor:pointer; margin-right:5px;}
+#adminModalContent button { background:#fbd46d; color:black; border:none; padding:12px 20px; border-radius:5px; cursor:pointer; width:100%;}
 #adminModalContent button:hover { background:#fff; }
 </style>
 </head>
@@ -65,21 +63,23 @@ footer .social-links a:hover { color:#fff;}
 <section id="thoughts"><h2>Thoughts</h2><p>“Life is about creating opportunities.”</p></section>
 
 <footer>
-<div class="social-links">
-  <a href="https://www.facebook.com/YOUR_FACEBOOK_PROFILE" target="_blank">Facebook</a>
-  <a href="https://www.linkedin.com/in/YOUR_LINKEDIN_PROFILE" target="_blank">LinkedIn</a>
-</div>
-<p>© 2025 INDIA BADSAH | Personal Biography Website</p>
+<p>© 2025 INDIA BADSAH | Personal Biography Website | 
+<a href="https://facebook.com/yourprofile" target="_blank" style="color:#fbd46d;">Facebook</a> | 
+<a href="https://linkedin.com/in/yourprofile" target="_blank" style="color:#fbd46d;">LinkedIn</a></p>
 </footer>
 
 <!-- Visitor Form Modal -->
 <div id="visitorModal">
 <div id="visitorModalContent">
 <h2>Visitor Form</h2>
-<label>Visitor Name</label><input type="text" id="visitorName" required>
-<label>DOB</label><input type="date" id="visitorDOB" required>
-<label>Father Name</label><input type="text" id="fatherName">
-<label>Visitor Address</label><input type="text" id="visitorAddress" required>
+<label>Visitor Name</label>
+<input type="text" id="visitorName" placeholder="Visitor Name" required>
+<label>DOB</label>
+<input type="date" id="visitorDOB" max="" required>
+<label>Father Name</label>
+<input type="text" id="fatherName" placeholder="Father's Name">
+<label>Visitor Address</label>
+<input type="text" id="visitorAddress" placeholder="Visitor Address" required>
 <label>Country</label>
 <select id="visitorCountry" required>
 <option value="">Select Country</option>
@@ -91,13 +91,17 @@ footer .social-links a:hover { color:#fff;}
 <option value="+44">UK (+44)</option>
 <option value="+65">Singapore (+65)</option>
 <option value="+971">UAE (+971)</option>
-<option value="+44">England (+44)</option>
 </select>
-<label>Visit Date</label><input type="date" id="visitDate" required>
-<label>Visit Time</label><input type="time" id="visitTime" required>
-<label>Contact Number</label><input type="tel" id="contactNumber" required>
-<label>Passport Number</label><input type="text" id="passportNumber">
-<label>Email</label><input type="email" id="email" required>
+<label>Visit Date</label>
+<input type="date" id="visitDate" min="" required>
+<label>Visit Time</label>
+<input type="time" id="visitTime" required>
+<label>Contact Number</label>
+<input type="tel" id="contactNumber" placeholder="Contact Number" required>
+<label>Passport Number</label>
+<input type="text" id="passportNumber" placeholder="Passport Number">
+<label>Email</label>
+<input type="email" id="email" placeholder="Email" required>
 <button onclick="submitVisitorForm()">Submit</button>
 <button onclick="closeVisitorForm()">Cancel</button>
 </div>
@@ -107,61 +111,82 @@ footer .social-links a:hover { color:#fff;}
 <div id="adminModal">
 <div id="adminModalContent">
 <h2>Admin Login</h2>
-<label>Username</label><input type="text" id="username" required>
-<label>Password</label><input type="password" id="password" required>
+<label>Username</label>
+<input type="text" id="username" required>
+<label>Password</label>
+<input type="password" id="password" required>
 <button onclick="submitAdminLogin()">Login</button>
 <button onclick="closeAdminForm()">Cancel</button>
 </div>
 </div>
 
 <script>
-const WEBAPP_URL="https://script.google.com/macros/s/AKfycbxTmCvsw2GY1Ceyx5yUAptHN0lAr6cs-DAPm71CtoiScCXpditZpKk653G7xkYNddCEYA/exec";
+const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbxTmCvsw2GY1Ceyx5yUAptHN0lAr6cs-DAPm71CtoiScCXpditZpKk653G7xkYNddCEYA/exec";
 
-/* Visitor Form */
-function openVisitorForm(){document.getElementById("visitorModal").style.display="block";}
-function closeVisitorForm(){document.getElementById("visitorModal").style.display="none";}
+// Set date constraints dynamically
+document.getElementById("visitorDOB").max = new Date().toISOString().split("T")[0];
+document.getElementById("visitDate").min = new Date().toISOString().split("T")[0];
+
+// Visitor Form
+function openVisitorForm(){ document.getElementById("visitorModal").style.display="block"; }
+function closeVisitorForm(){ document.getElementById("visitorModal").style.display="none"; }
+
 function submitVisitorForm(){
-const visitorName=document.getElementById("visitorName").value;
-const dob=document.getElementById("visitorDOB").value;
-const fatherName=document.getElementById("fatherName").value;
-const address=document.getElementById("visitorAddress").value;
-const country=document.getElementById("visitorCountry").value;
-const visitDate=document.getElementById("visitDate").value;
-const visitTime=document.getElementById("visitTime").value;
-const contactNumber=document.getElementById("contactNumber").value;
-const passport=document.getElementById("passportNumber").value;
-const email=document.getElementById("email").value;
-
-const now=new Date();
-if(new Date(dob)>now){alert("DOB cannot be in the future."); return;}
-if(new Date(visitDate+"T"+visitTime)<now){alert("Visit date/time cannot be past."); return;}
+const data = {
+visitorName: document.getElementById("visitorName").value,
+dob: document.getElementById("visitorDOB").value,
+fatherName: document.getElementById("fatherName").value,
+address: document.getElementById("visitorAddress").value,
+country: document.getElementById("visitorCountry").value,
+visitDate: document.getElementById("visitDate").value,
+visitTime: document.getElementById("visitTime").value,
+contactNumber: document.getElementById("contactNumber").value,
+passport: document.getElementById("passportNumber").value,
+email: document.getElementById("email").value
+};
 
 fetch(WEBAPP_URL,{
 method:'POST',
-body:JSON.stringify({visitorName,dob,fatherName,address,country,visitDate,visitTime,contactNumber,passport,email}),
+body:JSON.stringify(data),
 headers:{'Content-Type':'application/json'}
 })
 .then(res=>res.json())
-.then(d=>{alert("Appointment sent successfully\nAppointment No: "+d.appointmentNo); closeVisitorForm();})
+.then(d=>{
+if(d.success){
+alert(`Appointment sent Successfully\nAppointment No: ${d.appointmentNo}`);
+closeVisitorForm();
+document.getElementById("visitorName").value="";
+document.getElementById("visitorDOB").value="";
+document.getElementById("fatherName").value="";
+document.getElementById("visitorAddress").value="";
+document.getElementById("visitorCountry").value="";
+document.getElementById("visitDate").value="";
+document.getElementById("visitTime").value="";
+document.getElementById("contactNumber").value="";
+document.getElementById("passportNumber").value="";
+document.getElementById("email").value="";
+} else { alert("Error: "+d.message); }
+})
 .catch(err=>alert("Error sending appointment: "+err.message));
 }
 
-/* Admin Login */
-let attempts=0;
-function openAdminForm(){document.getElementById("adminModal").style.display="block";}
-function closeAdminForm(){document.getElementById("adminModal").style.display="none";}
+// Admin Login
+function openAdminForm(){ document.getElementById("adminModal").style.display="block"; }
+function closeAdminForm(){ document.getElementById("adminModal").style.display="none"; }
+
 function submitAdminLogin(){
 const username=document.getElementById("username").value;
 const password=document.getElementById("password").value;
+
 fetch(WEBAPP_URL,{
 method:'POST',
 body:JSON.stringify({type:"adminLogin",username,password}),
 headers:{'Content-Type':'application/json'}
 })
 .then(res=>res.text())
-.then(res=>{
-if(res=="SUCCESS"){window.location.href="admin_dashboard.html";}
-else{alert("Access Denied: Incorrect credentials");}
+.then(text=>{
+if(text.trim()==="SUCCESS"){ window.location.href="admin_dashboard.html"; }
+else{ alert("Access Denied: Incorrect credentials"); }
 })
 .catch(err=>alert("Error logging in: "+err.message));
 }

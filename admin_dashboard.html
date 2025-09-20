@@ -1,107 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Dashboard</title>
-<style>
-body { font-family: Arial, sans-serif; margin:0; background:linear-gradient(to right,#1a2a6c,#b21f1f,#fdbb2d); color:white;}
-header {text-align:center; padding:20px; background:rgba(0,0,0,0.7);}
-header h1 {margin:0; color:#fbd46d; text-shadow: 2px 2px 5px black;}
-button {padding:10px 20px; margin:10px 0; border:none; border-radius:5px; cursor:pointer; background:#fbd46d; color:black; font-weight:bold;}
-button:hover {background:#ffe66d;}
-table {width:100%; border-collapse: collapse; margin-top:20px;}
-table th, table td {border:1px solid #fff; padding:10px; text-align:center;}
-table th {background:rgba(255,255,255,0.2);}
-.logout {float:right; margin-right:20px;}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #1a2a6c;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #b21f1f;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+    }
+    .logout-btn {
+      float: right;
+      margin-top: -40px;
+      margin-right: 20px;
+      padding: 10px 20px;
+      background: #fbd46d;
+      color: black;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    table {
+      width: 95%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      background: rgba(255,255,255,0.1);
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #fff;
+      text-align: left;
+    }
+    th {
+      background: rgba(0,0,0,0.6);
+    }
+  </style>
 </head>
 <body>
 
 <header>
-<h1>Admin Dashboard</h1>
-<button class="logout" id="logoutBtn">Logout</button>
+  <h1>Admin Dashboard</h1>
+  <button class="logout-btn" onclick="adminLogout()">Logout</button>
 </header>
 
-<div id="visitorContainer">
-<table id="visitorTable">
-<thead>
-<tr>
-<th>Visitor Name</th>
-<th>DOB</th>
-<th>Father Name</th>
-<th>Address</th>
-<th>Country</th>
-<th>Visit Date</th>
-<th>Visit Time</th>
-<th>Contact Number</th>
-<th>Passport</th>
-<th>Email</th>
-<th>Appointment No</th>
-<th>Timestamp</th>
-</tr>
-</thead>
-<tbody></tbody>
-</table>
-</div>
+<main>
+  <h2 style="text-align:center; margin-top:20px;">Visitor Appointments</h2>
+  <table id="visitorTable">
+    <thead>
+      <tr>
+        <th>Visitor Name</th>
+        <th>DOB</th>
+        <th>Father Name</th>
+        <th>Address</th>
+        <th>Country</th>
+        <th>Visit Date</th>
+        <th>Visit Time</th>
+        <th>Contact Number</th>
+        <th>Passport</th>
+        <th>Email</th>
+        <th>Appointment No</th>
+        <th>Timestamp</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Visitor data will load here -->
+    </tbody>
+  </table>
+</main>
 
 <script>
-const webAppUrl = 'https://script.google.com/macros/s/AKfycbyccMt0PU2ukMEwQl76qmWTVvU0iFgk9NW_SK10JA5-Qmi-rAneOUmUd76-oSde7xk7qA/exec';
-
-// Simple login simulation
-const adminPassword = 'admin123'; // Set your password here
-let isLoggedIn = false;
-
-function loginAdmin() {
-  const pwd = prompt("Enter Admin Password:");
-  if(pwd === adminPassword){
-    isLoggedIn = true;
-    fetchVisitors();
-  } else {
-    alert("Access Denied!");
-    window.location.href = "index.html"; // redirect to main page
-  }
+// -------------------- Logout Redirect --------------------
+function adminLogout() {
+  alert("You have been logged out.");
+  window.location.href = "index.html"; // redirect to main page
 }
 
-function logoutAdmin() {
-  isLoggedIn = false;
-  alert("Logged out successfully");
-  window.location.href = "index.html";
-}
+// -------------------- Fetch Visitor Data --------------------
+const sheetURL = 'https://script.google.com/macros/s/AKfycbwB07Hrru5j8oLDJaojuR-2QWgXsTZDhPRUlRu5E-FF1nrXuqIadCynxJC-3JCYcALauA/exec'; // Your Web App URL
 
-document.getElementById('logoutBtn').onclick = logoutAdmin;
-
-// Fetch visitor data
-function fetchVisitors(){
-  fetch(webAppUrl)
-  .then(res => res.json())
-  .then(data => {
-    const tbody = document.querySelector('#visitorTable tbody');
-    tbody.innerHTML = '';
-    data.forEach(visitor => {
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td>${visitor["Visitor Name"] || ''}</td>
-        <td>${visitor["Visitor DOB"] || ''}</td>
-        <td>${visitor["Father Name"] || ''}</td>
-        <td>${visitor["Address"] || ''}</td>
-        <td>${visitor["Country"] || ''}</td>
-        <td>${visitor["Visit Date"] || ''}</td>
-        <td>${visitor["Visit Time"] || ''}</td>
-        <td>${visitor["Contact Number"] || ''}</td>
-        <td>${visitor["Passport"] || ''}</td>
-        <td>${visitor["Email"] || ''}</td>
-        <td>${visitor["Appointment No"] || ''}</td>
-        <td>${visitor["Timestamp"] || ''}</td>
-      `;
-      tbody.appendChild(tr);
+function loadVisitorData() {
+  fetch(sheetURL)
+    .then(res => res.json())
+    .then(data => {
+      const tbody = document.getElementById('visitorTable').querySelector('tbody');
+      tbody.innerHTML = '';
+      data.forEach(visitor => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${visitor['Visitor Name']}</td>
+          <td>${visitor['Visitor DOB']}</td>
+          <td>${visitor['Father Name']}</td>
+          <td>${visitor['Address']}</td>
+          <td>${visitor['Country']}</td>
+          <td>${visitor['Visit Date']}</td>
+          <td>${visitor['Visit Time']}</td>
+          <td>${visitor['Contact Number']}</td>
+          <td>${visitor['Passport']}</td>
+          <td>${visitor['Email']}</td>
+          <td>${visitor['Appointment No']}</td>
+          <td>${visitor['Timestamp']}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    })
+    .catch(err => {
+      alert("Error loading visitor data: " + err.message);
     });
-  })
-  .catch(err => alert("Failed to fetch visitor data: "+err.message));
 }
 
-// Run login on page load
-window.onload = loginAdmin;
+// Load data on page load
+window.onload = loadVisitorData;
 </script>
 
 </body>

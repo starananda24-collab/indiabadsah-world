@@ -17,25 +17,14 @@ section { padding:40px 20px; max-width:900px; margin:auto; background:rgba(255,2
 section:hover { transform: translateY(-5px);}
 section h2 { color:#ffe66d; margin-bottom:15px;}
 footer { text-align:center; padding:20px; background:rgba(0,0,0,0.7); color:#ccc;}
-input, select, button { width:100%; padding:10px; margin:5px 0 15px 0; border:none; border-radius:5px;}
-button { background:#fbd46d; color:black; cursor:pointer;}
-button:hover { background:#fff;}
-
-/* Visitor Form Modal */
-#visitorModal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.7);}
-#visitorModalContent { background:#222; margin:5% auto; padding:20px; border-radius:10px; width:90%; max-width:500px; color:white;}
-
-/* Admin Login Modal */
-#adminModal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.7);}
-#adminModalContent { background:#222; margin:5% auto; padding:20px; border-radius:10px; width:90%; max-width:400px; color:white;}
-
-/* Visitor Table for Admin */
-#adminTable { width:95%; margin:20px auto; border-collapse: collapse; background: rgba(255,255,255,0.1);}
-#adminTable th, #adminTable td { padding:10px; border:1px solid #fff; text-align:left;}
-#adminTable th { background: rgba(0,0,0,0.6);}
-.status-accepted { background:green; color:white; }
-.status-rejected { background:red; color:white; }
-.status-pending { background:pink; color:black; }
+table { width:100%; border-collapse:collapse; margin-top:20px;}
+th, td { padding:10px; border:1px solid #fff;}
+th { background:rgba(0,0,0,0.6);}
+.accepted {background-color:green;}
+.rejected {background-color:red;}
+.pending {background-color:pink;}
+input, select, button {border-radius:5px; padding:10px; margin:5px 0;}
+button {cursor:pointer;}
 </style>
 </head>
 <body>
@@ -57,25 +46,28 @@ button:hover { background:#fff;}
 <a href="#" onclick="openAdminForm()">Admin Login</a>
 </nav>
 
-<!-- Visitor Status Check -->
-<section id="visitorStatus">
-<h2>Check Your Appointment Status</h2>
-<label>Enter Appointment Number:</label>
-<input type="number" id="checkAppointmentNumber" placeholder="Appointment Number">
-<button onclick="checkVisitorStatus()">Check Status</button>
-<p id="statusResult"></p>
-</section>
+<section id="profile"><h2>Profile</h2><p>I am INDIA BADSAH, a passionate learner and explorer of life’s endless opportunities.</p></section>
+<section id="education"><h2>Education</h2><p>Education is the foundation of growth.</p></section>
+<section id="culture"><h2>Culture</h2><p>Culture defines who we are.</p></section>
+<section id="achievements"><h2>Achievements</h2><p>Perseverance and hard work define my journey.</p></section>
+<section id="hobbies"><h2>Hobbies</h2><p>Engage in creative and recreational activities.</p></section>
+<section id="interested"><h2>Interested About</h2><p>Deeply interested in innovation, leadership, and cultural understanding.</p></section>
+<section id="thoughts"><h2>Thoughts</h2><p>“Life is about creating opportunities.”</p></section>
+
+<footer>
+<p>© 2025 INDIA BADSAH | Personal Biography Website</p>
+</footer>
 
 <!-- Visitor Form Modal -->
-<div id="visitorModal">
-<div id="visitorModalContent">
+<div id="visitorModal" style="display:none;position:fixed; z-index:1000; left:0; top:0;width:100%;height:100%;background-color:rgba(0,0,0,0.7);">
+<div style="background:#222; margin:5% auto; padding:20px; border-radius:10px; width:90%; max-width:500px; color:white;">
 <h2>Visitor Form</h2>
 <label>Visitor Name</label>
 <input type="text" id="visitorName" placeholder="Visitor Name" required>
 <label>DOB</label>
-<input type="date" id="visitorDOB" max="">
-<label>Father's Name</label>
-<input type="text" id="fatherName" placeholder="Father's Name">
+<input type="date" id="visitorDOB" required>
+<label>Father Name</label>
+<input type="text" id="fatherName" placeholder="Father Name">
 <label>Visitor Address</label>
 <input type="text" id="visitorAddress" placeholder="Visitor Address" required>
 <label>Country</label>
@@ -89,10 +81,9 @@ button:hover { background:#fff;}
 <option value="+44">UK (+44)</option>
 <option value="+65">Singapore (+65)</option>
 <option value="+971">UAE (+971)</option>
-<option value="+44">England (+44)</option>
 </select>
 <label>Visit Date</label>
-<input type="date" id="visitDate" min="">
+<input type="date" id="visitDate" required>
 <label>Visit Time</label>
 <input type="time" id="visitTime" required>
 <label>Contact Number</label>
@@ -107,39 +98,56 @@ button:hover { background:#fff;}
 </div>
 
 <!-- Admin Login Modal -->
-<div id="adminModal">
-<div id="adminModalContent">
+<div id="adminModal" style="display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background-color:rgba(0,0,0,0.7);">
+<div style="background:#222; margin:5% auto; padding:20px; border-radius:10px; width:90%; max-width:400px; color:white;">
 <h2>Admin Login</h2>
-<input type="text" id="username" placeholder="Username" required>
-<input type="password" id="password" placeholder="Password" required>
+<input type="text" id="adminUsername" placeholder="Username" required>
+<input type="password" id="adminPassword" placeholder="Password" required>
 <button onclick="submitAdminLogin()">Login</button>
 <button onclick="closeAdminForm()">Cancel</button>
 </div>
 </div>
 
-<!-- Profile Sections -->
-<section id="profile"><h2>Profile</h2><p>I am INDIA BADSAH, a passionate learner and explorer of life’s endless opportunities.</p></section>
-<section id="education"><h2>Education</h2><p>Education is the foundation of growth.</p></section>
-<section id="culture"><h2>Culture</h2><p>Culture defines who we are.</p></section>
-<section id="achievements"><h2>Achievements</h2><p>Perseverance and hard work define my journey.</p></section>
-<section id="hobbies"><h2>Hobbies</h2><p>Engage in creative and recreational activities.</p></section>
-<section id="interested"><h2>Interested About</h2><p>Deeply interested in innovation, leadership, and cultural understanding.</p></section>
-<section id="thoughts"><h2>Thoughts</h2><p>“Life is about creating opportunities.”</p></section>
+<!-- Visitor Status Modal -->
+<div id="visitorStatusModal" style="display:none;position:fixed; z-index:1000; left:0; top:0;width:100%;height:100%;background-color:rgba(0,0,0,0.7);">
+<div style="background:#222; margin:5% auto; padding:20px; border-radius:10px; width:90%; max-width:500px; color:white;">
+<h2>Visitor Status</h2>
+<label>Enter Appointment Number</label>
+<input type="number" id="searchAppointmentNo" placeholder="Appointment No">
+<button onclick="searchAppointment()">Search</button>
+<div id="statusResult" style="margin-top:10px;"></div>
+<button onclick="closeVisitorStatus()">Close</button>
+</div>
+</div>
 
-<footer>
-<p>© 2025 INDIA BADSAH | Personal Biography Website | <a href="https://facebook.com" style="color:white;">Facebook</a> | <a href="https://wa.me/your_number" style="color:white;">WhatsApp</a></p>
-</footer>
+<!-- Visitor Table for Admin -->
+<section id="adminSection" style="display:none;">
+<h2>Visitor Appointments (Admin Only)</h2>
+<table id="visitorTable">
+<thead>
+<tr>
+<th>Visitor Name</th><th>DOB</th><th>Father Name</th><th>Address</th><th>Country</th>
+<th>Visit Date</th><th>Visit Time</th><th>Contact</th><th>Passport</th><th>Email</th>
+<th>Appointment No</th><th>Status</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+<button onclick="adminLogout()">Logout</button>
+</section>
 
 <script>
-/* Set min/max for date inputs dynamically */
-let today=new Date().toISOString().split("T")[0];
-document.getElementById("visitorDOB").max=today;
-document.getElementById("visitDate").min=today;
+const webAppURL = "https://script.google.com/macros/s/AKfycbw2NRzQZ32knafNEDLFajIzR3Ei9cemGDCUbs49pZHU/dev";
 
-/* Visitor Form Functions */
+/* Visitor Form */
 function openVisitorForm(){document.getElementById("visitorModal").style.display="block";}
 function closeVisitorForm(){document.getElementById("visitorModal").style.display="none";}
+
 function submitVisitorForm(){
+const now = new Date();
+const visitDate = new Date(document.getElementById("visitDate").value + " " + document.getElementById("visitTime").value);
+if(visitDate < now){ alert("Visit date/time cannot be in the past"); return; }
+
 const data={
 visitorName:document.getElementById("visitorName").value,
 dob:document.getElementById("visitorDOB").value,
@@ -152,85 +160,85 @@ contactNumber:document.getElementById("contactNumber").value,
 passport:document.getElementById("passportNumber").value,
 email:document.getElementById("email").value
 };
-fetch('https://script.google.com/macros/s/AKfycbw2NRzQZ32knafNEDLFajIzR3Ei9cemGDCUbs49pZHU/dev',{
-method:'POST',
-body:JSON.stringify(data),
-headers:{'Content-Type':'application/json'}
-}).then(res=>res.json()).then(d=>{
-alert(`${d.message}\nAppointment No: ${d.appointmentNo}`);
+
+fetch(webAppURL,{method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data)})
+.then(res=>res.json())
+.then(d=>{
+alert(`Appointment sent successfully. Your Appointment No: ${d.appointmentNo}`);
 closeVisitorForm();
-}).catch(err=>alert("Error sending appointment: "+err.message));
+})
+.catch(err=>alert("Error sending appointment: "+err.message));
 }
 
 /* Admin Login */
-let attempts=0;
 function openAdminForm(){document.getElementById("adminModal").style.display="block";}
 function closeAdminForm(){document.getElementById("adminModal").style.display="none";}
+
 function submitAdminLogin(){
-const username=document.getElementById("username").value;
-const password=document.getElementById("password").value;
-if(username==="admin" && password==="password123"){
+const username=document.getElementById("adminUsername").value.trim();
+const password=document.getElementById("adminPassword").value.trim();
+if(!username||!password){alert("Enter username and password"); return;}
+fetch(webAppURL,{method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({type:'adminLogin', username, password})})
+.then(res=>res.text())
+.then(resp=>{
+if(resp==="SUCCESS"){
 alert("Login Successful");
+document.getElementById("adminSection").style.display="block";
 closeAdminForm();
-loadAdminData();
-}else{
-attempts++;
-alert("PERMISSION DENIED");
-if(attempts>=2){closeAdminForm(); attempts=0;}
-}
+loadVisitorData();
+}else{alert("Permission Denied: Incorrect credentials.");}
+})
+.catch(err=>alert("Error connecting: "+err.message));
 }
 
-/* Admin Data Table */
-function loadAdminData(){
-fetch('https://script.google.com/macros/s/AKfycbw2NRzQZ32knafNEDLFajIzR3Ei9cemGDCUbs49pZHU/dev')
+function adminLogout(){
+document.getElementById("adminSection").style.display="none";
+alert("Logged out, returning to home page.");
+window.scrollTo(0,0);
+}
+
+/* Load Visitor Data */
+function loadVisitorData(){
+fetch(webAppURL)
 .then(res=>res.json())
 .then(data=>{
-let section=document.createElement("section");
-section.innerHTML='<h2>Admin Dashboard - Visitor Appointments</h2><table id="adminTable"><thead><tr><th>Name</th><th>DOB</th><th>Father Name</th><th>Address</th><th>Country</th><th>Visit Date</th><th>Visit Time</th><th>Contact</th><th>Passport</th><th>Email</th><th>Appointment No</th><th>Status</th></tr></thead><tbody></tbody></table>';
-document.body.insertBefore(section,document.getElementById("thoughts"));
-let tbody=section.querySelector("tbody");
-data.forEach(v=>{
-let statusClass=v.Status==="Accepted"?"status-accepted":v.Status==="Rejected"?"status-rejected":"status-pending";
-let tr=document.createElement("tr");
-tr.innerHTML=`<td>${v['Visitor Name']}</td>
-<td>${v['Visitor DOB']}</td>
-<td>${v['Father Name']}</td>
-<td>${v['Visitor Address']}</td>
-<td>${v['Country']}</td>
-<td>${v['Visit Date']}</td>
-<td>${v['Visit Time']}</td>
-<td>${v['Contact Number']}</td>
-<td>${v['Passport Number']}</td>
-<td>${v['Email']}</td>
-<td>${v['Appointment Number']}</td>
-<td class="${statusClass}">${v.Status||"Pending"}</td>`;
+const tbody=document.querySelector("#visitorTable tbody");
+tbody.innerHTML="";
+data.forEach(r=>{
+const tr=document.createElement("tr");
+let statusClass="pending";
+if(r.Status==="Accepted") statusClass="accepted";
+else if(r.Status==="Rejected") statusClass="rejected";
+tr.innerHTML=`<td>${r['Visitor Name']}</td><td>${r['Visitor DOB']}</td><td>${r['Father Name']}</td>
+<td>${r['Visitor Address']}</td><td>${r['Country']}</td><td>${r['Visit Date']}</td><td>${r['Visit Time']}</td>
+<td>${r['Contact Number']}</td><td>${r['Passport Number']}</td><td>${r['Email']}</td>
+<td>${r['Appointment Number']}</td><td class="${statusClass}">${r.Status||"Pending"}</td>`;
 tbody.appendChild(tr);
 });
 })
 .catch(err=>alert("Error loading admin data: "+err.message));
 }
 
-/* Visitor Status Check */
-function checkVisitorStatus(){
-const apptNo=document.getElementById("checkAppointmentNumber").value.trim();
-if(!apptNo){alert("Please enter appointment number");return;}
-fetch('https://script.google.com/macros/s/AKfycbw2NRzQZ32knafNEDLFajIzR3Ei9cemGDCUbs49pZHU/dev')
+/* Visitor Status Search */
+function searchAppointment(){
+const apNo=document.getElementById("searchAppointmentNo").value.trim();
+if(!apNo){alert("Enter Appointment Number"); return;}
+fetch(webAppURL)
 .then(res=>res.json())
 .then(data=>{
-let visitor=data.find(v=>v['Appointment Number']==apptNo);
-let result=document.getElementById("statusResult");
-if(visitor){
-let status=visitor.Status||"Pending";
-let color=status.toLowerCase()=="accepted"?"green":status.toLowerCase()=="rejected"?"red":"pink";
-result.style.background=color; result.style.padding="10px"; result.style.borderRadius="5px";
-result.innerHTML=`Status: ${status}<br>Visitor Name: ${visitor['Visitor Name']}<br>Visit Date: ${visitor['Visit Date']}<br>Visit Time: ${visitor['Visit Time']}`;
-}else{
-result.style.background="pink"; result.style.padding="10px"; result.style.borderRadius="5px";
-result.innerHTML="Appointment number not found.";
-}
+const resultDiv=document.getElementById("statusResult");
+const r=data.find(v=>v['Appointment Number']==apNo);
+if(!r){resultDiv.innerHTML="<p>Appointment not found</p>"; return;}
+let color="pink";
+if(r.Status==="Accepted") color="green";
+else if(r.Status==="Rejected") color="red";
+resultDiv.innerHTML=`<p style="background:${color};padding:5px;border-radius:5px;">
+Visitor: ${r['Visitor Name']} <br>Status: ${r.Status||"Pending"} <br>Visit Date: ${r['Visit Date']} <br>Visit Time: ${r['Visit Time']}</p>`;
 })
-.catch(err=>alert("Error fetching data: "+err.message));
+.catch(err=>alert("Error fetching status: "+err.message));
 }
+
+function closeVisitorStatus(){document.getElementById("visitorStatusModal").style.display="none";}
 </script>
 
 </body>

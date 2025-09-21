@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>INDIA BADSAH</title>
 <style>
-body { margin:0; font-family: Arial,sans-serif; background: linear-gradient(to right,#1a2a6c,#b21f1f,#fdbb2d); color:white; line-height:1.6; }
+body { margin:0; font-family: Arial,sans-serif; background: linear-gradient(to right,#1a2a6c,#b21f1f,#fdbb2d); color:white; line-height:1.6;}
 header { text-align:center; padding:20px; background:rgba(0,0,0,0.6);}
 header img { width:180px; height:180px; object-fit:cover; border-radius:50%; border:5px solid #fff; transition: transform 0.4s;}
 header img:hover { transform: scale(1.05) rotate(2deg);}
@@ -17,23 +17,22 @@ section { padding:40px 20px; max-width:900px; margin:auto; background:rgba(255,2
 section:hover { transform: translateY(-5px);}
 section h2 { color:#ffe66d; margin-bottom:15px;}
 footer { text-align:center; padding:20px; background:rgba(0,0,0,0.7); color:#ccc;}
-/* Visitor Form Modal */
-#visitorModal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.7);}
-#visitorModalContent { background:#222; margin:5% auto; padding:20px; border-radius:10px; width:90%; max-width:500px; color:white;}
-#visitorModalContent label { display:block; margin:5px 0 3px; font-weight:bold; }
-#visitorModalContent input, #visitorModalContent select { width:100%; padding:10px; margin-bottom:10px; border:none; border-radius:5px;}
-#visitorModalContent button { background:#fbd46d; color:black; border:none; padding:12px 20px; border-radius:5px; cursor:pointer; margin-right:10px;}
-#visitorModalContent button:hover { background:#fff; }
-/* Admin Login Modal */
-#adminModal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.7);}
-#adminModalContent { background:#222; margin:5% auto; padding:20px; border-radius:10px; width:90%; max-width:400px; color:white;}
-#adminModalContent input { width:100%; padding:10px; margin:5px 0 15px 0; border:none; border-radius:5px;}
-#adminModalContent button { background:#fbd46d; color:black; border:none; padding:12px 20px; border-radius:5px; cursor:pointer; margin-right:10px;}
-#adminModalContent button:hover { background:#fff; }
-/* Status Modal */
-#statusModal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.7);}
-#statusModalContent { background:#222; margin:5% auto; padding:20px; border-radius:10px; width:90%; max-width:500px; color:white;}
-#statusModalContent p { padding:10px; border-radius:5px; margin-bottom:10px;}
+.social-links { margin-top:10px;}
+.social-links a { color:#fbd46d; margin:0 10px; text-decoration:none; font-weight:bold;}
+.social-links a:hover { color:white;}
+/* Modal Styles */
+.modal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.7);}
+.modal-content { background:#222; margin:5% auto; padding:20px; border-radius:10px; width:90%; max-width:500px; color:white;}
+.modal-content input, .modal-content select { width:100%; padding:10px; margin:5px 0 15px 0; border:none; border-radius:5px;}
+.modal-content button { background:#fbd46d; color:black; border:none; padding:12px 20px; border-radius:5px; cursor:pointer; margin-right:10px;}
+.modal-content button:hover { background:#fff; color:black;}
+/* Visitor Table in admin modal */
+#adminDashboard table { width:100%; border-collapse:collapse; margin-top:10px;}
+#adminDashboard th, #adminDashboard td { padding:8px; border:1px solid #fff; text-align:left; font-size:0.85em;}
+#adminDashboard th { background:rgba(0,0,0,0.6);}
+.status-green { background-color:green; color:white; padding:3px 6px; border-radius:4px;}
+.status-red { background-color:red; color:white; padding:3px 6px; border-radius:4px;}
+.status-pink { background-color:pink; color:black; padding:3px 6px; border-radius:4px;}
 </style>
 </head>
 <body>
@@ -41,9 +40,9 @@ footer { text-align:center; padding:20px; background:rgba(0,0,0,0.7); color:#ccc
 <header>
 <img src="myphoto.jpg" alt="India Badsah Photo">
 <h1>INDIA BADSAH</h1>
-<div style="margin-top:10px;">
-<a href="https://facebook.com/" target="_blank" style="color:#3b5998; margin-right:10px;">Facebook</a>
-<a href="https://instagram.com/" target="_blank" style="color:#E1306C;">Instagram</a>
+<div class="social-links">
+<a href="https://www.facebook.com/" target="_blank">Facebook</a>
+<a href="https://www.instagram.com/" target="_blank">Instagram</a>
 </div>
 </header>
 
@@ -57,7 +56,7 @@ footer { text-align:center; padding:20px; background:rgba(0,0,0,0.7); color:#ccc
 <a href="#thoughts">Thoughts</a>
 <a href="#" onclick="openVisitorForm()">Visitor Form</a>
 <a href="#" onclick="openAdminForm()">Admin Login</a>
-<a href="#" onclick="openVisitorStatus()">Check Status</a>
+<a href="#" onclick="openVisitorSearch()">Check Appointment Status</a>
 </nav>
 
 <section id="profile"><h2>Profile</h2><p>I am INDIA BADSAH, a passionate learner and explorer of life’s endless opportunities.</p></section>
@@ -73,18 +72,18 @@ footer { text-align:center; padding:20px; background:rgba(0,0,0,0.7); color:#ccc
 </footer>
 
 <!-- Visitor Form Modal -->
-<div id="visitorModal">
-<div id="visitorModalContent">
+<div id="visitorModal" class="modal">
+<div class="modal-content">
 <h2>Visitor Form</h2>
-<label for="visitorName">Visitor Name</label>
-<input type="text" id="visitorName" required>
-<label for="visitorDOB">DOB</label>
+<label>Visitor Name</label>
+<input type="text" id="visitorName" placeholder="Visitor Name" required>
+<label>Date of Birth</label>
 <input type="date" id="visitorDOB" required>
-<label for="fatherName">Father's Name</label>
-<input type="text" id="fatherName">
-<label for="visitorAddress">Address</label>
-<input type="text" id="visitorAddress" required>
-<label for="visitorCountry">Country Code</label>
+<label>Father's Name</label>
+<input type="text" id="fatherName" placeholder="Father's Name">
+<label>Address</label>
+<input type="text" id="visitorAddress" placeholder="Visitor Address" required>
+<label>Country</label>
 <select id="visitorCountry" required>
 <option value="">Select Country</option>
 <option value="+91">India (+91)</option>
@@ -96,130 +95,145 @@ footer { text-align:center; padding:20px; background:rgba(0,0,0,0.7); color:#ccc
 <option value="+65">Singapore (+65)</option>
 <option value="+971">UAE (+971)</option>
 </select>
-<label for="visitDate">Visit Date</label>
+<label>Visit Date</label>
 <input type="date" id="visitDate" required>
-<label for="visitTime">Visit Time</label>
+<label>Visit Time</label>
 <input type="time" id="visitTime" required>
-<label for="contactNumber">Contact Number</label>
-<input type="tel" id="contactNumber" required>
-<label for="passportNumber">Passport Number</label>
-<input type="text" id="passportNumber">
-<label for="email">Email</label>
-<input type="email" id="email" required>
+<label>Contact Number</label>
+<input type="tel" id="contactNumber" placeholder="Contact Number" required>
+<label>Passport Number</label>
+<input type="text" id="passportNumber" placeholder="Passport Number">
+<label>Email</label>
+<input type="email" id="email" placeholder="example@gmail.com" required>
 <button onclick="submitVisitorForm()">Submit</button>
 <button onclick="closeVisitorForm()">Cancel</button>
 </div>
 </div>
 
 <!-- Admin Login Modal -->
-<div id="adminModal">
-<div id="adminModalContent">
+<div id="adminModal" class="modal">
+<div class="modal-content">
 <h2>Admin Login</h2>
 <input type="text" id="username" placeholder="Username" required>
 <input type="password" id="password" placeholder="Password" required>
 <button onclick="submitAdminLogin()">Login</button>
 <button onclick="closeAdminForm()">Cancel</button>
+<div id="adminDashboard" style="display:none;">
+<h3>Visitor Appointments</h3>
+<table>
+<thead>
+<tr>
+<th>Visitor Name</th><th>DOB</th><th>Father Name</th><th>Address</th><th>Country</th><th>Visit Date</th><th>Visit Time</th><th>Contact Number</th><th>Passport</th><th>Email</th><th>Appointment No</th><th>Status</th>
+</tr>
+</thead>
+<tbody id="adminTableBody"></tbody>
+</table>
+<button onclick="adminLogout()">Logout</button>
+</div>
 </div>
 </div>
 
-<!-- Visitor Status Modal -->
-<div id="statusModal">
-<div id="statusModalContent">
-<h2>Visitor Status</h2>
-<label for="statusAppointment">Enter Appointment No</label>
-<input type="number" id="statusAppointment" placeholder="Appointment No">
-<button onclick="checkVisitorStatus()">Check</button>
-<button onclick="closeVisitorStatus()">Close</button>
-<div id="statusResult"></div>
+<!-- Visitor Search Modal -->
+<div id="searchModal" class="modal">
+<div class="modal-content">
+<h2>Check Appointment Status</h2>
+<label>Appointment Number</label>
+<input type="number" id="searchAppointmentNo" placeholder="Enter Appointment Number">
+<button onclick="searchAppointment()">Search</button>
+<button onclick="closeSearchModal()">Cancel</button>
+<div id="searchResult"></div>
 </div>
 </div>
 
 <script>
-const webAppURL = "https://script.google.com/macros/s/AKfycbz6OHcvR-tVeM7PXnps0An63jekTp2buTf3Tr5fJDk_Pzu1G_1OoEBsFhd9LI4NTJc4dA/exec";
+const webAppUrl = 'https://script.google.com/macros/s/AKfycbz6OHcvR-tVeM7PXnps0An63jekTp2buTf3Tr5fJDk_Pzu1G_1OoEBsFhd9LI4NTJc4dA/exec';
 
-// ---------------- Visitor Form ----------------
-function openVisitorForm(){document.getElementById("visitorModal").style.display="block";}
-function closeVisitorForm(){document.getElementById("visitorModal").style.display="none";}
-
-// Set date/time restrictions
-const today = new Date().toISOString().split("T")[0];
-document.getElementById("visitorDOB").setAttribute("max", today);
-document.getElementById("visitDate").setAttribute("min", today);
-document.getElementById("visitTime").setAttribute("min", new Date().toTimeString().slice(0,5));
-
+// Visitor Form
+function openVisitorForm(){document.getElementById('visitorModal').style.display='block';setMinDates();}
+function closeVisitorForm(){document.getElementById('visitorModal').style.display='none';}
+function setMinDates(){
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('visitDate').setAttribute('min', today);
+  document.getElementById('visitorDOB').setAttribute('max', today);
+}
 function submitVisitorForm(){
-  const data = {
-    visitorName: document.getElementById("visitorName").value,
-    dob: document.getElementById("visitorDOB").value,
-    fatherName: document.getElementById("fatherName").value,
-    address: document.getElementById("visitorAddress").value,
-    country: document.getElementById("visitorCountry").value,
-    visitDate: document.getElementById("visitDate").value,
-    visitTime: document.getElementById("visitTime").value,
-    contactNumber: document.getElementById("contactNumber").value,
-    passport: document.getElementById("passportNumber").value,
-    email: document.getElementById("email").value
+  const visitDate=document.getElementById('visitDate').value;
+  const visitTime=document.getElementById('visitTime').value;
+  const now=new Date();
+  const visitDateTime=new Date(visitDate+'T'+visitTime);
+  if(visitDateTime<now){alert('Visit Date & Time must be in future'); return;}
+  const data={
+    visitorName:document.getElementById('visitorName').value,
+    dob:document.getElementById('visitorDOB').value,
+    fatherName:document.getElementById('fatherName').value,
+    address:document.getElementById('visitorAddress').value,
+    country:document.getElementById('visitorCountry').value,
+    visitDate:visitDate,
+    visitTime:visitTime,
+    contactNumber:document.getElementById('contactNumber').value,
+    passport:document.getElementById('passportNumber').value,
+    email:document.getElementById('email').value
   };
-  fetch(webAppURL,{
-    method:'POST',
-    body:JSON.stringify(data),
-    headers:{'Content-Type':'application/json'}
-  }).then(res=>res.json()).then(d=>{
-    alert(`Appointment sent successfully! Appointment No: ${d.appointmentNo}`);
+  fetch(webAppUrl,{method:'POST',body:JSON.stringify(data),headers:{'Content-Type':'application/json'}})
+  .then(res=>res.json()).then(d=>{
+    alert(d.message+'\nAppointment No: '+d.appointmentNo);
     closeVisitorForm();
-  }).catch(err=>alert("Error sending appointment: "+err.message));
+  }).catch(err=>alert('Error sending appointment: '+err.message));
 }
 
-// ---------------- Visitor Status ----------------
-function openVisitorStatus(){document.getElementById("statusModal").style.display="block";}
-function closeVisitorStatus(){document.getElementById("statusModal").style.display="none";}
-function checkVisitorStatus(){
-  const apptNo = document.getElementById("statusAppointment").value;
-  if(!apptNo){ alert("Enter appointment number"); return; }
-  fetch(webAppURL).then(res=>res.json()).then(data=>{
-    const visitor = data.find(v=>v["Appointment Number"] == apptNo);
-    if(!visitor){ alert("No record found"); return; }
-    let color = visitor.Status==="Accepted"?"green":visitor.Status==="Rejected"?"red":"pink";
-    document.getElementById("statusResult").innerHTML=`<p style="background:${color};padding:10px;border-radius:5px;">
-      Visitor: ${visitor["Visitor Name"]} <br>
-      Status: ${visitor.Status || "Pending"} <br>
-      Visit Date: ${visitor["Visit Date"]} <br>
-      Visit Time: ${visitor["Visit Time"]}
-      </p>`;
-  }).catch(err=>alert("Error fetching data: "+err.message));
-}
-
-// ---------------- Admin Login ----------------
-function openAdminForm(){document.getElementById("adminModal").style.display="block";}
-function closeAdminForm(){document.getElementById("adminModal").style.display="none";}
-
+// Admin Login
+let adminAttempts=0;
+function openAdminForm(){document.getElementById('adminModal').style.display='block';}
+function closeAdminForm(){document.getElementById('adminModal').style.display='none';document.getElementById('adminDashboard').style.display='none';}
 function submitAdminLogin(){
-  const username = document.getElementById("username").value;
-  const password = document.getElementById("password").value;
-  if(!username || !password){ alert("Enter credentials or cancel"); return; }
+  const username=document.getElementById('username').value;
+  const password=document.getElementById('password').value;
+  const data={type:'adminLogin',username,password};
+  fetch(webAppUrl,{method:'POST',body:JSON.stringify(data),headers:{'Content-Type':'application/json'}})
+  .then(res=>res.text()).then(txt=>{
+    if(txt==='SUCCESS'){
+      alert('Login Successful');
+      loadAdminDashboard();
+    }else{alert('Permission Denied'); adminAttempts++; if(adminAttempts>=2){closeAdminForm(); adminAttempts=0;}}
+  }).catch(err=>alert('Error logging in: '+err.message));
+}
+function loadAdminDashboard(){
+  document.getElementById('adminDashboard').style.display='block';
+  fetch(webAppUrl).then(res=>res.json()).then(data=>{
+    const tbody=document.getElementById('adminTableBody');
+    tbody.innerHTML='';
+    data.forEach(v=>{
+      const status=v.Status||'Pending';
+      let cls='status-pink';
+      if(status==='Accepted') cls='status-green';
+      else if(status==='Rejected') cls='status-red';
+      const tr=document.createElement('tr');
+      tr.innerHTML=`<td>${v['Visitor Name']}</td><td>${v['Visitor DOB']}</td><td>${v['Father Name']}</td><td>${v['Visitor Address']}</td><td>${v['Country']}</td><td>${v['Visit Date']}</td><td>${v['Visit Time']}</td><td>${v['Contact Number']}</td><td>${v['Passport Number']}</td><td>${v['Email']}</td><td>${v['Appointment Number']}</td><td class="${cls}">${status}</td>`;
+      tbody.appendChild(tr);
+    });
+  }).catch(err=>alert('Error loading admin data: '+err.message));
+}
+function adminLogout(){closeAdminForm(); alert('Logged out');}
 
-  fetch(webAppURL,{
-    method:'POST',
-    body:JSON.stringify({type:"adminLogin", username, password}),
-    headers:{'Content-Type':'application/json'}
-  }).then(res=>res.text()).then(txt=>{
-    if(txt.includes("PERMISSION DENIED")){ alert("Access Denied"); return; }
-    alert("Login Successful!"); 
-    closeAdminForm();
-    // Load visitor dashboard in modal
-    fetch(webAppURL).then(r=>r.json()).then(data=>{
-      let result = "<h3>Visitor Appointments</h3><table border='1' style='width:100%;color:black;background:white;border-collapse:collapse'><tr>";
-      Object.keys(data[0]).forEach(h=> result+=`<th>${h}</th>`); result+="</tr>";
-      data.forEach(v=>{ result+="<tr>"; Object.values(v).forEach(val=> result+=`<td>${val}</td>`); result+="</tr>"; });
-      result+="</table>";
-      const adminDiv = document.createElement("div");
-      adminDiv.style.cssText="position:fixed;top:5%;left:5%;width:90%;height:90%;overflow:auto;background:#fff;color:#000;padding:10px;z-index:1001;border-radius:10px;";
-      adminDiv.innerHTML=`<button onclick='this.parentElement.remove()'>Close</button>${result}`;
-      document.body.appendChild(adminDiv);
-    }).catch(err=>alert("Error loading admin data: "+err.message));
-  }).catch(err=>alert("Error logging in: "+err.message));
+// Visitor Search
+function openVisitorSearch(){document.getElementById('searchModal').style.display='block';document.getElementById('searchResult').innerHTML='';}
+function closeSearchModal(){document.getElementById('searchModal').style.display='none';}
+function searchAppointment(){
+  const appNo=document.getElementById('searchAppointmentNo').value;
+  if(!appNo){alert('Enter Appointment Number'); return;}
+  fetch(webAppUrl).then(res=>res.json()).then(data=>{
+    const visitor=data.find(v=>v['Appointment Number']==appNo);
+    const result=document.getElementById('searchResult');
+    if(visitor){
+      let status=visitor.Status||'Pending';
+      let cls='status-pink';
+      if(status==='Accepted') cls='status-green';
+      else if(status==='Rejected') cls='status-red';
+      result.innerHTML=`<p><b>Visitor Name:</b> ${visitor['Visitor Name']}</p>
+      <p><b>Status:</b> <span class="${cls}">${status}</span></p>`;
+    }else{result.innerHTML='<p>Appointment not found</p>';}
+  }).catch(err=>alert('Error fetching data: '+err.message));
 }
 </script>
-
 </body>
 </html>

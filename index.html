@@ -1,113 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="google-site-verification" content="1Ot9i9lyK2dI-pkJhqNMOhWEaCs2sLtynUPW9u4KtNQ" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>INDIA BADSAH</title>
 <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d);
-  color: white;
-  line-height: 1.6;
-}
-header {
-  text-align: center;
-  padding: 20px;
-  background: rgba(0,0,0,0.6);
-}
-header img {
-  width: 180px;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 5px solid #fff;
-  transition: transform 0.4s;
-}
-header img:hover { transform: scale(1.05) rotate(2deg); }
-header h1 {
-  margin: 15px 0 0;
-  font-size: 2.5em;
-  color: #fbd46d;
-  text-shadow: 2px 2px 5px black;
-}
-nav {
-  display: flex;
-  justify-content: center;
-  background: rgba(0,0,0,0.8);
-  flex-wrap: wrap;
-}
-nav a {
-  color: white;
-  text-decoration: none;
-  padding: 15px 20px;
-  display: block;
-  transition: background 0.3s, color 0.3s;
-}
-nav a:hover { background: #fbd46d; color: black; border-radius:5px; }
-section {
-  padding: 40px 20px;
-  max-width: 900px;
-  margin: auto;
-  background: rgba(255,255,255,0.1);
-  margin-bottom: 30px;
-  border-radius: 12px;
-  box-shadow: 0px 4px 15px rgba(0,0,0,0.5);
-  transition: transform 0.3s;
-}
-section:hover { transform: translateY(-5px); }
-section h2 { color: #ffe66d; margin-bottom: 15px; }
-footer {
-  text-align: center;
-  padding: 20px;
-  background: rgba(0,0,0,0.7);
-  color: #ccc;
-}
-/* Visitor Form Modal */
-#visitorModal {
-  display:none; position:fixed; z-index:1000;
-  left:0; top:0; width:100%; height:100%;
-  overflow:auto; background-color:rgba(0,0,0,0.7);
-}
-#visitorModalContent {
-  background:#222; margin:5% auto; padding:20px;
-  border-radius:10px; width:90%; max-width:500px;
-  color:white;
-}
-#visitorModalContent label {
-  display:block; margin-top:10px; font-weight:bold;
-}
-#visitorModalContent input, #visitorModalContent select {
-  width:100%; padding:10px; margin:5px 0; border:none; border-radius:5px;
-}
-#visitorModalContent button {
-  background:#fbd46d; color:black; border:none;
-  padding:12px 20px; border-radius:5px; cursor:pointer; margin-top:10px;
-}
-#visitorModalContent button:hover { background:#fff; }
-
-/* Admin Modal */
-#adminModal {
-  display:none; position:fixed; z-index:1000;
-  left:0; top:0; width:100%; height:100%;
-  overflow:auto; background-color:rgba(0,0,0,0.7);
-}
-#adminModalContent {
-  background:#222; margin:5% auto; padding:20px;
-  border-radius:10px; width:90%; max-width:400px; color:white;
-}
-#adminModalContent input {
-  width:100%; padding:10px; margin:5px 0; border:none; border-radius:5px;
-}
-#adminModalContent button {
-  background:#fbd46d; color:black; border:none;
-  padding:12px 20px; border-radius:5px; cursor:pointer; margin-top:10px;
-}
-#adminModalContent button:hover { background:#fff; }
-.cancel-btn { background:#ccc; margin-top:5px; }
-.cancel-btn:hover { background:#999; }
+body {margin:0; font-family: Arial,sans-serif; background: linear-gradient(to right,#1a2a6c,#b21f1f,#fdbb2d); color:white; line-height:1.6;}
+header {text-align:center; padding:20px; background:rgba(0,0,0,0.6);}
+header img {width:180px; height:180px; object-fit:cover; border-radius:50%; border:5px solid #fff; transition: transform 0.4s;}
+header img:hover {transform: scale(1.05) rotate(2deg);}
+header h1 {margin:15px 0 0; font-size:2.5em; color:#fbd46d; text-shadow:2px 2px 5px black;}
+nav {display:flex; justify-content:center; background:rgba(0,0,0,0.8); flex-wrap:wrap;}
+nav a {color:white; text-decoration:none; padding:15px 20px; display:block; transition: background 0.3s, color 0.3s;}
+nav a:hover {background:#fbd46d; color:black; border-radius:5px;}
+section {padding:40px 20px; max-width:900px; margin:auto; background:rgba(255,255,255,0.1); margin-bottom:30px; border-radius:12px; box-shadow:0px 4px 15px rgba(0,0,0,0.5); transition: transform 0.3s;}
+section:hover {transform: translateY(-5px);}
+section h2 {color:#ffe66d; margin-bottom:15px;}
+footer {text-align:center; padding:20px; background:rgba(0,0,0,0.7); color:#ccc;}
+label{display:block; margin-top:10px;}
+input, select{width:100%; padding:10px; margin:5px 0 15px 0; border:none; border-radius:5px;}
+button{background:#fbd46d; color:black; border:none; padding:12px 20px; border-radius:5px; cursor:pointer;}
+button:hover{background:#fff;}
+.status-accepted{background:green; padding:5px; border-radius:5px;}
+.status-rejected{background:red; padding:5px; border-radius:5px;}
+.status-pending{background:pink; padding:5px; border-radius:5px;}
 </style>
 </head>
 <body>
@@ -126,60 +42,31 @@ footer {
 <a href="#interested">Interested About</a>
 <a href="#thoughts">Thoughts</a>
 <a href="#" onclick="openVisitorForm()">Visitor Form</a>
+<a href="#" onclick="openVisitorSearch()">Check Status</a>
 <a href="#" onclick="openAdminForm()">Admin Login</a>
+<a href="https://www.facebook.com/YOUR_FACEBOOK" target="_blank">Facebook</a>
 </nav>
 
-<section id="profile">
-<h2>Profile</h2>
-<p>I am INDIA BADSAH, a passionate learner and explorer of life’s endless opportunities. With strong roots and a clear vision, I always aim to inspire others while growing myself in every possible field.</p>
-</section>
-
-<section id="education">
-<h2>Education</h2>
-<p>I believe education is the foundation of growth. Over the years, I have gathered knowledge not only from books but also from real-life experiences, which shaped my way of thinking and problem-solving abilities.</p>
-</section>
-
-<section id="culture">
-<h2>Culture</h2>
-<p>Culture defines who we are. I embrace traditions, values, and respect for diversity while blending it with modern ideas to create a balanced lifestyle.</p>
-</section>
-
-<section id="achievements">
-<h2>Achievements</h2>
-<p>Every step of life is an achievement — from personal milestones to professional success. My journey reflects perseverance, hard work, and dedication.</p>
-</section>
-
-<section id="hobbies">
-<h2>Hobbies</h2>
-<p>I enjoy engaging in creative and recreational activities, whether it is sports, art, music, or technology. Hobbies give me balance and energy to face daily challenges.</p>
-</section>
-
-<section id="interested">
-<h2>Interested About</h2>
-<p>I am deeply interested in innovation, leadership, and cultural understanding. Exploring new ideas and connecting with people from all walks of life always excites me.</p>
-</section>
-
-<section id="thoughts">
-<h2>Thoughts</h2>
-<p>“Life is not about waiting for opportunities, it is about creating them.” My belief is simple: with determination and honesty, nothing is impossible.</p>
-</section>
+<section id="profile"><h2>Profile</h2><p>I am INDIA BADSAH, a passionate learner and explorer of life’s endless opportunities.</p></section>
+<section id="education"><h2>Education</h2><p>Education is the foundation of growth.</p></section>
+<section id="culture"><h2>Culture</h2><p>Culture defines who we are.</p></section>
+<section id="achievements"><h2>Achievements</h2><p>Perseverance and hard work define my journey.</p></section>
+<section id="hobbies"><h2>Hobbies</h2><p>Engage in creative and recreational activities.</p></section>
+<section id="interested"><h2>Interested About</h2><p>Deeply interested in innovation, leadership, and cultural understanding.</p></section>
+<section id="thoughts"><h2>Thoughts</h2><p>“Life is about creating opportunities.”</p></section>
 
 <footer>
 <p>© 2025 INDIA BADSAH | Personal Biography Website</p>
 </footer>
 
 <!-- Visitor Form Modal -->
-<div id="visitorModal">
-<div id="visitorModalContent">
+<div id="visitorModal" style="display:none; position:fixed; left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.7); z-index:1000;">
+<div style="background:#222; margin:5% auto; padding:20px; border-radius:10px; width:90%; max-width:500px; color:white;">
 <h2>Visitor Form</h2>
-<label>Visitor Name</label>
-<input type="text" id="visitorName" placeholder="Visitor Name" required>
-<label>DOB</label>
-<input type="date" id="visitorDOB" max="">
-<label>Father Name</label>
-<input type="text" id="fatherName" placeholder="Father's Name">
-<label>Visitor Address</label>
-<input type="text" id="visitorAddress" placeholder="Address" required>
+<label>Visitor Name</label><input type="text" id="visitorName" required>
+<label>DOB</label><input type="date" id="visitorDOB" required>
+<label>Father Name</label><input type="text" id="fatherName">
+<label>Visitor Address</label><input type="text" id="visitorAddress" required>
 <label>Country</label>
 <select id="visitorCountry" required>
 <option value="">Select Country</option>
@@ -191,90 +78,101 @@ footer {
 <option value="+44">UK (+44)</option>
 <option value="+65">Singapore (+65)</option>
 <option value="+971">UAE (+971)</option>
+<option value="+44">England (+44)</option>
 </select>
-<label>Visit Date</label>
-<input type="date" id="visitDate" min="">
-<label>Visit Time</label>
-<input type="time" id="visitTime" min="">
-<label>Contact Number</label>
-<input type="tel" id="contactNumber" placeholder="Contact Number" required>
-<label>Passport Number</label>
-<input type="text" id="passportNumber" placeholder="Passport Number">
-<label>Email</label>
-<input type="email" id="email" placeholder="example@gmail.com" required>
+<label>Visit Date</label><input type="date" id="visitDate" required>
+<label>Visit Time</label><input type="time" id="visitTime" required>
+<label>Contact Number</label><input type="tel" id="contactNumber" required>
+<label>Passport Number</label><input type="text" id="passportNumber">
+<label>Email</label><input type="email" id="email" required>
 <button onclick="submitVisitorForm()">Submit</button>
-<button onclick="closeVisitorForm()" class="cancel-btn">Cancel</button>
+<button onclick="closeVisitorForm()">Cancel</button>
+</div>
+</div>
+
+<!-- Visitor Status Modal -->
+<div id="visitorSearchModal" style="display:none; position:fixed; left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.7); z-index:1000;">
+<div style="background:#222; margin:5% auto; padding:20px; border-radius:10px; width:90%; max-width:500px; color:white;">
+<h2>Check Visitor Status</h2>
+<label>Enter Appointment Number</label><input type="text" id="searchAppointment">
+<button onclick="searchVisitorStatus()">Search</button>
+<button onclick="closeVisitorSearch()">Cancel</button>
+<div id="visitorStatusResult" style="margin-top:10px;"></div>
 </div>
 </div>
 
 <!-- Admin Login Modal -->
-<div id="adminModal">
-<div id="adminModalContent">
+<div id="adminModal" style="display:none; position:fixed; left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.7); z-index:1000;">
+<div style="background:#222; margin:5% auto; padding:20px; border-radius:10px; width:90%; max-width:400px; color:white;">
 <h2>Admin Login</h2>
-<label>Username</label>
-<input type="text" id="username" placeholder="Username" required>
-<label>Password</label>
-<input type="password" id="password" placeholder="Password" required>
+<label>Username</label><input type="text" id="username" required>
+<label>Password</label><input type="password" id="password" required>
 <button onclick="submitAdminLogin()">Login</button>
-<button onclick="closeAdminForm()" class="cancel-btn">Cancel</button>
+<button onclick="closeAdminForm()">Cancel</button>
 </div>
 </div>
 
 <script>
-const WEBAPP_URL = "YOUR_WEBAPP_URL_HERE"; // replace with your deployed Apps Script URL
+const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbw2NRzQZ32knafNEDLFajIzR3Ei9cemGDCUbs49pZHU/dev";
 
-// Set dynamic date min/max
-const today = new Date().toISOString().split("T")[0];
-document.getElementById("visitorDOB").max = today;
-document.getElementById("visitDate").min = today;
-
-// ---------------- Visitor Form ----------------
+/* Visitor Form Functions */
 function openVisitorForm(){document.getElementById("visitorModal").style.display="block";}
 function closeVisitorForm(){document.getElementById("visitorModal").style.display="none";}
-
 function submitVisitorForm(){
-const data={
+const visitorDOB = new Date(document.getElementById("visitorDOB").value);
+const visitDate = new Date(document.getElementById("visitDate").value);
+const visitTime = document.getElementById("visitTime").value;
+const today = new Date();
+if(visitorDOB>today){alert("DOB cannot be in the future"); return;}
+if(visitDate<today){alert("Visit Date cannot be in the past"); return;}
+const data = {
 visitorName:document.getElementById("visitorName").value.trim(),
 dob:document.getElementById("visitorDOB").value,
 fatherName:document.getElementById("fatherName").value.trim(),
 address:document.getElementById("visitorAddress").value.trim(),
 country:document.getElementById("visitorCountry").value,
 visitDate:document.getElementById("visitDate").value,
-visitTime:document.getElementById("visitTime").value,
+visitTime:visitTime,
 contactNumber:document.getElementById("contactNumber").value.trim(),
 passport:document.getElementById("passportNumber").value.trim(),
 email:document.getElementById("email").value.trim()
 };
-fetch(WEBAPP_URL,{
-method:'POST',
-body:JSON.stringify(data),
-headers:{'Content-Type':'application/json'}
-})
+fetch(WEBAPP_URL,{method:'POST',body:JSON.stringify(data),headers:{'Content-Type':'application/json'}})
 .then(res=>res.json())
-.then(d=>{
-if(d.success){ alert("Appointment sent Successfully\nAppointment No: "+d.appointmentNo); closeVisitorForm(); }
-else{ alert("Error: "+d.message); }
-})
+.then(d=>{alert(`Appointment sent Successfully\nAppointment No: ${d.appointmentNo}`); closeVisitorForm();})
 .catch(err=>alert("Error sending appointment: "+err.message));
 }
 
-// ---------------- Admin Login ----------------
-let attempts=0;
+/* Visitor Status */
+function openVisitorSearch(){document.getElementById("visitorSearchModal").style.display="block";}
+function closeVisitorSearch(){document.getElementById("visitorSearchModal").style.display="none";}
+function searchVisitorStatus(){
+const appt=document.getElementById("searchAppointment").value.trim();
+if(!appt){alert("Enter appointment number"); return;}
+fetch(WEBAPP_URL).then(res=>res.json()).then(data=>{
+const visitor=data.find(v=>v["Appointment Number"]==appt);
+const resultDiv=document.getElementById("visitorStatusResult");
+if(!visitor){resultDiv.innerHTML="Not found"; return;}
+let statusClass="status-pending",statusText="Pending";
+if(visitor.Status==="Accepted"){statusClass="status-accepted"; statusText="Accepted";}
+else if(visitor.Status==="Rejected"){statusClass="status-rejected"; statusText="Rejected";}
+resultDiv.innerHTML=`<div class="${statusClass}">${statusText}</div>
+<p>Name: ${visitor["Visitor Name"]}<br>DOB: ${visitor["Visitor DOB"]}<br>Father Name: ${visitor["Father Name"]}<br>Address: ${visitor["Visitor Address"]}<br>Contact: ${visitor["Contact Number"]}</p>`;
+}).catch(err=>alert("Error fetching status: "+err.message));
+}
+
+/* Admin Login */
 function openAdminForm(){document.getElementById("adminModal").style.display="block";}
 function closeAdminForm(){document.getElementById("adminModal").style.display="none";}
 function submitAdminLogin(){
 const username=document.getElementById("username").value.trim();
 const password=document.getElementById("password").value.trim();
-if(!username || !password){alert("Enter username & password"); return;}
-fetch(WEBAPP_URL,{
-method:'POST',
-body:JSON.stringify({type:"adminLogin", username, password}),
-headers:{'Content-Type':'application/json'}
-})
+if(!username||!password){alert("Enter credentials"); return;}
+fetch(WEBAPP_URL,{method:'POST',body:JSON.stringify({type:"adminLogin",username,password}),headers:{'Content-Type':'application/json'}})
 .then(res=>res.text())
-.then(txt=>{
-if(txt.trim()==="SUCCESS"){window.location.href="admin_dashboard.html";}
-else{attempts++; alert("PERMISSION DENIED"); if(attempts>=3){closeAdminForm(); attempts=0;}}
+.then(resp=>{
+if(resp==="PERMISSION DENIED"){alert("Access Denied");}
+else{alert("Login Successful"); closeAdminForm(); window.location.href="index.html";}
 })
 .catch(err=>alert("Error logging in: "+err.message));
 }

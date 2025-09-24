@@ -79,36 +79,38 @@ footer { text-align:center; padding:20px; font-size:16px; background:rgba(0,0,0,
 </section>
 
 <footer>
-  <div class="contact-card"><a href="https://facebook.com/" target="_blank">Facebook</a></div>
-  <div class="contact-card"><a href="https://linkedin.com/" target="_blank">LinkedIn</a></div>
-  <div class="contact-card"><a href="https://instagram.com/" target="_blank">Instagram</a></div>
-  <div class="contact-card"><a href="mailto:starananda24@gmail.com">Email</a></div>
+  <div class="contact-card">
+    <a href="https://facebook.com/" target="_blank">Facebook</a>
+  </div>
+  <div class="contact-card">
+    <a href="https://linkedin.com/" target="_blank">LinkedIn</a>
+  </div>
+  <div class="contact-card">
+    <a href="https://instagram.com/" target="_blank">Instagram</a>
+  </div>
+  <div class="contact-card">
+    <a href="mailto:starananda24@gmail.com">Email</a>
+  </div>
 </footer>
 
 <script>
 const webAppUrl = "https://script.google.com/macros/s/AKfycbwXYyZ2sLrkSu1hAfzEA91mKUkTG6PEmKOeuoeolLtiFYPUyPlgtLVuPDKzq9aS-JYGhA/exec";
 
-// Set date limits
+// ---------------- Date limits -----------------
 document.getElementById('dob').max = new Date().toISOString().split("T")[0];
 document.getElementById('visitDate').min = new Date().toISOString().split("T")[0];
 
-// Show About section
+// ---------------- Toggle Sections -----------------
 function showSection(id){
-  document.getElementById('about').scrollIntoView({behavior:'smooth'});
+  document.getElementById('about').style.display = id==='about'?'block':'none';
+  document.getElementById('visitorForm').style.display = 'none';
 }
-
-// Toggle Visitor Form visibility
 function toggleVisitorForm(){
   const form = document.getElementById('visitorForm');
-  if(form.style.display === 'none' || form.style.display === ''){
-    form.style.display = 'block';
-    form.scrollIntoView({behavior:'smooth'});
-  } else {
-    form.style.display = 'none';
-  }
+  form.style.display = form.style.display==='block'?'none':'block';
 }
 
-// Visitor form submit
+// ---------------- Submit Form -----------------
 document.getElementById('formVisitor').addEventListener('submit', function(e){
   e.preventDefault();
   const visitorData = {
@@ -125,24 +127,23 @@ document.getElementById('formVisitor').addEventListener('submit', function(e){
   };
 
   fetch(webAppUrl, {
-    method:"POST",
-    mode:"cors",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({action:"saveVisitor", data:visitorData})
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify(visitorData)
   })
-  .then(response=>response.json())
-  .then(res=>{
-    if(res.appointmentNo){
-      alert("Appointment submitted! ID: "+res.appointmentNo);
+  .then(res=>res.json())
+  .then(data=>{
+    if(data.status==='success'){
+      alert(`Appointment booked successfully! Appointment No: ${data.appointmentNo}`);
       document.getElementById('formVisitor').reset();
       toggleVisitorForm();
     } else {
-      alert("Error: "+(res.error||"Unknown error"));
+      alert(`Error: ${data.message}`);
     }
   })
   .catch(err=>{
     console.error(err);
-    alert("Failed to submit. Check console.");
+    alert('Failed to submit form');
   });
 });
 </script>

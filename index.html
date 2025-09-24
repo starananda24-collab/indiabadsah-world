@@ -3,37 +3,104 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BHOLA NATH BASAK</title>
+<title>INDIA BADSAH</title>
 <style>
-body { margin:0; font-family:Arial,sans-serif; background:linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d); color:white;}
-header { text-align:center; padding:20px; background:rgba(0,0,0,0.6);}
-header img { width:180px; height:180px; object-fit:cover; border-radius:50%; border:5px solid #fff;}
-nav { display:flex; justify-content:center; background:rgba(0,0,0,0.8); flex-wrap:wrap;}
-nav a { color:white; text-decoration:none; padding:15px 20px;}
-nav a:hover { background:#fbd46d; color:black; border-radius:5px;}
-section { padding:20px; max-width:900px; margin:20px auto; background:rgba(255,255,255,0.1); border-radius:12px;}
-h2 { color:#ffe66d;}
-h3 { color:#ffd700;}
-input, select { width:95%; padding:10px; margin:8px 0; border-radius:5px; border:none;}
-button { padding:10px 20px; margin:10px 5px; border:none; border-radius:5px; cursor:pointer;}
-button.submit-btn { background:#4CAF50; color:white;}
-button.cancel-btn { background:#f44336; color:white;}
-footer { text-align:center; padding:10px; font-size:14px; background:rgba(0,0,0,0.7); position:fixed; bottom:0; width:100%;}
-footer a { color:#fbd46d; margin:0 8px; text-decoration:none; font-weight:bold;}
-footer a:hover { color:white;}
-footer p { margin:5px 0;}
-table { width:100%; border-collapse: collapse; margin-top:15px;}
-th,td { border:1px solid #fff; padding:8px; text-align:left;}
-th { background: rgba(0,0,0,0.6);}
-.status-pending { background:pink;}
-.status-accepted { background:green; color:white;}
-.status-rejected { background:red; color:white;}
+/* --- Basic Styles --- */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d);
+  color: white;
+  scroll-behavior: smooth;
+}
+header {
+  text-align: center;
+  padding: 20px;
+  background: rgba(0,0,0,0.6);
+}
+header img {
+  width: 180px; height: 180px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 5px solid #fff;
+}
+nav {
+  display: flex;
+  justify-content: center;
+  background: rgba(0,0,0,0.8);
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 15px 20px;
+}
+nav a:hover {
+  background: #fbd46d;
+  color: black;
+  border-radius: 5px;
+}
+section {
+  padding: 20px;
+  max-width: 900px;
+  margin: 20px auto;
+  background: rgba(255,255,255,0.1);
+  border-radius: 12px;
+}
+h2 { color:#ffe66d; }
+input, select {
+  width: 95%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 5px;
+  border: none;
+}
+button {
+  padding: 10px 20px;
+  margin: 10px 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+button.submit-btn { background: #4CAF50; color: white; }
+button.cancel-btn { background: #f44336; color: white; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+th, td { border:1px solid #fff; padding:8px; text-align:left; }
+th { background: rgba(0,0,0,0.6); }
+.status-pending { background:pink; }
+.status-accepted { background:green; color:white; }
+.status-rejected { background:red; color:white; }
+.social-links a { color:white; margin:0 10px; text-decoration:none; }
+.social-links a:hover { color:#fbd46d; }
+
+/* --- Profile and Contact Panel Styles --- */
+.profile-section p { margin-bottom: 15px; line-height:1.5; }
+.contact-panel {
+  background: rgba(0,0,0,0.7);
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0px 0px 15px #000;
+}
+.contact-panel a { color: #ffe66d; text-decoration: none; margin: 0 10px; }
+.contact-panel a:hover { color: #fbd46d; }
+
+/* --- Hide Admin Section by default --- */
+#adminDashboard { display: none; }
+#adminLogin { display: none; }
 </style>
 </head>
-<body>
+<body id="home">
 
 <header>
-  <img src="myphoto.jpg" alt="BHOLA NATH BASAK">
+  <img src="myphoto.jpg" alt="India Badsah">
   <h1>BHOLA NATH BASAK</h1>
   <div class="social-links">
     <a href="https://facebook.com/" target="_blank">Facebook</a>
@@ -43,42 +110,12 @@ th { background: rgba(0,0,0,0.6);}
 </header>
 
 <nav>
-  <a href="#about">About Me</a>
   <a href="#visitorForm">Visitor Form</a>
-  <!-- Admin login hidden from nav -->
+  <a href="#profile">Profile</a>
+  <a href="#contact">Contact</a>
 </nav>
 
-<section id="about">
-  <h2>Personal Details</h2>
-  <p><strong>Name:</strong> BHOLA NATH BASAK</p>
-  <p><strong>DOB:</strong> 24-03-1988</p>
-  <p><strong>Place of Birth:</strong> Krishnagar, Nadia, India</p>
-  <p><strong>Nationality:</strong> Indian</p>
-  <p><strong>Religion:</strong> Hindu</p>
-
-  <h3>Education</h3>
-  <p>Completed BA in Arts and MBA in Business Administration. Passionate about learning, continuously upgrading skills in leadership, business management, and modern technology.</p>
-
-  <h3>Culture</h3>
-  <p>Deeply rooted in Indian culture and traditions. Values family, social harmony, and respect for diversity. Enjoys participating in cultural festivals and traditional celebrations.</p>
-
-  <h3>Achievements</h3>
-  <p>Recognized for excellence in management and business projects. Published articles in business journals and received the Best Manager Award 2021.</p>
-
-  <h3>Hobbies</h3>
-  <p>Loves reading, traveling, photography, and exploring new cuisines. Enjoys spending time in nature and learning new skills.</p>
-
-  <h3>Interests</h3>
-  <p>Interested in technology, entrepreneurship, education, and personal growth. Keen to mentor young professionals and share knowledge.</p>
-
-  <h3>Thoughts</h3>
-  <p>"Every challenge is an opportunity to grow, every connection is a chance to learn, and every day is a gift to make a difference."</p>
-
-  <h3>Contact</h3>
-  <p>Email: starananda24@gmail.com</p>
-  <p>Phone: +971506309833</p>
-</section>
-
+<!-- ====== Visitor Form Section ====== -->
 <section id="visitorForm">
   <h2>Visitor Appointment Form</h2>
   <form id="formVisitor">
@@ -99,9 +136,8 @@ th { background: rgba(0,0,0,0.6);}
       <option value="Australia (+61)">Australia (+61)</option>
       <option value="Germany (+49)">Germany (+49)</option>
       <option value="France (+33)">France (+33)</option>
+      <option value="Japan (+81)">Japan (+81)</option>
       <option value="UAE (+971)">UAE (+971)</option>
-      <option value="Saudi Arabia (+966)">Saudi Arabia (+966)</option>
-      <option value="Other">Other</option>
     </select>
     <label>Visit Date</label>
     <input type="date" id="visitDate" required min="">
@@ -118,81 +154,66 @@ th { background: rgba(0,0,0,0.6);}
   </form>
 </section>
 
-<!-- Admin Section -->
-<section id="adminLogin" style="display:none;">
-  <h2>Admin Login</h2>
-  <form id="formAdmin">
-    <label>Username</label>
-    <input type="text" id="adminUsername" required>
-    <label>Password</label>
-    <input type="password" id="adminPassword" required>
-    <button type="submit">Login</button>
-  </form>
-  <div id="adminDashboard" style="display:none;">
-    <h2>Visitor Details</h2>
-    <table id="visitorTable">
-      <thead>
-        <tr>
-          <th>Appointment</th><th>Name</th><th>Father</th><th>DOB</th>
-          <th>Address</th><th>Country</th><th>Visit Date</th><th>Visit Time</th>
-          <th>Contact</th><th>Passport</th><th>Email</th><th>Status</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-    <h2>Admin Profile</h2>
-    <div id="adminProfile"></div>
+<!-- ====== Profile Section ====== -->
+<section id="profile">
+  <h2>About BHOLA NATH BASAK</h2>
+  <div class="profile-section">
+    <p><strong>Full Name:</strong> BHOLA NATH BASAK</p>
+    <p><strong>Date of Birth:</strong> 24-03-1988</p>
+    <p><strong>Place:</strong> Krishnagar, Nadia, India</p>
+    <p><strong>Nationality:</strong> Indian</p>
+    <p><strong>Religion:</strong> Hindu</p>
+    <p><strong>Education:</strong> My educational journey has been a combination of rigorous academic discipline and practical experience, cultivating an analytical mindset and a lifelong passion for learning. From early schooling to higher education, I focused on developing critical thinking, problem-solving, and creative skills, which laid the foundation for my personal and professional growth.</p>
+    <p><strong>Culture:</strong> Growing up in the vibrant cultural milieu of India, I have embraced values of community, respect, and tradition. I actively participate in festivals, arts, and social events, blending modernity with cultural heritage, which enriches my worldview and enhances my interpersonal connections.</p>
+    <p><strong>Achievements:</strong> Over the years, I have successfully completed numerous projects, received recognition for leadership and problem-solving, and contributed to initiatives that positively impacted my community. These milestones reflect dedication, perseverance, and an unwavering commitment to excellence.</p>
+    <p><strong>Hobbies:</strong> I enjoy reading, music, and exploring technology trends, which stimulate creativity and broaden my perspective. These activities balance work with personal fulfillment and provide continuous inspiration in daily life.</p>
+    <p><strong>Interests:</strong> I am passionate about social innovation, cultural studies, and technological advancements. Engaging with new ideas and understanding global perspectives keeps me motivated and continuously evolving.</p>
+    <p><strong>Thought:</strong> Life is a journey of discovery and growth; embracing challenges with curiosity and resilience transforms obstacles into opportunities and cultivates wisdom that benefits oneself and others.</p>
   </div>
 </section>
 
-<footer>
-  <span>Follow Me:</span>
-  <a href="https://facebook.com/" target="_blank">Facebook</a>
-  <a href="https://linkedin.com/" target="_blank">LinkedIn</a>
-  <a href="https://instagram.com/" target="_blank">Instagram</a>
-  <p>&copy; 2025 Personal Website BHOLA NATH BASAK</p>
-</footer>
+<!-- ====== Contact Section ====== -->
+<section id="contact">
+  <h2>Contact</h2>
+  <div class="contact-panel">
+    <p>Email: starananda24@gmail.com</p>
+    <p>Phone: +971506309833</p>
+    <p>
+      <a href="https://facebook.com/" target="_blank">Facebook</a> |
+      <a href="https://linkedin.com/" target="_blank">LinkedIn</a> |
+      <a href="https://instagram.com/" target="_blank">Instagram</a>
+    </p>
+  </div>
+</section>
+
+<!-- ====== Admin Dashboard (Hidden by default) ====== -->
+<section id="adminDashboard">
+  <h2>Visitor Details</h2>
+  <button onclick="adminLogout()">Logout</button>
+  <table id="visitorTable">
+    <thead>
+      <tr>
+        <th>Appointment</th><th>Name</th><th>Father</th><th>DOB</th>
+        <th>Address</th><th>Country</th><th>Visit Date</th><th>Visit Time</th>
+        <th>Contact</th><th>Passport</th><th>Email</th><th>Status</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</section>
 
 <script>
-// Show admin login if URL contains #adminLogin
-if(window.location.hash === "#adminLogin"){
-  document.getElementById('adminLogin').style.display = "block";
-  document.getElementById('adminLogin').scrollIntoView();
-}
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzWbgHPSrhmRj_duMijSV8kUuKBU1sGzHoCvN7f1TjXRm5CkjvJNBG0tvv1OeBwIKyP_Q/exec";
 
-// Date limits
+// Set date limits
 document.getElementById('dob').max = new Date().toISOString().split("T")[0];
 document.getElementById('visitDate').min = new Date().toISOString().split("T")[0];
 
-// Admin details
-const admin = {
-  username: "admin1",
-  password: "Password123",
-  name: "BHOLA NATH BASAK",
-  dob: "24-03-1988",
-  placeOfBirth: "Krishnagar, Nadia, India",
-  nationality: "Indian",
-  religion: "Hindu",
-  email: "starananda24@gmail.com",
-  culture: "Deeply rooted in Indian culture and traditions. Values family, social harmony, and respect for diversity.",
-  education: "Completed BA in Arts and MBA in Business Administration. Passionate about learning and skill growth.",
-  achievements: "Recognized for excellence in management and business projects. Published articles and received Best Manager Award.",
-  skills: "Leadership, Programming, Communication, Business Management",
-  hobbies: "Reading, traveling, photography, exploring new cuisines.",
-  interests: "Technology, entrepreneurship, education, personal growth.",
-  thoughts: "Every challenge is an opportunity to grow, every connection is a chance to learn, and every day is a gift to make a difference.",
-  social: { facebook: "https://facebook.com/", linkedin: "https://linkedin.com/", instagram: "https://instagram.com/" },
-  contactNumber: "+971506309833"
-};
-
-// Visitor form submit
+// --- Visitor Form Submission ---
 document.getElementById('formVisitor').addEventListener('submit', function(e){
   e.preventDefault();
-  const appointmentNo = 'APPT-' + Date.now();
-  const now = new Date();
-  const dateTime = now.toLocaleString();
-  const visitorData = {
-    appointmentNo,
+  const data = {
+    type: "visitorForm",
     visitorName: document.getElementById('visitorName').value,
     fatherName: document.getElementById('fatherName').value,
     dob: document.getElementById('dob').value,
@@ -202,75 +223,106 @@ document.getElementById('formVisitor').addEventListener('submit', function(e){
     visitTime: document.getElementById('visitTime').value,
     contactNumber: document.getElementById('contactNumber').value,
     passport: document.getElementById('passport').value,
-    email: document.getElementById('email').value,
-    dateTime
+    email: document.getElementById('email').value
   };
-
-  const waLink = `https://wa.me/${admin.contactNumber.replace(/\+/,'')}?text=${encodeURIComponent(
-    `New Visitor Appointment:\n\nAppointment No: ${appointmentNo}\nName: ${visitorData.visitorName}\nFather: ${visitorData.fatherName}\nDOB: ${visitorData.dob}\nAddress: ${visitorData.address}\nCountry: ${visitorData.country}\nVisit Date: ${visitorData.visitDate}\nVisit Time: ${visitorData.visitTime}\nContact: ${visitorData.contactNumber}\nPassport: ${visitorData.passport}\nEmail: ${visitorData.email}\nSubmitted At: ${dateTime}`
-  )}`;
-  window.open(waLink, '_blank');
-
-  const receiptContent = `<html><head><title>Appointment Receipt</title></head><body>
-  <h2>Visitor Appointment Receipt</h2>
-  <p><strong>Appointment No:</strong> ${appointmentNo}</p>
-  <p><strong>Name:</strong> ${visitorData.visitorName}</p>
-  <p><strong>Father Name:</strong> ${visitorData.fatherName}</p>
-  <p><strong>DOB:</strong> ${visitorData.dob}</p>
-  <p><strong>Address:</strong> ${visitorData.address}</p>
-  <p><strong>Country:</strong> ${visitorData.country}</p>
-  <p><strong>Visit Date:</strong> ${visitorData.visitDate}</p>
-  <p><strong>Visit Time:</strong> ${visitorData.visitTime}</p>
-  <p><strong>Contact:</strong> ${visitorData.contactNumber}</p>
-  <p><strong>Passport:</strong> ${visitorData.passport}</p>
-  <p><strong>Email:</strong> ${visitorData.email}</p>
-  <p><strong>Submitted At:</strong> ${dateTime}</p></body></html>`;
-  const printWindow = window.open('', '', 'height=600,width=800');
-  printWindow.document.write(receiptContent);
-  printWindow.document.close();
-  printWindow.print();
-
-  document.getElementById('formVisitor').reset();
-  alert(`Appointment Submitted!\nYour Appointment No: ${appointmentNo}`);
+  fetch(WEB_APP_URL, {
+    method:'POST',
+    body: JSON.stringify(data),
+    headers:{ 'Content-Type':'application/json' }
+  })
+  .then(res=>res.json())
+  .then(res=>{
+    if(res.success){
+      alert(`Appointment sent Successfully. Your Number: ${res.appointmentNo}`);
+      document.getElementById('formVisitor').reset();
+      // WhatsApp notification
+      window.open(`https://api.whatsapp.com/send?phone=+971506309833&text=New%20Visitor%20Submission%0AName:%20${encodeURIComponent(data.visitorName)}%0AContact:%20${encodeURIComponent(data.contactNumber)}%0AEmail:%20${encodeURIComponent(data.email)}`, '_blank');
+    } else {
+      alert("Error sending appointment: "+res.message);
+    }
+  })
+  .catch(err=>{
+    alert("Failed to fetch: "+err.message);
+  });
 });
 
-// Admin login
-document.getElementById('formAdmin').addEventListener('submit', function(e){
-  e.preventDefault();
-  const username = document.getElementById('adminUsername').value;
-  const password = document.getElementById('adminPassword').value;
-  if(username===admin.username && password===admin.password){
-    alert("Admin login successful");
-    document.getElementById('formAdmin').style.display="none";
-    document.getElementById('adminDashboard').style.display="block";
-    
-    const profileDiv = document.getElementById('adminProfile');
-    profileDiv.innerHTML = `
-      <p><strong>Name:</strong> ${admin.name}</p>
-      <p><strong>DOB:</strong> ${admin.dob}</p>
-      <p><strong>Place of Birth:</strong> ${admin.placeOfBirth}</p>
-      <p><strong>Nationality:</strong> ${admin.nationality}</p>
-      <p><strong>Religion:</strong> ${admin.religion}</p>
-      <p><strong>Culture:</strong> ${admin.culture}</p>
-      <p><strong>Education:</strong> ${admin.education}</p>
-      <p><strong>Achievements:</strong> ${admin.achievements}</p>
-      <p><strong>Skills:</strong> ${admin.skills}</p>
-      <p><strong>Hobbies:</strong> ${admin.hobbies}</p>
-      <p><strong>Interests:</strong> ${admin.interests}</p>
-      <p><strong>Thoughts:</strong> ${admin.thoughts}</p>
-      <p><strong>Email:</strong> ${admin.email}</p>
-      <p><strong>Contact:</strong> ${admin.contactNumber}</p>
-      <p><strong>Social:</strong> 
-        <a href="${admin.social.facebook}" target="_blank">Facebook</a> | 
-        <a href="${admin.social.linkedin}" target="_blank">LinkedIn</a> | 
-        <a href="${admin.social.instagram}" target="_blank">Instagram</a>
-      </p>
-    `;
+// --- Admin Login Auto Detection ---
+const adminCredentials = { username:"admin1", password:"Password123" };
+function checkAdminLogin() {
+  const adminToken = localStorage.getItem('adminToken');
+  if(adminToken === "true") {
+    showAdminDashboard();
   } else {
-    alert("Access denied");
+    showVisitorView();
   }
-});
+}
+function adminLogin(username, password) {
+  if(username === adminCredentials.username && password === adminCredentials.password){
+    localStorage.setItem('adminToken','true');
+    showAdminDashboard();
+  } else {
+    alert("Permission Denied");
+  }
+}
+function adminLogout(){
+  localStorage.removeItem('adminToken');
+  showVisitorView();
+  window.location.href="#home";
+}
+function showAdminDashboard(){
+  document.getElementById('adminDashboard').style.display="block";
+  document.getElementById('visitorForm').style.display="none";
+  document.getElementById('profile').style.display="block";
+  document.getElementById('contact').style.display="block";
+  loadAdminData();
+}
+function showVisitorView(){
+  document.getElementById('adminDashboard').style.display="none";
+  document.getElementById('visitorForm').style.display="block";
+  document.getElementById('profile').style.display="block";
+  document.getElementById('contact').style.display="block";
+}
+
+// --- Load Admin Data ---
+function loadAdminData(){
+  fetch(WEB_APP_URL)
+    .then(res=>res.json())
+    .then(data=>{
+      const tbody = document.querySelector("#visitorTable tbody");
+      tbody.innerHTML="";
+      data.forEach(d=>{
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${d["Appointment Number"]}</td><td>${d["Visitor Name"]}</td><td>${d["Father Name"]}</td>
+        <td>${d["Visitor DOB"]}</td><td>${d["Visitor Address"]}</td><td>${d["Country"]}</td>
+        <td>${d["Visit Date"]}</td><td>${d["Visit Time"]}</td><td>${d["Contact Number"]}</td>
+        <td>${d["Passport Number"]}</td><td>${d["Email"]}</td>
+        <td class="${d.Status=="Accepted"?"status-accepted":d.Status=="Rejected"?"status-rejected":"status-pending"}">${d.Status}</td>`;
+        tbody.appendChild(tr);
+      });
+    })
+    .catch(err=>alert("Error loading data: "+err.message));
+}
+
+// --- Visitor Status Check (Optional if needed) ---
 </script>
 
+<!-- Optional: Hidden Admin Login Modal -->
+<section id="adminLogin">
+  <h2>Admin Login</h2>
+  <form id="formAdmin" onsubmit="event.preventDefault(); adminLogin(document.getElementById('adminUsername').value, document.getElementById('adminPassword').value)">
+    <label>Username</label>
+    <input type="text" id="adminUsername" required>
+    <label>Password</label>
+    <input type="password" id="adminPassword" required>
+    <button type="submit">Login</button>
+  </form>
+</section>
+
+<footer style="text-align:center; padding:15px; background:rgba(0,0,0,0.7);">
+  &copy; 2025 Personal Website BHOLA NATH BASAK
+</footer>
+<script>
+checkAdminLogin();
+</script>
 </body>
 </html>

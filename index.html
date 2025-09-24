@@ -11,7 +11,7 @@ header img { width:180px; height:180px; object-fit:cover; border-radius:50%; bor
 nav { display:flex; justify-content:center; background:rgba(0,0,0,0.8); flex-wrap:wrap;}
 nav a { color:white; text-decoration:none; padding:15px 20px; cursor:pointer;}
 nav a:hover { background:#fbd46d; color:black; border-radius:5px;}
-section { padding:20px; max-width:900px; margin:20px auto; background:rgba(255,255,255,0.1); border-radius:12px;}
+section { padding:20px; max-width:900px; margin:20px auto; background:rgba(255,255,255,0.1); border-radius:12px; transition: all 0.5s ease-in-out;}
 h2 { color:#ffe66d;}
 input, select { width:95%; padding:10px; margin:8px 0; border-radius:5px; border:none;}
 button { padding:10px 20px; margin:10px 5px; border:none; border-radius:5px; cursor:pointer;}
@@ -21,7 +21,10 @@ footer { text-align:center; padding:20px; font-size:16px; background:rgba(0,0,0,
 .contact-card { background:rgba(255,255,255,0.1); padding:15px; border-radius:8px; text-align:center; width:120px;}
 .contact-card a { display:block; color:#fbd46d; text-decoration:none; font-weight:bold; margin:5px 0;}
 .contact-card a:hover { color:white;}
-#visitorForm { display:none; }
+#visitorForm { max-height:0; overflow:hidden; transition: max-height 0.5s ease;}
+#visitorForm.show { max-height:1000px; }
+.collapsible { cursor:pointer; padding:10px; background:rgba(0,0,0,0.3); border-radius:5px; margin-bottom:5px;}
+.content { max-height:0; overflow:hidden; transition:max-height 0.3s ease; padding-left:10px;}
 </style>
 </head>
 <body>
@@ -37,20 +40,20 @@ footer { text-align:center; padding:20px; font-size:16px; background:rgba(0,0,0,
 </nav>
 
 <section id="about">
-  <h2>Profile</h2>
-  <p>BHOLA NATH BASAK is a professional with exceptional leadership, programming, and business management skills. Experienced in strategic planning, problem-solving, and effective communication, he has guided teams to success and delivered measurable outcomes in business operations.</p>
-  
-  <h2>Culture</h2>
-  <p>Deeply rooted in Indian culture, BHOLA NATH BASAK embraces the values of integrity, discipline, and respect. Fluent in Hindi and English, he appreciates diverse perspectives while preserving traditional cultural principles, creating a harmonious balance between modern and traditional thinking.</p>
-  
-  <h2>Education</h2>
-  <p>BHOLA NATH BASAK holds a Bachelor of Arts in Arts and an MBA in Business Administration. His education has equipped him with analytical, managerial, and leadership skills that are crucial in business, programming, and strategic decision-making.</p>
-  
-  <h2>Thoughts & Interests</h2>
-  <p>He enjoys exploring technology, coding innovations, and the latest trends in business management. Passionate about continuous learning, BHOLA NATH BASAK reflects on creative solutions and shares insights to inspire others in their personal and professional growth.</p>
-  
-  <h2>Hobbies</h2>
-  <p>In his free time, he enjoys reading, traveling, writing articles, and learning new programming languages. He finds joy in problem-solving challenges and engaging in activities that combine creativity, logic, and practical knowledge.</p>
+  <div class="collapsible">Profile</div>
+  <div class="content"><p>BHOLA NATH BASAK is a professional with exceptional leadership, programming, and business management skills. Experienced in strategic planning, problem-solving, and effective communication, he has guided teams to success and delivered measurable outcomes in business operations.</p></div>
+
+  <div class="collapsible">Culture</div>
+  <div class="content"><p>Deeply rooted in Indian culture, BHOLA NATH BASAK embraces values of integrity, discipline, and respect. Fluent in Hindi and English, he appreciates diverse perspectives while preserving traditional cultural principles, creating a harmonious balance between modern and traditional thinking.</p></div>
+
+  <div class="collapsible">Education</div>
+  <div class="content"><p>BHOLA NATH BASAK holds a Bachelor of Arts in Arts and an MBA in Business Administration. His education has equipped him with analytical, managerial, and leadership skills that are crucial in business, programming, and strategic decision-making.</p></div>
+
+  <div class="collapsible">Thoughts & Interests</div>
+  <div class="content"><p>He enjoys exploring technology, coding innovations, and the latest trends in business management. Passionate about continuous learning, BHOLA NATH BASAK reflects on creative solutions and shares insights to inspire others in their personal and professional growth.</p></div>
+
+  <div class="collapsible">Hobbies</div>
+  <div class="content"><p>In his free time, he enjoys reading, traveling, writing articles, and learning new programming languages. He finds joy in problem-solving challenges and engaging in activities that combine creativity, logic, and practical knowledge.</p></div>
 </section>
 
 <section id="visitorForm">
@@ -94,26 +97,37 @@ footer { text-align:center; padding:20px; font-size:16px; background:rgba(0,0,0,
 </footer>
 
 <script>
-const webAppUrl = "https://script.google.com/macros/s/AKfycbwXYyZ2sLrkSu1hAfzEA91mKUkTG6PEmKOeuoeolLtiFYPUyPlgtLVuPDKzq9aS-JYGhA/exec";
+const whatsappNumber = "+971506309833"; // Admin WhatsApp
 
-// ---------------- Date limits -----------------
 document.getElementById('dob').max = new Date().toISOString().split("T")[0];
 document.getElementById('visitDate').min = new Date().toISOString().split("T")[0];
 
-// ---------------- Toggle Sections -----------------
+// Smooth scroll to section
 function showSection(id){
-  document.getElementById('about').style.display = id==='about'?'block':'none';
-  document.getElementById('visitorForm').style.display = 'none';
-}
-function toggleVisitorForm(){
-  const form = document.getElementById('visitorForm');
-  form.style.display = form.style.display==='block'?'none':'block';
+  document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+  toggleVisitorForm(false);
 }
 
-// ---------------- Submit Form -----------------
+// Toggle visitor form with animation
+function toggleVisitorForm(forceShow){
+  const form = document.getElementById('visitorForm');
+  if(forceShow === true) form.classList.add('show');
+  else if(forceShow === false) form.classList.remove('show');
+  else form.classList.toggle('show');
+}
+
+// Collapsible About Me sections
+document.querySelectorAll('.collapsible').forEach(item=>{
+  item.addEventListener('click', ()=>{
+    const content = item.nextElementSibling;
+    content.style.maxHeight = content.style.maxHeight ? null : content.scrollHeight + "px";
+  });
+});
+
+// Visitor form submit → WhatsApp
 document.getElementById('formVisitor').addEventListener('submit', function(e){
   e.preventDefault();
-  const visitorData = {
+  const data = {
     visitorName: document.getElementById('visitorName').value,
     fatherName: document.getElementById('fatherName').value,
     dob: document.getElementById('dob').value,
@@ -126,25 +140,24 @@ document.getElementById('formVisitor').addEventListener('submit', function(e){
     email: document.getElementById('email').value
   };
 
-  fetch(webAppUrl, {
-    method: 'POST',
-    headers: {'Content-Type':'application/json'},
-    body: JSON.stringify(visitorData)
-  })
-  .then(res=>res.json())
-  .then(data=>{
-    if(data.status==='success'){
-      alert(`Appointment booked successfully! Appointment No: ${data.appointmentNo}`);
-      document.getElementById('formVisitor').reset();
-      toggleVisitorForm();
-    } else {
-      alert(`Error: ${data.message}`);
-    }
-  })
-  .catch(err=>{
-    console.error(err);
-    alert('Failed to submit form');
-  });
+  const message = `New Visitor Appointment:
+Name: ${data.visitorName}
+Father Name: ${data.fatherName}
+DOB: ${data.dob}
+Address: ${data.address}
+Country: ${data.country}
+Visit Date: ${data.visitDate}
+Visit Time: ${data.visitTime}
+Contact: ${data.contactNumber}
+Passport: ${data.passport}
+Email: ${data.email}`;
+
+  if(confirm("You are about to send your appointment details via WhatsApp. Continue?")){
+    const waLink = `https://wa.me/${whatsappNumber.replace(/\+/,'')}?text=${encodeURIComponent(message)}`;
+    window.open(waLink, '_blank');
+    document.getElementById('formVisitor').reset();
+    toggleVisitorForm(false);
+  }
 });
 </script>
 

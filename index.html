@@ -10,7 +10,6 @@ body {
   font-family: Arial, sans-serif;
   background: linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d);
   color: white;
-  scroll-behavior: smooth;
 }
 header {
   text-align: center;
@@ -28,9 +27,6 @@ nav {
   justify-content: center;
   background: rgba(0,0,0,0.8);
   flex-wrap: wrap;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
 }
 nav a {
   color: white;
@@ -51,6 +47,7 @@ section {
   border-radius: 12px;
 }
 h2 { color:#ffe66d; }
+
 input, select {
   width: 95%;
   padding: 10px;
@@ -77,46 +74,22 @@ th { background: rgba(0,0,0,0.6); }
 .status-pending { background:pink; }
 .status-accepted { background:green; color:white; }
 .status-rejected { background:red; color:white; }
-.profile-panel {
-  background: #0d47a1;
-  color: white;
-  padding: 15px;
-  margin-bottom: 15px;
-  border-radius: 10px;
-  line-height: 1.5;
+.social-links a { color:white; margin:0 10px; text-decoration:none; }
+.social-links a:hover { color:#fbd46d; }
+#whatsappButton {
+  display:block;
+  padding:10px 15px;
+  margin-top:10px;
+  background:#25D366;
+  color:white;
+  text-decoration:none;
+  border-radius:5px;
+  text-align:center;
 }
-.profile-panel h3 {
-  background: #ffffff;
-  color: #0d47a1;
-  padding: 8px;
-  border-radius: 5px;
-}
-.contact-panel {
-  background: rgba(0,0,0,0.7);
-  padding: 15px;
-  border-radius: 10px;
-  text-align: center;
-  box-shadow: 0px 0px 15px #000;
-}
-.contact-panel a { color: #ffe66d; text-decoration: none; margin: 0 10px; }
-.contact-panel a:hover { color: #fbd46d; }
-#visitorFormPanel {
-  display: none;
-  background: linear-gradient(145deg, #1a2a6c, #fbd46d);
-  color: white;
-  padding: 20px;
-  margin-top: 20px;
-  border-radius: 15px;
-  box-shadow: 0px 0px 25px rgba(0,0,0,0.6);
-}
-#visitorFormPanel h2 {
-  text-align: center;
-  color: #000;
-  margin-bottom: 15px;
-}
+#whatsappButton:hover { background:#128C7E; }
 </style>
 </head>
-<body id="home">
+<body>
 
 <header>
   <img src="myphoto.jpg" alt="India Badsah">
@@ -124,49 +97,13 @@ th { background: rgba(0,0,0,0.6); }
 </header>
 
 <nav>
-  <a id="linkVisitorForm">Visitor Form</a>
-  <a href="#profile">Profile</a>
+  <a onclick="showVisitorForm()">Visitor Form</a>
+  <a href="#personalDetails">About Me</a>
   <a href="#contact">Contact</a>
 </nav>
 
-<section id="profile">
-  <h2>Profile & Details</h2>
-  <div class="profile-panel">
-    <h3>Personal Info</h3>
-    <p>Name: BHOLA NATH BASAK<br>
-       Email: starananda24@gmail.com<br>
-       DOB: 24-03-1988<br>
-       Place: Krishnagar, Nadia, India<br>
-       Nationality: Indian<br>
-       Religion: Hindu</p>
-  </div>
-  <div class="profile-panel">
-    <h3>Education</h3>
-    <p>I have pursued a rich and diverse education over the years, combining formal learning with practical experience. My studies have given me deep insights into various fields and the ability to approach problems analytically. I value continuous learning and consistently strive to acquire knowledge that can help both personal growth and professional excellence.</p>
-  </div>
-  <div class="profile-panel">
-    <h3>Culture</h3>
-    <p>Rooted deeply in Indian traditions, I embrace cultural diversity and the richness of heritage. Participating in festivals, music, literature, and social events has helped me develop a balanced worldview, fostering respect and understanding across different communities and beliefs. I cherish the cultural values that shape identity and society.</p>
-  </div>
-  <div class="profile-panel">
-    <h3>Achievements</h3>
-    <p>Over the years, I have achieved milestones that reflect dedication and hard work. From academic accomplishments to professional projects and community involvement, each success has strengthened my resolve. I believe in continuous improvement and setting higher standards for myself while contributing meaningfully to society and inspiring others to excel.</p>
-  </div>
-  <div class="profile-panel">
-    <h3>Hobbies</h3>
-    <p>I am passionate about reading, writing, exploring new technologies, and traveling. These hobbies enrich my mind and creativity while helping me connect with diverse perspectives. Engaging in these activities provides balance, refreshes energy, and fuels my personal and professional growth.</p>
-  </div>
-  <div class="profile-panel">
-    <h3>Interests</h3>
-    <p>My interests span education, technology, social development, and creative arts. I enjoy learning from people, exploring innovations, and contributing to meaningful projects that make a positive impact. Cultivating diverse interests keeps me curious, adaptive, and open to new ideas.</p>
-  </div>
-  <div class="profile-panel">
-    <h3>Thought</h3>
-    <p>I believe in the power of integrity, perseverance, and vision. Every action we take has consequences, and mindful living can transform individual lives and communities. My philosophy emphasizes learning from experiences, staying committed to ethical values, and fostering knowledge, creativity, and compassion in all endeavors.</p>
-  </div>
-</section>
-
-<section id="visitorFormPanel">
+<!-- ---------- Visitor Form (Hidden Initially) ---------- -->
+<section id="visitorFormSection" style="display:none;">
   <h2>Visitor Appointment Form</h2>
   <form id="formVisitor">
     <label>Visitor Name</label>
@@ -184,7 +121,7 @@ th { background: rgba(0,0,0,0.6); }
       <option value="UK (+44)">UK (+44)</option>
       <option value="Canada (+1)">Canada (+1)</option>
       <option value="Australia (+61)">Australia (+61)</option>
-      <option value="Germany (+49)">Germany (+49)</option>
+      <option value="Other">Other</option>
     </select>
     <label>Visit Date</label>
     <input type="date" id="visitDate" required min="">
@@ -197,41 +134,68 @@ th { background: rgba(0,0,0,0.6); }
     <label>Email</label>
     <input type="email" id="email" required>
     <button type="submit" class="submit-btn">Submit</button>
-    <button type="button" class="cancel-btn" onclick="hideVisitorForm()">Cancel</button>
+    <button type="button" class="cancel-btn" onclick="document.getElementById('formVisitor').reset()">Cancel</button>
   </form>
+
+  <a id="whatsappButton" href="#" target="_blank" style="display:none;">Send Submission to WhatsApp</a>
 </section>
 
+<!-- ---------- Personal Details ---------- -->
+<section id="personalDetails">
+  <h2>About Me</h2>
+  <p><strong>Name:</strong> BHOLA NATH BASAK</p>
+  <p><strong>Email:</strong> starananda24@gmail.com</p>
+  <p><strong>DOB:</strong> 24-03-1988</p>
+  <p><strong>Location:</strong> Nadia, Krishnagar, India</p>
+  <p><strong>Nationality:</strong> Indian</p>
+  <p><strong>Religion:</strong> Hindu</p>
+
+  <h3>Education</h3>
+  <p>I completed higher education in India, focusing on computer science and business management. My studies helped me develop analytical thinking, problem-solving skills, and a strong foundation in technology and entrepreneurship, preparing me for diverse professional challenges.</p>
+
+  <h3>Culture</h3>
+  <p>Growing up in Krishnagar, I was influenced by the rich Bengali culture, music, arts, and festivals. I cherish traditions while embracing modernity, blending cultural heritage with contemporary lifestyle and professional approach.</p>
+
+  <h3>Achievements</h3>
+  <p>Over the years, I have received recognition in programming, project management, and community service. Each milestone motivates me to pursue higher goals, improve skills, and contribute meaningfully to society and professional networks.</p>
+
+  <h3>Hobbies</h3>
+  <p>I enjoy reading, traveling, exploring technology, and creating digital art. These hobbies keep me creative, inspired, and constantly learning new skills that enrich my personal and professional life.</p>
+
+  <h3>Interests</h3>
+  <p>My interests include technology, education, social impact projects, and global cultural exchange. I enjoy learning languages, connecting with people, and exploring innovative solutions to real-world problems.</p>
+
+  <h3>Thought</h3>
+  <p>"Life is a continuous journey of learning, growth, and contribution. Every action should create value for oneself and others, leaving a positive mark on the world."</p>
+</section>
+
+<!-- ---------- Contact Section ---------- -->
 <section id="contact">
-  <h2>Contact & Social</h2>
-  <div class="contact-panel">
-    <p>Phone/WhatsApp: +971506309833</p>
-    <p>Email: starananda24@gmail.com</p>
-    <div class="social-links">
-      <a href="https://facebook.com/" target="_blank">Facebook</a>
-      <a href="https://linkedin.com/" target="_blank">LinkedIn</a>
-      <a href="https://instagram.com/" target="_blank">Instagram</a>
-    </div>
+  <h2>Contact</h2>
+  <p>Phone / WhatsApp: +971506309833</p>
+  <p>Email: starananda24@gmail.com</p>
+  <div class="social-links">
+    <a href="https://facebook.com/" target="_blank">Facebook</a>
+    <a href="https://linkedin.com/" target="_blank">LinkedIn</a>
+    <a href="https://instagram.com/" target="_blank">Instagram</a>
   </div>
 </section>
 
-<footer>
-  <p style="text-align:center; margin:20px;">&copy; 2025 Personal Website BHOLA NATH BASAK</p>
+<footer style="text-align:center; margin:20px 0; color:#fff;">
+  © 2025 Personal Website BHOLA NATH BASAK
 </footer>
 
 <script>
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycby7s2kDV8ir2UMRWazhMiPtPdMGlSjngjQ-eBoiYH50Nq0_YD6Z03Tj7uRb8EZdl1tGYw/exec";
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbweaZR6v37diLszvrmyIQcBZuuXh4NHQ143pEQVkkn9zn6-3QdGq4OS109VX8uhnUcNtw/exec";
 
-// Date limits
+// Set date limits
 document.getElementById('dob').max = new Date().toISOString().split("T")[0];
 document.getElementById('visitDate').min = new Date().toISOString().split("T")[0];
 
-// Show/hide visitor form
-document.getElementById('linkVisitorForm').addEventListener('click', function(){
-  document.getElementById('visitorFormPanel').style.display = "block";
-  document.getElementById('visitorFormPanel').scrollIntoView({behavior:"smooth"});
-});
-function hideVisitorForm(){
-  document.getElementById('visitorFormPanel').style.display = "none";
+// Show Visitor Form
+function showVisitorForm(){
+  document.getElementById('visitorFormSection').style.display = 'block';
+  document.getElementById('visitorFormSection').scrollIntoView({ behavior: 'smooth' });
 }
 
 // Visitor Form Submit
@@ -250,7 +214,7 @@ document.getElementById('formVisitor').addEventListener('submit', function(e){
     passport: document.getElementById('passport').value,
     email: document.getElementById('email').value
   };
-  
+
   fetch(WEB_APP_URL, {
     method:'POST',
     body: JSON.stringify(data),
@@ -260,9 +224,20 @@ document.getElementById('formVisitor').addEventListener('submit', function(e){
   .then(res=>{
     if(res.success){
       alert(`Appointment sent Successfully. Your Number: ${res.appointmentNo}`);
-      window.open(`https://wa.me/971506309833?text=New Visitor Submitted: Name: ${data.visitorName}, Appointment No: ${res.appointmentNo}`, '_blank');
       document.getElementById('formVisitor').reset();
-      hideVisitorForm();
+
+      // Show WhatsApp button
+      const adminNumber = "+971506309833";
+      const message = `New Visitor Submission:
+Name: ${data.visitorName}
+Appointment No: ${res.appointmentNo}
+Visit Date: ${data.visitDate} at ${data.visitTime}
+Contact: ${data.contactNumber}`;
+      const waLink = `https://wa.me/${adminNumber}?text=${encodeURIComponent(message)}`;
+      const waButton = document.getElementById('whatsappButton');
+      waButton.href = waLink;
+      waButton.style.display = "block";
+
     } else {
       alert("Error sending appointment: "+res.message);
     }

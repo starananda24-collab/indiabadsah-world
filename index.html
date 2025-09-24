@@ -5,26 +5,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BHOLA NATH BASAK</title>
 <style>
-body { margin:0; font-family:Arial,sans-serif; background:#f0f8ff; color:#000;}
-header { text-align:center; padding:20px; background:linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d); color:white;}
-header img { width:180px; height:180px; border-radius:50%; border:5px solid #fff; object-fit:cover;}
-nav { display:flex; justify-content:center; background:#333; flex-wrap:wrap;}
-nav a { color:white; text-decoration:none; padding:15px 20px;}
-nav a:hover { background:#fbd46d; color:black; border-radius:5px;}
-section { padding:20px; max-width:900px; margin:20px auto; background:rgba(255,255,255,0.1); border-radius:12px;}
-h2 { color:#1a2a6c;}
-input, select { width:95%; padding:10px; margin:8px 0; border-radius:5px; border:1px solid #ccc;}
-button { padding:10px 20px; margin:10px 5px; border:none; border-radius:5px; cursor:pointer;}
-button.submit-btn { background:#4CAF50; color:white;}
-button.cancel-btn { background:#f44336; color:white;}
-footer { text-align:center; padding:20px; background:#222; color:white;}
-footer a { display:inline-block; margin:5px; text-decoration:none; color:white; background:green; padding:8px; border-radius:5px;}
-footer a:hover { background:pink;}
-#visitorFormContainer { display:none; }
-#adminDashboard { display:none; }
-table { width:100%; border-collapse: collapse; margin-top:15px;}
-th,td { border:1px solid #000; padding:8px; text-align:left;}
-th { background: #4CAF50; color:white;}
+body { margin:0; font-family:Arial,sans-serif; background:linear-gradient(to right,#1a2a6c,#b21f1f,#fdbb2d); color:white;}
+header { text-align:center; padding:20px; background:rgba(0,0,0,0.6);}
+header img { width:180px;height:180px;border-radius:50%;border:5px solid #fff;}
+nav { display:flex;justify-content:center;background:rgba(0,0,0,0.8);flex-wrap:wrap;}
+nav a { color:white;text-decoration:none;padding:15px 20px;}
+nav a:hover { background:#fbd46d;color:black;border-radius:5px;}
+section { padding:20px; max-width:900px;margin:20px auto;background:rgba(255,255,255,0.1);border-radius:12px;}
+h2 { color:#ffe66d;}
+input,select { width:95%;padding:10px;margin:8px 0;border-radius:5px;border:none;}
+button { padding:10px 20px;margin:10px 5px;border:none;border-radius:5px;cursor:pointer;}
+button.submit-btn { background:#4CAF50;color:white;}
+button.cancel-btn { background:#f44336;color:white;}
+footer { text-align:center;padding:10px;font-size:14px;background:rgba(0,0,0,0.7);}
+footer a { color:#fbd46d;margin:0 8px;text-decoration:none;font-weight:bold;}
+footer a:hover { color:white;}
+table { width:100%;border-collapse: collapse;margin-top:15px;}
+th,td { border:1px solid #fff;padding:8px;text-align:left;}
+th { background: rgba(0,0,0,0.6);}
+.status-pending { background:pink;}
+.status-accepted { background:green;color:white;}
+.status-rejected { background:red;color:white;}
+.about-section { background:linear-gradient(to right,#ffffff,#1a2a6c);color:black;padding:15px;margin:10px 0;border-radius:10px;}
+.contact-card { display:inline-block;background:linear-gradient(to right,#28a745,#e83e8c);padding:10px 15px;margin:5px;border-radius:8px;}
+.contact-card a { color:white;text-decoration:none;font-weight:bold;}
 </style>
 </head>
 <body>
@@ -32,32 +36,49 @@ th { background: #4CAF50; color:white;}
 <header>
   <img src="myphoto.jpg" alt="BHOLA NATH BASAK">
   <h1>BHOLA NATH BASAK</h1>
+  <div class="social-links">
+    <a href="https://facebook.com/" target="_blank">Facebook</a>
+    <a href="https://linkedin.com/" target="_blank">LinkedIn</a>
+    <a href="https://instagram.com/" target="_blank">Instagram</a>
+  </div>
 </header>
 
 <nav>
   <a href="#about">About Me</a>
-  <a href="#" id="visitorFormLink">Visitor Form</a>
+  <a href="#visitorForm">Visitor Form</a>
   <a href="#adminLogin">Admin Login</a>
 </nav>
 
 <section id="about">
   <h2>About Me</h2>
-  <p><strong>Profile:</strong> Experienced professional in business management and technology, skilled in leadership, programming, and communication. Passionate about innovation and personal growth. (100 words)</p>
-  <p><strong>Culture & Thought:</strong> Deeply rooted in Indian culture, values integrity, education, and community service. Strong belief in lifelong learning and teamwork. (100 words)</p>
-  <p><strong>Education & Achievements:</strong> BA in Arts, MBA in Business Administration, Best Manager Award 2021, and published articles in business journals. Continuously seeks knowledge in management and technology. (100 words)</p>
-  <p><strong>Interests & Hobbies:</strong> Enjoys reading, programming projects, exploring new technologies, traveling, and mentoring young professionals. Maintains a balance between work, learning, and personal hobbies. (100 words)</p>
+  <div class="about-section">
+    <h3>Profile</h3>
+    <p>BHOLA NATH BASAK is an experienced professional with a rich background in leadership and business management. With years of expertise in handling teams, projects, and strategic planning, he has developed a unique approach to problem-solving and effective communication. His passion for technology and programming allows him to bridge traditional business practices with modern solutions, ensuring efficiency and innovation in every endeavor. He is dedicated to mentoring and guiding young professionals, promoting a collaborative work environment while constantly seeking growth opportunities.</p>
+  </div>
+  <div class="about-section">
+    <h3>Culture & Interests</h3>
+    <p>Deeply rooted in Indian culture, BHOLA NATH BASAK embraces values of respect, integrity, and continuous learning. He enjoys exploring historical traditions while incorporating contemporary perspectives in daily life. His interests span across literature, international business trends, and global networking. He actively participates in cultural events, educational workshops, and community programs, fostering connections and understanding diverse viewpoints. His hobbies include reading, analytical thinking, and developing creative strategies to solve real-world challenges, blending cultural insights with practical knowledge.</p>
+  </div>
+  <div class="about-section">
+    <h3>Education & Skills</h3>
+    <p>He holds a BA in Arts and an MBA in Business Administration, combining analytical skills with business acumen. His expertise includes leadership, programming, communication, and project management. He is adept at utilizing technological tools to enhance productivity and streamline operations. Constantly seeking knowledge, he attends workshops, certifications, and online courses to stay current with global trends. His strategic thinking, problem-solving, and mentorship skills make him a resourceful and dependable professional. He thrives in dynamic environments, balancing innovative approaches with practical applications.</p>
+  </div>
+  <div class="about-section">
+    <h3>Thoughts & Hobbies</h3>
+    <p>BHOLA NATH BASAK believes in continuous learning and adaptability. His thoughts revolve around innovation, ethical leadership, and creating meaningful impact. He dedicates time to personal growth, meditation, and exploring new technologies. Hobbies include writing analytical articles, participating in community projects, and exploring creative solutions to complex challenges. He enjoys collaborating with like-minded professionals and engaging in activities that enhance both personal and professional development. He values resilience, creativity, and the pursuit of knowledge in all aspects of life, blending work with passion and purpose.</p>
+  </div>
 </section>
 
-<section id="visitorFormContainer">
+<section id="visitorForm">
   <h2>Visitor Appointment Form</h2>
   <form id="formVisitor">
     <label>Visitor Name</label>
     <input type="text" id="visitorName" required>
     <label>Father Name</label>
     <input type="text" id="fatherName" required>
-    <label>Date of Birth</label>
+    <label>Visitor DOB</label>
     <input type="date" id="dob" required max="">
-    <label>Address</label>
+    <label>Visitor Address</label>
     <input type="text" id="address" required>
     <label>Country</label>
     <select id="country" required>
@@ -66,7 +87,10 @@ th { background: #4CAF50; color:white;}
       <option value="UK (+44)">UK (+44)</option>
       <option value="Canada (+1)">Canada (+1)</option>
       <option value="Australia (+61)">Australia (+61)</option>
+      <option value="Germany (+49)">Germany (+49)</option>
+      <option value="France (+33)">France (+33)</option>
       <option value="UAE (+971)">UAE (+971)</option>
+      <option value="Saudi Arabia (+966)">Saudi Arabia (+966)</option>
       <option value="Other">Other</option>
     </select>
     <label>Visit Date</label>
@@ -93,8 +117,8 @@ th { background: #4CAF50; color:white;}
     <input type="password" id="adminPassword" required>
     <button type="submit">Login</button>
   </form>
-
-  <div id="adminDashboard">
+  <button onclick="adminLogout()">Logout</button>
+  <div id="adminDashboard" style="display:none;">
     <h2>Visitor Details</h2>
     <table id="visitorTable">
       <thead>
@@ -106,41 +130,28 @@ th { background: #4CAF50; color:white;}
       </thead>
       <tbody></tbody>
     </table>
-    <button onclick="adminLogout()">Logout</button>
   </div>
 </section>
 
 <footer>
-  <h3>Contact</h3>
-  <a href="https://facebook.com/" target="_blank">Facebook</a>
-  <a href="https://linkedin.com/" target="_blank">LinkedIn</a>
-  <a href="https://instagram.com/" target="_blank">Instagram</a>
-  <a href="mailto:starananda24@gmail.com">Email</a>
+  <div class="contact-card"><a href="https://facebook.com/" target="_blank">Facebook</a></div>
+  <div class="contact-card"><a href="https://linkedin.com/" target="_blank">LinkedIn</a></div>
+  <div class="contact-card"><a href="https://instagram.com/" target="_blank">Instagram</a></div>
+  <div class="contact-card"><a href="mailto:starananda24@gmail.com">EmailID</a></div>
 </footer>
 
 <script>
-// Date limits
 document.getElementById('dob').max = new Date().toISOString().split("T")[0];
 document.getElementById('visitDate').min = new Date().toISOString().split("T")[0];
 
-// Show visitor form on click
-document.getElementById('visitorFormLink').addEventListener('click', function(e){
-  e.preventDefault();
-  document.getElementById('visitorFormContainer').style.display = 'block';
-});
+const admin = { username:"admin1", password:"Password123" };
+const webAppURL = "https://script.google.com/macros/s/AKfycbxr8qxKNRlScS0IYlDVqIaYGZoUjTSz0QLpZzZXyBZYN7xSqJ9Lb6jatbdFArMzMjGkIg/exec";
 
-// Admin details
-const admin = { username: "admin1", password: "Password123" };
-
-// Web App URL
-const webAppURL = "https://script.google.com/macros/s/AKfycbyvi3Oa--LZtfbJggR0kQtyW2iQp35ZW0zX_Gnj2IA-mXLbF0XE35P_lr-BmPyEN5t3Tw/exec";
-
-// Visitor form submit
 document.getElementById('formVisitor').addEventListener('submit', function(e){
   e.preventDefault();
-
+  const appointmentNo = 'APPT-'+Date.now();
   const visitorData = {
-    appointmentNumber: 'APPT-' + Date.now(),
+    appointmentNumber: appointmentNo,
     visitorName: document.getElementById('visitorName').value,
     fatherName: document.getElementById('fatherName').value,
     dob: document.getElementById('dob').value,
@@ -152,55 +163,40 @@ document.getElementById('formVisitor').addEventListener('submit', function(e){
     passport: document.getElementById('passport').value,
     email: document.getElementById('email').value
   };
-
-  fetch(webAppURL, {
-    method: 'POST',
-    body: JSON.stringify(visitorData)
-  })
-  .then(response => response.json())
-  .then(data => {
-    if(data.success){
-      alert('Form submitted! Appointment No: ' + visitorData.appointmentNumber);
-      // WhatsApp redirect
-      const waLink = `https://wa.me/+971506309833?text=${encodeURIComponent(
-        `New Visitor:\nAppointment No: ${visitorData.appointmentNumber}\nName: ${visitorData.visitorName}\nFather: ${visitorData.fatherName}\nDOB: ${visitorData.dob}\nAddress: ${visitorData.address}\nCountry: ${visitorData.country}\nVisit Date: ${visitorData.visitDate}\nVisit Time: ${visitorData.visitTime}\nContact: ${visitorData.contactNumber}\nPassport: ${visitorData.passport}\nEmail: ${visitorData.email}`
-      )}`;
-      window.open(waLink, '_blank');
-      document.getElementById('formVisitor').reset();
-    } else {
-      alert('Failed to submit: ' + data.error);
-    }
-  })
-  .catch(err => alert('Error: ' + err));
+  // WhatsApp redirect
+  const waLink = `https://wa.me/971506309833?text=${encodeURIComponent(
+    `New Visitor Appointment:\nAppointment No: ${appointmentNo}\nName: ${visitorData.visitorName}\nFather: ${visitorData.fatherName}\nDOB: ${visitorData.dob}\nAddress: ${visitorData.address}\nCountry: ${visitorData.country}\nVisit Date: ${visitorData.visitDate}\nVisit Time: ${visitorData.visitTime}\nContact: ${visitorData.contactNumber}\nPassport: ${visitorData.passport}\nEmail: ${visitorData.email}`
+  )}`;
+  fetch(webAppURL, { method:'POST', body: JSON.stringify(visitorData)})
+    .then(resp => resp.json())
+    .then(r => {
+      if(r.success){ window.open(waLink,'_blank'); alert(`Appointment Submitted! ${appointmentNo}`); document.getElementById('formVisitor').reset();}
+      else alert('Failed to submit');
+    }).catch(err=>alert('Failed to submit'));
 });
 
-// Admin login
 document.getElementById('formAdmin').addEventListener('submit', function(e){
   e.preventDefault();
   const username = document.getElementById('adminUsername').value;
   const password = document.getElementById('adminPassword').value;
-
-  if(username === admin.username && password === admin.password){
-    alert('Admin login successful');
-    document.getElementById('formAdmin').style.display = 'none';
-    document.getElementById('adminDashboard').style.display = 'block';
-
-    // Fetch visitor data from Google Sheet
+  if(username===admin.username && password===admin.password){
+    document.getElementById('formAdmin').style.display='none';
+    document.getElementById('adminDashboard').style.display='block';
     fetch(webAppURL)
-    .then(resp => resp.text())
-    .then(text => {
-      document.querySelector('#visitorTable tbody').innerHTML = '<tr><td colspan="11">Data available via Apps Script doPost</td></tr>';
-    });
-  } else {
-    alert('Access denied');
-  }
+      .then(resp=>resp.json())
+      .then(data=>{
+        const tbody = document.querySelector('#visitorTable tbody');
+        tbody.innerHTML = '';
+        data.forEach(visitor=>{
+          const tr = document.createElement('tr');
+          tr.innerHTML = `<td>${visitor.appointmentNumber}</td><td>${visitor.visitorName}</td><td>${visitor.fatherName}</td><td>${visitor.dob}</td><td>${visitor.address}</td><td>${visitor.country}</td><td>${visitor.visitDate}</td><td>${visitor.visitTime}</td><td>${visitor.contactNumber}</td><td>${visitor.passport}</td><td>${visitor.email}</td>`;
+          tbody.appendChild(tr);
+        });
+      });
+  } else { alert('Access denied'); }
 });
 
-// Admin logout
-function adminLogout(){
-  document.getElementById('adminDashboard').style.display = 'none';
-  document.getElementById('formAdmin').style.display = 'block';
-}
+function adminLogout(){ document.getElementById('adminDashboard').style.display='none'; document.getElementById('formAdmin').style.display='block'; }
 </script>
 
 </body>

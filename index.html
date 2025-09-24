@@ -3,38 +3,67 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>INDIA BADSAH</title>
+<title>BHOLA NATH BASAK</title>
 <style>
-body { margin:0; font-family:Arial, sans-serif; background:linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d); color:white; }
+body { margin:0; font-family:Arial,sans-serif; background:linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d); color:white;}
 header { text-align:center; padding:20px; background:rgba(0,0,0,0.6);}
 header img { width:180px; height:180px; object-fit:cover; border-radius:50%; border:5px solid #fff;}
 nav { display:flex; justify-content:center; background:rgba(0,0,0,0.8); flex-wrap:wrap;}
 nav a { color:white; text-decoration:none; padding:15px 20px;}
 nav a:hover { background:#fbd46d; color:black; border-radius:5px;}
 section { padding:20px; max-width:900px; margin:20px auto; background:rgba(255,255,255,0.1); border-radius:12px;}
-h2 { color:#ffe66d; }
-input, select { width:95%; padding:10px; margin:8px 0; border-radius:5px; border:none; }
+h2 { color:#ffe66d;}
+input, select { width:95%; padding:10px; margin:8px 0; border-radius:5px; border:none;}
 button { padding:10px 20px; margin:10px 5px; border:none; border-radius:5px; cursor:pointer;}
-button.submit-btn { background:#4CAF50; color:white; }
-button.cancel-btn { background:#f44336; color:white; }
-.social-links a { color:white; margin:0 10px; text-decoration:none; }
-.social-links a:hover { color:#fbd46d; }
+button.submit-btn { background:#4CAF50; color:white;}
+button.cancel-btn { background:#f44336; color:white;}
+footer { text-align:center; padding:10px; font-size:14px; background:rgba(0,0,0,0.7); position:fixed; bottom:0; width:100%;}
+footer a { color:#fbd46d; margin:0 8px; text-decoration:none; font-weight:bold;}
+footer a:hover { color:white;}
+table { width:100%; border-collapse: collapse; margin-top:15px;}
+th,td { border:1px solid #fff; padding:8px; text-align:left;}
+th { background: rgba(0,0,0,0.6);}
+.status-pending { background:pink;}
+.status-accepted { background:green; color:white;}
+.status-rejected { background:red; color:white;}
 </style>
 </head>
 <body>
 
 <header>
-  <img src="myphoto.jpg" alt="India Badsah">
-  <h1>INDIA BADSAH</h1>
+  <img src="myphoto.jpg" alt="BHOLA NATH BASAK">
+  <h1>BHOLA NATH BASAK</h1>
   <div class="social-links">
     <a href="https://facebook.com/" target="_blank">Facebook</a>
+    <a href="https://linkedin.com/" target="_blank">LinkedIn</a>
     <a href="https://instagram.com/" target="_blank">Instagram</a>
   </div>
 </header>
 
 <nav>
+  <a href="#about">About Me</a>
   <a href="#visitorForm">Visitor Form</a>
+  <a href="#adminLogin">Admin Login</a>
 </nav>
+
+<section id="about">
+  <h2>Personal Details</h2>
+  <p><strong>Name:</strong> BHOLA NATH BASAK</p>
+  <p><strong>DOB:</strong> 24-03-1988</p>
+  <p><strong>Place of Birth:</strong> Krishnagar, Nadia, India</p>
+  <p><strong>Nationality:</strong> Indian</p>
+  <p><strong>Religion:</strong> Hindu</p>
+  <p><strong>Culture:</strong> Indian Culture, Languages: Hindi, English</p>
+  <h3>Education</h3>
+  <p>BA in Arts, MBA in Business Administration</p>
+  <h3>Achievements</h3>
+  <p>Best Manager Award 2021, Published Articles in Business Journals</p>
+  <h3>Skills</h3>
+  <p>Leadership, Programming, Communication, Business Management</p>
+  <h3>Contact</h3>
+  <p>Email: starananda24@gmail.com</p>
+  <p>Phone: +971506309833</p>
+</section>
 
 <section id="visitorForm">
   <h2>Visitor Appointment Form</h2>
@@ -53,6 +82,12 @@ button.cancel-btn { background:#f44336; color:white; }
       <option value="USA (+1)">USA (+1)</option>
       <option value="UK (+44)">UK (+44)</option>
       <option value="Canada (+1)">Canada (+1)</option>
+      <option value="Australia (+61)">Australia (+61)</option>
+      <option value="Germany (+49)">Germany (+49)</option>
+      <option value="France (+33)">France (+33)</option>
+      <option value="UAE (+971)">UAE (+971)</option>
+      <option value="Saudi Arabia (+966)">Saudi Arabia (+966)</option>
+      <option value="Other">Other</option>
     </select>
     <label>Visit Date</label>
     <input type="date" id="visitDate" required min="">
@@ -69,23 +104,72 @@ button.cancel-btn { background:#f44336; color:white; }
   </form>
 </section>
 
+<section id="adminLogin">
+  <h2>Admin Login</h2>
+  <form id="formAdmin">
+    <label>Username</label>
+    <input type="text" id="adminUsername" required>
+    <label>Password</label>
+    <input type="password" id="adminPassword" required>
+    <button type="submit">Login</button>
+  </form>
+  <div id="adminDashboard" style="display:none;">
+    <h2>Visitor Details</h2>
+    <table id="visitorTable">
+      <thead>
+        <tr>
+          <th>Appointment</th><th>Name</th><th>Father</th><th>DOB</th>
+          <th>Address</th><th>Country</th><th>Visit Date</th><th>Visit Time</th>
+          <th>Contact</th><th>Passport</th><th>Email</th><th>Status</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <h2>Admin Profile</h2>
+    <div id="adminProfile"></div>
+  </div>
+</section>
+
+<footer>
+  <span>Follow Me:</span>
+  <a href="https://facebook.com/" target="_blank">Facebook</a>
+  <a href="https://linkedin.com/" target="_blank">LinkedIn</a>
+  <a href="https://instagram.com/" target="_blank">Instagram</a>
+</footer>
+
 <script>
-// Set date limits
+// ----------------- Date limits -----------------
 document.getElementById('dob').max = new Date().toISOString().split("T")[0];
 document.getElementById('visitDate').min = new Date().toISOString().split("T")[0];
+
+// ----------------- Admin Details -----------------
+const admin = {
+  username: "admin1",
+  password: "Password123",
+  name: "BHOLA NATH BASAK",
+  dob: "24-03-1988",
+  placeOfBirth: "Krishnagar, Nadia, India",
+  nationality: "Indian",
+  religion: "Hindu",
+  email: "starananda24@gmail.com",
+  culture: "Indian Culture",
+  education: "BA in Arts, MBA in Business Administration",
+  achievements: "Best Manager Award 2021, Published Articles in Business Journals",
+  skills: "Leadership, Programming, Communication, Business Management",
+  social: {
+    facebook: "https://facebook.com/",
+    linkedin: "https://linkedin.com/",
+    instagram: "https://instagram.com/"
+  },
+  contactNumber: "+971506309833"
+};
 
 // ----------------- Visitor Form Submit -----------------
 document.getElementById('formVisitor').addEventListener('submit', function(e){
   e.preventDefault();
-
-  // Generate unique appointment number
   const appointmentNo = 'APPT-' + Date.now();
-
-  // Get current date & time
   const now = new Date();
   const dateTime = now.toLocaleString();
-
-  // Get form values
   const visitorData = {
     appointmentNo,
     visitorName: document.getElementById('visitorName').value,
@@ -101,43 +185,69 @@ document.getElementById('formVisitor').addEventListener('submit', function(e){
     dateTime
   };
 
-  // Create WhatsApp message link
-  const adminNumber = '971506309833';
-  const message = `New Visitor Appointment:\n\nAppointment No: ${appointmentNo}\nName: ${visitorData.visitorName}\nFather: ${visitorData.fatherName}\nDOB: ${visitorData.dob}\nAddress: ${visitorData.address}\nCountry: ${visitorData.country}\nVisit Date: ${visitorData.visitDate}\nVisit Time: ${visitorData.visitTime}\nContact: ${visitorData.contactNumber}\nPassport: ${visitorData.passport}\nEmail: ${visitorData.email}\nSubmitted At: ${dateTime}`;
-  const waLink = `https://wa.me/${adminNumber}?text=${encodeURIComponent(message)}`;
-
-  // Open WhatsApp Web with pre-filled message
+  // WhatsApp Message
+  const waLink = `https://wa.me/${admin.contactNumber.replace(/\+/,'')}?text=${encodeURIComponent(
+    `New Visitor Appointment:\n\nAppointment No: ${appointmentNo}\nName: ${visitorData.visitorName}\nFather: ${visitorData.fatherName}\nDOB: ${visitorData.dob}\nAddress: ${visitorData.address}\nCountry: ${visitorData.country}\nVisit Date: ${visitorData.visitDate}\nVisit Time: ${visitorData.visitTime}\nContact: ${visitorData.contactNumber}\nPassport: ${visitorData.passport}\nEmail: ${visitorData.email}\nSubmitted At: ${dateTime}`
+  )}`;
   window.open(waLink, '_blank');
 
-  // Generate printable receipt
-  const receiptContent = `
-    <html>
-    <head><title>Appointment Receipt</title></head>
-    <body>
-      <h2>Visitor Appointment Receipt</h2>
-      <p><strong>Appointment No:</strong> ${appointmentNo}</p>
-      <p><strong>Name:</strong> ${visitorData.visitorName}</p>
-      <p><strong>Father Name:</strong> ${visitorData.fatherName}</p>
-      <p><strong>DOB:</strong> ${visitorData.dob}</p>
-      <p><strong>Address:</strong> ${visitorData.address}</p>
-      <p><strong>Country:</strong> ${visitorData.country}</p>
-      <p><strong>Visit Date:</strong> ${visitorData.visitDate}</p>
-      <p><strong>Visit Time:</strong> ${visitorData.visitTime}</p>
-      <p><strong>Contact:</strong> ${visitorData.contactNumber}</p>
-      <p><strong>Passport:</strong> ${visitorData.passport}</p>
-      <p><strong>Email:</strong> ${visitorData.email}</p>
-      <p><strong>Submitted At:</strong> ${dateTime}</p>
-    </body>
-    </html>
-  `;
+  // Printable Receipt
+  const receiptContent = `<html><head><title>Appointment Receipt</title></head><body>
+  <h2>Visitor Appointment Receipt</h2>
+  <p><strong>Appointment No:</strong> ${appointmentNo}</p>
+  <p><strong>Name:</strong> ${visitorData.visitorName}</p>
+  <p><strong>Father Name:</strong> ${visitorData.fatherName}</p>
+  <p><strong>DOB:</strong> ${visitorData.dob}</p>
+  <p><strong>Address:</strong> ${visitorData.address}</p>
+  <p><strong>Country:</strong> ${visitorData.country}</p>
+  <p><strong>Visit Date:</strong> ${visitorData.visitDate}</p>
+  <p><strong>Visit Time:</strong> ${visitorData.visitTime}</p>
+  <p><strong>Contact:</strong> ${visitorData.contactNumber}</p>
+  <p><strong>Passport:</strong> ${visitorData.passport}</p>
+  <p><strong>Email:</strong> ${visitorData.email}</p>
+  <p><strong>Submitted At:</strong> ${dateTime}</p></body></html>`;
   const printWindow = window.open('', '', 'height=600,width=800');
   printWindow.document.write(receiptContent);
   printWindow.document.close();
   printWindow.print();
 
-  // Reset form
   document.getElementById('formVisitor').reset();
-  alert(`Appointment Submitted Successfully!\nYour Appointment No: ${appointmentNo}`);
+  alert(`Appointment Submitted!\nYour Appointment No: ${appointmentNo}`);
+});
+
+// ----------------- Admin Login -----------------
+document.getElementById('formAdmin').addEventListener('submit', function(e){
+  e.preventDefault();
+  const username = document.getElementById('adminUsername').value;
+  const password = document.getElementById('adminPassword').value;
+  if(username===admin.username && password===admin.password){
+    alert("Admin login successful");
+    document.getElementById('formAdmin').style.display="none";
+    document.getElementById('adminDashboard').style.display="block";
+    
+    // Display admin profile
+    const profileDiv = document.getElementById('adminProfile');
+    profileDiv.innerHTML = `
+      <p><strong>Name:</strong> ${admin.name}</p>
+      <p><strong>DOB:</strong> ${admin.dob}</p>
+      <p><strong>Place of Birth:</strong> ${admin.placeOfBirth}</p>
+      <p><strong>Nationality:</strong> ${admin.nationality}</p>
+      <p><strong>Religion:</strong> ${admin.religion}</p>
+      <p><strong>Culture:</strong> ${admin.culture}</p>
+      <p><strong>Education:</strong> ${admin.education}</p>
+      <p><strong>Achievements:</strong> ${admin.achievements}</p>
+      <p><strong>Skills:</strong> ${admin.skills}</p>
+      <p><strong>Email:</strong> ${admin.email}</p>
+      <p><strong>Contact:</strong> ${admin.contactNumber}</p>
+      <p><strong>Social:</strong> 
+        <a href="${admin.social.facebook}" target="_blank">Facebook</a> | 
+        <a href="${admin.social.linkedin}" target="_blank">LinkedIn</a> | 
+        <a href="${admin.social.instagram}" target="_blank">Instagram</a>
+      </p>
+    `;
+  } else {
+    alert("Access denied");
+  }
 });
 </script>
 

@@ -13,6 +13,7 @@ nav a { color:white; text-decoration:none; padding:15px 20px;}
 nav a:hover { background:#fbd46d; color:black; border-radius:5px;}
 section { padding:20px; max-width:900px; margin:20px auto; background:rgba(255,255,255,0.1); border-radius:12px;}
 h2 { color:#ffe66d;}
+h3 { color:#ffd700;}
 input, select { width:95%; padding:10px; margin:8px 0; border-radius:5px; border:none;}
 button { padding:10px 20px; margin:10px 5px; border:none; border-radius:5px; cursor:pointer;}
 button.submit-btn { background:#4CAF50; color:white;}
@@ -20,6 +21,7 @@ button.cancel-btn { background:#f44336; color:white;}
 footer { text-align:center; padding:10px; font-size:14px; background:rgba(0,0,0,0.7); position:fixed; bottom:0; width:100%;}
 footer a { color:#fbd46d; margin:0 8px; text-decoration:none; font-weight:bold;}
 footer a:hover { color:white;}
+footer p { margin:5px 0;}
 table { width:100%; border-collapse: collapse; margin-top:15px;}
 th,td { border:1px solid #fff; padding:8px; text-align:left;}
 th { background: rgba(0,0,0,0.6);}
@@ -43,7 +45,7 @@ th { background: rgba(0,0,0,0.6);}
 <nav>
   <a href="#about">About Me</a>
   <a href="#visitorForm">Visitor Form</a>
-  <a href="#adminLogin">Admin Login</a>
+  <!-- Admin login link hidden -->
 </nav>
 
 <section id="about">
@@ -53,13 +55,25 @@ th { background: rgba(0,0,0,0.6);}
   <p><strong>Place of Birth:</strong> Krishnagar, Nadia, India</p>
   <p><strong>Nationality:</strong> Indian</p>
   <p><strong>Religion:</strong> Hindu</p>
-  <p><strong>Culture:</strong> Indian Culture, Languages: Hindi, English</p>
+
   <h3>Education</h3>
-  <p>BA in Arts, MBA in Business Administration</p>
+  <p>Completed BA in Arts and MBA in Business Administration. Passionate about learning, continuously upgrading skills in leadership, business management, and modern technology.</p>
+
+  <h3>Culture</h3>
+  <p>Deeply rooted in Indian culture and traditions. Values family, social harmony, and respect for diversity. Enjoys participating in cultural festivals and traditional celebrations.</p>
+
   <h3>Achievements</h3>
-  <p>Best Manager Award 2021, Published Articles in Business Journals</p>
-  <h3>Skills</h3>
-  <p>Leadership, Programming, Communication, Business Management</p>
+  <p>Recognized for excellence in management and business projects. Published articles in business journals and received the Best Manager Award 2021.</p>
+
+  <h3>Hobbies</h3>
+  <p>Loves reading, traveling, photography, and exploring new cuisines. Enjoys spending time in nature and learning new skills.</p>
+
+  <h3>Interests</h3>
+  <p>Interested in technology, entrepreneurship, education, and personal growth. Keen to mentor young professionals and share knowledge.</p>
+
+  <h3>Thoughts</h3>
+  <p>"Every challenge is an opportunity to grow, every connection is a chance to learn, and every day is a gift to make a difference."</p>
+
   <h3>Contact</h3>
   <p>Email: starananda24@gmail.com</p>
   <p>Phone: +971506309833</p>
@@ -104,7 +118,8 @@ th { background: rgba(0,0,0,0.6);}
   </form>
 </section>
 
-<section id="adminLogin">
+<!-- Hidden Admin Section -->
+<section id="adminLogin" style="display:none;">
   <h2>Admin Login</h2>
   <form id="formAdmin">
     <label>Username</label>
@@ -135,14 +150,15 @@ th { background: rgba(0,0,0,0.6);}
   <a href="https://facebook.com/" target="_blank">Facebook</a>
   <a href="https://linkedin.com/" target="_blank">LinkedIn</a>
   <a href="https://instagram.com/" target="_blank">Instagram</a>
+  <p>&copy; 2025 Personal Website BHOLA NATH BASAK</p>
 </footer>
 
 <script>
-// ----------------- Date limits -----------------
+// Date limits
 document.getElementById('dob').max = new Date().toISOString().split("T")[0];
 document.getElementById('visitDate').min = new Date().toISOString().split("T")[0];
 
-// ----------------- Admin Details -----------------
+// Admin details
 const admin = {
   username: "admin1",
   password: "Password123",
@@ -152,10 +168,13 @@ const admin = {
   nationality: "Indian",
   religion: "Hindu",
   email: "starananda24@gmail.com",
-  culture: "Indian Culture",
-  education: "BA in Arts, MBA in Business Administration",
-  achievements: "Best Manager Award 2021, Published Articles in Business Journals",
+  culture: "Deeply rooted in Indian culture and traditions. Values family, social harmony, and respect for diversity.",
+  education: "Completed BA in Arts and MBA in Business Administration. Passionate about learning and skill growth.",
+  achievements: "Recognized for excellence in management and business projects. Published articles and received Best Manager Award.",
   skills: "Leadership, Programming, Communication, Business Management",
+  hobbies: "Reading, traveling, photography, exploring new cuisines.",
+  interests: "Technology, entrepreneurship, education, personal growth.",
+  thoughts: "Every challenge is an opportunity to grow, every connection is a chance to learn, and every day is a gift to make a difference.",
   social: {
     facebook: "https://facebook.com/",
     linkedin: "https://linkedin.com/",
@@ -164,7 +183,7 @@ const admin = {
   contactNumber: "+971506309833"
 };
 
-// ----------------- Visitor Form Submit -----------------
+// Visitor form submit
 document.getElementById('formVisitor').addEventListener('submit', function(e){
   e.preventDefault();
   const appointmentNo = 'APPT-' + Date.now();
@@ -185,13 +204,11 @@ document.getElementById('formVisitor').addEventListener('submit', function(e){
     dateTime
   };
 
-  // WhatsApp Message
   const waLink = `https://wa.me/${admin.contactNumber.replace(/\+/,'')}?text=${encodeURIComponent(
     `New Visitor Appointment:\n\nAppointment No: ${appointmentNo}\nName: ${visitorData.visitorName}\nFather: ${visitorData.fatherName}\nDOB: ${visitorData.dob}\nAddress: ${visitorData.address}\nCountry: ${visitorData.country}\nVisit Date: ${visitorData.visitDate}\nVisit Time: ${visitorData.visitTime}\nContact: ${visitorData.contactNumber}\nPassport: ${visitorData.passport}\nEmail: ${visitorData.email}\nSubmitted At: ${dateTime}`
   )}`;
   window.open(waLink, '_blank');
 
-  // Printable Receipt
   const receiptContent = `<html><head><title>Appointment Receipt</title></head><body>
   <h2>Visitor Appointment Receipt</h2>
   <p><strong>Appointment No:</strong> ${appointmentNo}</p>
@@ -215,7 +232,7 @@ document.getElementById('formVisitor').addEventListener('submit', function(e){
   alert(`Appointment Submitted!\nYour Appointment No: ${appointmentNo}`);
 });
 
-// ----------------- Admin Login -----------------
+// Admin login
 document.getElementById('formAdmin').addEventListener('submit', function(e){
   e.preventDefault();
   const username = document.getElementById('adminUsername').value;
@@ -225,7 +242,6 @@ document.getElementById('formAdmin').addEventListener('submit', function(e){
     document.getElementById('formAdmin').style.display="none";
     document.getElementById('adminDashboard').style.display="block";
     
-    // Display admin profile
     const profileDiv = document.getElementById('adminProfile');
     profileDiv.innerHTML = `
       <p><strong>Name:</strong> ${admin.name}</p>
@@ -237,6 +253,9 @@ document.getElementById('formAdmin').addEventListener('submit', function(e){
       <p><strong>Education:</strong> ${admin.education}</p>
       <p><strong>Achievements:</strong> ${admin.achievements}</p>
       <p><strong>Skills:</strong> ${admin.skills}</p>
+      <p><strong>Hobbies:</strong> ${admin.hobbies}</p>
+      <p><strong>Interests:</strong> ${admin.interests}</p>
+      <p><strong>Thoughts:</strong> ${admin.thoughts}</p>
       <p><strong>Email:</strong> ${admin.email}</p>
       <p><strong>Contact:</strong> ${admin.contactNumber}</p>
       <p><strong>Social:</strong> 

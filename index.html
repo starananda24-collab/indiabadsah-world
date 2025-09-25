@@ -3,123 +3,94 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BHOLA NATH BASAK</title>
+<title>Visitor Management</title>
 <style>
-body { margin:0; font-family:Arial,sans-serif; background:linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d); color:white;}
-header { text-align:center; padding:20px; background:rgba(0,0,0,0.6);}
-header img { width:180px; height:180px; object-fit:cover; border-radius:50%; border:5px solid #fff;}
-nav { display:flex; justify-content:center; background:rgba(0,0,0,0.8); flex-wrap:wrap;}
-nav a { color:white; text-decoration:none; padding:15px 20px;}
-nav a:hover { background:#fbd46d; color:black; border-radius:5px;}
-section { padding:20px; max-width:900px; margin:20px auto; background:rgba(255,255,255,0.1); border-radius:12px;}
-h2 { color:#ffe66d;}
-input, select { width:95%; padding:10px; margin:8px 0; border-radius:5px; border:none;}
-button { padding:10px 20px; margin:10px 5px; border:none; border-radius:5px; cursor:pointer;}
-button.submit-btn { background:#4CAF50; color:white;}
-button.cancel-btn { background:#f44336; color:white;}
-button.logout-btn { background:#ff6600; color:white; margin-top:10px;}
-footer { text-align:center; padding:10px; font-size:14px; background:rgba(0,0,0,0.7); position:fixed; bottom:0; width:100%;}
-footer a { color:#fbd46d; margin:0 8px; text-decoration:none; font-weight:bold;}
-footer a:hover { color:white;}
-table { width:100%; border-collapse: collapse; margin-top:15px;}
-th,td { border:1px solid #fff; padding:8px; text-align:left;}
-th { background: rgba(0,0,0,0.6);}
-.status-pending { background:pink;}
-.status-accepted { background:green; color:white;}
-.status-rejected { background:red; color:white;}
-.action-btn { padding:5px 10px; margin:2px; border-radius:5px; cursor:pointer; border:none;}
-.action-accept { background:green; color:white;}
-.action-reject { background:red; color:white;}
-.action-delete { background:#555; color:white;}
-.about-panel { background:linear-gradient(to right, #1e3c72, #2a5298); color:white; padding:15px; border-radius:12px; margin-bottom:20px;}
+  body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f4f4f4; }
+  header { background: #1E3A8A; color: #fff; padding: 20px; text-align: center; }
+  .about-section { background: linear-gradient(135deg,#1E3A8A,#fff); color:#000; padding: 30px; margin:20px auto; max-width:900px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.2);}
+  .about-section h2 { text-align:center; margin-bottom:20px; }
+  .about-section p { text-align:justify; line-height:1.6; margin-bottom:15px; }
+  .visitor-btn { display:block; margin:20px auto; padding:15px 25px; background:#10B981; color:#fff; border:none; border-radius:5px; cursor:pointer; font-size:16px; }
+  .visitor-form { display:none; background:#fff; padding:20px; max-width:500px; margin:0 auto 20px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.2);}
+  .visitor-form input, .visitor-form select { width:100%; padding:10px; margin:10px 0; border-radius:5px; border:1px solid #ccc; }
+  .visitor-form button { padding:10px 20px; background:#1E3A8A; color:#fff; border:none; border-radius:5px; cursor:pointer; margin-right:10px; }
+  .admin-section { background:#fff; padding:20px; max-width:1000px; margin:20px auto; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.2);}
+  .admin-login { text-align:center; margin-bottom:20px; }
+  .admin-login input { padding:10px; margin:5px; border-radius:5px; border:1px solid #ccc; }
+  .admin-login button { padding:10px 20px; background:#10B981; color:#fff; border:none; border-radius:5px; cursor:pointer; }
+  table { width:100%; border-collapse: collapse; margin-top:20px; }
+  table, th, td { border:1px solid #ccc; }
+  th, td { padding:10px; text-align:center; }
+  th { background:#1E3A8A; color:#fff; }
+  .action-btn { padding:5px 10px; margin:2px; border:none; border-radius:5px; cursor:pointer; color:#fff; }
+  .accept { background:#10B981; }
+  .reject { background:#EF4444; }
+  .delete { background:#6B7280; }
+  footer { background:#1E3A8A; color:#fff; text-align:center; padding:20px; margin-top:40px; }
+  .contact-links { display:flex; justify-content:center; gap:15px; margin-top:10px; }
+  .contact-links a { display:block; padding:10px 15px; border-radius:5px; text-decoration:none; color:#fff; background:linear-gradient(135deg,#10B981,#EC4899); }
 </style>
 </head>
 <body>
 
 <header>
-  <img src="myphoto.jpg" alt="BHOLA NATH BASAK">
-  <h1>BHOLA NATH BASAK</h1>
+  <h1>Visitor Management System</h1>
 </header>
 
-<nav>
-  <a href="#about">About Me</a>
-  <a href="#" id="visitorLink">Visitor Form</a>
-  <a href="#adminLogin">Admin Login</a>
-</nav>
-
-<section id="about">
+<section class="about-section">
   <h2>About Me</h2>
-  <div class="about-panel">
-    <h3>Profile</h3>
-    <p>I am BHOLA NATH BASAK, a dedicated professional with expertise in leadership and management, committed to fostering business excellence and innovative solutions across industries. My experience spans various domains, consistently achieving results through strategic planning and collaborative approaches. I value continuous learning and actively engage in professional development activities, enhancing both personal and organizational growth. By combining analytical skills with creativity, I develop solutions that address complex challenges and deliver measurable impact.</p>
-    <h3>Education</h3>
-    <p>I hold a Bachelor of Arts degree and an MBA in Business Administration. My academic journey emphasized critical thinking, business analytics, and strategic management. Through rigorous coursework and real-world projects, I developed a solid foundation in organizational behavior, finance, marketing, and operations management. This education shaped my professional mindset, enabling me to navigate complex business landscapes, lead teams effectively, and contribute to organizational success. I continuously seek knowledge to stay ahead in evolving industries.</p>
-    <h3>Culture & Thoughts</h3>
-    <p>Growing up in India, I embrace diverse cultural values that instill respect, empathy, and integrity in both personal and professional life. My thoughts revolve around innovation, ethical leadership, and the power of collaboration. I believe in fostering inclusive environments where individuals feel valued and empowered to contribute. By integrating cultural awareness and strategic thinking, I approach challenges holistically, balancing creativity with practicality to achieve sustainable outcomes and long-term growth.</p>
-    <h3>Hobbies & Interests</h3>
-    <p>Outside of work, I enjoy exploring technology trends, reading, and participating in community activities. My hobbies include creative writing, music, and traveling to experience new cultures. These activities enrich my perspective, inspire problem-solving, and cultivate resilience. I am passionate about mentoring and sharing knowledge with aspiring professionals, helping them grow while maintaining a balance between personal fulfillment and career development.</p>
+  <p><strong>Profile:</strong> Experienced professional with a diverse background in multiple domains, bringing expertise and innovation to every project. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur efficitur lorem in augue ultricies, a consectetur purus finibus. Proin ac neque vel justo pharetra ullamcorper. Sed vel efficitur erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+  <p><strong>Thoughts:</strong> Committed to continuous learning and innovation. Fusce nec elit quis justo scelerisque fringilla non sit amet justo. Maecenas sit amet risus a purus imperdiet vehicula. Vivamus mollis elit vitae nisi vestibulum, in lacinia urna sollicitudin. Curabitur a velit vitae mi cursus tincidunt non a sapien.</p>
+  <p><strong>Hobbies:</strong> Passionate about technology, reading, and creative pursuits. Praesent mollis sapien nec lectus imperdiet, vel feugiat neque dignissim. Nunc sit amet orci in nunc scelerisque convallis. Etiam vitae tellus feugiat, iaculis dolor nec, blandit purus. Donec dapibus magna ut metus fermentum malesuada.</p>
+  <p><strong>Interests:</strong> Enthusiastic about problem-solving, innovation, and learning new skills. Integer vulputate urna id elit ultrices, ut mattis ex faucibus. Suspendisse potenti. Nullam tempor ligula vitae elit imperdiet, vel cursus magna vestibulum. Donec a ligula sed neque suscipit aliquet.</p>
+  <p><strong>Culture:</strong> Advocate of collaboration, integrity, and ethical practices in all professional engagements. Sed in massa non magna volutpat tempor. Mauris sit amet lectus vitae nisi facilisis porttitor.</p>
+  <p><strong>Education:</strong> Well-educated in diverse fields with continuous professional development. Vivamus id orci in elit hendrerit ultrices. Aliquam erat volutpat. Fusce vel felis nec mauris vehicula gravida. Curabitur sit amet dolor at erat eleifend luctus.</p>
+</section>
+
+<button class="visitor-btn" onclick="toggleVisitorForm()">Visitor Form</button>
+
+<section class="visitor-form" id="visitorForm">
+  <h2>Submit Visitor Form</h2>
+  <input type="text" id="visitorName" placeholder="Visitor Name">
+  <input type="date" id="dob" placeholder="Date of Birth">
+  <input type="text" id="fatherName" placeholder="Father Name">
+  <input type="text" id="address" placeholder="Address">
+  <input type="text" id="country" placeholder="Country">
+  <input type="date" id="visitDate" placeholder="Visit Date">
+  <input type="time" id="visitTime" placeholder="Visit Time">
+  <input type="text" id="contactNumber" placeholder="Contact Number">
+  <input type="text" id="passport" placeholder="Passport Number">
+  <input type="email" id="email" placeholder="Email">
+  <button onclick="submitForm()">Submit</button>
+  <button onclick="toggleVisitorForm()">Cancel</button>
+</section>
+
+<section class="admin-section">
+  <div class="admin-login" id="adminLoginDiv">
+    <input type="text" id="adminUser" placeholder="Admin Username">
+    <input type="password" id="adminPass" placeholder="Password">
+    <button onclick="adminLogin()">Login</button>
   </div>
-</section>
-
-<section id="visitorFormSection" style="display:none;">
-  <h2>Visitor Appointment Form</h2>
-  <form id="formVisitor">
-    <label>Visitor Name</label>
-    <input type="text" id="visitorName" required>
-    <label>Father Name</label>
-    <input type="text" id="fatherName" required>
-    <label>Visitor DOB</label>
-    <input type="date" id="dob" required max="">
-    <label>Visitor Address</label>
-    <input type="text" id="address" required>
-    <label>Country</label>
-    <select id="country" required>
-      <option value="India (+91)">India (+91)</option>
-      <option value="USA (+1)">USA (+1)</option>
-      <option value="UK (+44)">UK (+44)</option>
-      <option value="Canada (+1)">Canada (+1)</option>
-      <option value="Australia (+61)">Australia (+61)</option>
-      <option value="Germany (+49)">Germany (+49)</option>
-      <option value="France (+33)">France (+33)</option>
-      <option value="UAE (+971)">UAE (+971)</option>
-      <option value="Saudi Arabia (+966)">Saudi Arabia (+966)</option>
-      <option value="Other">Other</option>
-    </select>
-    <label>Visit Date</label>
-    <input type="date" id="visitDate" required min="">
-    <label>Visit Time</label>
-    <input type="time" id="visitTime" required>
-    <label>Contact Number</label>
-    <input type="tel" id="contactNumber" required>
-    <label>Passport Number</label>
-    <input type="text" id="passport">
-    <label>Email</label>
-    <input type="email" id="email" required>
-    <button type="submit" class="submit-btn">Submit</button>
-    <button type="button" class="cancel-btn" onclick="document.getElementById('formVisitor').reset()">Cancel</button>
-  </form>
-</section>
-
-<section id="adminLogin">
-  <h2>Admin Login</h2>
-  <form id="formAdmin">
-    <label>Username</label>
-    <input type="text" id="adminUsername" required>
-    <label>Password</label>
-    <input type="password" id="adminPassword" required>
-    <button type="submit">Login</button>
-  </form>
-  <button id="logoutBtn" class="logout-btn" style="display:none;" onclick="logoutAdmin()">Logout</button>
 
   <div id="adminDashboard" style="display:none;">
-    <h2>Visitor Details</h2>
+    <button onclick="adminLogout()">Logout</button>
     <table id="visitorTable">
       <thead>
         <tr>
-          <th>Name</th><th>DOB</th><th>Father</th><th>Address</th>
-          <th>Country</th><th>Visit Date</th><th>Visit Time</th>
-          <th>Contact</th><th>Passport</th><th>Email</th>
-          <th>Appointment</th><th>Status</th><th>Actions</th>
+          <th>Timestamp</th>
+          <th>Visitor Name</th>
+          <th>DOB</th>
+          <th>Father</th>
+          <th>Address</th>
+          <th>Country</th>
+          <th>Visit Date</th>
+          <th>Visit Time</th>
+          <th>Contact</th>
+          <th>Passport</th>
+          <th>Email</th>
+          <th>Appointment</th>
+          <th>Status</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody></tbody>
@@ -128,125 +99,122 @@ th { background: rgba(0,0,0,0.6);}
 </section>
 
 <footer>
-  <span>Contact:</span>
-  <a href="https://facebook.com/" target="_blank">Facebook</a>
-  <a href="https://linkedin.com/" target="_blank">LinkedIn</a>
-  <a href="https://instagram.com/" target="_blank">Instagram</a>
-  <a href="mailto:starananda24@gmail.com">Email</a>
-  <br>
-  &copy; 2025 BHOLA NATH BASAK
+  <p>&copy; 2025 Your Company. All rights reserved.</p>
+  <div class="contact-links">
+    <a href="https://facebook.com" target="_blank">Facebook</a>
+    <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+    <a href="https://instagram.com" target="_blank">Instagram</a>
+    <a href="mailto:example@gmail.com" target="_blank">Email</a>
+  </div>
 </footer>
 
 <script>
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx9rOd0zpE2uVVBVkvaXg6xTPR1cU8ElpurDKIGyEn1Bcjns_g6DZBkBXmdRWz9v9QJlw/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw8-xvhH02BWCl9G8lYvqlkAqNNn0IxYXfwR9suNc81f0RJKjRi9kn48_tCKtAVh4UWYQ/exec";
 
-// Show visitor form when link clicked
-document.getElementById('visitorLink').onclick = function(){ 
-  document.getElementById('visitorFormSection').style.display = 'block';
-};
+function toggleVisitorForm(){
+  const form = document.getElementById("visitorForm");
+  form.style.display = (form.style.display==="block")?"none":"block";
+}
 
-// Visitor Form submit
-document.getElementById('formVisitor').onsubmit = async function(e){
-  e.preventDefault();
-  const appointmentNumber = "APPT-" + Date.now();
+function submitForm(){
   const data = {
-    appointmentNumber,
-    visitorName: document.getElementById('visitorName').value,
-    fatherName: document.getElementById('fatherName').value,
-    dob: document.getElementById('dob').value,
-    address: document.getElementById('address').value,
-    country: document.getElementById('country').value,
-    visitDate: document.getElementById('visitDate').value,
-    visitTime: document.getElementById('visitTime').value,
-    contactNumber: document.getElementById('contactNumber').value,
-    passport: document.getElementById('passport').value,
-    email: document.getElementById('email').value
+    visitorName: document.getElementById("visitorName").value,
+    dob: document.getElementById("dob").value,
+    fatherName: document.getElementById("fatherName").value,
+    address: document.getElementById("address").value,
+    country: document.getElementById("country").value,
+    visitDate: document.getElementById("visitDate").value,
+    visitTime: document.getElementById("visitTime").value,
+    contactNumber: document.getElementById("contactNumber").value,
+    passport: document.getElementById("passport").value,
+    email: document.getElementById("email").value,
+    appointmentNumber: "APPT-" + new Date().getTime()
   };
 
-  const response = await fetch(WEB_APP_URL, {
-    method: 'POST',
+  fetch(SCRIPT_URL, {
+    method:"POST",
     body: JSON.stringify(data)
+  }).then(r=>r.json()).then(res=>{
+    if(res.success){
+      alert("Form submitted! Appointment: "+data.appointmentNumber);
+      window.open(`https://wa.me/917055484964?text=Visitor%20Name:%20${encodeURIComponent(data.visitorName)}%20Appointment:%20${encodeURIComponent(data.appointmentNumber)}`);
+      toggleVisitorForm();
+    }else{
+      alert("Failed: "+res.error);
+    }
   });
-  const result = await response.json();
-  if(result.success){
-    alert("Form submitted successfully! Appointment No: " + appointmentNumber);
-    const whatsappMsg = encodeURIComponent(
-      `Visitor Appointment\nName: ${data.visitorName}\nFather: ${data.fatherName}\nDOB: ${data.dob}\nAppointment: ${appointmentNumber}\nVisit: ${data.visitDate} ${data.visitTime}`
-    );
-    window.open(`https://wa.me/?text=${whatsappMsg}`, '_blank');
-    document.getElementById('formVisitor').reset();
-  } else alert("Failed to submit form: "+result.error);
-};
+}
 
-// Admin login
-document.getElementById('formAdmin').onsubmit = async function(e){
-  e.preventDefault();
-  const username = document.getElementById('adminUsername').value;
-  const password = document.getElementById('adminPassword').value;
-  if(username === "admin" && password === "admin123"){
-    document.getElementById('formAdmin').style.display='none';
-    document.getElementById('logoutBtn').style.display='inline-block';
-    document.getElementById('adminDashboard').style.display='block';
+function adminLogin(){
+  const user = document.getElementById("adminUser").value;
+  const pass = document.getElementById("adminPass").value;
+  if(user==="admin" && pass==="password123"){
+    document.getElementById("adminLoginDiv").style.display="none";
+    document.getElementById("adminDashboard").style.display="block";
     loadVisitors();
-  } else alert("Invalid credentials");
-};
-
-// Logout
-function logoutAdmin(){
-  document.getElementById('adminDashboard').style.display='none';
-  document.getElementById('formAdmin').style.display='block';
-  document.getElementById('logoutBtn').style.display='none';
-}
-
-// Load visitors
-async function loadVisitors(){
-  const res = await fetch(WEB_APP_URL+"?action=getVisitors");
-  const data = await res.json();
-  const tbody = document.querySelector('#visitorTable tbody');
-  tbody.innerHTML = '';
-  data.visitors.forEach(v=>{
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td>${v['Visitor Name']}</td>
-      <td>${v['Visitor DOB']}</td>
-      <td>${v['Father Name']}</td>
-      <td>${v['Visitor Address']}</td>
-      <td>${v['Country']}</td>
-      <td>${v['Visit Date']}</td>
-      <td>${v['Visit Time']}</td>
-      <td>${v['Contact Number']}</td>
-      <td>${v['Passport Number']}</td>
-      <td>${v['Email']}</td>
-      <td>${v['Appointment Number']}</td>
-      <td>${v['Status'] || 'Pending'}</td>
-      <td>
-        <button class="action-btn action-accept" onclick="updateStatus('${v['Appointment Number']}','Accepted',this)">Accept</button>
-        <button class="action-btn action-reject" onclick="updateStatus('${v['Appointment Number']}','Rejected',this)">Reject</button>
-        <button class="action-btn action-delete" onclick="deleteVisitor('${v['Appointment Number']}',this)">Delete</button>
-      </td>
-    `;
-    tbody.appendChild(tr);
-  });
-}
-
-// Update Status
-async function updateStatus(appt,status,btn){
-  await fetch(WEB_APP_URL, {
-    method:'POST',
-    body: JSON.stringify({appointmentNumber:appt,status})
-  });
-  loadVisitors();
-}
-
-// Delete Visitor
-async function deleteVisitor(appt,btn){
-  if(confirm("Are you sure to delete this visitor?")){
-    await fetch(WEB_APP_URL,{
-      method:'POST',
-      body: JSON.stringify({appointmentNumber:appt,delete:true})
-    });
-    loadVisitors();
+  }else{
+    alert("Invalid credentials");
   }
+}
+
+function adminLogout(){
+  document.getElementById("adminLoginDiv").style.display="block";
+  document.getElementById("adminDashboard").style.display="none";
+  document.getElementById("visitorTable").querySelector("tbody").innerHTML="";
+}
+
+function loadVisitors(){
+  fetch(SCRIPT_URL+"?action=getVisitors")
+  .then(r=>r.json())
+  .then(res=>{
+    if(res.success){
+      const tbody = document.getElementById("visitorTable").querySelector("tbody");
+      tbody.innerHTML="";
+      res.visitors.forEach((v,i)=>{
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${v.Timestamp || ""}</td>
+          <td>${v["Visitor Name"] || ""}</td>
+          <td>${v["Visitor DOB"] || ""}</td>
+          <td>${v["Father Name"] || ""}</td>
+          <td>${v["Visitor Address"] || ""}</td>
+          <td>${v.Country || ""}</td>
+          <td>${v["Visit Date"] || ""}</td>
+          <td>${v["Visit Time"] || ""}</td>
+          <td>${v["Contact Number"] || ""}</td>
+          <td>${v["Passport Number"] || ""}</td>
+          <td>${v.Email || ""}</td>
+          <td>${v["Appointment Number"] || ""}</td>
+          <td>${v.Status || "Pending"}</td>
+          <td>
+            <button class="action-btn accept" onclick="updateStatus('${v['Appointment Number']}','Accept',this)">Accept</button>
+            <button class="action-btn reject" onclick="updateStatus('${v['Appointment Number']}','Reject',this)">Reject</button>
+            <button class="action-btn delete" onclick="deleteVisitor('${v['Appointment Number']}',this)">Delete</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+  });
+}
+
+function updateStatus(appt,status,btn){
+  const row = btn.parentElement.parentElement;
+  const acceptBtn = row.querySelector(".accept");
+  const rejectBtn = row.querySelector(".reject");
+  if(status==="Accept"){
+    acceptBtn.disabled=true;
+    rejectBtn.disabled=false;
+  } else if(status==="Reject"){
+    acceptBtn.disabled=true;
+    rejectBtn.disabled=true;
+  }
+  row.querySelector("td:nth-child(13)").innerText=status;
+}
+
+function deleteVisitor(appt,btn){
+  const row = btn.parentElement.parentElement;
+  row.remove();
 }
 </script>
 

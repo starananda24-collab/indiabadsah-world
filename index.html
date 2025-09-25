@@ -5,30 +5,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BHOLA NATH BASAK</title>
 <style>
-body { margin:0; font-family:Arial,sans-serif; background:linear-gradient(to right,#1a2a6c,#b21f1f,#fdbb2d); color:white;}
+body { margin:0; font-family:Arial,sans-serif; background:linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d); color:white;}
 header { text-align:center; padding:20px; background:rgba(0,0,0,0.6);}
-header img { width:180px;height:180px;border-radius:50%;border:5px solid #fff;}
-nav { display:flex;justify-content:center;background:rgba(0,0,0,0.8);flex-wrap:wrap;}
-nav a { color:white;text-decoration:none;padding:15px 20px;}
-nav a:hover { background:#fbd46d;color:black;border-radius:5px;}
-section { padding:20px; max-width:900px;margin:20px auto;background:rgba(255,255,255,0.1);border-radius:12px;}
+header img { width:180px; height:180px; object-fit:cover; border-radius:50%; border:5px solid #fff;}
+nav { display:flex; justify-content:center; background:rgba(0,0,0,0.8); flex-wrap:wrap;}
+nav a { color:white; text-decoration:none; padding:15px 20px;}
+nav a:hover { background:#fbd46d; color:black; border-radius:5px;}
+section { padding:20px; max-width:900px; margin:20px auto; background:rgba(255,255,255,0.1); border-radius:12px;}
 h2 { color:#ffe66d;}
-input,select { width:95%;padding:10px;margin:8px 0;border-radius:5px;border:none;}
-button { padding:10px 20px;margin:10px 5px;border:none;border-radius:5px;cursor:pointer;}
-button.submit-btn { background:#4CAF50;color:white;}
-button.cancel-btn { background:#f44336;color:white;}
-footer { text-align:center;padding:10px;font-size:14px;background:rgba(0,0,0,0.7);}
-footer a { color:#fbd46d;margin:0 8px;text-decoration:none;font-weight:bold;}
-footer a:hover { color:white;}
-table { width:100%;border-collapse: collapse;margin-top:15px;}
-th,td { border:1px solid #fff;padding:8px;text-align:left;}
+input, select { width:95%; padding:10px; margin:8px 0; border-radius:5px; border:none;}
+button { padding:10px 20px; margin:10px 5px; border:none; border-radius:5px; cursor:pointer;}
+button.submit-btn { background:#4CAF50; color:white;}
+button.cancel-btn { background:#f44336; color:white;}
+footer { text-align:center; padding:20px; font-size:14px; background:rgba(0,0,0,0.7);}
+footer .contacts { display:flex; justify-content:center; gap:20px; flex-wrap:wrap; margin-top:10px;}
+footer .contact-box { background:linear-gradient(135deg,#4caf50,#ff4081); padding:15px; border-radius:8px; text-align:center; min-width:120px;}
+footer .contact-box a { color:white; text-decoration:none; display:block; margin:5px 0; font-weight:bold;}
+table { width:100%; border-collapse: collapse; margin-top:15px;}
+th,td { border:1px solid #fff; padding:8px; text-align:left;}
 th { background: rgba(0,0,0,0.6);}
 .status-pending { background:pink;}
-.status-accepted { background:green;color:white;}
-.status-rejected { background:red;color:white;}
-.about-section { background:linear-gradient(to right,#ffffff,#1a2a6c);color:black;padding:15px;margin:10px 0;border-radius:10px;}
-.contact-card { display:inline-block;background:linear-gradient(to right,#28a745,#e83e8c);padding:10px 15px;margin:5px;border-radius:8px;}
-.contact-card a { color:white;text-decoration:none;font-weight:bold;}
+.status-accepted { background:green; color:white;}
+.status-rejected { background:red; color:white;}
 </style>
 </head>
 <body>
@@ -36,11 +34,6 @@ th { background: rgba(0,0,0,0.6);}
 <header>
   <img src="myphoto.jpg" alt="BHOLA NATH BASAK">
   <h1>BHOLA NATH BASAK</h1>
-  <div class="social-links">
-    <a href="https://facebook.com/" target="_blank">Facebook</a>
-    <a href="https://linkedin.com/" target="_blank">LinkedIn</a>
-    <a href="https://instagram.com/" target="_blank">Instagram</a>
-  </div>
 </header>
 
 <nav>
@@ -51,22 +44,11 @@ th { background: rgba(0,0,0,0.6);}
 
 <section id="about">
   <h2>About Me</h2>
-  <div class="about-section">
-    <h3>Profile</h3>
-    <p>BHOLA NATH BASAK is an experienced professional with a rich background in leadership and business management. With years of expertise in handling teams, projects, and strategic planning, he has developed a unique approach to problem-solving and effective communication. His passion for technology and programming allows him to bridge traditional business practices with modern solutions, ensuring efficiency and innovation in every endeavor. He is dedicated to mentoring and guiding young professionals, promoting a collaborative work environment while constantly seeking growth opportunities.</p>
-  </div>
-  <div class="about-section">
-    <h3>Culture & Interests</h3>
-    <p>Deeply rooted in Indian culture, BHOLA NATH BASAK embraces values of respect, integrity, and continuous learning. He enjoys exploring historical traditions while incorporating contemporary perspectives in daily life. His interests span across literature, international business trends, and global networking. He actively participates in cultural events, educational workshops, and community programs, fostering connections and understanding diverse viewpoints. His hobbies include reading, analytical thinking, and developing creative strategies to solve real-world challenges, blending cultural insights with practical knowledge.</p>
-  </div>
-  <div class="about-section">
-    <h3>Education & Skills</h3>
-    <p>He holds a BA in Arts and an MBA in Business Administration, combining analytical skills with business acumen. His expertise includes leadership, programming, communication, and project management. He is adept at utilizing technological tools to enhance productivity and streamline operations. Constantly seeking knowledge, he attends workshops, certifications, and online courses to stay current with global trends. His strategic thinking, problem-solving, and mentorship skills make him a resourceful and dependable professional. He thrives in dynamic environments, balancing innovative approaches with practical applications.</p>
-  </div>
-  <div class="about-section">
-    <h3>Thoughts & Hobbies</h3>
-    <p>BHOLA NATH BASAK believes in continuous learning and adaptability. His thoughts revolve around innovation, ethical leadership, and creating meaningful impact. He dedicates time to personal growth, meditation, and exploring new technologies. Hobbies include writing analytical articles, participating in community projects, and exploring creative solutions to complex challenges. He enjoys collaborating with like-minded professionals and engaging in activities that enhance both personal and professional development. He values resilience, creativity, and the pursuit of knowledge in all aspects of life, blending work with passion and purpose.</p>
-  </div>
+  <p><strong>Profile:</strong> I am Bhola Nath Basak, a professional with extensive experience in management, programming, and leadership. I emphasize ethics, creativity, and innovation in all my work, always striving for excellence in both personal and professional life. I enjoy mentoring others, sharing knowledge, and contributing positively to my community.</p>
+  <p><strong>Culture:</strong> Growing up in India, I have embraced the rich cultural traditions and values while integrating global perspectives into my approach. I actively participate in cultural events, literature, and discussions, valuing diversity, collaboration, and community engagement.</p>
+  <p><strong>Education:</strong> I hold a BA in Arts and an MBA in Business Administration. My studies have equipped me with strategic thinking, problem-solving, and leadership skills. I continually pursue knowledge through professional development, online courses, and workshops to stay updated with global trends.</p>
+  <p><strong>Thoughts & Philosophy:</strong> I believe in ethical leadership, continuous learning, and contributing positively to society. My philosophy revolves around respect, integrity, and innovation, ensuring every action has a meaningful impact.</p>
+  <p><strong>Interests & Hobbies:</strong> I enjoy reading, coding, exploring new technologies, participating in workshops, mentoring students, and engaging in cultural and creative activities. These activities fuel my curiosity, creativity, and professional growth.</p>
 </section>
 
 <section id="visitorForm">
@@ -117,7 +99,6 @@ th { background: rgba(0,0,0,0.6);}
     <input type="password" id="adminPassword" required>
     <button type="submit">Login</button>
   </form>
-  <button onclick="adminLogout()">Logout</button>
   <div id="adminDashboard" style="display:none;">
     <h2>Visitor Details</h2>
     <table id="visitorTable">
@@ -125,7 +106,7 @@ th { background: rgba(0,0,0,0.6);}
         <tr>
           <th>Appointment</th><th>Name</th><th>Father</th><th>DOB</th>
           <th>Address</th><th>Country</th><th>Visit Date</th><th>Visit Time</th>
-          <th>Contact</th><th>Passport</th><th>Email</th>
+          <th>Contact</th><th>Passport</th><th>Email</th><th>Status</th>
         </tr>
       </thead>
       <tbody></tbody>
@@ -134,10 +115,13 @@ th { background: rgba(0,0,0,0.6);}
 </section>
 
 <footer>
-  <div class="contact-card"><a href="https://facebook.com/" target="_blank">Facebook</a></div>
-  <div class="contact-card"><a href="https://linkedin.com/" target="_blank">LinkedIn</a></div>
-  <div class="contact-card"><a href="https://instagram.com/" target="_blank">Instagram</a></div>
-  <div class="contact-card"><a href="mailto:starananda24@gmail.com">EmailID</a></div>
+  <h3>Contact</h3>
+  <div class="contacts">
+    <div class="contact-box"><a href="https://facebook.com/" target="_blank">Facebook</a></div>
+    <div class="contact-box"><a href="https://linkedin.com/" target="_blank">LinkedIn</a></div>
+    <div class="contact-box"><a href="https://instagram.com/" target="_blank">Instagram</a></div>
+    <div class="contact-box"><a href="mailto:starananda24@gmail.com">Email</a></div>
+  </div>
 </footer>
 
 <script>
@@ -145,11 +129,12 @@ document.getElementById('dob').max = new Date().toISOString().split("T")[0];
 document.getElementById('visitDate').min = new Date().toISOString().split("T")[0];
 
 const admin = { username:"admin1", password:"Password123" };
-const webAppURL = "https://script.google.com/macros/s/AKfycbxr8qxKNRlScS0IYlDVqIaYGZoUjTSz0QLpZzZXyBZYN7xSqJ9Lb6jatbdFArMzMjGkIg/exec";
+const webAppURL = "https://script.google.com/macros/s/AKfycbyuT7l2LNNJqxLDBfI0wMU58BhP7BSNwSpop-Ru22xII9uWdTS14UEOjMgHGuXKfcnRhw/exec";
 
-document.getElementById('formVisitor').addEventListener('submit', function(e){
+// Visitor form submit
+document.getElementById('formVisitor').addEventListener('submit', async function(e){
   e.preventDefault();
-  const appointmentNo = 'APPT-'+Date.now();
+  const appointmentNo = 'APPT-' + Date.now();
   const visitorData = {
     appointmentNumber: appointmentNo,
     visitorName: document.getElementById('visitorName').value,
@@ -163,41 +148,49 @@ document.getElementById('formVisitor').addEventListener('submit', function(e){
     passport: document.getElementById('passport').value,
     email: document.getElementById('email').value
   };
-  // WhatsApp redirect
-  const waLink = `https://wa.me/971506309833?text=${encodeURIComponent(
-    `New Visitor Appointment:\nAppointment No: ${appointmentNo}\nName: ${visitorData.visitorName}\nFather: ${visitorData.fatherName}\nDOB: ${visitorData.dob}\nAddress: ${visitorData.address}\nCountry: ${visitorData.country}\nVisit Date: ${visitorData.visitDate}\nVisit Time: ${visitorData.visitTime}\nContact: ${visitorData.contactNumber}\nPassport: ${visitorData.passport}\nEmail: ${visitorData.email}`
-  )}`;
-  fetch(webAppURL, { method:'POST', body: JSON.stringify(visitorData)})
-    .then(resp => resp.json())
-    .then(r => {
-      if(r.success){ window.open(waLink,'_blank'); alert(`Appointment Submitted! ${appointmentNo}`); document.getElementById('formVisitor').reset();}
-      else alert('Failed to submit');
-    }).catch(err=>alert('Failed to submit'));
+  try{
+    const res = await fetch(webAppURL,{method:"POST", body:JSON.stringify(visitorData)});
+    const result = await res.json();
+    if(result.success){
+      const waLink = `https://wa.me/+971506309833?text=${encodeURIComponent(
+        `New Visitor Appointment:\nAppointment No: ${appointmentNo}\nName: ${visitorData.visitorName}\nFather: ${visitorData.fatherName}\nDOB: ${visitorData.dob}\nAddress: ${visitorData.address}\nCountry: ${visitorData.country}\nVisit Date: ${visitorData.visitDate}\nVisit Time: ${visitorData.visitTime}\nContact: ${visitorData.contactNumber}\nPassport: ${visitorData.passport}\nEmail: ${visitorData.email}`
+      )}`;
+      window.open(waLink,"_blank");
+      alert("Form submitted successfully!");
+      document.getElementById('formVisitor').reset();
+    }else{ alert("Failed to submit: "+result.error); }
+  }catch(err){ alert("Error: "+err.message); }
 });
 
-document.getElementById('formAdmin').addEventListener('submit', function(e){
+// Admin login
+document.getElementById('formAdmin').addEventListener('submit', async function(e){
   e.preventDefault();
-  const username = document.getElementById('adminUsername').value;
-  const password = document.getElementById('adminPassword').value;
-  if(username===admin.username && password===admin.password){
-    document.getElementById('formAdmin').style.display='none';
-    document.getElementById('adminDashboard').style.display='block';
-    fetch(webAppURL)
-      .then(resp=>resp.json())
-      .then(data=>{
-        const tbody = document.querySelector('#visitorTable tbody');
-        tbody.innerHTML = '';
-        data.forEach(visitor=>{
-          const tr = document.createElement('tr');
-          tr.innerHTML = `<td>${visitor.appointmentNumber}</td><td>${visitor.visitorName}</td><td>${visitor.fatherName}</td><td>${visitor.dob}</td><td>${visitor.address}</td><td>${visitor.country}</td><td>${visitor.visitDate}</td><td>${visitor.visitTime}</td><td>${visitor.contactNumber}</td><td>${visitor.passport}</td><td>${visitor.email}</td>`;
-          tbody.appendChild(tr);
-        });
-      });
-  } else { alert('Access denied'); }
+  if(document.getElementById('adminUsername').value===admin.username && document.getElementById('adminPassword').value===admin.password){
+    document.getElementById('formAdmin').style.display="none";
+    document.getElementById('adminDashboard').style.display="block";
+    // Fetch visitor data
+    const res = await fetch(webAppURL);
+    const visitors = await res.json();
+    const tbody = document.querySelector('#visitorTable tbody');
+    tbody.innerHTML = "";
+    visitors.forEach(v=>{
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${v['Appointment Number']||v.appointmentNumber||''}</td>
+                      <td>${v['Visitor Name']||v.visitorName||''}</td>
+                      <td>${v['Father Name']||v.fatherName||''}</td>
+                      <td>${v['Visitor DOB']||v.dob||''}</td>
+                      <td>${v['Visitor Address']||v.address||''}</td>
+                      <td>${v['Country']||v.country||''}</td>
+                      <td>${v['Visit Date']||v.visitDate||''}</td>
+                      <td>${v['Visit Time']||v.visitTime||''}</td>
+                      <td>${v['Contact Number']||v.contactNumber||''}</td>
+                      <td>${v['Passport Number']||v.passport||''}</td>
+                      <td>${v['Email']||v.email||''}</td>
+                      <td>${v.Status||'Pending'}</td>`;
+      tbody.appendChild(tr);
+    });
+  }else{ alert("Access Denied!"); }
 });
-
-function adminLogout(){ document.getElementById('adminDashboard').style.display='none'; document.getElementById('formAdmin').style.display='block'; }
 </script>
-
 </body>
 </html>

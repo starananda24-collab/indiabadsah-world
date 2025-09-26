@@ -28,8 +28,8 @@ th { background: rgba(0,0,0,0.6);}
 .status-accepted { background:green; color:white;}
 .status-rejected { background:red; color:white;}
 .action-btn { padding:5px 10px; margin:2px; border-radius:5px; cursor:pointer; border:none;}
-.action-accept { background:green; color:white;}
-.action-reject { background:red; color:white;}
+.action-accept { background:#aaa; color:white;}
+.action-reject { background:#aaa; color:white;}
 .action-delete { background:#555; color:white;}
 .about-panel { background:linear-gradient(to right, #1e3c72, #2a5298); color:white; padding:15px; border-radius:12px; margin-bottom:20px;}
 </style>
@@ -140,16 +140,49 @@ th { background: rgba(0,0,0,0.6);}
 <script>
 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwx-A1wmW5-kdB5mn1SQFcbyF6PnSCpddfmMGAjbzgXZUzfQfmJMz6MHwkjrMdrCyNtRg/exec";
 
-// Show visitor form when link clicked
+// Show visitor form
 document.getElementById('visitorLink').onclick = function(){ 
   document.getElementById('visitorFormSection').style.display = 'block';
 };
 
-// Visitor Form submit
+// Visitor Form submit with validations + WhatsApp + Print
 document.getElementById('formVisitor').onsubmit = async function(e){
   e.preventDefault();
+
+  const dob = new Date(document.getElementById('dob').value);
+  const visitDate = new Date(document.getElementById('visitDate').value);
+  const visitTime = document.getElementById('visitTime').value.split(':');
+  const now = new Date();
+  
+  // Age check ≥18
+  let age = now.getFullYear() - dob.getFullYear();
+  const m = now.getMonth() - dob.getMonth();
+  if(m < 0 || (m === 0 && now.getDate() < dob.getDate())) age--;
+  if(age < 18){
+    alert("Visitor must be 18 years or older.");
+    return;
+  }
+  
+  // Visit date check
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const visitDay = new Date(visitDate.getFullYear(), visitDate.getMonth(), visitDate.getDate());
+  if(visitDay < today){
+    alert("Visit date cannot be in the past.");
+    return;
+  }
+  
+  // Visit time check if today
+  if(visitDay.getTime() === today.getTime()){
+    const visitHour = parseInt(visitTime[0]);
+    const visitMin = parseInt(visitTime[1]);
+    if(visitHour < now.getHours() || (visitHour === now.getHours() && visitMin <= now.getMinutes())){
+      alert("Visit time must be in the future.");
+      return;
+    }
+  }
+
   const appointmentNumber = "APPT-" + Date.now();
-  const data = {
+  const visitorData = {
     appointmentNumber,
     visitorName: document.getElementById('visitorName').value,
     fatherName: document.getElementById('fatherName').value,
@@ -162,15 +195,41 @@ document.getElementById('formVisitor').onsubmit = async function(e){
     passport: document.getElementById('passport').value,
     email: document.getElementById('email').value
   };
+  
+  // Send to Google Sheet
   const response = await fetch(WEB_APP_URL, {
     method: 'POST',
-    body: JSON.stringify(data)
+    body: JSON.stringify(visitorData)
   });
   const result = await response.json();
   if(result.success){
-    alert("Form submitted successfully! Appointment No: " + appointmentNumber);
+    // Print visitor details
+    const printContent = `
+      Visitor Name: ${visitorData.visitorName}\n
+      Father Name: ${visitorData.fatherName}\n
+      DOB: ${visitorData.dob}\n
+      Address: ${visitorData.address}\n
+      Country: ${visitorData.country}\n
+      Visit Date: ${visitorData.visitDate}\n
+      Visit Time: ${visitorData.visitTime}\n
+      Contact: ${visitorData.contactNumber}\n
+      Passport: ${visitorData.passport}\n
+      Email: ${visitorData.email}\n
+      Appointment No: ${visitorData.appointmentNumber}
+    `;
+    const newWin = window.open('');
+    newWin.document.write('<pre>'+printContent+'</pre>');
+    newWin.print();
+
+    // Redirect to WhatsApp
+    const whatsappMessage = encodeURIComponent(printContent);
+    const whatsappURL = `https://wa.me/?text=${whatsappMessage}`;
+    window.open(whatsappURL,'_blank');
+
+    // Reset form and reload admin dashboard
     document.getElementById('formVisitor').reset();
     loadVisitors();
+    alert("Form submitted successfully! Appointment No: " + appointmentNumber);
   } else alert("Failed to submit form: "+result.error);
 };
 
@@ -202,27 +261,46 @@ async function loadVisitors(){
     const tbody = document.querySelector('#visitorTable tbody');
     tbody.innerHTML = '';
     data.visitors.forEach(v=>{
+      const dob = new Date(v['Visitor DOB']);
+      const visitDate = new Date(v['Visit Date']);
+      const status = v['Status'] || 'Pending';
       const tr = document.createElement('tr');
       tr.innerHTML = `
         <td>${v['Visitor Name'] || ''}</td>
-        <td>${v['Visitor DOB'] || ''}</td>
+        <td>${dob.toLocaleDateString() || ''}</td>
         <td>${v['Father Name'] || ''}</td>
         <td>${v['Visitor Address'] || ''}</td>
         <td>${v['Country'] || ''}</td>
-        <td>${v['Visit Date'] || ''}</td>
+        <td>${visitDate.toLocaleDateString() || ''}</td>
         <td>${v['Visit Time'] || ''}</td>
         <td>${v['Contact Number'] || ''}</td>
         <td>${v['Passport Number'] || ''}</td>
         <td>${v['Email'] || ''}</td>
         <td>${v['Appointment Number'] || ''}</td>
-        <td>${v['Status'] || 'Pending'}</td>
+        <td class="status-${status.toLowerCase()}">${status}</td>
         <td>
-          <button class="action-btn action-accept" onclick="updateStatus('${v['Appointment Number']}','Accepted',this)">Accept</button>
-          <button class="action-btn action-reject" onclick="updateStatus('${v['Appointment Number']}','Rejected',this)">Reject</button>
+          <button class="action-btn action-accept" onclick="updateStatus('${v['Appointment Number']}','Accepted',this)" ${status==='Rejected'?'disabled':''}>Accept</button>
+          <button class="action-btn action-reject" onclick="updateStatus('${v['Appointment Number']}','Rejected',this)" ${status==='Accepted'?'disabled':''}>Reject</button>
           <button class="action-btn action-delete" onclick="deleteVisitor('${v['Appointment Number']}',this)">Delete</button>
         </td>
       `;
       tbody.appendChild(tr);
+
+      // Dynamic colors
+      const acceptBtn = tr.querySelector('.action-accept');
+      const rejectBtn = tr.querySelector('.action-reject');
+      if(status==='Accepted'){
+        acceptBtn.style.background='green';
+        rejectBtn.style.background='#aaa';
+        rejectBtn.disabled=true;
+      } else if(status==='Rejected'){
+        rejectBtn.style.background='red';
+        acceptBtn.style.background='#aaa';
+        acceptBtn.disabled=true;
+      } else {
+        acceptBtn.style.background='#aaa';
+        rejectBtn.style.background='#aaa';
+      }
     });
   } catch(err){
     console.error('Error loading visitors:', err);

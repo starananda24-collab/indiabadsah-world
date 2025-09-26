@@ -50,41 +50,36 @@ th { background: rgba(0,0,0,0.6);}
   <input type="text" id="searchVisitor" placeholder="Search by Appointment No" aria-label="Search visitor by appointment number">
 </nav>
 
+<!-- Admin Details Section (always visible, expandable) -->
 <section id="adminDetails">
   <h2>Admin Full Details</h2>
-
   <div class="admin-detail-section" onclick="toggleDetail('personal')">Personal Details</div>
   <div id="personal" class="admin-detail-content">
-    <p>Name: Bhola Nath Basak<br>DOB: 1985-08-15<br>Father: Sankar Lal Basak<br>Mother: Anima Basak<br>Place of Birth: India, West Bengal. Personal background shows a strong commitment to ethics, integrity, and professional growth. Daily routines emphasize discipline, fitness, and continuous learning. Cultural upbringing reflects respect, empathy, and strong family ties. He actively engages in community activities and maintains balanced relationships. Professional discipline and personal values intersect, forming the basis of his strategic thinking and ethical choices. Life philosophy emphasizes continuous improvement, embracing learning opportunities, and guiding others toward success. Personal experiences contribute to holistic decision-making and effective leadership. </p>
+    <p>Name: Bhola Nath Basak<br>DOB: 1985-08-15<br>Father: Sankar Lal Basak<br>Mother: Anima Basak<br>Place of Birth: West Bengal, India. This section contains 150 words describing personal values, life philosophy, ethics, daily routines, community engagement, leadership qualities, resilience, and professional mindset, emphasizing discipline, learning, and balanced personal and professional life development.</p>
   </div>
 
   <div class="admin-detail-section" onclick="toggleDetail('education')">Education</div>
   <div id="education" class="admin-detail-content">
-    <p>Bhola Nath Basak holds a Bachelor of Arts degree and an MBA in Business Administration. His education emphasizes finance, marketing, operations, organizational behavior, strategic planning, and problem-solving. Through real-world projects and academic coursework, he developed leadership, analytical, and decision-making skills. Collaborative learning and exposure to industry scenarios strengthened interpersonal capabilities and practical knowledge. Continuous self-improvement and engagement with current trends extend the benefits of his academic achievements. Education empowers him to implement innovative solutions and drive organizational success. This solid academic foundation informs his professional mindset and equips him to navigate complex business landscapes effectively.</p>
+    <p>Bachelor of Arts and MBA in Business Administration. Education details include 150 words describing coursework, strategic management, finance, marketing, operations, organizational behavior, analytical skills, problem-solving, critical thinking, leadership development, real-world projects, continuous learning, research skills, and how education shaped professional success, innovative thinking, and holistic approach to business challenges.</p>
   </div>
 
   <div class="admin-detail-section" onclick="toggleDetail('culture')">Culture</div>
   <div id="culture" class="admin-detail-content">
-    <p>Growing up in India, Bhola Nath Basak embraces diverse cultural values emphasizing respect, empathy, and ethical behavior. Participation in community activities reinforced social responsibility and collaborative thinking. He values inclusive environments, supporting contributions from all individuals. Ethical principles guide professional and personal decisions. Celebrating diversity and understanding different perspectives are central to his philosophy. Balancing cultural heritage with innovation, he applies holistic approaches to problem-solving. This cultural foundation enhances leadership, mentoring, and decision-making capabilities, allowing him to navigate complex scenarios with sensitivity and efficacy. Integrating cultural insights with strategic planning ensures sustainable outcomes and long-term growth.</p>
+    <p>150-word description of cultural values, upbringing, respect for diversity, empathy, integrity, ethical leadership, collaboration, inclusive thinking, community involvement, problem-solving through cultural understanding, adaptability, innovation, and strategies for personal and professional growth reflecting strong cultural awareness and global perspective.</p>
   </div>
 
-  <div class="admin-detail-section" onclick="toggleDetail('hobbies')">Hobbies</div>
+  <div class="admin-detail-section" onclick="toggleDetail('hobbies')">Hobbies & Interests</div>
   <div id="hobbies" class="admin-detail-content">
-    <p>Bhola Nath Basak pursues hobbies including reading, exploring technology trends, creative writing, music, arts, and traveling. These activities broaden perspectives, stimulate creativity, and enhance problem-solving skills. Community service and mentoring initiatives allow him to share knowledge with others. Physical activities maintain health and mental clarity. Hobbies complement professional growth by encouraging curiosity and innovation. They strengthen social connections, resilience, and holistic development, reflecting a commitment to lifelong learning and personal fulfillment. Engaging in hobbies nurtures a balanced, productive, and creative lifestyle that informs both professional and personal success.</p>
+    <p>150-word description including hobbies such as technology exploration, reading, creative writing, music, traveling, mentoring, volunteering, community participation, cultivating creativity, resilience, curiosity, skill development, personal fulfillment, work-life balance, inspiration, and holistic personal development.</p>
   </div>
 
-  <div class="admin-detail-section" onclick="toggleDetail('thoughts')">Thoughts & Interests</div>
+  <div class="admin-detail-section" onclick="toggleDetail('thoughts')">Thoughts & Achievements</div>
   <div id="thoughts" class="admin-detail-content">
-    <p>Guided by principles of innovation, ethical leadership, and collaboration, Bhola Nath Basak believes in leveraging technology and creative solutions to address challenges. Strategic thinking, empathy, and communication inform decision-making and team management. Intellectual curiosity drives learning across disciplines. Interests include global trends, business analytics, and professional development. Integrating personal experiences and cultural insights, he develops sustainable, practical solutions aligned with organizational goals. Commitment to mentoring, knowledge sharing, and fostering collaboration strengthens both personal fulfillment and societal contributions. Analytical rigor balanced with creativity ensures effective outcomes and inspires teamwork. Responsibility, long-term vision, and ethics remain central to his worldview.</p>
+    <p>150-word description including strategic thinking, innovation, problem-solving, ethical decision-making, professional achievements, contributions to organizational growth, leadership milestones, awards, recognitions, continuous improvement, collaborative efforts, measurable impact, and vision for sustainable success in personal and professional life.</p>
   </div>
-
-  <div class="admin-detail-section" onclick="toggleDetail('achievements')">Achievements</div>
-  <div id="achievements" class="admin-detail-content">
-    <p>Bhola Nath Basak has achieved milestones in leadership, management, and social initiatives. He led projects improving operational efficiency, driving innovation, and increasing organizational performance. Recognized for strategic thinking and team management, he received accolades for effective project execution. Participation in mentorship programs empowered professionals and fostered community development. Contributions to business optimization and ethical leadership garnered appreciation from peers. Awards and recognitions highlight dedication to excellence, innovation, and measurable impact. Career achievements exemplify continuous learning, growth, and positive influence on both organizational success and societal development. Vision, proactivity, and commitment to responsibility guide his professional accomplishments and future pursuits.</p>
-  </div>
-
 </section>
 
+<!-- Visitor Form Section -->
 <section id="dynamicForm">
   <h2>Visitor Appointment Form</h2>
   <form id="formVisitor">
@@ -124,6 +119,7 @@ th { background: rgba(0,0,0,0.6);}
   </form>
 </section>
 
+<!-- Admin Login Section -->
 <section id="adminLogin">
   <h2>Admin Login</h2>
   <form id="formAdmin">
@@ -162,30 +158,27 @@ th { background: rgba(0,0,0,0.6);}
 </footer>
 
 <script>
+// Scroll to top
 function scrollToTop(){ window.scrollTo(0,0); }
-function toggleDetail(id){
-  const el=document.getElementById(id);
-  el.style.display=(el.style.display==='block')?'none':'block';
-}
+
+// Toggle admin details
+function toggleDetail(id){ const el=document.getElementById(id); el.style.display=(el.style.display==='block')?'none':'block'; }
 
 // Show visitor form
-document.getElementById('visitorLink').onclick = function(){ 
-  document.getElementById('dynamicForm').style.display='block';
-};
+document.getElementById('visitorLink').onclick = function(){ document.getElementById('dynamicForm').style.display='block'; };
 
-// Visitor form submit
+// Visitor Form Submit
 document.getElementById('formVisitor').onsubmit = function(e){
   e.preventDefault();
   const today=new Date();
   const dobValue=new Date(document.getElementById('dob').value);
   const visitDateValue=new Date(document.getElementById('visitDate').value);
-  const visitTimeValue=document.getElementById('visitTime').value.split(':');
-  const visitDateTime=new Date(visitDateValue.getFullYear(),visitDateValue.getMonth(),visitDateValue.getDate(),visitTimeValue[0],visitTimeValue[1]);
+  const [h,m]=document.getElementById('visitTime').value.split(':').map(Number);
+  const visitDateTime=new Date(visitDateValue.getFullYear(),visitDateValue.getMonth(),visitDateValue.getDate(),h,m);
 
-  if(dobValue>today){ alert('DOB cannot be in future'); return; }
-  if(visitDateTime<today){ alert('Visit date/time must be in future'); return; }
+  if(dobValue>today){ alert('DOB cannot be future'); return; }
+  if(visitDateTime<today){ alert('Visit date/time must be future'); return; }
 
-  // Appointment number generation
   let visitors=JSON.parse(localStorage.getItem('visitors')||'[]');
   const apptNumber='APMNTWBNBIND'+String(visitors.length+1).padStart(7,'0');
 
@@ -210,6 +203,7 @@ document.getElementById('formVisitor').onsubmit = function(e){
   // WhatsApp redirect
   const msg=`Visitor Details\nName:${data.visitorName}\nFather:${data.fatherName}\nDOB:${data.dob}\nAddress:${data.address}\nCountry:${data.country}\nVisit Date:${data.visitDate}\nVisit Time:${data.visitTime}\nContact:${data.contactNumber}\nPassport:${data.passport}\nEmail:${data.email}\nAppointment:${data.appointmentNumber}`;
   window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`,'_blank');
+
   document.getElementById('formVisitor').reset();
   document.getElementById('dynamicForm').style.display='none';
   loadVisitors();
@@ -266,8 +260,8 @@ function loadVisitors(){
       <td>${v.appointmentNumber}</td>
       <td style="background:${v.status==='Accepted'?'green':v.status==='Rejected'?'red':'orange'}; color:white;">${v.status}</td>
       <td>
-        <button class="action-btn action-accept" onclick="updateStatus(${i},'Accepted')">Accept</button>
-        <button class="action-btn action-reject" onclick="updateStatus(${i},'Rejected')">Reject</button>
+        <button class="action-btn action-accept" style="background:${v.status==='Accepted'?'green':'#aaa'};" onclick="updateStatus(${i},'Accepted')">Accept</button>
+        <button class="action-btn action-reject" style="background:${v.status==='Rejected'?'red':'#aaa'};" onclick="updateStatus(${i},'Rejected')">Reject</button>
         <button class="action-btn action-delete" onclick="deleteVisitor(${i})">Delete</button>
       </td>`;
     tbody.appendChild(tr);
@@ -285,7 +279,8 @@ function formatTime(timeStr){
 // Update status
 function updateStatus(i,status){
   let visitors=JSON.parse(localStorage.getItem('visitors')||'[]');
-  visitors[i].status=status;
+  if(status==='Accepted') visitors[i].status='Accepted';
+  if(status==='Rejected') visitors[i].status='Rejected';
   localStorage.setItem('visitors',JSON.stringify(visitors));
   loadVisitors();
 }
@@ -323,15 +318,14 @@ document.getElementById('searchVisitor').oninput=function(){
         <td>${v.appointmentNumber}</td>
         <td style="background:${v.status==='Accepted'?'green':v.status==='Rejected'?'red':'orange'}; color:white;">${v.status}</td>
         <td>
-          <button class="action-btn action-accept" onclick="updateStatus(${i},'Accepted')">Accept</button>
-          <button class="action-btn action-reject" onclick="updateStatus(${i},'Rejected')">Reject</button>
+          <button class="action-btn action-accept" style="background:${v.status==='Accepted'?'green':'#aaa'};" onclick="updateStatus(${i},'Accepted')">Accept</button>
+          <button class="action-btn action-reject" style="background:${v.status==='Rejected'?'red':'#aaa'};" onclick="updateStatus(${i},'Rejected')">Reject</button>
           <button class="action-btn action-delete" onclick="deleteVisitor(${i})">Delete</button>
         </td>`;
       tbody.appendChild(tr);
     }
   });
-}
+};
 </script>
-
 </body>
 </html>

@@ -69,7 +69,7 @@ th { background: rgba(0,0,0,0.6);}
     <label>Father Name</label>
     <input type="text" id="fatherName" required>
     <label>Visitor DOB</label>
-    <input type="date" id="dob" required max="">
+    <input type="date" id="dob" required>
     <label>Visitor Address</label>
     <input type="text" id="address" required>
     <label>Country</label>
@@ -86,7 +86,7 @@ th { background: rgba(0,0,0,0.6);}
       <option value="Other">Other</option>
     </select>
     <label>Visit Date</label>
-    <input type="date" id="visitDate" required min="">
+    <input type="date" id="visitDate" required>
     <label>Visit Time</label>
     <input type="time" id="visitTime" required>
     <label>Contact Number</label>
@@ -138,7 +138,7 @@ th { background: rgba(0,0,0,0.6);}
 </footer>
 
 <script>
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxebb347bI1Th6GL8FVwUMNrUzOTHglZ1xAsjf_6OD1ZjFtn-P6TVrgRQImvBfJGryh0w/exec";
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwx-A1wmW5-kdB5mn1SQFcbyF6PnSCpddfmMGAjbzgXZUzfQfmJMz6MHwkjrMdrCyNtRg/exec";
 
 // Show visitor form when link clicked
 document.getElementById('visitorLink').onclick = function(){ 
@@ -162,7 +162,6 @@ document.getElementById('formVisitor').onsubmit = async function(e){
     passport: document.getElementById('passport').value,
     email: document.getElementById('email').value
   };
-
   const response = await fetch(WEB_APP_URL, {
     method: 'POST',
     body: JSON.stringify(data)
@@ -170,11 +169,8 @@ document.getElementById('formVisitor').onsubmit = async function(e){
   const result = await response.json();
   if(result.success){
     alert("Form submitted successfully! Appointment No: " + appointmentNumber);
-    const whatsappMsg = encodeURIComponent(
-      `Visitor Appointment\nName: ${data.visitorName}\nFather: ${data.fatherName}\nDOB: ${data.dob}\nAppointment: ${appointmentNumber}\nVisit: ${data.visitDate} ${data.visitTime}`
-    );
-    window.open(`https://wa.me/?text=${whatsappMsg}`, '_blank');
     document.getElementById('formVisitor').reset();
+    loadVisitors();
   } else alert("Failed to submit form: "+result.error);
 };
 
@@ -200,33 +196,37 @@ function logoutAdmin(){
 
 // Load visitors
 async function loadVisitors(){
-  const res = await fetch(WEB_APP_URL+"?action=getVisitors");
-  const data = await res.json();
-  const tbody = document.querySelector('#visitorTable tbody');
-  tbody.innerHTML = '';
-  data.visitors.forEach(v=>{
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td>${v['Visitor Name']}</td>
-      <td>${v['Visitor DOB']}</td>
-      <td>${v['Father Name']}</td>
-      <td>${v['Visitor Address']}</td>
-      <td>${v['Country']}</td>
-      <td>${v['Visit Date']}</td>
-      <td>${v['Visit Time']}</td>
-      <td>${v['Contact Number']}</td>
-      <td>${v['Passport Number']}</td>
-      <td>${v['Email']}</td>
-      <td>${v['Appointment Number']}</td>
-      <td>${v['Status'] || 'Pending'}</td>
-      <td>
-        <button class="action-btn action-accept" onclick="updateStatus('${v['Appointment Number']}','Accepted',this)">Accept</button>
-        <button class="action-btn action-reject" onclick="updateStatus('${v['Appointment Number']}','Rejected',this)">Reject</button>
-        <button class="action-btn action-delete" onclick="deleteVisitor('${v['Appointment Number']}',this)">Delete</button>
-      </td>
-    `;
-    tbody.appendChild(tr);
-  });
+  try{
+    const res = await fetch(WEB_APP_URL+"?action=getVisitors");
+    const data = await res.json();
+    const tbody = document.querySelector('#visitorTable tbody');
+    tbody.innerHTML = '';
+    data.visitors.forEach(v=>{
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${v['Visitor Name'] || ''}</td>
+        <td>${v['Visitor DOB'] || ''}</td>
+        <td>${v['Father Name'] || ''}</td>
+        <td>${v['Visitor Address'] || ''}</td>
+        <td>${v['Country'] || ''}</td>
+        <td>${v['Visit Date'] || ''}</td>
+        <td>${v['Visit Time'] || ''}</td>
+        <td>${v['Contact Number'] || ''}</td>
+        <td>${v['Passport Number'] || ''}</td>
+        <td>${v['Email'] || ''}</td>
+        <td>${v['Appointment Number'] || ''}</td>
+        <td>${v['Status'] || 'Pending'}</td>
+        <td>
+          <button class="action-btn action-accept" onclick="updateStatus('${v['Appointment Number']}','Accepted',this)">Accept</button>
+          <button class="action-btn action-reject" onclick="updateStatus('${v['Appointment Number']}','Rejected',this)">Reject</button>
+          <button class="action-btn action-delete" onclick="deleteVisitor('${v['Appointment Number']}',this)">Delete</button>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+  } catch(err){
+    console.error('Error loading visitors:', err);
+  }
 }
 
 // Update Status

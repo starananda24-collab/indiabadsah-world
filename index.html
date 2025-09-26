@@ -11,7 +11,7 @@ header img { width:180px; height:180px; object-fit:cover; border-radius:50%; bor
 nav { display:flex; justify-content:center; background:rgba(0,0,0,0.8); flex-wrap:wrap;}
 nav a, nav input[type=text] { color:white; text-decoration:none; padding:10px 15px; margin:5px; border-radius:5px; border:none;}
 nav a:hover { background:#fbd46d; color:black;}
-nav input[type=text] { width:200px; }
+nav input[type=text] { width:200px; color:black; }
 section { padding:20px; max-width:900px; margin:20px auto; background:rgba(255,255,255,0.1); border-radius:12px;}
 h2 { color:#ffe66d;}
 input, select { width:95%; padding:10px; margin:8px 0; border-radius:5px; border:none;}
@@ -36,8 +36,8 @@ th { background: rgba(0,0,0,0.6);}
 #dynamicForm { background:white; color:black; padding:20px; border-radius:12px; max-width:600px; margin:20px auto; display:none; border:2px solid red; }
 #dynamicForm input, #dynamicForm select { width:95%; padding:8px; margin:6px 0; border-radius:5px; border:1px solid #ccc; color:black;}
 #dynamicForm button { margin:5px; }
-#visitorDetailsPanel { display:none; background:rgba(0,0,0,0.8); padding:20px; border-radius:12px; margin-top:20px; }
-#visitorDetailsPanel h3 { color:#ffe66d; margin-top:15px; }
+.admin-detail-section { margin:10px 0; padding:10px; background:rgba(0,0,0,0.6); border-radius:8px; cursor:pointer; }
+.admin-detail-content { display:none; background:rgba(255,255,255,0.1); padding:10px; border-radius:8px; margin-top:5px; color:white; }
 </style>
 </head>
 <body>
@@ -126,7 +126,27 @@ th { background: rgba(0,0,0,0.6);}
       <tbody></tbody>
     </table>
 
-    <div id="visitorDetailsPanel"></div>
+    <h2>Admin Full Details</h2>
+    <div class="admin-detail-section" onclick="toggleDetail('education')">Education</div>
+    <div id="education" class="admin-detail-content">
+      <p>Education description ~150 words...</p>
+    </div>
+    <div class="admin-detail-section" onclick="toggleDetail('culture')">Culture</div>
+    <div id="culture" class="admin-detail-content">
+      <p>Culture description ~150 words...</p>
+    </div>
+    <div class="admin-detail-section" onclick="toggleDetail('personal')">Personal Details</div>
+    <div id="personal" class="admin-detail-content">
+      <p>Personal details description ~150 words...</p>
+    </div>
+    <div class="admin-detail-section" onclick="toggleDetail('hobbies')">Hobbies</div>
+    <div id="hobbies" class="admin-detail-content">
+      <p>Hobbies description ~150 words...</p>
+    </div>
+    <div class="admin-detail-section" onclick="toggleDetail('thoughts')">Thoughts & Interests</div>
+    <div id="thoughts" class="admin-detail-content">
+      <p>Thoughts and interests description ~150 words...</p>
+    </div>
   </div>
 </section>
 
@@ -150,6 +170,12 @@ document.getElementById('visitorLink').onclick = function(){
   form.scrollIntoView({behavior:'smooth'});
 };
 
+// Toggle admin section
+function toggleDetail(id){
+  const content = document.getElementById(id);
+  content.style.display = (content.style.display==='block')?'none':'block';
+}
+
 // Persist admin login
 if(localStorage.getItem('adminLoggedIn')==='true'){
   document.getElementById('formAdmin').style.display='none';
@@ -170,16 +196,17 @@ document.getElementById('formVisitor').onsubmit = async function(e){
   let age = now.getFullYear() - dob.getFullYear();
   const m = now.getMonth() - dob.getMonth();
   if(m<0 || (m===0 && now.getDate()<dob.getDate())) age--;
-  if(age<18 || dob>now){ alert("DOB must be ≥18 and not future."); return; }
+  if(age<18 || dob>=now){ alert("DOB must be < today and ≥18"); return; }
 
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   const visitDay = new Date(visitDate.getFullYear(), visitDate.getMonth(), visitDate.getDate());
-  if(visitDay < today){ alert("Visit date cannot be in past."); return; }
+  if(visitDay<today){ alert("Visit date cannot be in past"); return; }
   if(visitDay.getTime()===today.getTime()){
     const vh = parseInt(visitTimeParts[0]), vm=parseInt(visitTimeParts[1]);
-    if(vh<now.getHours() || (vh===now.getHours() && vm<=now.getMinutes())){ alert("Visit time must be future."); return; }
+    if(vh<now.getHours() || (vh===now.getHours() && vm<=now.getMinutes())){ alert("Visit time must be future"); return; }
   }
 
+  // Appointment number
   let lastAppt = parseInt(localStorage.getItem('lastAppt')||0)+1;
   localStorage.setItem('lastAppt', lastAppt);
   const appointmentNumber = 'APMNTWBNBIND'+String(lastAppt).padStart(7,'0');
@@ -198,54 +225,35 @@ document.getElementById('formVisitor').onsubmit = async function(e){
     email: document.getElementById('email').value
   };
 
-  const response = await fetch(WEB_APP_URL,{method:'POST',body:JSON.stringify(visitorData)});
-  const result = await response.json();
+  const res = await fetch(WEB_APP_URL, {method:'POST', body:JSON.stringify(visitorData)});
+  const result = await res.json();
   if(result.success){
-    // Print
-    const printContent = `
-Visitor Name: ${visitorData.visitorName}
-Father Name: ${visitorData.fatherName}
-DOB: ${visitorData.dob}
-Address: ${visitorData.address}
-Country: ${visitorData.country}
-Visit Date: ${visitorData.visitDate}
-Visit Time: ${visitorData.visitTime}
-Contact: ${visitorData.contactNumber}
-Passport: ${visitorData.passport}
-Email: ${visitorData.email}
-Appointment No: ${visitorData.appointmentNumber}
-`;
-    const newWin = window.open('');
-    newWin.document.write('<pre>'+printContent+'</pre>');
-    newWin.print();
-
-    // WhatsApp
-    window.open(`https://wa.me/?text=${encodeURIComponent(printContent)}`,'_blank');
-
+    alert("Form submitted! Appointment No: "+appointmentNumber);
     document.getElementById('formVisitor').reset();
     loadVisitors();
-    alert("Form submitted! Appointment No: " + appointmentNumber);
-  } else alert("Failed: "+result.error);
+  } else { alert("Failed: "+result.error);}
 };
 
 // Admin login
-document.getElementById('formAdmin').onsubmit = async function(e){
+document.getElementById('formAdmin').onsubmit = function(e){
   e.preventDefault();
-  if(document.getElementById('adminUsername').value==='admin' && document.getElementById('adminPassword').value==='admin123'){
-    localStorage.setItem('adminLoggedIn','true');
+  const username = document.getElementById('adminUsername').value;
+  const password = document.getElementById('adminPassword').value;
+  if(username==='admin' && password==='admin123'){
     document.getElementById('formAdmin').style.display='none';
     document.getElementById('logoutBtn').style.display='inline-block';
     document.getElementById('adminDashboard').style.display='block';
+    localStorage.setItem('adminLoggedIn','true');
     loadVisitors();
-  } else alert("Invalid credentials");
+  } else { alert("Invalid credentials"); }
 };
 
 // Logout
 function logoutAdmin(){
-  localStorage.removeItem('adminLoggedIn');
-  document.getElementById('adminDashboard').style.display='none';
   document.getElementById('formAdmin').style.display='block';
   document.getElementById('logoutBtn').style.display='none';
+  document.getElementById('adminDashboard').style.display='none';
+  localStorage.removeItem('adminLoggedIn');
 }
 
 // Load visitors
@@ -254,31 +262,34 @@ async function loadVisitors(){
     const res = await fetch(WEB_APP_URL+"?action=getVisitors");
     const data = await res.json();
     const tbody = document.querySelector('#visitorTable tbody');
-    tbody.innerHTML='';
+    tbody.innerHTML = '';
     data.visitors.forEach(v=>{
-      const dob = new Date(v['Visitor DOB']);
-      const visitDate = new Date(v['Visit Date']);
-      const visitTime = new Date('1970-01-01T'+v['Visit Time']+':00');
-      const status = v['Status'] || 'Pending';
       const tr = document.createElement('tr');
+      const dob = new Date(v['Visitor DOB']).toLocaleDateString();
+      const visitDate = new Date(v['Visit Date']).toLocaleDateString();
+      let visitTime = v['Visit Time'];
+      // format to am/pm
+      const [h,m] = visitTime.split(':');
+      let hour=parseInt(h), suffix='AM';
+      if(hour>=12){ suffix='PM'; if(hour>12) hour-=12; } if(hour===0) hour=12;
+      visitTime = hour+':'+m+' '+suffix;
       tr.innerHTML = `
-        <td>${v['Visitor Name']}</td>
-        <td>${dob.toLocaleDateString()}</td>
-        <td>${v['Father Name']}</td>
-        <td>${v['Visitor Address']}</td>
-        <td>${v['Country']}</td>
-        <td>${visitDate.toLocaleDateString()}</td>
-        <td>${visitTime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12:true})}</td>
-        <td>${v['Contact Number']}</td>
-        <td>${v['Passport Number']}</td>
-        <td>${v['Email']}</td>
-        <td>${v['Appointment Number']}</td>
-        <td class="status-${status.toLowerCase()}">${status}</td>
+        <td>${v['Visitor Name'] || ''}</td>
+        <td>${dob}</td>
+        <td>${v['Father Name'] || ''}</td>
+        <td>${v['Visitor Address'] || ''}</td>
+        <td>${v['Country'] || ''}</td>
+        <td>${visitDate}</td>
+        <td>${visitTime}</td>
+        <td>${v['Contact Number'] || ''}</td>
+        <td>${v['Passport Number'] || ''}</td>
+        <td>${v['Email'] || ''}</td>
+        <td>${v['Appointment Number'] || ''}</td>
+        <td>${v['Status'] || 'Pending'}</td>
         <td>
-          <button class="action-btn action-accept" onclick="updateStatus('${v['Appointment Number']}','Accepted',this)" ${status==='Rejected'?'disabled':''}>Accept</button>
-          <button class="action-btn action-reject" onclick="updateStatus('${v['Appointment Number']}','Rejected',this)" ${status==='Accepted'?'disabled':''}>Reject</button>
-          <button class="action-btn action-delete" onclick="deleteVisitor('${v['Appointment Number']}',this)">Delete</button>
-          <button class="action-btn" onclick="showDetails('${v['Appointment Number']}')">View Details</button>
+          <button class="action-btn action-accept" onclick="updateStatus('${v['Appointment Number']}','Accepted')">Accept</button>
+          <button class="action-btn action-reject" onclick="updateStatus('${v['Appointment Number']}','Rejected')">Reject</button>
+          <button class="action-btn action-delete" onclick="deleteVisitor('${v['Appointment Number']}')">Delete</button>
         </td>
       `;
       tbody.appendChild(tr);
@@ -287,58 +298,31 @@ async function loadVisitors(){
 }
 
 // Update Status
-async function updateStatus(appt,status,btn){
+async function updateStatus(appt,status){
   await fetch(WEB_APP_URL,{method:'POST',body:JSON.stringify({appointmentNumber:appt,status})});
   loadVisitors();
 }
 
 // Delete Visitor
-async function deleteVisitor(appt,btn){
+async function deleteVisitor(appt){
   if(confirm("Are you sure to delete this visitor?")){
     await fetch(WEB_APP_URL,{method:'POST',body:JSON.stringify({appointmentNumber:appt,delete:true})});
-    loadVisitors();
     alert("Visitor Deleted");
+    loadVisitors();
   }
 }
 
-// Show Visitor Details
-async function showDetails(appt){
-  const res = await fetch(WEB_APP_URL+"?action=getVisitors");
-  const data = await res.json();
-  const visitor = data.visitors.find(v=>v['Appointment Number']===appt);
-  if(!visitor) { alert("Visitor Deleted"); return; }
-
-  const panel = document.getElementById('visitorDetailsPanel');
-  panel.innerHTML = `
-<h3>Education</h3>
-<p>${visitor.visitorName} has pursued comprehensive education in various domains, blending theoretical knowledge and practical expertise, fostering critical thinking, analytical skills, and leadership abilities across diverse academic and professional settings. The educational journey emphasizes continuous learning, innovative thinking, and strategic problem-solving, equipping ${visitor.visitorName} to tackle real-world challenges with confidence and efficiency, maintaining a forward-thinking approach in all professional endeavors, ensuring sustained growth and development over time, and integrating knowledge effectively across multiple disciplines.</p>
-<h3>Culture</h3>
-<p>Growing up in diverse cultural settings, ${visitor.visitorName} embraces values such as respect, empathy, integrity, and collaboration. Exposure to multiple perspectives enriches personal and professional interactions, enhancing cross-cultural understanding, ethical decision-making, and inclusive practices. ${visitor.visitorName} values traditions while adopting modern approaches, balancing cultural heritage with contemporary insights, fostering teamwork, and nurturing positive organizational and community engagement.</p>
-<h3>Personal Details</h3>
-<p>${visitor.visitorName}, son/daughter of ${visitor['Father Name']}, resides at ${visitor['Visitor Address']}, ${visitor['Country']}. Born on ${new Date(visitor['Visitor DOB']).toLocaleDateString()}, ${visitor.visitorName} maintains active engagement in professional, social, and personal pursuits. ${visitor.visitorName} demonstrates discipline, responsibility, and a proactive mindset, contributing positively to any project or collaborative effort, prioritizing both personal growth and broader societal impact while pursuing continuous learning and skill enhancement.</p>
-<h3>Hobbies</h3>
-<p>${visitor.visitorName} enjoys a variety of hobbies, including creative writing, music, traveling, technology exploration, and community involvement. These activities foster imagination, cultural awareness, problem-solving, and resilience. Participation in hobbies helps ${visitor.visitorName} maintain balance between professional responsibilities and personal fulfillment, promoting holistic development and enriching experiences that inspire innovation and personal growth across multiple domains.</p>
-<h3>Thoughts</h3>
-<p>${visitor.visitorName} believes in innovation, ethical leadership, strategic thinking, and collaborative problem-solving. Emphasizing integrity, inclusivity, and continuous improvement, ${visitor.visitorName} approaches challenges holistically, balancing creativity with practicality, while fostering environments that encourage learning, innovation, and sustainable growth. Thoughts are guided by analytical reasoning, empathy, and long-term vision.</p>
-<h3>Interests</h3>
-<p>${visitor.visitorName} is actively interested in technology trends, leadership development, strategic planning, business innovation, and cross-cultural collaboration. ${visitor.visitorName} pursues continuous knowledge acquisition, networking, and skill enhancement, striving to contribute meaningfully to professional and societal growth, while exploring new opportunities, insights, and methodologies to stay ahead in dynamic environments and deliver measurable impact in chosen fields.</p>
-`;
-  panel.style.display='block';
-  panel.scrollIntoView({behavior:'smooth'});
-}
-
-// Visitor search
+// Search visitor
 document.getElementById('searchVisitor').oninput = function(){
   const search = this.value.trim().toLowerCase();
   const rows = document.querySelectorAll('#visitorTable tbody tr');
   rows.forEach(r=>{
     const appt = r.cells[10].innerText.toLowerCase();
-    if(appt.includes(search)) r.style.display='table-row';
-    else r.style.display='none';
+    r.style.display = appt.includes(search)?'table-row':'none';
   });
 };
 
-// Always scroll top on page load
+// Always scroll top
 window.onbeforeunload = function(){ window.scrollTo(0,0); };
 </script>
 

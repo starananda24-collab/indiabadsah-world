@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BHOLA NATH BASAK</title>
 <style>
-body { margin:0; font-family:Arial,sans-serif; background:linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d); color:white;}
+body { margin:0; font-family:Arial,sans-serif; background:linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d); color:white; scroll-behavior:smooth;}
 header { text-align:center; padding:20px; background:rgba(0,0,0,0.6);}
 header img { width:180px; height:180px; object-fit:cover; border-radius:50%; border:5px solid #fff;}
-nav { display:flex; justify-content:center; background:rgba(0,0,0,0.8); flex-wrap:wrap;}
+nav { display:flex; justify-content:center; background:rgba(0,0,0,0.8); flex-wrap:wrap; align-items:center;}
 nav a, nav input[type=text] { color:white; text-decoration:none; padding:10px 15px; margin:5px; border-radius:5px; border:none;}
 nav a:hover { background:#fbd46d; color:black;}
-nav input[type=text] { width:200px; color:black; }
+nav input[type=text] { width:220px; color:black; padding:5px; border-radius:5px; border:none;}
 section { padding:20px; max-width:900px; margin:20px auto; background:rgba(255,255,255,0.1); border-radius:12px;}
 h2 { color:#ffe66d;}
 input, select { width:95%; padding:10px; margin:8px 0; border-radius:5px; border:none;}
@@ -25,14 +25,10 @@ footer a:hover { color:white;}
 table { width:100%; border-collapse: collapse; margin-top:15px;}
 th,td { border:1px solid #fff; padding:8px; text-align:left;}
 th { background: rgba(0,0,0,0.6);}
-.status-pending { background:pink;}
-.status-accepted { background:green; color:white;}
-.status-rejected { background:red; color:white;}
 .action-btn { padding:5px 10px; margin:2px; border-radius:5px; cursor:pointer; border:none;}
 .action-accept { background:#aaa; color:white;}
 .action-reject { background:#aaa; color:white;}
 .action-delete { background:#555; color:white;}
-.about-panel { background:linear-gradient(to right, #1e3c72, #2a5298); color:white; padding:15px; border-radius:12px; margin-bottom:20px;}
 #dynamicForm { background:white; color:black; padding:20px; border-radius:12px; max-width:600px; margin:20px auto; display:none; border:2px solid red; }
 #dynamicForm input, #dynamicForm select { width:95%; padding:8px; margin:6px 0; border-radius:5px; border:1px solid #ccc; color:black;}
 #dynamicForm button { margin:5px; }
@@ -40,7 +36,7 @@ th { background: rgba(0,0,0,0.6);}
 .admin-detail-content { display:none; background:rgba(255,255,255,0.1); padding:10px; border-radius:8px; margin-top:5px; color:white; }
 </style>
 </head>
-<body>
+<body onload="scrollToTop()">
 
 <header>
   <img src="myphoto.jpg" alt="BHOLA NATH BASAK">
@@ -51,14 +47,14 @@ th { background: rgba(0,0,0,0.6);}
   <a href="#about">About Me</a>
   <a href="#" id="visitorLink">Visitor Form</a>
   <a href="#adminLogin">Admin Login</a>
-  <input type="text" id="searchVisitor" placeholder="Search by Appointment No">
+  <input type="text" id="searchVisitor" placeholder="Search by Appointment No" aria-label="Search visitor by appointment number">
 </nav>
 
 <section id="about">
   <h2>About Me</h2>
   <div class="about-panel">
     <h3>Profile</h3>
-    <p>I am BHOLA NATH BASAK, a dedicated professional with expertise in leadership and management...</p>
+    <p>I am BHOLA NATH BASAK, a dedicated professional with expertise in leadership and management, committed to fostering business excellence and innovative solutions across industries. My experience spans various domains, consistently achieving results through strategic planning and collaborative approaches. I value continuous learning and actively engage in professional development activities, enhancing both personal and organizational growth. By combining analytical skills with creativity, I develop solutions that address complex challenges and deliver measurable impact.</p>
   </div>
 </section>
 
@@ -127,26 +123,37 @@ th { background: rgba(0,0,0,0.6);}
     </table>
 
     <h2>Admin Full Details</h2>
-    <div class="admin-detail-section" onclick="toggleDetail('education')">Education</div>
-    <div id="education" class="admin-detail-content">
-      <p>Education description ~150 words...</p>
-    </div>
-    <div class="admin-detail-section" onclick="toggleDetail('culture')">Culture</div>
-    <div id="culture" class="admin-detail-content">
-      <p>Culture description ~150 words...</p>
-    </div>
+
     <div class="admin-detail-section" onclick="toggleDetail('personal')">Personal Details</div>
     <div id="personal" class="admin-detail-content">
-      <p>Personal details description ~150 words...</p>
+      <p>Name: Bhola Nath Basak<br>DOB: 1985-08-15<br>Father: Sankar Lal Basak<br>Mother: Anima Basak<br>Place of Birth: India, West Bengal. Personal background shows a strong commitment to ethics, integrity, and professional growth. He values leadership and mentoring others. Daily routines emphasize discipline, professional development, fitness, and continuous learning. In both personal and professional spheres, he fosters a positive environment, promotes teamwork, and encourages innovation. His life experiences contribute to holistic decision-making. Cultural upbringing reflects respect, empathy, and strong family ties, shaping his worldview and social interactions. He actively engages in community activities and maintains balanced relationships. Professional discipline and personal values intersect, forming the basis of his strategic thinking and ethical choices. He focuses on long-term impact while navigating challenges, consistently prioritizing responsibility, fairness, and transparency. Life philosophy emphasizes continuous improvement, embracing learning opportunities, and guiding others toward success and fulfillment, reinforcing his role as a reliable and visionary leader in every domain.</p>
     </div>
+
+    <div class="admin-detail-section" onclick="toggleDetail('education')">Education</div>
+    <div id="education" class="admin-detail-content">
+      <p>Bhola Nath Basak has pursued a comprehensive educational path emphasizing critical thinking, leadership, and business management. He holds a Bachelor of Arts degree, followed by an MBA in Business Administration. His academic journey includes deep learning in finance, marketing, operations, and organizational behavior. Through extensive coursework, he developed analytical, strategic planning, and problem-solving skills essential for leading teams and projects. Participating in real-world projects strengthened his practical understanding of complex business environments, allowing him to connect theory with execution. Collaborative learning enhanced interpersonal skills, preparing him to work effectively in diverse teams. His education reflects dedication, discipline, and a commitment to excellence, providing a solid foundation for lifelong learning. Continuous self-improvement and engagement with current industry trends further extend the benefits of his academic achievements. This educational background empowers him to devise innovative solutions, implement effective strategies, and drive organizational success in dynamic professional landscapes. The knowledge acquired guides decision-making, project execution, and leadership roles with measurable impact.</p>
+    </div>
+
+    <div class="admin-detail-section" onclick="toggleDetail('culture')">Culture</div>
+    <div id="culture" class="admin-detail-content">
+      <p>Growing up in India, Bhola Nath Basak is deeply influenced by diverse cultural values emphasizing respect, empathy, and ethical behavior. His upbringing instilled appreciation for traditions while encouraging openness to modern ideas and global perspectives. Participation in community activities reinforced social responsibility and collaborative thinking. Cultural exposure strengthened communication skills, adaptability, and conflict resolution abilities. He values inclusive environments, supporting contributions from all individuals and fostering mutual respect. Ethical principles guide professional and personal decisions, reflecting honesty, integrity, and fairness. Celebrating diversity and understanding different perspectives form key aspects of his philosophy. Balancing cultural heritage with innovation, he applies holistic approaches to problem-solving, integrating historical awareness with contemporary knowledge. This cultural foundation enhances leadership, mentoring, and decision-making capabilities, allowing him to navigate complex, multicultural scenarios with sensitivity and efficacy. By merging cultural insights with strategic planning, he achieves sustainable outcomes, promotes growth, and builds strong interpersonal relationships across professional and personal spheres.</p>
+    </div>
+
     <div class="admin-detail-section" onclick="toggleDetail('hobbies')">Hobbies</div>
     <div id="hobbies" class="admin-detail-content">
-      <p>Hobbies description ~150 words...</p>
+      <p>Bhola Nath Basak actively pursues hobbies that nurture creativity, learning, and well-being. These include reading literature and technical books, exploring technology trends, creative writing, and engaging in music and arts. Traveling is another passion, allowing him to experience diverse cultures, broaden perspectives, and enhance adaptability. He participates in community service and mentorship programs, sharing knowledge with aspiring professionals. Physical activities, such as walking and fitness routines, maintain health and mental clarity. Hobbies provide a balanced lifestyle, reduce stress, and encourage curiosity. Engaging in problem-solving and strategic thinking through personal projects stimulates analytical skills. These interests complement professional growth, enabling innovative solutions and a holistic approach to challenges. By cultivating hobbies, he strengthens social connections, nurtures creativity, and develops resilience. Hobbies remain integral to personal fulfillment and sustainable career development, reflecting his commitment to lifelong learning, cultural appreciation, and continuous self-improvement.</p>
     </div>
+
     <div class="admin-detail-section" onclick="toggleDetail('thoughts')">Thoughts & Interests</div>
     <div id="thoughts" class="admin-detail-content">
-      <p>Thoughts and interests description ~150 words...</p>
+      <p>Bhola Nath Basak is guided by principles of innovation, ethical leadership, and collaboration. He believes in harnessing technology and creative solutions to address complex challenges efficiently. Strategic thinking, combined with empathy and communication skills, informs decision-making and team management. He maintains interest in global trends, business analytics, and social impact initiatives. Critical reflection and adaptability shape his approach to problem-solving, while mentoring others is a key focus, enhancing collective growth. Integrating personal experiences and cultural insights, he develops sustainable solutions aligned with organizational goals. Intellectual curiosity drives continuous learning and exploration of interdisciplinary subjects. Interests include technological advancements, organizational development, and professional networks that foster growth opportunities. By balancing analytical rigor with creativity, he ensures practical outcomes while inspiring collaboration. His worldview emphasizes responsibility, long-term vision, and ethical considerations. Commitment to knowledge sharing, mentoring, and professional engagement strengthens both personal fulfillment and contributions to society, reflecting a comprehensive and forward-thinking mindset.</p>
     </div>
+
+    <div class="admin-detail-section" onclick="toggleDetail('achievements')">Achievements</div>
+    <div id="achievements" class="admin-detail-content">
+      <p>Throughout his career, Bhola Nath Basak has achieved significant milestones across leadership, management, and social initiatives. He successfully led projects that improved operational efficiency, drove innovation, and increased organizational performance. Recognized for strategic thinking and decision-making, he has received accolades for effective team management and successful implementation of complex programs. Participation in mentorship and training initiatives empowered professionals and fostered community development. His contributions to business process optimization, creative solutions, and ethical leadership have garnered appreciation from peers and stakeholders. International exposure enhanced cross-cultural competence and expanded professional networks. Publications, presentations, and involvement in professional associations reflect ongoing knowledge sharing and thought leadership. Awards and recognitions highlight commitment to excellence, innovation, and positive impact. These achievements exemplify a career marked by continuous growth, learning, and measurable contributions to both organizational success and societal development. Dedication, vision, and proactive engagement remain central to his accomplishments.</p>
+    </div>
+
   </div>
 </section>
 
@@ -163,18 +170,9 @@ th { background: rgba(0,0,0,0.6);}
 <script>
 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwx-A1wmW5-kdB5mn1SQFcbyF6PnSCpddfmMGAjbzgXZUzfQfmJMz6MHwkjrMdrCyNtRg/exec";
 
-// Show dynamic visitor form
-document.getElementById('visitorLink').onclick = function(){ 
-  const form = document.getElementById('dynamicForm');
-  form.style.display='block';
-  form.scrollIntoView({behavior:'smooth'});
-};
-
-// Toggle admin section
-function toggleDetail(id){
-  const content = document.getElementById(id);
-  content.style.display = (content.style.display==='block')?'none':'block';
-}
+function scrollToTop(){ window.scrollTo(0,0); }
+document.getElementById('visitorLink').onclick = ()=>{ document.getElementById('dynamicForm').style.display='block'; };
+function toggleDetail(id){ const c=document.getElementById(id); c.style.display = c.style.display==='block'?'none':'block'; }
 
 // Persist admin login
 if(localStorage.getItem('adminLoggedIn')==='true'){
@@ -184,34 +182,46 @@ if(localStorage.getItem('adminLoggedIn')==='true'){
   loadVisitors();
 }
 
+// Admin login
+document.getElementById('formAdmin').onsubmit = function(e){
+  e.preventDefault();
+  const u=document.getElementById('adminUsername').value;
+  const p=document.getElementById('adminPassword').value;
+  if(u==='admin' && p==='admin123'){
+    localStorage.setItem('adminLoggedIn','true');
+    document.getElementById('formAdmin').style.display='none';
+    document.getElementById('logoutBtn').style.display='inline-block';
+    document.getElementById('adminDashboard').style.display='block';
+    loadVisitors();
+  }else alert("Invalid credentials");
+};
+
+// Logout
+function logoutAdmin(){
+  localStorage.removeItem('adminLoggedIn');
+  document.getElementById('formAdmin').style.display='block';
+  document.getElementById('logoutBtn').style.display='none';
+  document.getElementById('adminDashboard').style.display='none';
+}
+
 // Visitor form submit
 document.getElementById('formVisitor').onsubmit = async function(e){
   e.preventDefault();
-
   const dob = new Date(document.getElementById('dob').value);
   const visitDate = new Date(document.getElementById('visitDate').value);
-  const visitTimeParts = document.getElementById('visitTime').value.split(':');
   const now = new Date();
-
-  let age = now.getFullYear() - dob.getFullYear();
-  const m = now.getMonth() - dob.getMonth();
+  let age = now.getFullYear()-dob.getFullYear();
+  const m=now.getMonth()-dob.getMonth();
   if(m<0 || (m===0 && now.getDate()<dob.getDate())) age--;
   if(age<18 || dob>=now){ alert("DOB must be < today and ≥18"); return; }
-
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  const visitDay = new Date(visitDate.getFullYear(), visitDate.getMonth(), visitDate.getDate());
-  if(visitDay<today){ alert("Visit date cannot be in past"); return; }
-  if(visitDay.getTime()===today.getTime()){
-    const vh = parseInt(visitTimeParts[0]), vm=parseInt(visitTimeParts[1]);
-    if(vh<now.getHours() || (vh===now.getHours() && vm<=now.getMinutes())){ alert("Visit time must be future"); return; }
-  }
+  if(visitDate<today){ alert("Visit date cannot be past"); return; }
 
-  // Appointment number
   let lastAppt = parseInt(localStorage.getItem('lastAppt')||0)+1;
   localStorage.setItem('lastAppt', lastAppt);
   const appointmentNumber = 'APMNTWBNBIND'+String(lastAppt).padStart(7,'0');
 
-  const visitorData = {
+  const data = {
     appointmentNumber,
     visitorName: document.getElementById('visitorName').value,
     fatherName: document.getElementById('fatherName').value,
@@ -222,108 +232,99 @@ document.getElementById('formVisitor').onsubmit = async function(e){
     visitTime: document.getElementById('visitTime').value,
     contactNumber: document.getElementById('contactNumber').value,
     passport: document.getElementById('passport').value,
-    email: document.getElementById('email').value
+    email: document.getElementById('email').value,
+    status: 'Pending'
   };
 
-  const res = await fetch(WEB_APP_URL, {method:'POST', body:JSON.stringify(visitorData)});
-  const result = await res.json();
-  if(result.success){
-    alert("Form submitted! Appointment No: "+appointmentNumber);
-    document.getElementById('formVisitor').reset();
-    loadVisitors();
-  } else { alert("Failed: "+result.error);}
+  let visitors = JSON.parse(localStorage.getItem('visitors')||'[]');
+  visitors.push(data);
+  localStorage.setItem('visitors', JSON.stringify(visitors));
+  alert("Form submitted! Appointment: "+appointmentNumber);
+
+  // WhatsApp redirect
+  const msg = `Visitor Details\nName:${data.visitorName}\nFather:${data.fatherName}\nDOB:${data.dob}\nAddress:${data.address}\nCountry:${data.country}\nVisit Date:${data.visitDate}\nVisit Time:${data.visitTime}\nContact:${data.contactNumber}\nPassport:${data.passport}\nEmail:${data.email}\nAppointment:${data.appointmentNumber}`;
+  window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+
+  document.getElementById('formVisitor').reset();
+  document.getElementById('dynamicForm').style.display='none';
 };
 
-// Admin login
-document.getElementById('formAdmin').onsubmit = function(e){
-  e.preventDefault();
-  const username = document.getElementById('adminUsername').value;
-  const password = document.getElementById('adminPassword').value;
-  if(username==='admin' && password==='admin123'){
-    document.getElementById('formAdmin').style.display='none';
-    document.getElementById('logoutBtn').style.display='inline-block';
-    document.getElementById('adminDashboard').style.display='block';
-    localStorage.setItem('adminLoggedIn','true');
-    loadVisitors();
-  } else { alert("Invalid credentials"); }
-};
-
-// Logout
-function logoutAdmin(){
-  document.getElementById('formAdmin').style.display='block';
-  document.getElementById('logoutBtn').style.display='none';
-  document.getElementById('adminDashboard').style.display='none';
-  localStorage.removeItem('adminLoggedIn');
+// Load visitor table
+function loadVisitors(){
+  const tbody = document.querySelector("#visitorTable tbody");
+  tbody.innerHTML='';
+  let visitors = JSON.parse(localStorage.getItem('visitors')||'[]');
+  visitors.forEach((v,i)=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`
+      <td>${v.visitorName}</td>
+      <td>${v.dob}</td>
+      <td>${v.fatherName}</td>
+      <td>${v.address}</td>
+      <td>${v.country}</td>
+      <td>${v.visitDate}</td>
+      <td>${v.visitTime}</td>
+      <td>${v.contactNumber}</td>
+      <td>${v.passport}</td>
+      <td>${v.email}</td>
+      <td>${v.appointmentNumber}</td>
+      <td style="background:${v.status==='Accepted'?'green':v.status==='Rejected'?'red':'orange'};">${v.status}</td>
+      <td>
+        <button class="action-btn action-accept" onclick="updateStatus(${i},'Accepted')">Accept</button>
+        <button class="action-btn action-reject" onclick="updateStatus(${i},'Rejected')">Reject</button>
+        <button class="action-btn action-delete" onclick="deleteVisitor(${i})">Delete</button>
+      </td>`;
+    tbody.appendChild(tr);
+  });
 }
 
-// Load visitors
-async function loadVisitors(){
-  try{
-    const res = await fetch(WEB_APP_URL+"?action=getVisitors");
-    const data = await res.json();
-    const tbody = document.querySelector('#visitorTable tbody');
-    tbody.innerHTML = '';
-    data.visitors.forEach(v=>{
-      const tr = document.createElement('tr');
-      const dob = new Date(v['Visitor DOB']).toLocaleDateString();
-      const visitDate = new Date(v['Visit Date']).toLocaleDateString();
-      let visitTime = v['Visit Time'];
-      // format to am/pm
-      const [h,m] = visitTime.split(':');
-      let hour=parseInt(h), suffix='AM';
-      if(hour>=12){ suffix='PM'; if(hour>12) hour-=12; } if(hour===0) hour=12;
-      visitTime = hour+':'+m+' '+suffix;
-      tr.innerHTML = `
-        <td>${v['Visitor Name'] || ''}</td>
-        <td>${dob}</td>
-        <td>${v['Father Name'] || ''}</td>
-        <td>${v['Visitor Address'] || ''}</td>
-        <td>${v['Country'] || ''}</td>
-        <td>${visitDate}</td>
-        <td>${visitTime}</td>
-        <td>${v['Contact Number'] || ''}</td>
-        <td>${v['Passport Number'] || ''}</td>
-        <td>${v['Email'] || ''}</td>
-        <td>${v['Appointment Number'] || ''}</td>
-        <td>${v['Status'] || 'Pending'}</td>
-        <td>
-          <button class="action-btn action-accept" onclick="updateStatus('${v['Appointment Number']}','Accepted')">Accept</button>
-          <button class="action-btn action-reject" onclick="updateStatus('${v['Appointment Number']}','Rejected')">Reject</button>
-          <button class="action-btn action-delete" onclick="deleteVisitor('${v['Appointment Number']}')">Delete</button>
-        </td>
-      `;
-      tbody.appendChild(tr);
-    });
-  } catch(err){ console.error(err); }
-}
-
-// Update Status
-async function updateStatus(appt,status){
-  await fetch(WEB_APP_URL,{method:'POST',body:JSON.stringify({appointmentNumber:appt,status})});
+// Update visitor status
+function updateStatus(index,status){
+  let visitors = JSON.parse(localStorage.getItem('visitors')||'[]');
+  visitors[index].status=status;
+  localStorage.setItem('visitors', JSON.stringify(visitors));
   loadVisitors();
 }
 
-// Delete Visitor
-async function deleteVisitor(appt){
-  if(confirm("Are you sure to delete this visitor?")){
-    await fetch(WEB_APP_URL,{method:'POST',body:JSON.stringify({appointmentNumber:appt,delete:true})});
-    alert("Visitor Deleted");
-    loadVisitors();
-  }
+// Delete visitor
+function deleteVisitor(index){
+  let visitors = JSON.parse(localStorage.getItem('visitors')||'[]');
+  visitors.splice(index,1);
+  localStorage.setItem('visitors', JSON.stringify(visitors));
+  loadVisitors();
 }
 
-// Search visitor
+// Search
 document.getElementById('searchVisitor').oninput = function(){
-  const search = this.value.trim().toLowerCase();
-  const rows = document.querySelectorAll('#visitorTable tbody tr');
-  rows.forEach(r=>{
-    const appt = r.cells[10].innerText.toLowerCase();
-    r.style.display = appt.includes(search)?'table-row':'none';
+  const val=this.value.toLowerCase();
+  let visitors = JSON.parse(localStorage.getItem('visitors')||'[]');
+  const tbody = document.querySelector("#visitorTable tbody");
+  tbody.innerHTML='';
+  visitors.forEach((v,i)=>{
+    if(v.appointmentNumber.toLowerCase().includes(val)){
+      const tr=document.createElement('tr');
+      tr.innerHTML=`
+      <td>${v.visitorName}</td>
+      <td>${v.dob}</td>
+      <td>${v.fatherName}</td>
+      <td>${v.address}</td>
+      <td>${v.country}</td>
+      <td>${v.visitDate}</td>
+      <td>${v.visitTime}</td>
+      <td>${v.contactNumber}</td>
+      <td>${v.passport}</td>
+      <td>${v.email}</td>
+      <td>${v.appointmentNumber}</td>
+      <td style="background:${v.status==='Accepted'?'green':v.status==='Rejected'?'red':'orange'};">${v.status}</td>
+      <td>
+        <button class="action-btn action-accept" onclick="updateStatus(${i},'Accepted')">Accept</button>
+        <button class="action-btn action-reject" onclick="updateStatus(${i},'Rejected')">Reject</button>
+        <button class="action-btn action-delete" onclick="deleteVisitor(${i})">Delete</button>
+      </td>`;
+      tbody.appendChild(tr);
+    }
   });
-};
-
-// Always scroll top
-window.onbeforeunload = function(){ window.scrollTo(0,0); };
+}
 </script>
 
 </body>

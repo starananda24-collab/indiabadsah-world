@@ -36,7 +36,7 @@ th { background: rgba(0,0,0,0.6);}
 .admin-detail-content { display:none; background:rgba(255,255,255,0.1); padding:10px; border-radius:8px; margin-top:5px; color:white; }
 </style>
 </head>
-<body onload="scrollToTop()">
+<body onload="scrollToTop(); loadVisitors(); checkAdminLogin();">
 
 <header>
   <img src="myphoto.jpg" alt="BHOLA NATH BASAK">
@@ -50,36 +50,30 @@ th { background: rgba(0,0,0,0.6);}
   <input type="text" id="searchVisitor" placeholder="Search by Appointment No" aria-label="Search visitor by appointment number">
 </nav>
 
-<!-- Admin Details Section (always visible, expandable) -->
 <section id="adminDetails">
   <h2>Admin Full Details</h2>
   <div class="admin-detail-section" onclick="toggleDetail('personal')">Personal Details</div>
   <div id="personal" class="admin-detail-content">
     <p>Name: Bhola Nath Basak<br>DOB: 1985-08-15<br>Father: Sankar Lal Basak<br>Mother: Anima Basak<br>Place of Birth: West Bengal, India. This section contains 150 words describing personal values, life philosophy, ethics, daily routines, community engagement, leadership qualities, resilience, and professional mindset, emphasizing discipline, learning, and balanced personal and professional life development.</p>
   </div>
-
   <div class="admin-detail-section" onclick="toggleDetail('education')">Education</div>
   <div id="education" class="admin-detail-content">
     <p>Bachelor of Arts and MBA in Business Administration. Education details include 150 words describing coursework, strategic management, finance, marketing, operations, organizational behavior, analytical skills, problem-solving, critical thinking, leadership development, real-world projects, continuous learning, research skills, and how education shaped professional success, innovative thinking, and holistic approach to business challenges.</p>
   </div>
-
   <div class="admin-detail-section" onclick="toggleDetail('culture')">Culture</div>
   <div id="culture" class="admin-detail-content">
     <p>150-word description of cultural values, upbringing, respect for diversity, empathy, integrity, ethical leadership, collaboration, inclusive thinking, community involvement, problem-solving through cultural understanding, adaptability, innovation, and strategies for personal and professional growth reflecting strong cultural awareness and global perspective.</p>
   </div>
-
   <div class="admin-detail-section" onclick="toggleDetail('hobbies')">Hobbies & Interests</div>
   <div id="hobbies" class="admin-detail-content">
     <p>150-word description including hobbies such as technology exploration, reading, creative writing, music, traveling, mentoring, volunteering, community participation, cultivating creativity, resilience, curiosity, skill development, personal fulfillment, work-life balance, inspiration, and holistic personal development.</p>
   </div>
-
   <div class="admin-detail-section" onclick="toggleDetail('thoughts')">Thoughts & Achievements</div>
   <div id="thoughts" class="admin-detail-content">
     <p>150-word description including strategic thinking, innovation, problem-solving, ethical decision-making, professional achievements, contributions to organizational growth, leadership milestones, awards, recognitions, continuous improvement, collaborative efforts, measurable impact, and vision for sustainable success in personal and professional life.</p>
   </div>
 </section>
 
-<!-- Visitor Form Section -->
 <section id="dynamicForm">
   <h2>Visitor Appointment Form</h2>
   <form id="formVisitor">
@@ -115,11 +109,10 @@ th { background: rgba(0,0,0,0.6);}
     <label>Email</label>
     <input type="email" id="email" required>
     <button type="submit" class="submit-btn">Submit</button>
-    <button type="button" class="cancel-btn" onclick="document.getElementById('formVisitor').reset()">Cancel</button>
+    <button type="button" class="cancel-btn" id="cancelFormBtn">Cancel</button>
   </form>
 </section>
 
-<!-- Admin Login Section -->
 <section id="adminLogin">
   <h2>Admin Login</h2>
   <form id="formAdmin">
@@ -158,136 +151,101 @@ th { background: rgba(0,0,0,0.6);}
 </footer>
 
 <script>
-// Scroll to top
+// Scroll to top on refresh
 function scrollToTop(){ window.scrollTo(0,0); }
 
 // Toggle admin details
 function toggleDetail(id){ const el=document.getElementById(id); el.style.display=(el.style.display==='block')?'none':'block'; }
 
 // Show visitor form
-document.getElementById('visitorLink').onclick = function(){ document.getElementById('dynamicForm').style.display='block'; };
+document.getElementById('visitorLink').onclick = function(){ document.getElementById('dynamicForm').style.display='block'; scrollToTop(); };
 
-// Visitor Form Submit
-document.getElementById('formVisitor').onsubmit = function(e){
+// Cancel form
+document.getElementById('cancelFormBtn').onclick=function(){ document.getElementById('formVisitor').reset(); document.getElementById('dynamicForm').style.display='none'; };
+
+// Local storage visitor data
+function generateAppointmentNumber(){
+  let lastNum = localStorage.getItem('lastApptNum') || 0;
+  lastNum = parseInt(lastNum)+1;
+  localStorage.setItem('lastApptNum', lastNum);
+  return 'APMNTWBNBIND'+String(lastNum).padStart(7,'0');
+}
+
+// Form submit
+document.getElementById('formVisitor').onsubmit=function(e){
   e.preventDefault();
   const today=new Date();
   const dobValue=new Date(document.getElementById('dob').value);
   const visitDateValue=new Date(document.getElementById('visitDate').value);
-  const [h,m]=document.getElementById('visitTime').value.split(':').map(Number);
-  const visitDateTime=new Date(visitDateValue.getFullYear(),visitDateValue.getMonth(),visitDateValue.getDate(),h,m);
-
-  if(dobValue>today){ alert('DOB cannot be future'); return; }
-  if(visitDateTime<today){ alert('Visit date/time must be future'); return; }
-
-  let visitors=JSON.parse(localStorage.getItem('visitors')||'[]');
-  const apptNumber='APMNTWBNBIND'+String(visitors.length+1).padStart(7,'0');
-
+  const visitTimeValue=document.getElementById('visitTime').value;
+  // DOB validation
+  if(dobValue>today){ alert("DOB cannot be in the future"); return;}
+  // Visit date validation
+  if(visitDateValue<today){ alert("Visit date cannot be past"); return;}
+  // Visit time validation if today
+  if(visitDateValue.toDateString()===today.toDateString()){
+    const [h,m]=visitTimeValue.split(':');
+    if(parseInt(h)<today.getHours() || (parseInt(h)===today.getHours() && parseInt(m)<=today.getMinutes())){
+      alert("Visit time must be future"); return;
+    }
+  }
   const data={
-    visitorName:document.getElementById('visitorName').value,
-    fatherName:document.getElementById('fatherName').value,
-    dob:document.getElementById('dob').value,
-    address:document.getElementById('address').value,
-    country:document.getElementById('country').value,
-    visitDate:document.getElementById('visitDate').value,
-    visitTime:document.getElementById('visitTime').value,
-    contactNumber:document.getElementById('contactNumber').value,
-    passport:document.getElementById('passport').value,
-    email:document.getElementById('email').value,
-    appointmentNumber:apptNumber,
+    appointmentNumber: generateAppointmentNumber(),
+    visitorName: document.getElementById('visitorName').value,
+    fatherName: document.getElementById('fatherName').value,
+    dob: document.getElementById('dob').value,
+    address: document.getElementById('address').value,
+    country: document.getElementById('country').value,
+    visitDate: document.getElementById('visitDate').value,
+    visitTime: document.getElementById('visitTime').value,
+    contactNumber: document.getElementById('contactNumber').value,
+    passport: document.getElementById('passport').value,
+    email: document.getElementById('email').value,
     status:'Pending'
   };
+  let visitors=JSON.parse(localStorage.getItem('visitors')||'[]');
   visitors.push(data);
   localStorage.setItem('visitors',JSON.stringify(visitors));
-  alert('Form submitted! Appointment: '+apptNumber);
-
-  // WhatsApp redirect
-  const msg=`Visitor Details\nName:${data.visitorName}\nFather:${data.fatherName}\nDOB:${data.dob}\nAddress:${data.address}\nCountry:${data.country}\nVisit Date:${data.visitDate}\nVisit Time:${data.visitTime}\nContact:${data.contactNumber}\nPassport:${data.passport}\nEmail:${data.email}\nAppointment:${data.appointmentNumber}`;
-  window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`,'_blank');
-
+  alert("Form submitted! Appointment No: "+data.appointmentNumber);
   document.getElementById('formVisitor').reset();
   document.getElementById('dynamicForm').style.display='none';
   loadVisitors();
 };
 
-// Admin login
-document.getElementById('formAdmin').onsubmit=function(e){
-  e.preventDefault();
-  const username=document.getElementById('adminUsername').value;
-  const password=document.getElementById('adminPassword').value;
-  if(username==='admin' && password==='admin123'){
-    document.getElementById('formAdmin').style.display='none';
-    document.getElementById('logoutBtn').style.display='inline-block';
-    document.getElementById('adminDashboard').style.display='block';
-    localStorage.setItem('adminLogged','true');
-    loadVisitors();
-  } else alert('Invalid credentials');
-};
-
-// Admin logout
-function logoutAdmin(){
-  document.getElementById('adminDashboard').style.display='none';
-  document.getElementById('formAdmin').style.display='block';
-  document.getElementById('logoutBtn').style.display='none';
-  localStorage.removeItem('adminLogged');
-}
-
-// Maintain login on refresh
-if(localStorage.getItem('adminLogged')==='true'){
-  document.getElementById('formAdmin').style.display='none';
-  document.getElementById('logoutBtn').style.display='inline-block';
-  document.getElementById('adminDashboard').style.display='block';
-  loadVisitors();
-}
-
-// Load visitors table
+// Load visitors
 function loadVisitors(){
   const tbody=document.querySelector('#visitorTable tbody');
   tbody.innerHTML='';
   let visitors=JSON.parse(localStorage.getItem('visitors')||'[]');
   visitors.forEach((v,i)=>{
     const tr=document.createElement('tr');
-    tr.innerHTML=`
-      <td>${v.visitorName}</td>
-      <td>${v.dob}</td>
-      <td>${v.fatherName}</td>
-      <td>${v.address}</td>
-      <td>${v.country}</td>
-      <td>${v.visitDate}</td>
-      <td>${formatTime(v.visitTime)}</td>
-      <td>${v.contactNumber}</td>
-      <td>${v.passport}</td>
-      <td>${v.email}</td>
-      <td>${v.appointmentNumber}</td>
-      <td style="background:${v.status==='Accepted'?'green':v.status==='Rejected'?'red':'orange'}; color:white;">${v.status}</td>
-      <td>
-        <button class="action-btn action-accept" style="background:${v.status==='Accepted'?'green':'#aaa'};" onclick="updateStatus(${i},'Accepted')">Accept</button>
-        <button class="action-btn action-reject" style="background:${v.status==='Rejected'?'red':'#aaa'};" onclick="updateStatus(${i},'Rejected')">Reject</button>
-        <button class="action-btn action-delete" onclick="deleteVisitor(${i})">Delete</button>
-      </td>`;
+    tr.innerHTML=`<td>${v.visitorName}</td><td>${v.dob}</td><td>${v.fatherName}</td><td>${v.address}</td>
+<td>${v.country}</td><td>${v.visitDate}</td><td>${formatTime(v.visitTime)}</td>
+<td>${v.contactNumber}</td><td>${v.passport}</td><td>${v.email}</td>
+<td>${v.appointmentNumber}</td><td style="background:${v.status==='Accepted'?'green':v.status==='Rejected'?'red':'orange'};color:white;">${v.status}</td>
+<td>
+<button class="action-btn action-accept" style="background:${v.status==='Accepted'?'green':'#aaa'};" onclick="updateStatus(${i},'Accepted')">Accept</button>
+<button class="action-btn action-reject" style="background:${v.status==='Rejected'?'red':'#aaa'};" onclick="updateStatus(${i},'Rejected')">Reject</button>
+<button class="action-btn action-delete" onclick="deleteVisitor(${i})">Delete</button>
+</td>`;
     tbody.appendChild(tr);
   });
 }
 
-// Format time to AM/PM
-function formatTime(timeStr){
-  let [h,m]=timeStr.split(':');
-  h=parseInt(h); let ampm=h>=12?'PM':'AM';
-  h=h%12; if(h===0) h=12;
-  return h+':'+m+' '+ampm;
-}
+// Format AM/PM
+function formatTime(timeStr){ let [h,m]=timeStr.split(':'); h=parseInt(h); let ampm=h>=12?'PM':'AM'; h=h%12||12; return h+':'+m+' '+ampm; }
 
 // Update status
 function updateStatus(i,status){
   let visitors=JSON.parse(localStorage.getItem('visitors')||'[]');
-  if(status==='Accepted') visitors[i].status='Accepted';
-  if(status==='Rejected') visitors[i].status='Rejected';
+  visitors[i].status=status;
   localStorage.setItem('visitors',JSON.stringify(visitors));
   loadVisitors();
 }
 
-// Delete visitor
+// Delete
 function deleteVisitor(i){
-  if(confirm('Delete this visitor permanently?')){
+  if(confirm('Delete permanently?')){
     let visitors=JSON.parse(localStorage.getItem('visitors')||'[]');
     visitors.splice(i,1);
     localStorage.setItem('visitors',JSON.stringify(visitors));
@@ -301,31 +259,47 @@ document.getElementById('searchVisitor').oninput=function(){
   const tbody=document.querySelector('#visitorTable tbody');
   tbody.innerHTML='';
   let visitors=JSON.parse(localStorage.getItem('visitors')||'[]');
-  visitors.forEach((v,i)=>{
-    if(v.appointmentNumber.toLowerCase().includes(val)){
-      const tr=document.createElement('tr');
-      tr.innerHTML=`
-        <td>${v.visitorName}</td>
-        <td>${v.dob}</td>
-        <td>${v.fatherName}</td>
-        <td>${v.address}</td>
-        <td>${v.country}</td>
-        <td>${v.visitDate}</td>
-        <td>${formatTime(v.visitTime)}</td>
-        <td>${v.contactNumber}</td>
-        <td>${v.passport}</td>
-        <td>${v.email}</td>
-        <td>${v.appointmentNumber}</td>
-        <td style="background:${v.status==='Accepted'?'green':v.status==='Rejected'?'red':'orange'}; color:white;">${v.status}</td>
-        <td>
-          <button class="action-btn action-accept" style="background:${v.status==='Accepted'?'green':'#aaa'};" onclick="updateStatus(${i},'Accepted')">Accept</button>
-          <button class="action-btn action-reject" style="background:${v.status==='Rejected'?'red':'#aaa'};" onclick="updateStatus(${i},'Rejected')">Reject</button>
-          <button class="action-btn action-delete" onclick="deleteVisitor(${i})">Delete</button>
-        </td>`;
-      tbody.appendChild(tr);
-    }
+  visitors.filter(v=>v.appointmentNumber.toLowerCase().includes(val)).forEach((v,i)=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${v.visitorName}</td><td>${v.dob}</td><td>${v.fatherName}</td><td>${v.address}</td>
+<td>${v.country}</td><td>${v.visitDate}</td><td>${formatTime(v.visitTime)}</td>
+<td>${v.contactNumber}</td><td>${v.passport}</td><td>${v.email}</td>
+<td>${v.appointmentNumber}</td><td style="background:${v.status==='Accepted'?'green':v.status==='Rejected'?'red':'orange'};color:white;">${v.status}</td>
+<td>
+<button class="action-btn action-accept" style="background:${v.status==='Accepted'?'green':'#aaa'};" onclick="updateStatus(${i},'Accepted')">Accept</button>
+<button class="action-btn action-reject" style="background:${v.status==='Rejected'?'red':'#aaa'};" onclick="updateStatus(${i},'Rejected')">Reject</button>
+<button class="action-btn action-delete" onclick="deleteVisitor(${i})">Delete</button>
+</td>`;
+    tbody.appendChild(tr);
   });
 };
+
+// Admin login
+document.getElementById('formAdmin').onsubmit=function(e){
+  e.preventDefault();
+  const user=document.getElementById('adminUsername').value;
+  const pass=document.getElementById('adminPassword').value;
+  if(user==='admin' && pass==='12345'){
+    localStorage.setItem('adminLoggedIn','true');
+    checkAdminLogin();
+  } else alert('Invalid credentials');
+};
+
+// Check admin login
+function checkAdminLogin(){
+  if(localStorage.getItem('adminLoggedIn')==='true'){
+    document.getElementById('adminDashboard').style.display='block';
+    document.getElementById('logoutBtn').style.display='inline-block';
+  } else {
+    document.getElementById('adminDashboard').style.display='none';
+    document.getElementById('logoutBtn').style.display='none';
+  }
+}
+
+// Logout admin
+function logoutAdmin(){ localStorage.removeItem('adminLoggedIn'); checkAdminLogin(); }
+
 </script>
+
 </body>
 </html>

@@ -5,39 +5,36 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>BHOLA NATH BASAK</title>
 <style>
-  body { margin:0; font-family:Arial,sans-serif; background:linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d); color:white;}
-  header { text-align:center; padding:20px; background:rgba(0,0,0,0.6);}
-  header img { width:180px; height:180px; object-fit:cover; border-radius:50%; border:5px solid #fff;}
-  nav { display:flex; justify-content:center; background:rgba(0,0,0,0.8); flex-wrap:wrap; padding:8px;}
-  nav a, nav input[type=text] { color:white; text-decoration:none; padding:10px 15px; margin:5px; border-radius:5px; border:none;}
-  nav a:hover { background:#fbd46d; color:black;}
-  nav input[type=text] { width:200px; color:black; padding:6px; border-radius:5px;}
-  section { padding:20px; max-width:900px; margin:20px auto; background:rgba(255,255,255,0.1); border-radius:12px;}
-  h2 { color:#ffe66d;}
-  input, select { width:95%; padding:10px; margin:8px 0; border-radius:5px; border:none;}
-  button { padding:10px 20px; margin:10px 5px; border:none; border-radius:5px; cursor:pointer;}
-  button.submit-btn { background:#4CAF50; color:white;}
-  button.cancel-btn { background:#f44336; color:white;}
-  button.logout-btn { background:#ff6600; color:white; margin-top:10px;}
-  footer { text-align:center; padding:10px; font-size:14px; background:rgba(0,0,0,0.7); position:fixed; bottom:0; width:100%;}
-  footer a { color:#fbd46d; margin:0 8px; text-decoration:none; font-weight:bold;}
-  footer a:hover { color:white;}
-  table { width:100%; border-collapse: collapse; margin-top:15px;}
-  th,td { border:1px solid #fff; padding:8px; text-align:left;}
-  th { background: rgba(0,0,0,0.6);}
-  .status-pending { background:pink;}
-  .status-accepted { background:green; color:white;}
-  .status-rejected { background:red; color:white;}
-  .status-deleted { background:gray; color:white;}
-  .action-btn { padding:5px 10px; margin:2px; border-radius:5px; cursor:pointer; border:none;}
-  .action-accept { background:#4CAF50; color:white;}
-  .action-reject { background:#f44336; color:white;}
-  .action-delete { background:#555; color:white;}
-  .about-panel { background:linear-gradient(to right, #1e3c72, #2a5298); color:white; padding:15px; border-radius:12px; margin-bottom:20px;}
-  #dynamicForm { background:white; color:black; padding:20px; border-radius:12px; max-width:600px; margin:20px auto; display:none; border:2px solid red; }
-  #dynamicForm input, #dynamicForm select { width:95%; padding:8px; margin:6px 0; border-radius:5px; border:1px solid #ccc; color:black;}
-  #dynamicForm button { margin:5px; }
-  @media (max-width:720px){ nav{flex-direction:column;} nav input[type=text]{width:90%} }
+body { margin:0; font-family:Arial,sans-serif; background:linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d); color:white;}
+header { text-align:center; padding:20px; background:rgba(0,0,0,0.6);}
+header img { width:180px; height:180px; object-fit:cover; border-radius:50%; border:5px solid #fff;}
+nav { display:flex; justify-content:center; background:rgba(0,0,0,0.8); flex-wrap:wrap; padding:8px;}
+nav a, nav input[type=text] { color:white; text-decoration:none; padding:10px 15px; margin:5px; border-radius:5px; border:none;}
+nav a:hover { background:#fbd46d; color:black;}
+nav input[type=text] { width:200px; color:black; padding:6px; border-radius:5px;}
+section { padding:20px; max-width:900px; margin:20px auto; background:rgba(255,255,255,0.1); border-radius:12px;}
+h2 { color:#ffe66d;}
+input, select { width:95%; padding:10px; margin:8px 0; border-radius:5px; border:none;}
+button { padding:10px 20px; margin:10px 5px; border:none; border-radius:5px; cursor:pointer;}
+button.submit-btn { background:#4CAF50; color:white;}
+button.cancel-btn { background:#f44336; color:white;}
+button.logout-btn { background:#ff6600; color:white; margin-top:10px;}
+footer { text-align:center; padding:10px; font-size:14px; background:rgba(0,0,0,0.7); position:fixed; bottom:0; width:100%;}
+footer a { color:#fbd46d; margin:0 8px; text-decoration:none; font-weight:bold;}
+footer a:hover { color:white;}
+table { width:100%; border-collapse: collapse; margin-top:15px;}
+th,td { border:1px solid #fff; padding:8px; text-align:left;}
+th { background: rgba(0,0,0,0.6);}
+.status-pending { background:pink;}
+.status-accepted { background:green; color:white;}
+.status-rejected { background:red; color:white;}
+.status-deleted { background:gray; color:white;}
+#dynamicForm { background:white; color:black; padding:20px; border-radius:12px; max-width:600px; margin:20px auto; border:2px solid red; display:none; }
+#dynamicForm input, #dynamicForm select { width:95%; padding:8px; margin:6px 0; border-radius:5px; border:1px solid #ccc; color:black;}
+#dynamicForm button { margin:5px; }
+.admin-details-panel { background: #cce7ff; color:black; padding:15px; border-radius:10px; margin-top:20px; cursor:pointer; border:1px solid #99d1ff;}
+.admin-details-content { display:block; background:#e6f2ff; padding:15px; border-radius:10px; margin-top:10px; color:#001; line-height:1.5;}
+@media (max-width:720px){ nav{flex-direction:column;} nav input[type=text]{width:90%} }
 </style>
 </head>
 <body>
@@ -56,37 +53,40 @@
 
 <section id="about">
   <h2>About Me</h2>
-  <div class="about-panel">
-    <h3>Profile</h3>
-    <p>I am BHOLA NATH BASAK, a dedicated professional with expertise in leadership and management. My focus is on continuous development, strategic planning, and fostering growth for myself and others in diverse business environments. I am married to Asha Basak since 2016, and we have a daughter named Sonakshi Basak, born on 29th November 2021 in Krishnagar. I emphasize ethical leadership, community contribution, and lifelong learning, integrating cultural awareness, innovative thinking, and hands-on experience to achieve sustainable results and nurture talent across business and social domains.</p>
-
+  <div class="admin-details-content">
+    <p>I am BHOLA NATH BASAK, a dedicated professional focused on leadership, management, and fostering growth. I combine strategic planning with continuous development to achieve excellence in business environments. Over the years, I have cultivated expertise in process improvement, mentorship, and organizational transformation. My philosophy emphasizes ethical practices, collaboration, and sustainable outcomes. I actively pursue knowledge through research, training, and industry engagement, applying insights to drive measurable results. Problem-solving, communication, and innovation are central to my approach, ensuring projects are executed effectively while maintaining high standards of integrity. I also mentor emerging professionals, encouraging curiosity and resilience to navigate complex challenges. My commitment is to long-term impact, creating value for organizations, teams, and communities through thoughtful decision-making, analytical thinking, and adaptive strategies. I strive to lead by example, demonstrating discipline, empathy, and dedication in every initiative I undertake.</p>
+    
     <h3>Personal Details</h3>
     <p><strong>Date of Birth:</strong> 24-03-1988</p>
+    <p><strong>Married:</strong> 2016 to Asha Basak</p>
+    <p><strong>Children:</strong> Sonakshi Basak, born 29th November 2021 in Krishnagar</p>
     <p><strong>Place of Birth:</strong> Kolkata, India</p>
     <p><strong>Father Name:</strong> Sankar Lal Basak</p>
     <p><strong>Mother Name:</strong> Anima Basak</p>
-    <p><strong>Married:</strong> 2016 with Asha Basak</p>
-    <p><strong>Children:</strong> 1 daughter - Sonakshi Basak, born 29th November 2021, Krishnagar</p>
+  </div>
 
-    <h3>Education</h3>
-    <p>Bhola Nath Basak completed a Bachelor of Arts degree followed by an MBA in Business Administration. Across his academic journey he focused on strategic management, finance, organizational behaviour, marketing and operations. He participated in practical projects and case studies that sharpened analytical skills and decision-making ability—combining theory with real-world applications. Continuous learning remains central to his approach, ensuring he keeps up with industry trends and best practices, applying evidence-based frameworks to drive measurable outcomes in organizations and community initiatives.</p>
+  <h3>Education</h3>
+  <div class="admin-details-content">
+    <p>Bhola Nath Basak completed a Bachelor of Arts degree followed by an MBA in Business Administration, emphasizing strategic management, finance, marketing, organizational behavior, and operations. He engaged in practical projects and case studies, which sharpened analytical, decision-making, and leadership skills. Continuous learning, critical thinking, and team collaboration are central to his educational philosophy. He integrates ethical practices with academic knowledge to create practical solutions, achieving measurable results. His learning journey combines theory and real-world applications, fostering a deep understanding of organizational dynamics. Bhola Nath continually applies evidence-based strategies to solve complex problems, mentor others, and innovate within professional and community environments. This foundation enables him to deliver strategic insights, manage change, and foster sustainable growth in business contexts, emphasizing the value of integrity, adaptability, and lifelong learning.</p>
+  </div>
 
-    <h3>Culture</h3>
-    <p>Growing up in India instilled in him appreciation for cultural diversity, respect for elders, community bonding, and empathy. Cultural exposure taught him the importance of listening, consensus, and inclusive leadership. These principles are applied in professional life through collaborative decision-making, sensitivity to diverse perspectives, and ethical conduct. Cultural awareness strengthens stakeholder engagement and enables him to design solutions that are context-aware and socially responsible—bridging tradition with modern practices to support both innovation and continuity.</p>
+  <h3>Culture</h3>
+  <div class="admin-details-content">
+    <p>Growing up in India, Bhola Nath Basak developed a deep appreciation for cultural diversity, empathy, and social responsibility. He embraces collaborative decision-making, consensus-building, and community engagement. Respect for traditions and inclusive leadership shape his professional approach, fostering trust and cooperation. Exposure to multiple cultural perspectives enhances his ability to design context-sensitive solutions that balance innovation with continuity. By valuing diversity, he promotes ethical, socially aware business practices, ensuring stakeholder alignment and sustainable outcomes. He applies these cultural principles in organizational management, strategy formulation, and mentoring, integrating heritage with modern practices to strengthen team performance, enhance adaptability, and drive meaningful impact within communities and businesses.</p>
+  </div>
 
-    <h3>Hobbies</h3>
-    <p>His hobbies include reading, creative writing, listening to and creating music, traveling to new places, exploring technology trends, and mentoring aspiring professionals. These pursuits foster creativity, broaden perspectives, improve communication, and maintain well-being—fueling the curiosity and resilience needed for complex problem solving and leadership.</p>
+  <h3>Hobbies</h3>
+  <div class="admin-details-content">
+    <p>Bhola Nath enjoys reading, creative writing, music composition and appreciation, traveling, exploring technology, and mentoring aspiring professionals. These activities nurture creativity, broaden perspective, enhance communication skills, and maintain well-being. Engaging in diverse hobbies strengthens problem-solving abilities, resilience, and emotional intelligence. He applies insights from hobbies to professional endeavors, fostering innovation, strategic thinking, and adaptive leadership. Hobbies support lifelong learning, curiosity, and holistic personal growth, enabling Bhola Nath to remain motivated, energized, and balanced while pursuing professional and community objectives. These passions contribute to his ability to inspire, collaborate, and implement effective solutions within complex environments.</p>
+  </div>
 
-    <h3>Thoughts & Achievements</h3>
-    <p>He believes in ethical leadership, continuous improvement and measurable impact. Achievements include leading process-improvement initiatives, mentoring teams to achieve higher performance, and contributing to community development programs. His approach blends strategic thinking with empathy, ensuring durable, people-centered outcomes and long-term growth for organizations and individuals.</p>
-
-    <h3>Interests</h3>
-    <p>He is interested in business analytics, leadership development, organizational transformation and cross-cultural collaboration. By staying curious and learning continuously, he applies new ideas to help organizations adapt and thrive.</p>
+  <h3>Thoughts & Interests</h3>
+  <div class="admin-details-content">
+    <p>Bhola Nath Basak emphasizes ethical leadership, continuous improvement, and measurable outcomes. He is interested in business analytics, leadership development, organizational transformation, and cross-cultural collaboration. His achievements include leading process-improvement initiatives, mentoring teams for high performance, and contributing to community programs. He believes in blending strategic thinking with empathy to ensure people-centered outcomes. Interests in innovation, lifelong learning, and responsible decision-making drive his professional and personal development. By fostering collaboration, inclusivity, and ethical practices, he contributes to sustainable growth, community engagement, and the cultivation of future leaders. His philosophy integrates experience, analytical rigor, and social awareness to generate meaningful impact and long-term value across organizations and communities.</p>
   </div>
 </section>
 
-<!-- Visitor form -->
-<section id="dynamicForm" aria-labelledby="visitorFormHeader" style="display:none;">
+<section id="dynamicForm">
   <h2 id="visitorFormHeader">Visitor Appointment Form</h2>
   <form id="formVisitor">
     <label>Visitor Name</label>
@@ -163,191 +163,142 @@
 </footer>
 
 <script>
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwx-A1wmW5-kdB5mn1SQFcbyF6PnSCpddfmMGAjbzgXZUzfQfmJMz6MHwkjrMdrCyNtRg/exec";
-const ADMIN_WHATSAPP = "+971506309833";
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycby0I1rbbRzxj9cjtwLkOcMNSLCOPKvLLdIxktl2zcScivFayz36mP3M55-QePrPz8mX/exec";
 
-// Utility functions
+function escapeHtml(str){ if(!str) return ''; return String(str).replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[s])); }
+
 function generateAppointmentNumber(){
-  let last = parseInt(localStorage.getItem('lastAppt') || '0', 10);
-  last +=1;
-  localStorage.setItem('lastAppt', last);
+  let last = parseInt(localStorage.getItem('lastAppt')||'0',10);
+  last=last+1;
+  localStorage.setItem('lastAppt',String(last));
   return 'APMNTWBNBIND'+String(last).padStart(7,'0');
 }
-function escapeHtml(str){
-  if(!str) return '';
-  return String(str).replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[s]));
-}
 
-// Show visitor form
-document.getElementById('visitorLink').addEventListener('click', e=>{
+document.getElementById('visitorLink').addEventListener('click',e=>{
   e.preventDefault();
-  const formSection = document.getElementById('dynamicForm');
-  formSection.style.display = 'block';
-  formSection.scrollIntoView({behavior:'smooth'});
-  setTimeout(()=>document.getElementById('visitorName').focus(),300);
+  document.getElementById('dynamicForm').style.display='block';
+  document.getElementById('visitorName').focus();
 });
 
-// Cancel form
-document.getElementById('cancelFormBtn').addEventListener('click', ()=>{
+document.getElementById('cancelFormBtn').addEventListener('click',()=>{
   document.getElementById('formVisitor').reset();
   document.getElementById('dynamicForm').style.display='none';
 });
 
-// Visitor form submission
-document.getElementById('formVisitor').addEventListener('submit', async e=>{
+document.getElementById('formVisitor').addEventListener('submit',async e=>{
   e.preventDefault();
-  const name = document.getElementById('visitorName').value.trim();
-  const father = document.getElementById('fatherName').value.trim();
-  const dob = document.getElementById('dob').value;
-  const address = document.getElementById('address').value.trim();
-  const country = document.getElementById('country').value;
-  const visitDate = document.getElementById('visitDate').value;
-  const visitTime = document.getElementById('visitTime').value;
-  const contact = document.getElementById('contactNumber').value.trim();
-  const passport = document.getElementById('passport').value.trim();
-  const email = document.getElementById('email').value.trim();
+  const name=document.getElementById('visitorName').value.trim();
+  const father=document.getElementById('fatherName').value.trim();
+  const dob=document.getElementById('dob').value;
+  const address=document.getElementById('address').value.trim();
+  const country=document.getElementById('country').value;
+  const visitDate=document.getElementById('visitDate').value;
+  const visitTime=document.getElementById('visitTime').value;
+  const contact=document.getElementById('contactNumber').value.trim();
+  const passport=document.getElementById('passport').value.trim();
+  const email=document.getElementById('email').value.trim();
 
-  // Basic validations
-  if(!name || !father || !dob || !address || !visitDate || !visitTime || !contact || !email){
-    alert('Please fill all required fields');
-    return;
-  }
+  const now=new Date();
+  const dobDate=new Date(dob);
+  let age=now.getFullYear()-dobDate.getFullYear();
+  if((now.getMonth()<dobDate.getMonth())||(now.getMonth()===dobDate.getMonth()&&now.getDate()<dobDate.getDate())) age--;
+  if(age<18){ alert('Visitor must be at least 18 years old'); return; }
+  const visitDateObj=new Date(visitDate+'T'+visitTime+':00');
+  if(visitDateObj<now){ alert('Visit date/time must be future'); return; }
 
-  const appointmentNumber = generateAppointmentNumber();
-
-  const payload = {
-    appointmentNumber, visitorName:name, fatherName:father, dob, address, country, visitDate, visitTime, contactNumber:contact, passport, email, status:'Pending'
-  };
+  const appointmentNumber=generateAppointmentNumber();
+  const payload={appointmentNumber,visitorName:name,fatherName:father,dob,address,country,visitDate,visitTime,contactNumber:contact,passportNumber:passport,email};
 
   try{
-    await fetch(WEB_APP_URL,{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify(payload)
-    });
+    const resp=await fetch(WEB_APP_URL,{method:'POST',body:JSON.stringify(payload),headers:{'Content-Type':'application/json'}});
+    const result=await resp.json().catch(()=>({success:true}));
+    if(result && result.success===false){ alert('Submission failed'); return; }
   }catch(err){
-    console.warn(err);
+    console.warn('Server submit failed',err);
   }
 
   alert('Appointment sent successfully! Appointment No: '+appointmentNumber);
 
-  const msgContent = `
-Visitor Name: ${name}
-Father Name: ${father}
-DOB: ${dob}
-Address: ${address}
-Country: ${country}
-Visit Date: ${visitDate}
-Visit Time: ${visitTime}
-Contact: ${contact}
-Passport: ${passport}
-Email: ${email}
-Appointment No: ${appointmentNumber}
-`;
-  // Redirect to WhatsApp
-  window.open(`https://wa.me/${ADMIN_WHATSAPP}?text=${encodeURIComponent(msgContent)}`, '_blank');
+  const printContent=`Visitor Name: ${name}\nFather Name: ${father}\nDOB: ${dob}\nAddress: ${address}\nCountry: ${country}\nVisit Date: ${visitDate}\nVisit Time: ${visitTime}\nContact: ${contact}\nPassport: ${passport}\nEmail: ${email}\nAppointment No: ${appointmentNumber}`;
+  const newWin=window.open('','PRINT');
+  newWin.document.write('<pre>'+printContent+'</pre>');
+  newWin.print();
+  newWin.close();
+
+  const whatsappURL='https://wa.me/971506309833?text='+
+    encodeURIComponent(`Visitor Appointment:\nName: ${name}\nFather: ${father}\nDOB: ${dob}\nAddress: ${address}\nCountry: ${country}\nVisit Date: ${visitDate}\nVisit Time: ${visitTime}\nContact: ${contact}\nAppointment No: ${appointmentNumber}`);
+  window.open(whatsappURL,'_blank');
 
   document.getElementById('formVisitor').reset();
   document.getElementById('dynamicForm').style.display='none';
 });
 
 // Admin login
-document.getElementById('formAdmin').addEventListener('submit', e=>{
+document.getElementById('formAdmin').addEventListener('submit',async e=>{
   e.preventDefault();
-  const user = document.getElementById('adminUsername').value;
-  const pass = document.getElementById('adminPassword').value;
-  if(user==='admin' && pass==='admin123'){
-    localStorage.setItem('adminLoggedIn','true');
+  const user=document.getElementById('adminUsername').value.trim();
+  const pass=document.getElementById('adminPassword').value;
+  if(user==='admin' && pass==='1234'){ // change password here
     document.getElementById('formAdmin').style.display='none';
-    document.getElementById('logoutBtn').style.display='inline-block';
+    document.getElementById('logoutBtn').style.display='block';
     document.getElementById('adminDashboard').style.display='block';
-    loadVisitors();
+    loadVisitorData();
   }else{ alert('Invalid credentials'); }
 });
+
 function logoutAdmin(){
-  localStorage.removeItem('adminLoggedIn');
+  document.getElementById('formAdmin').style.display='block';
   document.getElementById('logoutBtn').style.display='none';
   document.getElementById('adminDashboard').style.display='none';
-  document.getElementById('formAdmin').style.display='block';
 }
 
-// Load visitors
-async function loadVisitors(){
-  if(localStorage.getItem('adminLoggedIn')!=='true') return;
-  const tbody = document.querySelector('#visitorTable tbody');
-  tbody.innerHTML='';
-
-  let visitors = [];
+async function loadVisitorData(){
   try{
-    const resp = await fetch(WEB_APP_URL+'?action=getVisitors');
-    const data = await resp.json();
-    visitors = Array.isArray(data.visitors)?data.visitors:[];
-  }catch(e){ console.warn(e); }
+    const resp=await fetch(WEB_APP_URL+'?action=read');
+    const data=await resp.json();
+    const tbody=document.querySelector('#visitorTable tbody');
+    tbody.innerHTML='';
+    if(Array.isArray(data)){
+      data.forEach((v,i)=>{
+        const tr=document.createElement('tr');
+        tr.innerHTML=`<td>${escapeHtml(v.visitorName)}</td>
+        <td>${escapeHtml(v.dob)}</td>
+        <td>${escapeHtml(v.fatherName)}</td>
+        <td>${escapeHtml(v.address)}</td>
+        <td>${escapeHtml(v.country)}</td>
+        <td>${escapeHtml(v.visitDate)}</td>
+        <td>${escapeHtml(v.visitTime)}</td>
+        <td>${escapeHtml(v.contactNumber)}</td>
+        <td>${escapeHtml(v.passportNumber)}</td>
+        <td>${escapeHtml(v.email)}</td>
+        <td>${escapeHtml(v.appointmentNumber)}</td>
+        <td>${v.status||'Pending'}</td>
+        <td>
+        <button onclick="deleteVisitor('${v.appointmentNumber}')">Delete</button>
+        </td>`;
+        tbody.appendChild(tr);
+      });
+    }
+  }catch(err){ console.warn('Error fetching visitor data',err); }
+}
 
-  visitors.forEach(v=>{
-    const tr = document.createElement('tr');
-    const status = v.status || 'Pending';
-    tr.innerHTML = `
-      <td>${escapeHtml(v.visitorName)}</td>
-      <td>${escapeHtml(v.dob)}</td>
-      <td>${escapeHtml(v.fatherName)}</td>
-      <td>${escapeHtml(v.address)}</td>
-      <td>${escapeHtml(v.country)}</td>
-      <td>${escapeHtml(v.visitDate)}</td>
-      <td>${escapeHtml(v.visitTime)}</td>
-      <td>${escapeHtml(v.contactNumber)}</td>
-      <td>${escapeHtml(v.passport)}</td>
-      <td>${escapeHtml(v.email)}</td>
-      <td>${escapeHtml(v.appointmentNumber)}</td>
-      <td class="status-${status.toLowerCase()}">${escapeHtml(status)}</td>
-      <td>
-        <button class="action-btn action-accept" ${status==='Rejected'?'disabled':''}>Accept</button>
-        <button class="action-btn action-reject" ${status==='Accepted'?'disabled':''}>Reject</button>
-        <button class="action-btn action-delete">Delete</button>
-      </td>
-    `;
-    const acceptBtn = tr.querySelector('.action-accept');
-    const rejectBtn = tr.querySelector('.action-reject');
-    const deleteBtn = tr.querySelector('.action-delete');
-    const appt = v.appointmentNumber;
-
-    acceptBtn.addEventListener('click', async ()=>{
-      try{ await fetch(WEB_APP_URL,{method:'POST', body:JSON.stringify({appointmentNumber:appt,status:'Accepted'})}); }catch(e){console.warn(e);}
-      loadVisitors();
-    });
-    rejectBtn.addEventListener('click', async ()=>{
-      try{ await fetch(WEB_APP_URL,{method:'POST', body:JSON.stringify({appointmentNumber:appt,status:'Rejected'})}); }catch(e){console.warn(e);}
-      loadVisitors();
-    });
-    deleteBtn.addEventListener('click', async ()=>{
-      if(confirm('Do you want to delete this appointment permanently?')){
-        try{ await fetch(WEB_APP_URL,{method:'POST', body:JSON.stringify({appointmentNumber:appt,status:'Deleted'})}); }catch(e){console.warn(e);}
-        alert('Record deleted permanently!');
-        loadVisitors();
-      }
-    });
-
-    tbody.appendChild(tr);
-  });
+async function deleteVisitor(appointmentNumber){
+  if(!confirm('Do you want to delete this visitor permanently?')) return;
+  try{
+    await fetch(WEB_APP_URL+'?action=delete&appointmentNumber='+encodeURIComponent(appointmentNumber));
+    alert('Visitor record deleted permanently');
+    loadVisitorData();
+  }catch(err){ console.warn('Delete error',err); }
 }
 
 // Search functionality
-document.getElementById('searchVisitor').addEventListener('input', e=>{
-  const val = e.target.value.trim().toLowerCase();
-  const rows = document.querySelectorAll('#visitorTable tbody tr');
-  rows.forEach(row=>{
-    const apptNo = row.cells[10].innerText.toLowerCase();
-    row.style.display = apptNo.includes(val)?'':'none';
+document.getElementById('searchVisitor').addEventListener('input',function(){
+  const val=this.value.toLowerCase();
+  document.querySelectorAll('#visitorTable tbody tr').forEach(tr=>{
+    const appt=tr.cells[10].innerText.toLowerCase();
+    tr.style.display=appt.includes(val)?'':'none';
   });
 });
-
-// Auto-load admin if already logged in
-if(localStorage.getItem('adminLoggedIn')==='true'){
-  document.getElementById('formAdmin').style.display='none';
-  document.getElementById('logoutBtn').style.display='inline-block';
-  document.getElementById('adminDashboard').style.display='block';
-  loadVisitors();
-}
 </script>
 
 </body>

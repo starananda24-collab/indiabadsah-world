@@ -1,47 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>BHOLA NATH BASAK</title>
 <style>
-  body { margin:0; font-family:Arial,sans-serif; background:linear-gradient(to right,#1a2a6c,#b21f1f,#fdbb2d); color:white;}
-  header { text-align:center; padding:18px; background:rgba(0,0,0,0.6);}
-  header img { width:170px; height:170px; object-fit:cover; border-radius:50%; border:5px solid #fff;}
+  body { margin:0; font-family:Arial,sans-serif; background:linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d); color:white;}
+  header { text-align:center; padding:20px; background:rgba(0,0,0,0.6);}
+  header img { width:180px; height:180px; object-fit:cover; border-radius:50%; border:5px solid #fff;}
   nav { display:flex; justify-content:center; background:rgba(0,0,0,0.8); flex-wrap:wrap; padding:8px;}
-  nav a, nav input[type=text] { color:white; text-decoration:none; padding:10px 14px; margin:5px; border-radius:6px; border:none;}
+  nav a, nav input[type=text] { color:white; text-decoration:none; padding:10px 15px; margin:5px; border-radius:5px; border:none;}
   nav a:hover { background:#fbd46d; color:black;}
-  nav input[type=text] { width:240px; color:black; padding:6px; border-radius:6px;}
-  section { padding:20px; max-width:980px; margin:18px auto; background:rgba(255,255,255,0.06); border-radius:12px;}
-  h2 { color:#ffe66d; margin-top:0;}
-  input, select, textarea { width:95%; padding:10px; margin:8px 0; border-radius:6px; border:none;}
-  button { padding:10px 18px; margin:8px 6px; border:none; border-radius:6px; cursor:pointer;}
+  nav input[type=text] { width:200px; color:black; padding:6px; border-radius:5px;}
+  section { padding:20px; max-width:900px; margin:20px auto; background:rgba(255,255,255,0.1); border-radius:12px;}
+  h2 { color:#ffe66d;}
+  input, select { width:95%; padding:10px; margin:8px 0; border-radius:5px; border:none;}
+  button { padding:10px 20px; margin:10px 5px; border:none; border-radius:5px; cursor:pointer;}
   button.submit-btn { background:#4CAF50; color:white;}
   button.cancel-btn { background:#f44336; color:white;}
   button.logout-btn { background:#ff6600; color:white; margin-top:10px;}
   footer { text-align:center; padding:10px; font-size:14px; background:rgba(0,0,0,0.7); position:fixed; bottom:0; width:100%;}
   footer a { color:#fbd46d; margin:0 8px; text-decoration:none; font-weight:bold;}
   footer a:hover { color:white;}
-  table { width:100%; border-collapse: collapse; margin-top:12px;}
-  th,td { border:1px solid #fff; padding:8px; text-align:left; vertical-align:middle;}
+  table { width:100%; border-collapse: collapse; margin-top:15px;}
+  th,td { border:1px solid #fff; padding:8px; text-align:left;}
   th { background: rgba(0,0,0,0.6);}
-  .status-pending { background:orange; color:black; padding:6px 8px; border-radius:6px; display:inline-block;}
-  .status-accepted { background:green; color:white; padding:6px 8px; border-radius:6px; display:inline-block;}
-  .status-rejected { background:red; color:white; padding:6px 8px; border-radius:6px; display:inline-block;}
-  .action-btn { padding:6px 8px; margin:2px; border-radius:6px; cursor:pointer; border:none; color:white;}
-  .action-accept { background:green; }
-  .action-reject { background:red; }
-  .action-delete { background:#555; }
-  .about-panel { background:linear-gradient(to right,#1e3c72,#2a5298); color:white; padding:18px; border-radius:12px; margin-bottom:20px;}
-  #dynamicForm { background:white; color:black; padding:20px; border-radius:12px; max-width:720px; margin:20px auto; display:none; border:2px solid #e53935; }
-  #dynamicForm input, #dynamicForm select { width:95%; padding:8px; margin:6px 0; border-radius:6px; border:1px solid #ccc; color:black;}
-  .admin-details-panel { background:#cce7ff; color:black; padding:14px; border-radius:10px; margin-top:12px; cursor:pointer; border:1px solid #99d1ff;}
-  .admin-details-content { display:none; background:#e6f2ff; padding:14px; border-radius:10px; margin-top:8px; color:#001; line-height:1.5;}
-  #visitorDetailsPanel { display:none; background:rgba(0,0,0,0.88); padding:18px; border-radius:12px; margin-top:20px; color:white;}
-  .deleted-message { background:#222; color:#ffefc2; padding:12px; border-radius:8px; margin:10px 0; font-weight:bold; text-align:center;}
-  .confirmation-card { background:#fff; color:#000; padding:12px; border-radius:8px; margin:12px 0; }
-  .download-btn { background:#1976d2; color:white; padding:8px 12px; border-radius:6px; border:none; cursor:pointer; }
-  @media (max-width:720px){ nav{flex-direction:column;} nav input[type=text]{width:92%} table{font-size:13px} }
+  .status-pending { background:pink;}
+  .status-accepted { background:green; color:white;}
+  .status-rejected { background:red; color:white;}
+  .status-deleted { background:gray; color:white;}
+  .action-btn { padding:5px 10px; margin:2px; border-radius:5px; cursor:pointer; border:none;}
+  .action-accept { background:#4CAF50; color:white;}
+  .action-reject { background:#f44336; color:white;}
+  .action-delete { background:#555; color:white;}
+  .about-panel { background:linear-gradient(to right, #1e3c72, #2a5298); color:white; padding:15px; border-radius:12px; margin-bottom:20px;}
+  #dynamicForm { background:white; color:black; padding:20px; border-radius:12px; max-width:600px; margin:20px auto; display:none; border:2px solid red; }
+  #dynamicForm input, #dynamicForm select { width:95%; padding:8px; margin:6px 0; border-radius:5px; border:1px solid #ccc; color:black;}
+  #dynamicForm button { margin:5px; }
+  @media (max-width:720px){ nav{flex-direction:column;} nav input[type=text]{width:90%} }
 </style>
 </head>
 <body>
@@ -62,102 +58,87 @@
   <h2>About Me</h2>
   <div class="about-panel">
     <h3>Profile</h3>
-    <p>I am BHOLA NATH BASAK, a dedicated professional specialized in leadership and management. I focus on designing practical strategies and creating high-performance teams that deliver measurable results. My approach combines analytical rigor with empathy — understanding people, processes, and data to make better decisions. I work across functions and industries, building solutions that are sustainable and scalable. Continuous learning is central to my life: I study management frameworks, participate in workshops, and mentor younger professionals. I believe leaders serve teams, listen well, and foster environments where innovation and accountability coexist. Outside work I balance curiosity with discipline — exploring technology, writing, and traveling to stay adaptable and open-minded.</p>
+    <p>I am BHOLA NATH BASAK, a dedicated professional with expertise in leadership and management. My focus is on continuous development, strategic planning, and fostering growth for myself and others in diverse business environments. I am married to Asha Basak since 2016, and we have a daughter named Sonakshi Basak, born on 29th November 2021 in Krishnagar. I emphasize ethical leadership, community contribution, and lifelong learning, integrating cultural awareness, innovative thinking, and hands-on experience to achieve sustainable results and nurture talent across business and social domains.</p>
 
-    <div class="admin-details-panel" id="panelPersonal">Personal Details (click to open)</div>
-    <div id="personalDetails" class="admin-details-content">
-      <p><strong>Date of Birth:</strong> 24-03-1988</p>
-      <p><strong>Place of Birth:</strong> Kolkata, India</p>
-      <p><strong>Father Name:</strong> Sankar Lal Basak</p>
-      <p><strong>Mother Name:</strong> Anima Basak</p>
-      <p><strong>Married:</strong> 2016 to Asha Basak</p>
-      <p><strong>Children:</strong> Daughter Sonakshi Basak — born in Krishnagar on 29 November 2021</p>
-      <p>Family values such as integrity, perseverance and community service shaped my early life and guided my professional choices. These values influence how I mentor, lead, and design initiatives aimed at both growth and social benefit.</p>
-    </div>
+    <h3>Personal Details</h3>
+    <p><strong>Date of Birth:</strong> 24-03-1988</p>
+    <p><strong>Place of Birth:</strong> Kolkata, India</p>
+    <p><strong>Father Name:</strong> Sankar Lal Basak</p>
+    <p><strong>Mother Name:</strong> Anima Basak</p>
+    <p><strong>Married:</strong> 2016 with Asha Basak</p>
+    <p><strong>Children:</strong> 1 daughter - Sonakshi Basak, born 29th November 2021, Krishnagar</p>
 
-    <div class="admin-details-panel" id="panelEducation">Education (click to open)</div>
-    <div id="education" class="admin-details-content">
-      <p>I hold a Bachelor of Arts and an MBA in Business Administration. My education emphasized strategic management, finance, marketing, operations, and organizational behaviour. Through rigorous coursework and practical case studies I developed skills in analysis, decision-making and team leadership. Project-based learning and real-world internships helped me apply theoretical frameworks to business problems, strengthening my ability to craft measurable and sustainable solutions. Post-degree, I continued professional development through workshops, seminars and mentoring to stay current with evolving best practices and to refine my leadership style.</p>
-    </div>
+    <h3>Education</h3>
+    <p>Bhola Nath Basak completed a Bachelor of Arts degree followed by an MBA in Business Administration. Across his academic journey he focused on strategic management, finance, organizational behaviour, marketing and operations. He participated in practical projects and case studies that sharpened analytical skills and decision-making ability—combining theory with real-world applications. Continuous learning remains central to his approach, ensuring he keeps up with industry trends and best practices, applying evidence-based frameworks to drive measurable outcomes in organizations and community initiatives.</p>
 
-    <div class="admin-details-panel" id="panelCulture">Culture (click to open)</div>
-    <div id="culture" class="admin-details-content">
-      <p>Growing up in India instilled in me respect for diversity, empathy, and the importance of community. I incorporate cultural awareness into leadership by listening actively and fostering inclusive teams. This approach helps balance tradition with modern practices, building trust and enabling more effective stakeholder engagement. Cultural sensitivity is central to designing solutions that work in local contexts while maintaining ethical standards and performance goals.</p>
-    </div>
+    <h3>Culture</h3>
+    <p>Growing up in India instilled in him appreciation for cultural diversity, respect for elders, community bonding, and empathy. Cultural exposure taught him the importance of listening, consensus, and inclusive leadership. These principles are applied in professional life through collaborative decision-making, sensitivity to diverse perspectives, and ethical conduct. Cultural awareness strengthens stakeholder engagement and enables him to design solutions that are context-aware and socially responsible—bridging tradition with modern practices to support both innovation and continuity.</p>
 
-    <div class="admin-details-panel" id="panelHobbies">Hobbies (click to open)</div>
-    <div id="hobbies" class="admin-details-content">
-      <p>My hobbies include reading, creative writing, music, traveling and exploring technology trends. These activities broaden my perspective and feed creativity, enabling problem-solving and resilience. Mentoring in community programs is also an important pastime that helps others grow while keeping me grounded and inspired.</p>
-    </div>
+    <h3>Hobbies</h3>
+    <p>His hobbies include reading, creative writing, listening to and creating music, traveling to new places, exploring technology trends, and mentoring aspiring professionals. These pursuits foster creativity, broaden perspectives, improve communication, and maintain well-being—fueling the curiosity and resilience needed for complex problem solving and leadership.</p>
 
-    <div class="admin-details-panel" id="panelThoughts">Thoughts & Achievements (click to open)</div>
-    <div id="thoughts" class="admin-details-content">
-      <p>I believe in ethical leadership, continuous improvement and measurable impact. My achievements include leading process improvements, mentoring teams, and contributing to community projects. I evaluate success by both quantitative outcomes and human development: better processes, clearer accountability and stronger engagement. These priorities guide my long-term professional decisions.</p>
-    </div>
+    <h3>Thoughts & Achievements</h3>
+    <p>He believes in ethical leadership, continuous improvement and measurable impact. Achievements include leading process-improvement initiatives, mentoring teams to achieve higher performance, and contributing to community development programs. His approach blends strategic thinking with empathy, ensuring durable, people-centered outcomes and long-term growth for organizations and individuals.</p>
 
-    <div class="admin-details-panel" id="panelInterests">Interests (click to open)</div>
-    <div id="interests" class="admin-details-content">
-      <p>My interests include business analytics, organizational transformation, leadership development and cross-cultural collaboration. Keeping curiosity alive through learning helps me adapt and guide teams through change, applying new ideas to create practical value.</p>
-    </div>
+    <h3>Interests</h3>
+    <p>He is interested in business analytics, leadership development, organizational transformation and cross-cultural collaboration. By staying curious and learning continuously, he applies new ideas to help organizations adapt and thrive.</p>
   </div>
 </section>
 
-<!-- Visitor form section -->
+<!-- Visitor form -->
 <section id="dynamicForm" aria-labelledby="visitorFormHeader" style="display:none;">
   <h2 id="visitorFormHeader">Visitor Appointment Form</h2>
   <form id="formVisitor">
-    <label>Visitor Name</label><input type="text" id="visitorName" required>
-    <label>Father Name</label><input type="text" id="fatherName" required>
-    <label>Visitor DOB</label><input type="date" id="dob" required>
-    <label>Visitor Address</label><input type="text" id="address" required>
+    <label>Visitor Name</label>
+    <input type="text" id="visitorName" required>
+    <label>Father Name</label>
+    <input type="text" id="fatherName" required>
+    <label>Visitor DOB</label>
+    <input type="date" id="dob" required>
+    <label>Visitor Address</label>
+    <input type="text" id="address" required>
     <label>Country</label>
     <select id="country" required>
-      <option>India (+91)</option>
-      <option>USA (+1)</option>
-      <option>UK (+44)</option>
-      <option>Canada (+1)</option>
-      <option>Australia (+61)</option>
-      <option>Germany (+49)</option>
-      <option>France (+33)</option>
-      <option>UAE (+971)</option>
-      <option>Saudi Arabia (+966)</option>
-      <option>Other</option>
+      <option value="India (+91)">India (+91)</option>
+      <option value="USA (+1)">USA (+1)</option>
+      <option value="UK (+44)">UK (+44)</option>
+      <option value="Canada (+1)">Canada (+1)</option>
+      <option value="Australia (+61)">Australia (+61)</option>
+      <option value="Germany (+49)">Germany (+49)</option>
+      <option value="France (+33)">France (+33)</option>
+      <option value="UAE (+971)">UAE (+971)</option>
+      <option value="Saudi Arabia (+966)">Saudi Arabia (+966)</option>
+      <option value="Other">Other</option>
     </select>
-    <label>Visit Date</label><input type="date" id="visitDate" required>
-    <label>Visit Time</label><input type="time" id="visitTime" required>
-    <label>Contact Number</label><input type="tel" id="contactNumber" required>
-    <label>Passport Number</label><input type="text" id="passport">
-    <label>Email</label><input type="email" id="email" required>
-    <div style="margin-top:10px;">
-      <button type="submit" class="submit-btn">Submit</button>
-      <button type="button" class="cancel-btn" id="cancelFormBtn">Cancel</button>
-    </div>
+    <label>Visit Date</label>
+    <input type="date" id="visitDate" required>
+    <label>Visit Time</label>
+    <input type="time" id="visitTime" required>
+    <label>Contact Number</label>
+    <input type="tel" id="contactNumber" required>
+    <label>Passport Number</label>
+    <input type="text" id="passport">
+    <label>Email</label>
+    <input type="email" id="email" required>
+    <button type="submit" class="submit-btn">Submit</button>
+    <button type="button" class="cancel-btn" id="cancelFormBtn">Cancel</button>
   </form>
-
-  <!-- Confirmation / Save panel for visitor after successful submission -->
-  <div id="visitorConfirmPanel" style="display:none; max-width:700px; margin:12px auto;">
-    <div class="confirmation-card" id="visitorConfirmContent"></div>
-    <div style="text-align:center;">
-      <button id="downloadBtn" class="download-btn">Download Appointment</button>
-      <button id="printBtn" class="download-btn" style="background:#4CAF50;margin-left:8px;">Print</button>
-    </div>
-  </div>
 </section>
 
-<!-- Admin login + dashboard -->
 <section id="adminLogin">
   <h2>Admin Login</h2>
   <form id="formAdmin">
-    <label>Username</label><input type="text" id="adminUsername" required>
-    <label>Password</label><input type="password" id="adminPassword" required>
+    <label>Username</label>
+    <input type="text" id="adminUsername" required>
+    <label>Password</label>
+    <input type="password" id="adminPassword" required>
     <button type="submit">Login</button>
   </form>
   <button id="logoutBtn" class="logout-btn" style="display:none;" onclick="logoutAdmin()">Logout</button>
 
   <div id="adminDashboard" style="display:none;">
     <h2>Visitor Details</h2>
-    <table id="visitorTable" aria-describedby="visitorTableDesc">
-      <caption id="visitorTableDesc" style="display:none">Visitors table</caption>
+    <table id="visitorTable">
       <thead>
         <tr>
           <th>Name</th><th>DOB</th><th>Father</th><th>Address</th>
@@ -168,8 +149,6 @@
       </thead>
       <tbody></tbody>
     </table>
-
-    <div id="visitorDetailsPanel" aria-live="polite"></div>
   </div>
 </section>
 
@@ -179,55 +158,44 @@
   <a href="https://linkedin.com/" target="_blank">LinkedIn</a>
   <a href="https://instagram.com/" target="_blank">Instagram</a>
   <a href="mailto:starananda24@gmail.com">Email</a>
-  <br>&copy; 2025 BHOLA NATH BASAK
+  <br>
+  &copy; 2025 BHOLA NATH BASAK
 </footer>
 
 <script>
-/* ================= CONFIG ================= */
 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwx-A1wmW5-kdB5mn1SQFcbyF6PnSCpddfmMGAjbzgXZUzfQfmJMz6MHwkjrMdrCyNtRg/exec";
-const ADMIN_WHATSAPP_NUMBER = "971506309833"; // use wa.me/number WITHOUT plus or leading zeros
+const ADMIN_WHATSAPP = "+971506309833";
 
-/* ================= HELPERS ================= */
-function escapeHtml(s){ if(!s) return ''; return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[c])); }
-function formatDate(d){ try{ const dt=new Date(d); if(isNaN(dt)) return d; return dt.toLocaleDateString(); } catch(e) { return d; } }
-function formatTime(hhmm){ if(!hhmm) return ''; const parts = hhmm.split(':'); if(parts.length<2) return hhmm; let h = parseInt(parts[0],10); const m = parts[1]; const ampm = h>=12 ? 'PM' : 'AM'; h = h % 12 || 12; return `${h}:${m} ${ampm}`; }
-function scrollTop(){ window.scrollTo(0,0); }
-
-/* appointment counter */
+// Utility functions
 function generateAppointmentNumber(){
-  let last = parseInt(localStorage.getItem('lastAppt')||'0',10) || 0;
-  last++; localStorage.setItem('lastAppt', String(last));
-  return 'APMNTWBNBIND' + String(last).padStart(7,'0');
+  let last = parseInt(localStorage.getItem('lastAppt') || '0', 10);
+  last +=1;
+  localStorage.setItem('lastAppt', last);
+  return 'APMNTWBNBIND'+String(last).padStart(7,'0');
+}
+function escapeHtml(str){
+  if(!str) return '';
+  return String(str).replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[s]));
 }
 
-/* toggle about panels */
-document.querySelectorAll('.admin-details-panel').forEach(panel=>{
-  panel.addEventListener('click', () => {
-    const content = panel.nextElementSibling;
-    if(!content) return;
-    content.style.display = content.style.display === 'block' ? 'none' : 'block';
-    if(content.style.display === 'block') content.scrollIntoView({behavior:'smooth'});
-  });
+// Show visitor form
+document.getElementById('visitorLink').addEventListener('click', e=>{
+  e.preventDefault();
+  const formSection = document.getElementById('dynamicForm');
+  formSection.style.display = 'block';
+  formSection.scrollIntoView({behavior:'smooth'});
+  setTimeout(()=>document.getElementById('visitorName').focus(),300);
 });
 
-/* ================= SHOW / CANCEL VISITOR FORM ================= */
-document.getElementById('visitorLink').addEventListener('click', (e)=>{
-  e.preventDefault();
-  document.getElementById('dynamicForm').style.display = 'block';
-  document.getElementById('dynamicForm').scrollIntoView({behavior:'smooth'});
-  setTimeout(()=>document.getElementById('visitorName').focus(), 200);
-});
+// Cancel form
 document.getElementById('cancelFormBtn').addEventListener('click', ()=>{
   document.getElementById('formVisitor').reset();
-  document.getElementById('dynamicForm').style.display = 'none';
-  document.getElementById('visitorConfirmPanel').style.display = 'none';
+  document.getElementById('dynamicForm').style.display='none';
 });
 
-/* ================= SUBMIT VISITOR FORM ================= */
-document.getElementById('formVisitor').addEventListener('submit', async (e)=>{
+// Visitor form submission
+document.getElementById('formVisitor').addEventListener('submit', async e=>{
   e.preventDefault();
-
-  // Collect data
   const name = document.getElementById('visitorName').value.trim();
   const father = document.getElementById('fatherName').value.trim();
   const dob = document.getElementById('dob').value;
@@ -239,433 +207,148 @@ document.getElementById('formVisitor').addEventListener('submit', async (e)=>{
   const passport = document.getElementById('passport').value.trim();
   const email = document.getElementById('email').value.trim();
 
-  // Validations
-  const now = new Date();
-  const dobDate = new Date(dob);
-  if(isNaN(dobDate.getTime())) { alert('Please enter valid DOB'); return; }
-  let age = now.getFullYear() - dobDate.getFullYear();
-  const mm = now.getMonth() - dobDate.getMonth();
-  if(mm < 0 || (mm === 0 && now.getDate() < dobDate.getDate())) age--;
-  if(age < 18){ alert('Visitor must be at least 18 years old'); return; }
-  if(dobDate > now){ alert('DOB cannot be in the future'); return; }
+  // Basic validations
+  if(!name || !father || !dob || !address || !visitDate || !visitTime || !contact || !email){
+    alert('Please fill all required fields');
+    return;
+  }
 
-  if(!visitDate || !visitTime){ alert('Please choose visit date and time'); return; }
-  const visitDateTime = new Date(visitDate + 'T' + visitTime + ':00');
-  if(isNaN(visitDateTime.getTime()) || visitDateTime < now){ alert('Visit date/time must be in the future'); return; }
-
-  // Generate appointment
   const appointmentNumber = generateAppointmentNumber();
 
-  // Record structure (server-friendly keys)
   const payload = {
-    appointmentNumber,
-    'Visitor Name': name,
-    'Father Name': father,
-    'Visitor DOB': dob,
-    'Visitor Address': address,
-    'Country': country,
-    'Visit Date': visitDate,
-    'Visit Time': visitTime,
-    'Contact Number': contact,
-    'Passport Number': passport,
-    'Email': email,
-    'Status': 'Pending'
+    appointmentNumber, visitorName:name, fatherName:father, dob, address, country, visitDate, visitTime, contactNumber:contact, passport, email, status:'Pending'
   };
 
-  // Show success message first
-  alert('Appointment sent successfully');
-
-  // Try server POST (JSON). If fails, fallback to localStorage
-  let serverOK = false;
-  try {
-    const resp = await fetch(WEB_APP_URL, {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify(payload)
+  try{
+    await fetch(WEB_APP_URL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(payload)
     });
-    if(resp.ok) serverOK = true;
-  } catch(err){
-    console.warn('Server submit failed, saving locally', err);
+  }catch(err){
+    console.warn(err);
   }
 
-  if(!serverOK){
-    // store as fallback
-    const list = JSON.parse(localStorage.getItem('visitors') || '[]');
-    list.push({
-      appointmentNumber,
-      visitorName: name,
-      fatherName: father,
-      dob,
-      address,
-      country,
-      visitDate,
-      visitTime,
-      contactNumber: contact,
-      passportNumber: passport,
-      email,
-      status: 'Pending'
-    });
-    localStorage.setItem('visitors', JSON.stringify(list));
-  }
+  alert('Appointment sent successfully! Appointment No: '+appointmentNumber);
 
-  // Build print/download content
-  const displayText = `Appointment No: ${appointmentNumber}\nVisitor Name: ${name}\nFather: ${father}\nDOB: ${dob}\nAddress: ${address}\nCountry: ${country}\nVisit Date: ${visitDate}\nVisit Time: ${visitTime}\nContact: ${contact}\nPassport: ${passport}\nEmail: ${email}\n`;
+  const msgContent = `
+Visitor Name: ${name}
+Father Name: ${father}
+DOB: ${dob}
+Address: ${address}
+Country: ${country}
+Visit Date: ${visitDate}
+Visit Time: ${visitTime}
+Contact: ${contact}
+Passport: ${passport}
+Email: ${email}
+Appointment No: ${appointmentNumber}
+`;
+  // Redirect to WhatsApp
+  window.open(`https://wa.me/${ADMIN_WHATSAPP}?text=${encodeURIComponent(msgContent)}`, '_blank');
 
-  // Show confirmation panel with save / print options
-  document.getElementById('visitorConfirmContent').innerText = displayText;
-  document.getElementById('visitorConfirmPanel').style.display = 'block';
-  document.getElementById('visitorConfirmPanel').scrollIntoView({behavior:'smooth'});
-
-  // Wire download / print buttons
-  document.getElementById('downloadBtn').onclick = function(){
-    const blob = new Blob([displayText], { type: 'text/plain' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = `appointment_${appointmentNumber}.txt`;
-    a.click();
-    URL.revokeObjectURL(a.href);
-  };
-  document.getElementById('printBtn').onclick = function(){
-    const w = window.open('', '_blank');
-    w.document.write('<pre style="font-family:Arial;">' + displayText + '</pre>');
-    w.document.close();
-    w.print();
-    w.close();
-  };
-
-  // Redirect to Admin WhatsApp with prefilled message
-  const waMsg = `New Appointment\n${displayText}`;
-  const waUrl = `https://wa.me/${ADMIN_WHATSAPP_NUMBER}?text=${encodeURIComponent(waMsg)}`;
-  // open in new tab
-  window.open(waUrl, '_blank');
-
-  // clear form (keep confirm panel visible)
   document.getElementById('formVisitor').reset();
-
-  // refresh admin view so admin sees new record
-  await loadVisitors();
+  document.getElementById('dynamicForm').style.display='none';
 });
 
-/* ================= ADMIN LOGIN / PERSISTENCE ================= */
-document.getElementById('formAdmin').addEventListener('submit', (e)=>{
+// Admin login
+document.getElementById('formAdmin').addEventListener('submit', e=>{
   e.preventDefault();
   const user = document.getElementById('adminUsername').value;
   const pass = document.getElementById('adminPassword').value;
-  if(user === 'admin' && pass === 'admin123'){
+  if(user==='admin' && pass==='admin123'){
     localStorage.setItem('adminLoggedIn','true');
-    document.getElementById('formAdmin').style.display = 'none';
-    document.getElementById('logoutBtn').style.display = 'inline-block';
-    document.getElementById('adminDashboard').style.display = 'block';
-    // show success then load visitors
-    alert('Admin login successful');
+    document.getElementById('formAdmin').style.display='none';
+    document.getElementById('logoutBtn').style.display='inline-block';
+    document.getElementById('adminDashboard').style.display='block';
     loadVisitors();
-  } else {
-    alert('Invalid credentials');
-  }
+  }else{ alert('Invalid credentials'); }
 });
 function logoutAdmin(){
   localStorage.removeItem('adminLoggedIn');
-  document.getElementById('logoutBtn').style.display = 'none';
-  document.getElementById('adminDashboard').style.display = 'none';
-  document.getElementById('formAdmin').style.display = 'block';
+  document.getElementById('logoutBtn').style.display='none';
+  document.getElementById('adminDashboard').style.display='none';
+  document.getElementById('formAdmin').style.display='block';
 }
 
-/* ================= LOAD VISITORS (server preferred, merged with local) ================= */
+// Load visitors
 async function loadVisitors(){
-  if(localStorage.getItem('adminLoggedIn') !== 'true') return;
+  if(localStorage.getItem('adminLoggedIn')!=='true') return;
   const tbody = document.querySelector('#visitorTable tbody');
-  tbody.innerHTML = '';
+  tbody.innerHTML='';
 
-  // try server
-  let serverList = [];
-  try {
-    const resp = await fetch(WEB_APP_URL + '?action=getVisitors');
-    if(resp.ok){
-      const data = await resp.json();
-      serverList = Array.isArray(data.visitors) ? data.visitors : [];
-    }
-  } catch(err){
-    console.warn('Server fetch failed', err);
-  }
+  let visitors = [];
+  try{
+    const resp = await fetch(WEB_APP_URL+'?action=getVisitors');
+    const data = await resp.json();
+    visitors = Array.isArray(data.visitors)?data.visitors:[];
+  }catch(e){ console.warn(e); }
 
-  // local fallback list
-  const localList = JSON.parse(localStorage.getItem('visitors') || '[]');
-
-  // map server by appointment for quick lookup
-  const serverMap = {};
-  serverList.forEach(item => {
-    const ap = (item['Appointment Number'] || item.appointmentNumber || '').toString();
-    if(ap) serverMap[ap] = item;
-  });
-
-  // merged: server items first; then local-only items
-  const merged = [...serverList];
-  localList.forEach(local => {
-    const ap = String(local.appointmentNumber || local.appointment || '');
-    if(!serverMap[ap]){
-      merged.push({
-        'Visitor Name': local.visitorName || local.name || '',
-        'Visitor DOB': local.dob || '',
-        'Father Name': local.fatherName || '',
-        'Visitor Address': local.address || '',
-        'Country': local.country || '',
-        'Visit Date': local.visitDate || '',
-        'Visit Time': local.visitTime || '',
-        'Contact Number': local.contactNumber || '',
-        'Passport Number': local.passportNumber || local.passport || '',
-        'Email': local.email || '',
-        'Appointment Number': local.appointmentNumber || local.appointment || '',
-        'Status': local.status || 'Pending'
-      });
-    }
-  });
-
-  populateVisitorRows(merged);
-}
-
-/* ================= RENDER ROWS & WIRE ACTIONS ================= */
-function populateVisitorRows(visitors){
-  const tbody = document.querySelector('#visitorTable tbody');
-  tbody.innerHTML = '';
-  visitors.forEach(v => {
-    const appt = v['Appointment Number'] || v.appointmentNumber || v.appointment || '';
-    const name = v['Visitor Name'] || v.visitorName || '';
-    const dob = v['Visitor DOB'] || v.dob || '';
-    const father = v['Father Name'] || v.fatherName || '';
-    const addr = v['Visitor Address'] || v.address || '';
-    const country = v['Country'] || v.country || '';
-    const visitDate = v['Visit Date'] || v.visitDate || '';
-    const visitTime = v['Visit Time'] || v.visitTime || '';
-    const contact = v['Contact Number'] || v.contactNumber || '';
-    const passport = v['Passport Number'] || v.passportNumber || v.passport || '';
-    const email = v['Email'] || v.email || '';
-    const status = v['Status'] || v.status || 'Pending';
-
+  visitors.forEach(v=>{
     const tr = document.createElement('tr');
-    tr.dataset.appt = appt;
+    const status = v.status || 'Pending';
     tr.innerHTML = `
-      <td>${escapeHtml(name)}</td>
-      <td>${escapeHtml(formatDate(dob))}</td>
-      <td>${escapeHtml(father)}</td>
-      <td>${escapeHtml(addr)}</td>
-      <td>${escapeHtml(country)}</td>
-      <td>${escapeHtml(formatDate(visitDate))}</td>
-      <td>${escapeHtml(formatTime(visitTime))}</td>
-      <td>${escapeHtml(contact)}</td>
-      <td>${escapeHtml(passport)}</td>
-      <td>${escapeHtml(email)}</td>
-      <td>${escapeHtml(appt)}</td>
-      <td class="status-cell">${escapeHtml(status)}</td>
-      <td class="actions-cell">
-        <button class="action-btn action-accept" ${status==='Accepted' ? 'disabled' : ''}>Accept</button>
-        <button class="action-btn action-reject" ${status==='Rejected' ? 'disabled' : ''}>Reject</button>
+      <td>${escapeHtml(v.visitorName)}</td>
+      <td>${escapeHtml(v.dob)}</td>
+      <td>${escapeHtml(v.fatherName)}</td>
+      <td>${escapeHtml(v.address)}</td>
+      <td>${escapeHtml(v.country)}</td>
+      <td>${escapeHtml(v.visitDate)}</td>
+      <td>${escapeHtml(v.visitTime)}</td>
+      <td>${escapeHtml(v.contactNumber)}</td>
+      <td>${escapeHtml(v.passport)}</td>
+      <td>${escapeHtml(v.email)}</td>
+      <td>${escapeHtml(v.appointmentNumber)}</td>
+      <td class="status-${status.toLowerCase()}">${escapeHtml(status)}</td>
+      <td>
+        <button class="action-btn action-accept" ${status==='Rejected'?'disabled':''}>Accept</button>
+        <button class="action-btn action-reject" ${status==='Accepted'?'disabled':''}>Reject</button>
         <button class="action-btn action-delete">Delete</button>
       </td>
     `;
-    tbody.appendChild(tr);
-
-    // wire accept
-    tr.querySelector('.action-accept').addEventListener('click', async ()=>{
-      if(!confirm('Do you want to Accept this appointment?')) return;
-      await updateStatus(appt, 'Accepted');
-      await loadVisitors();
-    });
-
-    // wire reject
-    tr.querySelector('.action-reject').addEventListener('click', async ()=>{
-      if(!confirm('Do you want to Reject this appointment?')) return;
-      await updateStatus(appt, 'Rejected');
-      await loadVisitors();
-    });
-
-    // wire delete
-    tr.querySelector('.action-delete').addEventListener('click', async ()=>{
-      if(!confirm('Do you want to delete this appointment permanently?')) return;
-      await deleteVisitor(appt);
-      alert('Record deleted permanently');
-      await loadVisitors();
-    });
-  });
-
-  // reflect status styling and enable/disable buttons accordingly
-  Array.from(document.querySelectorAll('#visitorTable tbody tr')).forEach(tr=>{
-    const cell = tr.querySelector('.status-cell');
-    const s = cell.innerText.trim().toLowerCase();
-    if(s === 'accepted') cell.className = 'status-accepted';
-    else if(s === 'rejected') cell.className = 'status-rejected';
-    else cell.className = 'status-pending';
-
     const acceptBtn = tr.querySelector('.action-accept');
     const rejectBtn = tr.querySelector('.action-reject');
-    if(s === 'accepted'){ acceptBtn.disabled = true; acceptBtn.style.background='green'; rejectBtn.disabled=false; rejectBtn.style.background='#aaa'; }
-    else if(s === 'rejected'){ rejectBtn.disabled = true; rejectBtn.style.background='red'; acceptBtn.disabled=false; acceptBtn.style.background='#aaa'; }
-    else { acceptBtn.disabled = false; rejectBtn.disabled = false; acceptBtn.style.background='green'; rejectBtn.style.background='red'; }
+    const deleteBtn = tr.querySelector('.action-delete');
+    const appt = v.appointmentNumber;
+
+    acceptBtn.addEventListener('click', async ()=>{
+      try{ await fetch(WEB_APP_URL,{method:'POST', body:JSON.stringify({appointmentNumber:appt,status:'Accepted'})}); }catch(e){console.warn(e);}
+      loadVisitors();
+    });
+    rejectBtn.addEventListener('click', async ()=>{
+      try{ await fetch(WEB_APP_URL,{method:'POST', body:JSON.stringify({appointmentNumber:appt,status:'Rejected'})}); }catch(e){console.warn(e);}
+      loadVisitors();
+    });
+    deleteBtn.addEventListener('click', async ()=>{
+      if(confirm('Do you want to delete this appointment permanently?')){
+        try{ await fetch(WEB_APP_URL,{method:'POST', body:JSON.stringify({appointmentNumber:appt,status:'Deleted'})}); }catch(e){console.warn(e);}
+        alert('Record deleted permanently!');
+        loadVisitors();
+      }
+    });
+
+    tbody.appendChild(tr);
   });
 }
 
-/* ================= UPDATE STATUS (server then local fallback) ================= */
-async function updateStatus(appointmentNumber, status){
-  try {
-    const fd = new FormData();
-    fd.append('appointmentNumber', appointmentNumber);
-    fd.append('status', status);
-    await fetch(WEB_APP_URL, { method: 'POST', body: fd });
-  } catch(err){
-    console.warn('Server status update failed, updating local fallback', err);
-    const list = JSON.parse(localStorage.getItem('visitors') || '[]');
-    for(const it of list){
-      if((it.appointmentNumber || it.appointment) === appointmentNumber){
-        it.status = status;
-      }
-    }
-    localStorage.setItem('visitors', JSON.stringify(list));
-  }
-}
-
-/* ================= DELETE PERMANENT (server + local) ================= */
-async function deleteVisitor(appointmentNumber){
-  try {
-    const fd = new FormData();
-    fd.append('appointmentNumber', appointmentNumber);
-    fd.append('delete', 'true');
-    await fetch(WEB_APP_URL, { method: 'POST', body: fd });
-  } catch(err){
-    console.warn('Server delete failed (continuing local delete)', err);
-  }
-  // remove from local storage fallback
-  const list = JSON.parse(localStorage.getItem('visitors') || '[]');
-  const filtered = list.filter(it => (it.appointmentNumber || it.appointment) !== appointmentNumber);
-  localStorage.setItem('visitors', JSON.stringify(filtered));
-}
-
-/* ================= SEARCH BAR ================= */
-let searchTimer = null;
-document.getElementById('searchVisitor').addEventListener('input', function(){
-  const q = this.value.trim().toLowerCase();
-  clearTimeout(searchTimer);
-  searchTimer = setTimeout(async ()=>{
-    if(q === ''){
-      document.querySelectorAll('#visitorTable tbody tr').forEach(r => r.style.display = '');
-      document.getElementById('visitorDetailsPanel').style.display = 'none';
-      return;
-    }
-
-    // first filter loaded rows
-    let matched = 0;
-    document.querySelectorAll('#visitorTable tbody tr').forEach(r=>{
-      const appt = (r.dataset.appt || '').toLowerCase();
-      if(appt.includes(q)){ r.style.display = ''; matched++; } else r.style.display = 'none';
-    });
-    if(matched > 0){ document.getElementById('visitorDetailsPanel').style.display = 'none'; return; }
-
-    // if no match in table, check server and local fallback
-    let exists = false;
-    let found = null;
-    try {
-      const resp = await fetch(WEB_APP_URL + '?action=getVisitors');
-      if(resp.ok){
-        const data = await resp.json();
-        const list = Array.isArray(data.visitors) ? data.visitors : [];
-        found = list.find(x => ((x['Appointment Number'] || '').toLowerCase() === q));
-        exists = !!found;
-      }
-    } catch(err){
-      console.warn('Server search failed', err);
-    }
-
-    if(!exists){
-      const local = JSON.parse(localStorage.getItem('visitors') || '[]');
-      const localFound = local.find(x => ((x.appointmentNumber || x.appointment || '').toLowerCase() === q));
-      if(localFound){
-        exists = true;
-        found = {
-          'Visitor Name': localFound.visitorName || localFound.name || '',
-          'Visitor DOB': localFound.dob || '',
-          'Father Name': localFound.fatherName || '',
-          'Visitor Address': localFound.address || '',
-          'Country': localFound.country || '',
-          'Visit Date': localFound.visitDate || '',
-          'Visit Time': localFound.visitTime || '',
-          'Passport Number': localFound.passportNumber || localFound.passport || '',
-          'Email': localFound.email || '',
-          'Appointment Number': localFound.appointmentNumber || localFound.appointment || '',
-          'Status': localFound.status || 'Pending'
-        };
-      }
-    }
-
-    if(!exists){
-      const panel = document.getElementById('visitorDetailsPanel');
-      panel.innerHTML = `<div class="deleted-message">Appointment Deleted</div>`;
-      panel.style.display = 'block';
-      panel.scrollIntoView({behavior:'smooth'});
-      document.querySelectorAll('#visitorTable tbody tr').forEach(r => r.style.display = 'none');
-      return;
-    }
-
-    // exists -> show details
-    displayVisitorDetails(found);
-    if(localStorage.getItem('adminLoggedIn') === 'true'){
-      await loadVisitors();
-      document.querySelectorAll('#visitorTable tbody tr').forEach(r => {
-        const appt = (r.dataset.appt || '').toLowerCase();
-        r.style.display = appt.includes(q) ? '' : 'none';
-      });
-    }
-  }, 300);
+// Search functionality
+document.getElementById('searchVisitor').addEventListener('input', e=>{
+  const val = e.target.value.trim().toLowerCase();
+  const rows = document.querySelectorAll('#visitorTable tbody tr');
+  rows.forEach(row=>{
+    const apptNo = row.cells[10].innerText.toLowerCase();
+    row.style.display = apptNo.includes(val)?'':'none';
+  });
 });
 
-/* ================= DISPLAY DETAILS IN PANEL ================= */
-function displayVisitorDetails(v){
-  const panel = document.getElementById('visitorDetailsPanel');
-  const name = v['Visitor Name'] || v.visitorName || '';
-  const father = v['Father Name'] || v.fatherName || '';
-  const dob = v['Visitor DOB'] || v.dob || '';
-  const addr = v['Visitor Address'] || v.address || '';
-  const country = v['Country'] || v.country || '';
-  const visitDate = v['Visit Date'] || v.visitDate || '';
-  const visitTime = v['Visit Time'] || v.visitTime || '';
-  const passport = v['Passport Number'] || v.passportNumber || v.passport || '';
-  const email = v['Email'] || v.email || '';
-  const appt = v['Appointment Number'] || v.appointmentNumber || v.appointment || '';
-
-  panel.innerHTML = `
-    <h3>Personal Details</h3>
-    <p><strong>Name:</strong> ${escapeHtml(name)}</p>
-    <p><strong>Father:</strong> ${escapeHtml(father)}</p>
-    <p><strong>DOB:</strong> ${escapeHtml(formatDate(dob))}</p>
-    <p><strong>Address:</strong> ${escapeHtml(addr)}</p>
-    <p><strong>Country:</strong> ${escapeHtml(country)}</p>
-    <p><strong>Appointment:</strong> ${escapeHtml(appt)}</p>
-
-    <h3>Education</h3>
-    <p>${escapeHtml(name || 'This visitor')} has engaged in formal learning and professional development to build management, analytical and leadership competencies applied to projects and teams. (summary)</p>
-
-    <h3>Culture</h3>
-    <p>A focus on empathy, inclusion and collaboration underpins effective teamwork and stakeholder engagement. (summary)</p>
-
-    <h3>Hobbies</h3>
-    <p>Enjoys reading, music, travel and technology exploration which broaden thinking and resilience. (summary)</p>
-
-    <h3>Thoughts & Interests</h3>
-    <p>Interests include leadership development, analytics and practical innovation that delivers measurable outcomes. (summary)</p>
-  `;
-  panel.style.display = 'block';
-  panel.scrollIntoView({behavior:'smooth'});
+// Auto-load admin if already logged in
+if(localStorage.getItem('adminLoggedIn')==='true'){
+  document.getElementById('formAdmin').style.display='none';
+  document.getElementById('logoutBtn').style.display='inline-block';
+  document.getElementById('adminDashboard').style.display='block';
+  loadVisitors();
 }
-
-/* ================= ON LOAD: restore admin if persisted ================= */
-window.addEventListener('load', ()=>{
-  scrollTop();
-  if(localStorage.getItem('adminLoggedIn') === 'true'){
-    document.getElementById('formAdmin').style.display = 'none';
-    document.getElementById('logoutBtn').style.display = 'inline-block';
-    document.getElementById('adminDashboard').style.display = 'block';
-    loadVisitors();
-  }
-});
-window.onbeforeunload = ()=> scrollTop();
-
 </script>
+
 </body>
 </html>

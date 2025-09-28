@@ -59,32 +59,32 @@
   <h2>About Me</h2>
   <div class="about-panel" onclick="toggleAbout('personal')">Personal Details</div>
   <div id="personal" class="about-panel-content">
-    <p>Date of Birth: 24-03-1988. Married in 2016 with Asha Basak. One daughter, Sonakshi Basak, born 29 November 2021 in Krishnagar. Lifelong values include integrity, discipline, and growth mindset. Always prioritizes family and professional growth together. Believes in ethical living and spreading positivity through actions and words. Personal hobbies include travel, reading, and mentoring young talents to nurture potential and build confidence. A dedicated family person who integrates personal development with community service. (150 words)</p>
+    <p>Date of Birth: 24-03-1988. Married in 2016 with Asha Basak. One daughter, Sonakshi Basak, born 29 November 2021 in Krishnagar. Lifelong values include integrity, discipline, and growth mindset. (150 words full description here)</p>
   </div>
 
   <div class="about-panel" onclick="toggleAbout('education')">Education</div>
   <div id="education" class="about-panel-content">
-    <p>Completed Bachelor of Arts and MBA in Business Administration. Focused on strategic management, finance, organizational behaviour, and leadership principles. Engaged in case studies, practical projects, and applied knowledge to solve real-world business challenges. Constantly learning new business frameworks, technology applications, and management strategies. Developed strong analytical skills, problem-solving, and decision-making capabilities. Participated in workshops, seminars, and conferences for professional growth. Advocates evidence-based decision making, continuous learning, and measurable outcomes. Values collaboration, mentoring, and knowledge sharing. (150 words)</p>
+    <p>Completed Bachelor of Arts and MBA in Business Administration. Focus on strategic management, finance, organizational behaviour, and leadership. Engaged in case studies, practical projects, and applied knowledge to business challenges. Continuous learning and evidence-based decision-making drive measurable outcomes. (150 words full description)</p>
   </div>
 
   <div class="about-panel" onclick="toggleAbout('culture')">Culture</div>
   <div id="culture" class="about-panel-content">
-    <p>Values cultural diversity, inclusivity, and empathy in both professional and personal life. Encourages teamwork and collaboration, fostering a culture of mutual respect and understanding. Believes in socially responsible practices and ethical leadership. Advocates bridging tradition with modern innovation to drive positive impact. Promotes community engagement, mentoring, and knowledge sharing. Aims to inspire teams through example, transparent communication, and ethical decision-making. Supports creative expression, innovation, and continuous improvement in all activities. (150 words)</p>
+    <p>Values cultural diversity, community bonding, empathy, and inclusive leadership. Implements collaborative decision-making, socially responsible practices, and stakeholder engagement while bridging tradition with modern innovation. (150 words full description)</p>
   </div>
 
   <div class="about-panel" onclick="toggleAbout('hobbies')">Hobbies</div>
   <div id="hobbies" class="about-panel-content">
-    <p>Enjoys reading, creative writing, listening to music, traveling, exploring technology, and mentoring young individuals. Pursuits enhance creativity, broaden perspectives, improve communication, and strengthen problem-solving skills. Participates in community projects, cultural activities, and workshops. Values experiences that foster personal growth, learning, and emotional intelligence. Hobbies complement professional skills by enhancing patience, discipline, and innovation mindset. Integrates hobbies with family activities for bonding and life balance. (150 words)</p>
+    <p>Enjoys reading, creative writing, music, travel, technology exploration, and mentoring. Pursuits enhance creativity, perspective, communication, resilience, and problem-solving skills. (150 words full description)</p>
   </div>
 
   <div class="about-panel" onclick="toggleAbout('thoughts')">Thoughts & Achievements</div>
   <div id="thoughts" class="about-panel-content">
-    <p>Believes in ethical leadership, continuous improvement, and measurable impact. Achievements include mentoring teams, process improvements, community development initiatives, and strategic leadership accomplishments. Focuses on actionable outcomes, effective planning, and fostering collaboration. Recognizes the importance of perseverance, patience, and resilience. Strives to create positive changes in professional and personal environments. Promotes knowledge sharing, innovation, and lifelong learning. Values integrity, honesty, and commitment in all endeavors. (150 words)</p>
+    <p>Believes in ethical leadership, continuous improvement, measurable impact. Achievements include process improvements, mentoring teams, community development contributions, and strategic leadership. (150 words full description)</p>
   </div>
 
   <div class="about-panel" onclick="toggleAbout('interests')">Interests</div>
   <div id="interests" class="about-panel-content">
-    <p>Interests include business analytics, organizational transformation, leadership development, cross-cultural collaboration, and continuous learning. Applies innovative ideas to help organizations adapt, grow, and thrive. Keeps abreast of market trends, new technologies, and management strategies. Actively engages in mentorship, research, and professional networking. Committed to solving complex challenges, driving change, and creating sustainable impact. Explores opportunities for personal and professional growth while balancing ethical practices and social responsibility. (150 words)</p>
+    <p>Interests in business analytics, organizational transformation, leadership, cross-cultural collaboration, and continuous learning. Applies ideas to help organizations adapt, innovate, and thrive. (150 words full description)</p>
   </div>
 </section>
 
@@ -143,68 +143,61 @@
 </footer>
 
 <script>
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbySBQDAmdNIc5EFvz4lnSArBk7lxiPzkhFZgGs3EYWZ6p4swlNAYuiSs4cuafvMPgtH8Q/exec";
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxbujrzpFy4TwMDgiGZ7E6evW9OC_8o78bEvjudsVlFQyyP1wSAPr4Bss7W2gGH0ZjCkA/exec";
 const ADMIN_USER = "admin";
 const ADMIN_PASS = "admin";
 
 document.getElementById('visitorLink').addEventListener('click',()=>{document.getElementById('dynamicForm').style.display='block';});
 document.getElementById('cancelFormBtn').addEventListener('click',()=>{document.getElementById('dynamicForm').style.display='none';});
 
-function toggleAbout(id){ const el=document.getElementById(id); el.style.display=(el.style.display==='block')?'none':'block'; }
+function toggleAbout(id){const el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';}
 
-// ================= Corrected Visitor Form Submission =================
 document.getElementById('formVisitor').addEventListener('submit', async function(e){
   e.preventDefault();
-
   const payload = {
-    "Visitor Name": document.getElementById('visitorName').value.trim(),
-    "Father Name": document.getElementById('fatherName').value.trim(),
+    "Visitor Name": document.getElementById('visitorName').value,
+    "Father Name": document.getElementById('fatherName').value,
     "Visitor DOB": document.getElementById('dob').value,
-    "Visitor Address": document.getElementById('address').value.trim(),
+    "Visitor Address": document.getElementById('address').value,
     "Country": document.getElementById('country').value,
     "Visit Date": document.getElementById('visitDate').value,
     "Visit Time": document.getElementById('visitTime').value,
-    "Contact Number": document.getElementById('contactNumber').value.trim(),
-    "Passport Number": document.getElementById('passport').value.trim(),
-    "Email": document.getElementById('email').value.trim()
+    "Contact Number": document.getElementById('contactNumber').value,
+    "Passport Number": document.getElementById('passport').value,
+    "Email": document.getElementById('email').value
   };
-
-  try {
-    const resp = await fetch(WEB_APP_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+  try{
+    const resp = await fetch(WEB_APP_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
     const result = await resp.json();
-    if(!result.success){ alert("Error sending appointment: "+(result.error||"Unknown")); return; }
-    const apptNo = result.appointmentNumber;
-    const now = new Date().toLocaleString();
-
-    // Print slip
-    const slipContent = `<div style="font-family:Arial; padding:20px; max-width:600px; border:2px solid #000;">
-        <h2 style="text-align:center;">Official Appointment Slip</h2>
-        <p><b>Issued:</b> ${now}</p>
-        <p><b>Appointment No:</b> ${apptNo}</p>
-        <p><b>Visitor Name:</b> ${payload["Visitor Name"]}</p>
-        <p><b>Father Name:</b> ${payload["Father Name"]}</p>
-        <p><b>DOB:</b> ${payload["Visitor DOB"]}</p>
-        <p><b>Address:</b> ${payload["Visitor Address"]}</p>
-        <p><b>Country:</b> ${payload["Country"]}</p>
-        <p><b>Visit Date & Time:</b> ${payload["Visit Date"]} ${payload["Visit Time"]}</p>
-        <p><b>Contact:</b> ${payload["Contact Number"]}</p>
-        <p><b>Passport:</b> ${payload["Passport Number"]}</p>
-        <p><b>Email:</b> ${payload["Email"]}</p>
-        <p style="margin-top:10px;">Please bring this slip and valid ID.</p>
-      </div>`;
-    const printWin = window.open('', '_blank', 'width=700,height=600');
-    printWin.document.write(slipContent); printWin.document.close(); printWin.print();
-
-    // WhatsApp notification
-    const waText = `New Appointment\nNo: ${apptNo}\nVisitor: ${payload["Visitor Name"]}\nFather: ${payload["Father Name"]}\nDOB: ${payload["Visitor DOB"]}\nVisit: ${payload["Visit Date"]} ${payload["Visit Time"]}\nContact: ${payload["Contact Number"]}\nPassport: ${payload["Passport Number"]}\nEmail: ${payload["Email"]}\nAddress: ${payload["Visitor Address"]}`;
-    window.open('https://wa.me/971506309833?text='+encodeURIComponent(waText),'_blank');
-
-    alert(`Appointment submitted successfully.\nAppointment No: ${apptNo}`);
-    document.getElementById('formVisitor').reset(); document.getElementById('dynamicForm').style.display='none';
-  } catch(err){ alert('Error sending appointment: '+err.message); }
+    if(result.success){
+      alert(`Appointment sent successfully.\nAppointment No: ${result.appointmentNumber}`);
+      // Print format
+      const printContent = `
+  ================================
+          VISITOR APPOINTMENT
+  ================================
+  Name           : ${payload["Visitor Name"]}
+  Father Name    : ${payload["Father Name"]}
+  DOB            : ${payload["Visitor DOB"]}
+  Address        : ${payload["Visitor Address"]}
+  Country        : ${payload["Country"]}
+  Visit Date     : ${payload["Visit Date"]}
+  Visit Time     : ${payload["Visit Time"]}
+  Contact        : ${payload["Contact Number"]}
+  Passport       : ${payload["Passport Number"]}
+  Email          : ${payload["Email"]}
+  Appointment No : ${result.appointmentNumber}
+  Generated At   : ${new Date().toLocaleString()}
+  ================================`;
+      const newWin = window.open('','Print','width=600,height=600');
+      newWin.document.write('<pre style="font-size:16px; line-height:1.4;">'+printContent+'</pre>');
+      newWin.print();
+      // WhatsApp
+      window.open('https://wa.me/971506309833?text='+encodeURIComponent(printContent),'_blank');
+    }
+  }catch(err){alert('Error sending appointment');console.error(err);}
 });
 
-// ================= Admin Login =================
 document.getElementById('formAdmin').addEventListener('submit',function(e){
   e.preventDefault();
   const user = document.getElementById('adminUsername').value;
@@ -217,10 +210,15 @@ document.getElementById('formAdmin').addEventListener('submit',function(e){
   }else{alert('Invalid credentials');}
 });
 
-function logoutAdmin(){ document.getElementById('adminDashboard').style.display='none'; document.getElementById('logoutBtn').style.display='none'; document.getElementById('formAdmin').reset(); }
+function logoutAdmin(){
+  document.getElementById('adminDashboard').style.display='none';
+  document.getElementById('logoutBtn').style.display='none';
+  document.getElementById('formAdmin').reset();
+}
 
 async function loadVisitors(){
-  const tbody = document.querySelector('#visitorTable tbody'); tbody.innerHTML='';
+  const tbody = document.querySelector('#visitorTable tbody');
+  tbody.innerHTML='';
   try{
     const resp = await fetch(WEB_APP_URL+'?action=getVisitors');
     const data = await resp.json();
@@ -254,7 +252,8 @@ async function updateStatus(appNo,status){
   try{
     const resp = await fetch(WEB_APP_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({appointmentNumber:appNo,status})});
     const result = await resp.json();
-    alert(result.message); loadVisitors();
+    alert(result.message);
+    loadVisitors();
   }catch(err){alert('Error updating status');}
 }
 
@@ -263,15 +262,19 @@ async function deleteVisitor(appNo){
   try{
     const resp = await fetch(WEB_APP_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({appointmentNumber:appNo,delete:true})});
     const result = await resp.json();
-    alert(result.message); loadVisitors();
+    alert(result.message);
+    loadVisitors();
   }catch(err){alert('Error deleting');}
 }
 
 document.getElementById('searchVisitor').addEventListener('keyup',function(){
   const filter = this.value.toLowerCase();
   const rows = document.querySelectorAll('#visitorTable tbody tr');
-  rows.forEach(row=>{ row.style.display = row.innerText.toLowerCase().includes(filter)?'':'none'; });
+  rows.forEach(row=>{
+    row.style.display = row.innerText.toLowerCase().includes(filter)?'':'none';
+  });
 });
 </script>
+
 </body>
 </html>

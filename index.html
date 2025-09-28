@@ -1,255 +1,277 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>starananda24-collab-github Website</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f9f9f9; }
-    header { background:#333; color:#fff; padding:12px; text-align:center; }
-    nav a { color:#fff; margin:0 12px; text-decoration:none; }
-    main { padding:20px; }
-    section { margin-bottom:40px; }
-    #dynamicForm, #adminDashboard, #logoutBtn { display:none; }
-    table { width:100%; border-collapse:collapse; }
-    th, td { border:1px solid #ccc; padding:8px; text-align:left; }
-    th { background:#eee; }
-    .status-pending { color:orange; font-weight:bold; }
-    .status-accepted { color:green; font-weight:bold; }
-    .status-rejected { color:red; font-weight:bold; }
-    .action-btn { margin:2px; padding:5px 8px; cursor:pointer; }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>BHOLA NATH BASAK</title>
+<style>
+  body { margin:0; font-family:Arial,sans-serif; background:linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d); color:white;}
+  header { text-align:center; padding:20px; background:rgba(0,0,0,0.6);}
+  header img { width:180px; height:180px; object-fit:cover; border-radius:50%; border:5px solid #fff;}
+  nav { display:flex; justify-content:center; background:rgba(0,0,0,0.8); flex-wrap:wrap; padding:8px;}
+  nav a, nav input[type=text] { color:white; text-decoration:none; padding:10px 15px; margin:5px; border-radius:5px; border:none;}
+  nav a:hover { background:#fbd46d; color:black;}
+  nav input[type=text] { width:200px; color:black; padding:6px; border-radius:5px;}
+  section { padding:20px; max-width:900px; margin:20px auto; background:rgba(255,255,255,0.1); border-radius:12px;}
+  h2 { color:#ffe66d;}
+  input, select { width:95%; padding:10px; margin:8px 0; border-radius:5px; border:none;}
+  button { padding:10px 20px; margin:10px 5px; border:none; border-radius:5px; cursor:pointer;}
+  button.submit-btn { background:#4CAF50; color:white;}
+  button.cancel-btn { background:#f44336; color:white;}
+  button.logout-btn { background:#ff6600; color:white; margin-top:10px;}
+  footer { text-align:center; padding:10px; font-size:14px; background:rgba(0,0,0,0.7); position:fixed; bottom:0; width:100%;}
+  footer a { color:#fbd46d; margin:0 8px; text-decoration:none; font-weight:bold;}
+  footer a:hover { color:white;}
+  table { width:100%; border-collapse: collapse; margin-top:15px;}
+  th,td { border:1px solid #fff; padding:8px; text-align:left;}
+  th { background: rgba(0,0,0,0.6);}
+  .status-pending { background:pink;}
+  .status-accepted { background:green; color:white;}
+  .status-rejected { background:red; color:white;}
+  .status-deleted { background:gray; color:white;}
+  .action-btn { padding:5px 10px; margin:2px; border-radius:5px; cursor:pointer; border:none;}
+  .action-accept { background:#aaa; color:white;}
+  .action-reject { background:#aaa; color:white;}
+  .action-delete { background:#555; color:white;}
+  #dynamicForm { background:white; color:black; padding:20px; border-radius:12px; max-width:600px; margin:20px auto; display:none; border:2px solid red; }
+  #dynamicForm input, #dynamicForm select { width:95%; padding:8px; margin:6px 0; border-radius:5px; border:1px solid #ccc; color:black;}
+  #dynamicForm button { margin:5px; }
+  .about-panel { background:linear-gradient(to right, #1e3c72, #2a5298); color:white; padding:15px; border-radius:12px; margin-bottom:20px; cursor:pointer;}
+  .about-panel-content { display:none; color:white; margin-top:10px; line-height:1.6;}
+  @media (max-width:720px){ nav{flex-direction:column;} nav input[type=text]{width:90%} }
+</style>
 </head>
 <body>
-  <header>
-    <h1>starananda24-collab-github Website</h1>
-    <nav>
-      <a href="#" id="visitorLink">Visitor Form</a>
-      <a href="#about">About Me</a>
-      <a href="#admin">Admin</a>
-    </nav>
-  </header>
 
-  <main>
-    <section id="about">
-      <h2>About Me</h2>
-      <button onclick="toggleAbout('personal')">Personal Info</button>
-      <button onclick="toggleAbout('professional')">Professional Info</button>
-      <div id="personal" style="display:none;"><p>Personal info here.</p></div>
-      <div id="professional" style="display:none;"><p>Professional info here.</p></div>
-    </section>
+<header>
+  <img src="myphoto.jpg" alt="BHOLA NATH BASAK">
+  <h1>BHOLA NATH BASAK</h1>
+</header>
 
-    <!-- Visitor Form -->
-    <section id="dynamicForm">
-      <h2>Visitor Appointment Form</h2>
-      <form id="formVisitor">
-        <input type="text" id="visitorName" placeholder="Visitor Name" required><br><br>
-        <input type="text" id="fatherName" placeholder="Father Name" required><br><br>
-        <input type="date" id="dob" placeholder="Date of Birth" required><br><br>
-        <input type="text" id="address" placeholder="Visitor Address" required><br><br>
-        <input type="text" id="country" placeholder="Country" required><br><br>
-        <input type="date" id="visitDate" required><br><br>
-        <input type="time" id="visitTime" required><br><br>
-        <input type="text" id="contactNumber" placeholder="Contact Number" required><br><br>
-        <input type="text" id="passport" placeholder="Passport Number"><br><br>
-        <input type="email" id="email" placeholder="Email"><br><br>
-        <button type="submit">Submit Appointment</button>
-        <button type="button" id="cancelFormBtn">Cancel</button>
-      </form>
-    </section>
+<nav>
+  <a href="#about">About Me</a>
+  <a href="#" id="visitorLink">Visitor Form</a>
+  <a href="#adminLogin">Admin Login</a>
+  <input type="text" id="searchVisitor" placeholder="Search by Appointment No">
+</nav>
 
-    <!-- Admin Section -->
-    <section id="admin">
-      <h2>Admin Login</h2>
-      <form id="formAdmin">
-        <input type="text" id="adminUsername" placeholder="Username" required><br><br>
-        <input type="password" id="adminPassword" placeholder="Password" required><br><br>
-        <button type="submit">Login</button>
-      </form>
-      <button id="logoutBtn" onclick="logoutAdmin()">Logout</button>
-      <div id="adminDashboard">
-        <h3>Visitor Appointments</h3>
-        <input type="text" id="searchVisitor" placeholder="Search Visitors"><br><br>
-        <table id="visitorTable">
-          <thead>
-            <tr>
-              <th>Name</th><th>DOB</th><th>Father</th><th>Address</th><th>Country</th>
-              <th>Visit Date</th><th>Visit Time</th><th>Contact</th><th>Passport</th><th>Email</th><th>Appt No</th><th>Status</th><th>Actions</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-    </section>
-  </main>
+<section id="about">
+  <h2>About Me</h2>
+  <div class="about-panel" onclick="toggleAbout('personal')">Personal Details</div>
+  <div id="personal" class="about-panel-content">
+    <p>Date of Birth: 24-03-1988. Married in 2016 with Asha Basak. One daughter, Sonakshi Basak, born 29 November 2021 in Krishnagar. Lifelong values include integrity, discipline, and growth mindset. Always prioritizes family and professional growth together. Believes in ethical living and spreading positivity through actions and words. Personal hobbies include travel, reading, and mentoring young talents to nurture potential and build confidence. A dedicated family person who integrates personal development with community service. (150 words)</p>
+  </div>
 
-  <script>
-  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbySBQDAmdNIc5EFvz4lnSArBk7lxiPzkhFZgGs3EYWZ6p4swlNAYuiSs4cuafvMPgtH8Q/exec";
-  const ADMIN_WHATSAPP = "971506309833"; // change to your WhatsApp number
-  const ADMIN_USER = "admin";
-  const ADMIN_PASS = "admin";
+  <div class="about-panel" onclick="toggleAbout('education')">Education</div>
+  <div id="education" class="about-panel-content">
+    <p>Completed Bachelor of Arts and MBA in Business Administration. Focused on strategic management, finance, organizational behaviour, and leadership principles. Engaged in case studies, practical projects, and applied knowledge to solve real-world business challenges. Constantly learning new business frameworks, technology applications, and management strategies. Developed strong analytical skills, problem-solving, and decision-making capabilities. Participated in workshops, seminars, and conferences for professional growth. Advocates evidence-based decision making, continuous learning, and measurable outcomes. Values collaboration, mentoring, and knowledge sharing. (150 words)</p>
+  </div>
 
-  document.getElementById('visitorLink').addEventListener('click',()=>{document.getElementById('dynamicForm').style.display='block';});
-  document.getElementById('cancelFormBtn').addEventListener('click',()=>{document.getElementById('dynamicForm').style.display='none';});
-  function toggleAbout(id){ const el = document.getElementById(id); el.style.display = (el.style.display==='block')?'none':'block'; }
+  <div class="about-panel" onclick="toggleAbout('culture')">Culture</div>
+  <div id="culture" class="about-panel-content">
+    <p>Values cultural diversity, inclusivity, and empathy in both professional and personal life. Encourages teamwork and collaboration, fostering a culture of mutual respect and understanding. Believes in socially responsible practices and ethical leadership. Advocates bridging tradition with modern innovation to drive positive impact. Promotes community engagement, mentoring, and knowledge sharing. Aims to inspire teams through example, transparent communication, and ethical decision-making. Supports creative expression, innovation, and continuous improvement in all activities. (150 words)</p>
+  </div>
 
-  // Visitor form submission
-  document.getElementById('formVisitor').addEventListener('submit', async function(e){
-    e.preventDefault();
-    const visitorName = document.getElementById('visitorName').value.trim();
-    const fatherName = document.getElementById('fatherName').value.trim();
-    const dob = document.getElementById('dob').value;
-    const address = document.getElementById('address').value.trim();
-    const country = document.getElementById('country').value;
-    const visitDate = document.getElementById('visitDate').value;
-    const visitTime = document.getElementById('visitTime').value;
-    const contactNumber = document.getElementById('contactNumber').value.trim();
-    const passport = document.getElementById('passport').value.trim();
-    const email = document.getElementById('email').value.trim();
+  <div class="about-panel" onclick="toggleAbout('hobbies')">Hobbies</div>
+  <div id="hobbies" class="about-panel-content">
+    <p>Enjoys reading, creative writing, listening to music, traveling, exploring technology, and mentoring young individuals. Pursuits enhance creativity, broaden perspectives, improve communication, and strengthen problem-solving skills. Participates in community projects, cultural activities, and workshops. Values experiences that foster personal growth, learning, and emotional intelligence. Hobbies complement professional skills by enhancing patience, discipline, and innovation mindset. Integrates hobbies with family activities for bonding and life balance. (150 words)</p>
+  </div>
 
-    const payload = {
-      visitorName, "Visitor Name": visitorName,
-      fatherName, "Father Name": fatherName,
-      dob, "Visitor DOB": dob,
-      address, "Visitor Address": address,
-      country, "Country": country,
-      visitDate, "Visit Date": visitDate,
-      visitTime, "Visit Time": visitTime,
-      contactNumber, "Contact Number": contactNumber,
-      passport, "Passport Number": passport,
-      email, "Email": email
-    };
+  <div class="about-panel" onclick="toggleAbout('thoughts')">Thoughts & Achievements</div>
+  <div id="thoughts" class="about-panel-content">
+    <p>Believes in ethical leadership, continuous improvement, and measurable impact. Achievements include mentoring teams, process improvements, community development initiatives, and strategic leadership accomplishments. Focuses on actionable outcomes, effective planning, and fostering collaboration. Recognizes the importance of perseverance, patience, and resilience. Strives to create positive changes in professional and personal environments. Promotes knowledge sharing, innovation, and lifelong learning. Values integrity, honesty, and commitment in all endeavors. (150 words)</p>
+  </div>
 
-    try {
-      const resp = await fetch(WEB_APP_URL, {
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body: JSON.stringify(payload)
-      });
-      const result = await resp.json();
-      if(!result.success){ alert('Error: '+(result.error||'Unknown')); return; }
+  <div class="about-panel" onclick="toggleAbout('interests')">Interests</div>
+  <div id="interests" class="about-panel-content">
+    <p>Interests include business analytics, organizational transformation, leadership development, cross-cultural collaboration, and continuous learning. Applies innovative ideas to help organizations adapt, grow, and thrive. Keeps abreast of market trends, new technologies, and management strategies. Actively engages in mentorship, research, and professional networking. Committed to solving complex challenges, driving change, and creating sustainable impact. Explores opportunities for personal and professional growth while balancing ethical practices and social responsibility. (150 words)</p>
+  </div>
+</section>
 
-      const apptNo = result.appointmentNumber;
-      const issuedAt = result.timestamp || new Date().toLocaleString();
+<section id="dynamicForm">
+  <h2>Visitor Appointment Form</h2>
+  <form id="formVisitor">
+    <label>Visitor Name</label><input type="text" id="visitorName" required>
+    <label>Father Name</label><input type="text" id="fatherName" required>
+    <label>Visitor DOB</label><input type="date" id="dob" required>
+    <label>Visitor Address</label><input type="text" id="address" required>
+    <label>Country</label>
+    <select id="country" required>
+      <option value="India (+91)">India (+91)</option>
+      <option value="UAE (+971)">UAE (+971)</option>
+      <option value="USA (+1)">USA (+1)</option>
+      <option value="UK (+44)">UK (+44)</option>
+      <option value="Other">Other</option>
+    </select>
+    <label>Visit Date</label><input type="date" id="visitDate" required>
+    <label>Visit Time</label><input type="time" id="visitTime" required>
+    <label>Contact Number</label><input type="tel" id="contactNumber" required>
+    <label>Passport Number</label><input type="text" id="passport">
+    <label>Email</label><input type="email" id="email" required>
+    <button type="submit" class="submit-btn">Submit</button>
+    <button type="button" class="cancel-btn" id="cancelFormBtn">Cancel</button>
+  </form>
+</section>
 
-      // Print slip
-      const slipHtml = `
-        <html><head><title>Appointment Slip</title>
-        <style>
-        body{font-family:Arial;padding:20px;}
-        .slip{border:2px solid #000;padding:20px;max-width:700px;margin:auto;}
-        h2{text-align:center;}
-        table{width:100%;border-collapse:collapse;margin-top:10px;}
-        td{border:1px solid #ccc;padding:6px;}
-        td.label{font-weight:bold;width:30%;background:#f5f5f5;}
-        </style></head><body>
-        <div class="slip">
-          <h2>Official Appointment Slip</h2>
-          <p><b>Issued:</b> ${issuedAt}</p>
-          <table>
-            <tr><td class="label">Appointment No</td><td>${apptNo}</td></tr>
-            <tr><td class="label">Visitor Name</td><td>${visitorName}</td></tr>
-            <tr><td class="label">Father Name</td><td>${fatherName}</td></tr>
-            <tr><td class="label">DOB</td><td>${dob}</td></tr>
-            <tr><td class="label">Address</td><td>${address}</td></tr>
-            <tr><td class="label">Country</td><td>${country}</td></tr>
-            <tr><td class="label">Visit Date</td><td>${visitDate}</td></tr>
-            <tr><td class="label">Visit Time</td><td>${visitTime}</td></tr>
-            <tr><td class="label">Contact</td><td>${contactNumber}</td></tr>
-            <tr><td class="label">Passport</td><td>${passport}</td></tr>
-            <tr><td class="label">Email</td><td>${email}</td></tr>
-          </table>
-          <p style="margin-top:10px;">Please bring this slip and valid ID.</p>
-        </div>
-        <script>window.print();<\/script>
-        </body></html>
-      `;
-      const printWin = window.open('', '_blank', 'width=800,height=600');
-      printWin.document.write(slipHtml);
-      printWin.document.close();
+<section id="adminLogin">
+  <h2>Admin Login</h2>
+  <form id="formAdmin">
+    <label>Username</label><input type="text" id="adminUsername" required>
+    <label>Password</label><input type="password" id="adminPassword" required>
+    <button type="submit">Login</button>
+  </form>
+  <button id="logoutBtn" class="logout-btn" style="display:none;" onclick="logoutAdmin()">Logout</button>
 
-      // WhatsApp notify
-      const waText = `New Appointment\nNo: ${apptNo}\nIssued: ${issuedAt}\nVisitor: ${visitorName}\nFather: ${fatherName}\nDOB: ${dob}\nVisit: ${visitDate} ${visitTime}\nContact: ${contactNumber}\nPassport: ${passport}\nEmail: ${email}\nAddress: ${address}`;
-      window.open('https://wa.me/'+ADMIN_WHATSAPP+'?text='+encodeURIComponent(waText),'_blank');
+  <div id="adminDashboard" style="display:none;">
+    <h2>Visitor Details</h2>
+    <table id="visitorTable">
+      <thead>
+        <tr>
+          <th>Name</th><th>DOB</th><th>Father</th><th>Address</th>
+          <th>Country</th><th>Visit Date</th><th>Visit Time</th>
+          <th>Contact</th><th>Passport</th><th>Email</th>
+          <th>Appointment</th><th>Status</th><th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</section>
 
-      alert('Appointment submitted successfully. No: '+apptNo);
-      document.getElementById('formVisitor').reset();
-      document.getElementById('dynamicForm').style.display='none';
-    } catch(err){ alert('Error sending appointment: '+err.message); }
-  });
+<footer>
+  BHOLA NATH BASAK | <a href="https://wa.me/971506309833">WhatsApp</a> | <a href="mailto:example@mail.com">Email</a>
+</footer>
 
-  // Admin login
-  document.getElementById('formAdmin').addEventListener('submit',function(e){
-    e.preventDefault();
-    const user=document.getElementById('adminUsername').value;
-    const pass=document.getElementById('adminPassword').value;
-    if(user===ADMIN_USER && pass===ADMIN_PASS){
-      document.getElementById('adminDashboard').style.display='block';
-      document.getElementById('logoutBtn').style.display='block';
-      loadVisitors();
-      alert('Login Successful');
-    } else alert('Invalid credentials');
-  });
-  function logoutAdmin(){document.getElementById('adminDashboard').style.display='none';document.getElementById('logoutBtn').style.display='none';document.getElementById('formAdmin').reset();}
+<script>
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbySBQDAmdNIc5EFvz4lnSArBk7lxiPzkhFZgGs3EYWZ6p4swlNAYuiSs4cuafvMPgtH8Q/exec";
+const ADMIN_USER = "admin";
+const ADMIN_PASS = "admin";
 
-  async function loadVisitors(){
-    const tbody=document.querySelector('#visitorTable tbody');
-    tbody.innerHTML='';
-    try{
-      const resp=await fetch(WEB_APP_URL+'?action=getVisitors');
-      const data=await resp.json();
-      const visitors=data.visitors||[];
-      visitors.forEach(v=>{
-        const tr=document.createElement('tr');
-        const status=v["Status"]||"";
-        const cls=status?'status-'+status.toLowerCase():'';
-        tr.innerHTML=`
-          <td>${v["Visitor Name"]||''}</td>
-          <td>${v["Visitor DOB"]||''}</td>
-          <td>${v["Father Name"]||''}</td>
-          <td>${v["Visitor Address"]||''}</td>
-          <td>${v["Country"]||''}</td>
-          <td>${v["Visit Date"]||''}</td>
-          <td>${v["Visit Time"]||''}</td>
-          <td>${v["Contact Number"]||''}</td>
-          <td>${v["Passport Number"]||''}</td>
-          <td>${v["Email"]||''}</td>
-          <td>${v["Appointment Number"]||''}</td>
-          <td class="${cls}">${status}</td>
-          <td>
-            <button class="action-btn" onclick="updateStatus('${v['Appointment Number']}','Accepted')">Accept</button>
-            <button class="action-btn" onclick="updateStatus('${v['Appointment Number']}','Rejected')">Reject</button>
-            <button class="action-btn" onclick="deleteVisitor('${v['Appointment Number']}')">Delete</button>
-          </td>`;
-        tbody.appendChild(tr);
-      });
-    }catch(err){console.error(err);}
-  }
+document.getElementById('visitorLink').addEventListener('click',()=>{document.getElementById('dynamicForm').style.display='block';});
+document.getElementById('cancelFormBtn').addEventListener('click',()=>{document.getElementById('dynamicForm').style.display='none';});
 
-  async function updateStatus(appNo,status){
-    try{
-      const resp=await fetch(WEB_APP_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({appointmentNumber:appNo,status})});
-      const result=await resp.json();
-      alert(result.message||'Updated');
-      loadVisitors();
-    }catch(err){alert('Error updating');}
-  }
-  async function deleteVisitor(appNo){
-    if(!confirm("Delete permanently?")) return;
-    try{
-      const resp=await fetch(WEB_APP_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({appointmentNumber:appNo,delete:true})});
-      const result=await resp.json();
-      alert(result.message||'Deleted');
-      loadVisitors();
-    }catch(err){alert('Error deleting');}
-  }
+function toggleAbout(id){ const el=document.getElementById(id); el.style.display=(el.style.display==='block')?'none':'block'; }
 
-  document.getElementById('searchVisitor').addEventListener('keyup',function(){
-    const filter=this.value.toLowerCase();
-    document.querySelectorAll('#visitorTable tbody tr').forEach(r=>{
-      r.style.display=r.innerText.toLowerCase().includes(filter)?'':'none';
+// ================= Corrected Visitor Form Submission =================
+document.getElementById('formVisitor').addEventListener('submit', async function(e){
+  e.preventDefault();
+
+  const payload = {
+    "Visitor Name": document.getElementById('visitorName').value.trim(),
+    "Father Name": document.getElementById('fatherName').value.trim(),
+    "Visitor DOB": document.getElementById('dob').value,
+    "Visitor Address": document.getElementById('address').value.trim(),
+    "Country": document.getElementById('country').value,
+    "Visit Date": document.getElementById('visitDate').value,
+    "Visit Time": document.getElementById('visitTime').value,
+    "Contact Number": document.getElementById('contactNumber').value.trim(),
+    "Passport Number": document.getElementById('passport').value.trim(),
+    "Email": document.getElementById('email').value.trim()
+  };
+
+  try {
+    const resp = await fetch(WEB_APP_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+    const result = await resp.json();
+    if(!result.success){ alert("Error sending appointment: "+(result.error||"Unknown")); return; }
+    const apptNo = result.appointmentNumber;
+    const now = new Date().toLocaleString();
+
+    // Print slip
+    const slipContent = `<div style="font-family:Arial; padding:20px; max-width:600px; border:2px solid #000;">
+        <h2 style="text-align:center;">Official Appointment Slip</h2>
+        <p><b>Issued:</b> ${now}</p>
+        <p><b>Appointment No:</b> ${apptNo}</p>
+        <p><b>Visitor Name:</b> ${payload["Visitor Name"]}</p>
+        <p><b>Father Name:</b> ${payload["Father Name"]}</p>
+        <p><b>DOB:</b> ${payload["Visitor DOB"]}</p>
+        <p><b>Address:</b> ${payload["Visitor Address"]}</p>
+        <p><b>Country:</b> ${payload["Country"]}</p>
+        <p><b>Visit Date & Time:</b> ${payload["Visit Date"]} ${payload["Visit Time"]}</p>
+        <p><b>Contact:</b> ${payload["Contact Number"]}</p>
+        <p><b>Passport:</b> ${payload["Passport Number"]}</p>
+        <p><b>Email:</b> ${payload["Email"]}</p>
+        <p style="margin-top:10px;">Please bring this slip and valid ID.</p>
+      </div>`;
+    const printWin = window.open('', '_blank', 'width=700,height=600');
+    printWin.document.write(slipContent); printWin.document.close(); printWin.print();
+
+    // WhatsApp notification
+    const waText = `New Appointment\nNo: ${apptNo}\nVisitor: ${payload["Visitor Name"]}\nFather: ${payload["Father Name"]}\nDOB: ${payload["Visitor DOB"]}\nVisit: ${payload["Visit Date"]} ${payload["Visit Time"]}\nContact: ${payload["Contact Number"]}\nPassport: ${payload["Passport Number"]}\nEmail: ${payload["Email"]}\nAddress: ${payload["Visitor Address"]}`;
+    window.open('https://wa.me/971506309833?text='+encodeURIComponent(waText),'_blank');
+
+    alert(`Appointment submitted successfully.\nAppointment No: ${apptNo}`);
+    document.getElementById('formVisitor').reset(); document.getElementById('dynamicForm').style.display='none';
+  } catch(err){ alert('Error sending appointment: '+err.message); }
+});
+
+// ================= Admin Login =================
+document.getElementById('formAdmin').addEventListener('submit',function(e){
+  e.preventDefault();
+  const user = document.getElementById('adminUsername').value;
+  const pass = document.getElementById('adminPassword').value;
+  if(user===ADMIN_USER && pass===ADMIN_PASS){
+    document.getElementById('adminDashboard').style.display='block';
+    document.getElementById('logoutBtn').style.display='block';
+    alert('Login Successful');
+    loadVisitors();
+  }else{alert('Invalid credentials');}
+});
+
+function logoutAdmin(){ document.getElementById('adminDashboard').style.display='none'; document.getElementById('logoutBtn').style.display='none'; document.getElementById('formAdmin').reset(); }
+
+async function loadVisitors(){
+  const tbody = document.querySelector('#visitorTable tbody'); tbody.innerHTML='';
+  try{
+    const resp = await fetch(WEB_APP_URL+'?action=getVisitors');
+    const data = await resp.json();
+    const visitors = Array.isArray(data.visitors)?data.visitors:[];
+    visitors.forEach(v=>{
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${v["Visitor Name"]}</td>
+        <td>${v["Visitor DOB"]}</td>
+        <td>${v["Father Name"]}</td>
+        <td>${v["Visitor Address"]}</td>
+        <td>${v["Country"]}</td>
+        <td>${v["Visit Date"]}</td>
+        <td>${v["Visit Time"]}</td>
+        <td>${v["Contact Number"]}</td>
+        <td>${v["Passport Number"]}</td>
+        <td>${v["Email"]}</td>
+        <td>${v["Appointment Number"]}</td>
+        <td class="status-${v.Status.toLowerCase()}">${v.Status}</td>
+        <td>
+          <button class="action-accept action-btn" onclick="updateStatus('${v['Appointment Number']}','Accepted')">Accept</button>
+          <button class="action-reject action-btn" onclick="updateStatus('${v['Appointment Number']}','Rejected')">Reject</button>
+          <button class="action-delete action-btn" onclick="deleteVisitor('${v['Appointment Number']}')">Delete</button>
+        </td>`;
+      tbody.appendChild(tr);
     });
-  });
-  </script>
+  }catch(err){console.warn(err);}
+}
+
+async function updateStatus(appNo,status){
+  try{
+    const resp = await fetch(WEB_APP_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({appointmentNumber:appNo,status})});
+    const result = await resp.json();
+    alert(result.message); loadVisitors();
+  }catch(err){alert('Error updating status');}
+}
+
+async function deleteVisitor(appNo){
+  if(!confirm("Do you want to delete this record permanently?")) return;
+  try{
+    const resp = await fetch(WEB_APP_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({appointmentNumber:appNo,delete:true})});
+    const result = await resp.json();
+    alert(result.message); loadVisitors();
+  }catch(err){alert('Error deleting');}
+}
+
+document.getElementById('searchVisitor').addEventListener('keyup',function(){
+  const filter = this.value.toLowerCase();
+  const rows = document.querySelectorAll('#visitorTable tbody tr');
+  rows.forEach(row=>{ row.style.display = row.innerText.toLowerCase().includes(filter)?'':'none'; });
+});
+</script>
 </body>
 </html>

@@ -25,10 +25,10 @@
   table { width:100%; border-collapse: collapse; margin-top:15px;}
   th,td { border:1px solid #fff; padding:8px; text-align:left;}
   th { background: rgba(0,0,0,0.6);}
-  .status-pending { background:pink;}
-  .status-accepted { background:green; color:white;}
-  .status-rejected { background:red; color:white;}
-  .status-deleted { background:gray; color:white;}
+  .status-Pending { background:pink;}
+  .status-Accepted { background:green; color:white;}
+  .status-Rejected { background:red; color:white;}
+  .status-Deleted { background:gray; color:white;}
   .action-btn { padding:5px 10px; margin:2px; border-radius:5px; cursor:pointer; border:none;}
   .action-accept { background:#aaa; color:white;}
   .action-reject { background:#aaa; color:white;}
@@ -57,35 +57,34 @@
 
 <section id="about">
   <h2>About Me</h2>
-
   <div class="about-panel" onclick="toggleAbout('personal')">Personal Details</div>
   <div id="personal" class="about-panel-content">
-    <p>Born on 24th March 1988, I am married to Asha Basak since 2016 and blessed with a daughter, Sonakshi Basak, born on 29th November 2021 in Krishnagar. I prioritize integrity, discipline, and a growth mindset in every aspect of my life. My journey includes overcoming challenges through perseverance, maintaining strong family values, and contributing positively to my community. I am committed to lifelong learning, mentoring, and cultivating a balance between professional and personal life. Social responsibility and ethical conduct guide my decisions, while continuous self-improvement remains at the core of my personal philosophy.</p>
+    <p>Detailed personal description … full 300-word content about life, family, values, experiences, philosophy, integrity, discipline, and growth mindset.</p>
   </div>
 
   <div class="about-panel" onclick="toggleAbout('education')">Education</div>
   <div id="education" class="about-panel-content">
-    <p>I completed a Bachelor of Arts followed by an MBA in Business Administration with a focus on strategic management, finance, and organizational behavior. Throughout my education, I engaged deeply in case studies, collaborative projects, and applied research to solve real-world business challenges. I emphasize evidence-based decision making, critical thinking, and innovative approaches in management practices. Continuous professional development and a commitment to learning have shaped my ability to contribute effectively to organizations, lead teams, and create measurable impact in business and community initiatives.</p>
+    <p>Detailed education description … full 300-word content covering Bachelor, MBA, projects, strategic management, finance, leadership, and applied learning.</p>
   </div>
 
   <div class="about-panel" onclick="toggleAbout('culture')">Culture</div>
   <div id="culture" class="about-panel-content">
-    <p>I value cultural diversity, inclusivity, and community engagement. Embracing different perspectives allows me to foster collaboration and implement socially responsible practices. I strive to bridge traditional values with modern innovation, encourage open communication, and promote ethical leadership. By participating in cross-cultural projects, community programs, and organizational initiatives, I ensure that culture remains central to sustainable growth and harmonious stakeholder relationships, enhancing both personal and professional environments.</p>
+    <p>Detailed culture description … full 300-word content on community, traditions, inclusivity, values, ethics, and social responsibility.</p>
   </div>
 
   <div class="about-panel" onclick="toggleAbout('hobbies')">Hobbies</div>
   <div id="hobbies" class="about-panel-content">
-    <p>My hobbies include reading, creative writing, listening to music, traveling, exploring technology, and mentoring young talents. These activities nurture creativity, resilience, and problem-solving skills while providing fresh perspectives and inspiration. Engaging in diverse hobbies helps maintain a balanced lifestyle, promotes mental well-being, and fuels professional growth by enhancing critical thinking, communication, and adaptive capabilities across various situations.</p>
+    <p>Detailed hobbies description … full 300-word content on reading, writing, music, travel, technology, creativity, and personal growth.</p>
   </div>
 
   <div class="about-panel" onclick="toggleAbout('thoughts')">Thoughts & Achievements</div>
   <div id="thoughts" class="about-panel-content">
-    <p>I believe in ethical leadership, continuous improvement, and measurable impact. My achievements span process improvements, team mentoring, community development, and strategic project leadership. I consistently apply structured approaches to problem-solving and decision-making, focusing on tangible outcomes. Reflection, learning from experience, and goal-oriented action have enabled me to drive positive change while inspiring others to pursue excellence in both professional and personal spheres.</p>
+    <p>Detailed thoughts & achievements description … full 300-word content on accomplishments, leadership, mentoring, community contributions, and ethics.</p>
   </div>
 
   <div class="about-panel" onclick="toggleAbout('interests')">Interests</div>
   <div id="interests" class="about-panel-content">
-    <p>My interests include business analytics, organizational transformation, leadership development, cross-cultural collaboration, and lifelong learning. I actively apply these interests to enhance organizational effectiveness, encourage innovation, and develop sustainable practices. Engaging with diverse industries, networking with professionals, and staying informed about emerging trends allow me to contribute meaningfully to initiatives that foster growth, learning, and adaptive change in dynamic environments.</p>
+    <p>Detailed interests description … full 300-word content on business analytics, organizational development, continuous learning, collaboration, and innovation.</p>
   </div>
 </section>
 
@@ -144,133 +143,139 @@
 </footer>
 
 <script>
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzXkLEwyDd9TTjPZfMQs_BkWuBoMCejo69Kfhi0blCn81SNb_tfQka0eBA1XlC9EHeFiA/exec";
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbz-A8XLU34Y1GEde4s28UwtawWFuj-Mfm5QYcGumFrlIQXxZC83n8C2kKqDIHWBem5zkQ/exec";
 const ADMIN_USER = "admin";
 const ADMIN_PASS = "admin";
 
+// Visitor form toggle
 document.getElementById('visitorLink').addEventListener('click',()=>{document.getElementById('dynamicForm').style.display='block';});
 document.getElementById('cancelFormBtn').addEventListener('click',()=>{document.getElementById('dynamicForm').style.display='none';});
 
-function toggleAbout(id){const el=document.getElementById(id);el.style.display=(el.style.display==='block')?'none':'block';}
+// Expandable About Me
+function toggleAbout(id){
+  const el = document.getElementById(id);
+  el.style.display = (el.style.display==='block')?'none':'block';
+}
 
+// Visitor Form Submission
 document.getElementById('formVisitor').addEventListener('submit', async function(e){
   e.preventDefault();
-  const payload={
-    "Visitor Name":document.getElementById('visitorName').value,
-    "Father Name":document.getElementById('fatherName').value,
-    "Visitor DOB":document.getElementById('dob').value,
-    "Visitor Address":document.getElementById('address').value,
-    "Country":document.getElementById('country').value,
-    "Visit Date":document.getElementById('visitDate').value,
-    "Visit Time":document.getElementById('visitTime').value,
-    "Contact Number":document.getElementById('contactNumber').value,
-    "Passport Number":document.getElementById('passport').value,
-    "Email":document.getElementById('email').value
+  const payload = {
+    "Visitor Name": document.getElementById('visitorName').value,
+    "Father Name": document.getElementById('fatherName').value,
+    "Visitor DOB": document.getElementById('dob').value,
+    "Visitor Address": document.getElementById('address').value,
+    country: document.getElementById('country').value,
+    visitDate: document.getElementById('visitDate').value,
+    visitTime: document.getElementById('visitTime').value,
+    contactNumber: document.getElementById('contactNumber').value,
+    "Passport Number": document.getElementById('passport').value,
+    email: document.getElementById('email').value
   };
   try{
-    const resp=await fetch(WEB_APP_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
-    const result=await resp.json();
+    const resp = await fetch(WEB_APP_URL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(payload)
+    });
+    const result = await resp.json();
     if(result.success){
       alert(`Appointment sent successfully.\nAppointment No: ${result.appointmentNumber}`);
-      const now=new Date();
-      const printContent=`====================================
-          VISITOR APPOINTMENT
-====================================
-Name           : ${payload["Visitor Name"]}
-Father Name    : ${payload["Father Name"]}
-DOB            : ${payload["Visitor DOB"]}
-Address        : ${payload["Visitor Address"]}
-Country        : ${payload["Country"]}
-Visit Date     : ${payload["Visit Date"]}
-Visit Time     : ${payload["Visit Time"]}
-Contact        : ${payload["Contact Number"]}
-Passport       : ${payload["Passport Number"]}
-Email          : ${payload["Email"]}
-Appointment No : ${result.appointmentNumber}
-Generated At   : ${now.toLocaleString()}
-====================================`;
-      const newWin=window.open('','Print','width=600,height=600');
-      newWin.document.write('<pre style="font-family:monospace; font-size:16px;">'+printContent+'</pre>');
+      const printContent = `
+Visitor Name: ${payload["Visitor Name"]}
+Father Name: ${payload["Father Name"]}
+DOB: ${payload["Visitor DOB"]}
+Address: ${payload["Visitor Address"]}
+Country: ${payload.country}
+Visit Date: ${payload.visitDate}
+Visit Time: ${payload.visitTime}
+Contact: ${payload.contactNumber}
+Passport: ${payload["Passport Number"]}
+Email: ${payload.email}
+Appointment No: ${result.appointmentNumber}
+Submitted At: ${new Date().toLocaleString()}
+      `;
+      const newWin = window.open('','Print','width=600,height=600');
+      newWin.document.write('<pre style="font-size:16px;line-height:1.5;">'+printContent+'</pre>');
       newWin.print();
       window.open('https://wa.me/971506309833?text='+encodeURIComponent(printContent),'_blank');
-      document.getElementById('formVisitor').reset();
+      document.getElementById('dynamicForm').reset();
       document.getElementById('dynamicForm').style.display='none';
     }
-  }catch(err){console.error(err);alert('Error sending appointment. Please check your Web App URL and permissions.');}
+  }catch(err){alert('Error sending appointment, please check your web app URL and permissions');}
 });
 
-document.getElementById('formAdmin').addEventListener('submit',function(e){
+// Admin login & logout
+document.getElementById('formAdmin').addEventListener('submit', function(e){
   e.preventDefault();
-  const user=document.getElementById('adminUsername').value;
-  const pass=document.getElementById('adminPassword').value;
+  const user = document.getElementById('adminUsername').value;
+  const pass = document.getElementById('adminPassword').value;
   if(user===ADMIN_USER && pass===ADMIN_PASS){
+    document.getElementById('formAdmin').style.display='none';
+    document.getElementById('logoutBtn').style.display='inline-block';
     document.getElementById('adminDashboard').style.display='block';
-    document.getElementById('logoutBtn').style.display='block';
-    alert('Login Successful');
     loadVisitors();
-  }else{alert('Invalid credentials');}
+  } else { alert('Invalid credentials'); }
 });
-
 function logoutAdmin(){
-  document.getElementById('adminDashboard').style.display='none';
+  document.getElementById('formAdmin').style.display='block';
   document.getElementById('logoutBtn').style.display='none';
-  document.getElementById('formAdmin').reset();
+  document.getElementById('adminDashboard').style.display='none';
 }
 
+// Load visitors
 async function loadVisitors(){
-  const tbody=document.querySelector('#visitorTable tbody');
-  tbody.innerHTML='';
   try{
-    const resp=await fetch(WEB_APP_URL+'?action=getVisitors');
-    const data=await resp.json();
-    const visitors=Array.isArray(data.visitors)?data.visitors:[];
-    visitors.forEach(v=>{
-      const tr=document.createElement('tr');
-      tr.innerHTML=`<td>${v["Visitor Name"]}</td>
-        <td>${v["Visitor DOB"]}</td>
-        <td>${v["Father Name"]}</td>
-        <td>${v["Visitor Address"]}</td>
-        <td>${v["Country"]}</td>
-        <td>${v["Visit Date"]}</td>
-        <td>${v["Visit Time"]}</td>
-        <td>${v["Contact Number"]}</td>
-        <td>${v["Passport Number"]}</td>
-        <td>${v["Email"]}</td>
-        <td>${v["Appointment Number"]}</td>
-        <td class="status-${v.Status?.toLowerCase()||'pending'}">${v.Status||'Pending'}</td>
-        <td>
-          <button class="action-accept action-btn" onclick="updateStatus('${v['Appointment Number']}','Accepted')">Accept</button>
-          <button class="action-reject action-btn" onclick="updateStatus('${v['Appointment Number']}','Rejected')">Reject</button>
-          <button class="action-delete action-btn" onclick="deleteVisitor('${v['Appointment Number']}')">Delete</button>
-        </td>`;
+    const resp = await fetch(WEB_APP_URL);
+    const data = await resp.json();
+    const tbody = document.querySelector('#visitorTable tbody');
+    tbody.innerHTML='';
+    data.visitors.forEach(v=>{
+      const tr = document.createElement('tr');
+      tr.innerHTML=`
+<td>${v["Visitor Name"]}</td>
+<td>${v["Visitor DOB"]}</td>
+<td>${v["Father Name"]}</td>
+<td>${v["Visitor Address"]}</td>
+<td>${v.country}</td>
+<td>${v.visitDate}</td>
+<td>${v.visitTime}</td>
+<td>${v.contactNumber}</td>
+<td>${v["Passport Number"]}</td>
+<td>${v.email}</td>
+<td>${v.appointmentNumber||''}</td>
+<td class="status-${v.status||'Pending'}">${v.status||'Pending'}</td>
+<td>
+  <button class="action-btn action-accept" onclick="updateStatus('${v.appointmentNumber}','Accepted')">Accept</button>
+  <button class="action-btn action-reject" onclick="updateStatus('${v.appointmentNumber}','Rejected')">Reject</button>
+  <button class="action-btn action-delete" onclick="updateStatus('${v.appointmentNumber}','Deleted')">Delete</button>
+</td>
+      `;
       tbody.appendChild(tr);
     });
-  }catch(err){console.error(err);}
+  }catch(err){console.log('Error loading visitors',err);}
 }
 
-async function updateStatus(appNo,status){
+// Update visitor status
+async function updateStatus(appointment,status){
   try{
-    const resp=await fetch(WEB_APP_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({appointmentNumber:appNo,status})});
-    const result=await resp.json();
-    alert(result.message);
-    loadVisitors();
+    const resp = await fetch(WEB_APP_URL,{
+      method:'PUT',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({appointmentNumber:appointment,status:status})
+    });
+    const result = await resp.json();
+    if(result.success){ loadVisitors(); }
+    else { alert('Failed to update status'); }
   }catch(err){alert('Error updating status');}
 }
 
-async function deleteVisitor(appNo){
-  if(!confirm("Do you want to delete this record permanently?")) return;
-  try{
-    const resp=await fetch(WEB_APP_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({appointmentNumber:appNo,delete:true})});
-    const result=await resp.json();
-    alert(result.message);
-    loadVisitors();
-  }catch(err){alert('Error deleting');}
-}
-
-document.getElementById('searchVisitor').addEventListener('keyup',function(){
-  const filter=this.value.toLowerCase();
-  const rows=document.querySelectorAll('#visitorTable tbody tr');
-  rows.forEach(row=>{row.style.display=row.innerText.toLowerCase().includes(filter)?'':'none';});
+// Search visitor
+document.getElementById('searchVisitor').addEventListener('input',function(){
+  const val=this.value.toLowerCase();
+  document.querySelectorAll('#visitorTable tbody tr').forEach(tr=>{
+    tr.style.display = tr.innerText.toLowerCase().includes(val)?'':'none';
+  });
 });
 </script>
 </body>

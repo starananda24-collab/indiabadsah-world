@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BHOLA NATH BASAK</title>
+<title>INDIA BADSAH - BHOLA NATH BASAK</title>
 <style>
 body {
   margin: 0;
@@ -17,7 +17,8 @@ header {
   background: rgba(0,0,0,0.6);
 }
 header img {
-  width: 180px; height: 180px;
+  width: 180px;
+  height: 180px;
   object-fit: cover;
   border-radius: 50%;
   border: 5px solid #fff;
@@ -47,7 +48,6 @@ section {
   border-radius: 12px;
 }
 h2 { color:#ffe66d; }
-
 input, select {
   width: 95%;
   padding: 10px;
@@ -87,7 +87,7 @@ th { background: rgba(0,0,0,0.6); }
   text-align:center;
 }
 #whatsappButton:hover { background:#128C7E; }
-footer { text-align:center; padding:10px; font-size:14px; background:rgba(0,0,0,0.7); width:100%;}
+footer { text-align:center; padding:10px; font-size:14px; background:rgba(0,0,0,0.7); position:fixed; bottom:0; width:100%;}
 footer a { color:#fbd46d; margin:0 8px; text-decoration:none; font-weight:bold;}
 footer a:hover { color:white;}
 </style>
@@ -95,9 +95,8 @@ footer a:hover { color:white;}
 <body>
 
 <header>
-  <img src="myphoto.jpg" alt="India Badsah">
   <img src="myphoto.jpg" alt="BHOLA NATH BASAK">
-  <h1>BHOLA NATH BASAK</h1>
+  <h1>Welcome to My Personal Website - BHOLA NATH BASAK</h1>
   <div class="social-links">
     <a href="https://facebook.com/" target="_blank">Facebook</a>
     <a href="https://linkedin.com/" target="_blank">LinkedIn</a>
@@ -112,99 +111,73 @@ footer a:hover { color:white;}
   <a href="#adminLogin">Admin Login</a>
 </nav>
 
-<!-- ---------- Visitor Form Section ---------- -->
+<!-- Visitor Form Section -->
 <section id="visitorFormSection" style="display:none;">
-<section id="about">
-  <h2>Personal Details</h2>
-  <p><strong>Name:</strong> BHOLA NATH BASAK</p>
-  <p><strong>DOB:</strong> 24-03-1988</p>
-  <p><strong>Place of Birth:</strong> Krishnagar, Nadia, India</p>
-  <p><strong>Nationality:</strong> Indian</p>
-  <p><strong>Religion:</strong> Hindu</p>
-  <p><strong>Culture:</strong> Indian Culture, Languages: Hindi, English</p>
-  <h3>Education</h3>
-  <p>BA in Arts, MBA in Business Administration</p>
-  <h3>Achievements</h3>
-  <p>Best Manager Award 2021, Published Articles in Business Journals</p>
-  <h3>Skills</h3>
-  <p>Leadership, Programming, Communication, Business Management</p>
-  <h3>Contact</h3>
-  <p>Email: starananda24@gmail.com</p>
-  <p>Phone: +971506309833</p>
+  <section id="visitorForm">
+    <h2>Visitor Appointment Form</h2>
+    <form id="formVisitor">
+      <label>Visitor Name</label>
+      <input type="text" id="visitorName" required>
+      <label>Father Name</label>
+      <input type="text" id="fatherName" required>
+      <label>Visitor DOB</label>
+      <input type="date" id="dob" required>
+      <label>Visitor Address</label>
+      <input type="text" id="address" required>
+      <label>Country</label>
+      <select id="country" required>
+        <option value="India (+91)">India (+91)</option>
+        <option value="USA (+1)">USA (+1)</option>
+        <option value="UK (+44)">UK (+44)</option>
+        <option value="Canada (+1)">Canada (+1)</option>
+        <option value="Australia (+61)">Australia (+61)</option>
+        <option value="Germany (+49)">Germany (+49)</option>
+        <option value="France (+33)">France (+33)</option>
+        <option value="UAE (+971)">UAE (+971)</option>
+        <option value="Saudi Arabia (+966)">Saudi Arabia (+966)</option>
+        <option value="Other">Other</option>
+      </select>
+      <label>Visit Date</label>
+      <input type="date" id="visitDate" required>
+      <label>Visit Time</label>
+      <input type="time" id="visitTime" required>
+      <label>Contact Number</label>
+      <input type="tel" id="contactNumber" required>
+      <label>Passport Number</label>
+      <input type="text" id="passport">
+      <label>Email</label>
+      <input type="email" id="email" required>
+      <button type="submit" class="submit-btn">Submit</button>
+      <button type="button" class="cancel-btn" onclick="document.getElementById('formVisitor').reset()">Cancel</button>
+    </form>
+    <a id="whatsappButton" href="#" target="_blank" style="display:none;">Send Submission to WhatsApp</a>
+  </section>
 </section>
 
-<section id="visitorForm">
-<h2>Visitor Appointment Form</h2>
-<form id="formVisitor">
-    <label>Visitor Name</label>
-    <input type="text" id="visitorName" required>
-    <label>Father Name</label>
-    <input type="text" id="fatherName" required>
-    <label>Visitor DOB</label>
-    <input type="date" id="dob" required max="">
-    <label>Visitor Address</label>
-    <input type="text" id="address" required>
-    <label>Country</label>
-    <select id="country" required>
-      <option value="India (+91)">India (+91)</option>
-      <option value="USA (+1)">USA (+1)</option>
-      <option value="UK (+44)">UK (+44)</option>
-      <option value="Canada (+1)">Canada (+1)</option>
-      <option value="Australia (+61)">Australia (+61)</option>
-      <option value="Germany (+49)">Germany (+49)</option>
-      <option value="France (+33)">France (+33)</option>
-      <option value="UAE (+971)">UAE (+971)</option>
-      <option value="Saudi Arabia (+966)">Saudi Arabia (+966)</option>
-      <option value="Other">Other</option>
-    </select>
-    <label>Visit Date</label>
-    <input type="date" id="visitDate" required min="">
-    <label>Visit Time</label>
-    <input type="time" id="visitTime" required>
-    <label>Contact Number</label>
-    <input type="tel" id="contactNumber" required>
-    <label>Passport Number</label>
-    <input type="text" id="passport">
-    <label>Email</label>
-    <input type="email" id="email" required>
-<button type="submit" class="submit-btn">Submit</button>
-<button type="button" class="cancel-btn" onclick="document.getElementById('formVisitor').reset()">Cancel</button>
-</form>
-
-<a id="whatsappButton" href="#" target="_blank" style="display:none;">Send Submission to WhatsApp</a>
-</section>
-</section>
-
-<!-- ---------- Personal Details ---------- -->
+<!-- Personal Details -->
 <section id="personalDetails">
   <h2>About Me</h2>
   <p><strong>Name:</strong> BHOLA NATH BASAK</p>
   <p><strong>Email:</strong> starananda24@gmail.com</p>
   <p><strong>DOB:</strong> 24-03-1988</p>
-  <p><strong>Location:</strong> Nadia, Krishnagar, India</p>
+  <p><strong>Location:</strong> Krishnagar, Nadia, India</p>
   <p><strong>Nationality:</strong> Indian</p>
   <p><strong>Religion:</strong> Hindu</p>
-
   <h3>Education</h3>
-  <p>I completed higher education in India, focusing on computer science and business management. My studies helped me develop analytical thinking, problem-solving skills, and a strong foundation in technology and entrepreneurship, preparing me for diverse professional challenges.</p>
-
+  <p>BA in Arts, MBA in Business Administration, completed in India. Developed analytical and problem-solving skills.</p>
   <h3>Culture</h3>
-  <p>Growing up in Krishnagar, I was influenced by the rich Bengali culture, music, arts, and festivals. I cherish traditions while embracing modernity, blending cultural heritage with contemporary lifestyle and professional approach.</p>
-
+  <p>Growing up in Krishnagar, I embrace rich Bengali culture and traditions.</p>
   <h3>Achievements</h3>
-  <p>Over the years, I have received recognition in programming, project management, and community service. Each milestone motivates me to pursue higher goals, improve skills, and contribute meaningfully to society and professional networks.</p>
-
-  <h3>Hobbies</h3>
-  <p>I enjoy reading, traveling, exploring technology, and creating digital art. These hobbies keep me creative, inspired, and constantly learning new skills that enrich my personal and professional life.</p>
-
-  <h3>Interests</h3>
-  <p>My interests include technology, education, social impact projects, and global cultural exchange. I enjoy learning languages, connecting with people, and exploring innovative solutions to real-world problems.</p>
-
+  <p>Best Manager Award 2021, Published Articles in Business Journals, Recognized in programming and project management.</p>
+  <h3>Skills</h3>
+  <p>Leadership, Programming, Communication, Business Management</p>
+  <h3>Hobbies & Interests</h3>
+  <p>Reading, traveling, exploring technology, creating digital art, social projects.</p>
   <h3>Thought</h3>
-  <p>"Life is a continuous journey of learning, growth, and contribution. Every action should create value for oneself and others, leaving a positive mark on the world."</p>
+  <p>"Life is a continuous journey of learning, growth, and contribution."</p>
 </section>
 
-<!-- ---------- Contact Section ---------- -->
+<!-- Contact Section -->
 <section id="contact">
   <h2>Contact</h2>
   <p>Phone / WhatsApp: +971506309833</p>
@@ -216,12 +189,14 @@ footer a:hover { color:white;}
   </div>
 </section>
 
-<!-- ---------- Admin Login Section ---------- -->
+<!-- Admin Login -->
 <section id="adminLogin">
   <h2>Admin Login</h2>
   <form id="formAdmin">
-    <label>Username</label><input type="text" id="adminUsername" required>
-    <label>Password</label><input type="password" id="adminPassword" required>
+    <label>Username</label>
+    <input type="text" id="adminUsername" required>
+    <label>Password</label>
+    <input type="password" id="adminPassword" required>
     <button type="submit">Login</button>
   </form>
   <div id="adminDashboard" style="display:none;">
@@ -241,16 +216,16 @@ footer a:hover { color:white;}
 
 <footer>
   © 2025 Personal Website BHOLA NATH BASAK
-  <span>Follow Me:</span>
+  <br>Follow Me:
   <a href="https://facebook.com/" target="_blank">Facebook</a>
   <a href="https://linkedin.com/" target="_blank">LinkedIn</a>
   <a href="https://instagram.com/" target="_blank">Instagram</a>
 </footer>
 
 <script>
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbweaZR6v37diLszvrmyIQcBZuuXh4NHQ143pEQVkkn9zn6-3QdGq4OS109VX8uhnUcNtw/exec";
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwKXH6_0V2k7irYzmVRVs_5xpochgK1DQZiwDxhGg9Ek6zWD4PlGHkt2IjhdK1r9MmFBA/exec";
 
-// Set date limits
+// Date limits
 document.getElementById('dob').max = new Date().toISOString().split("T")[0];
 document.getElementById('visitDate').min = new Date().toISOString().split("T")[0];
 
@@ -263,38 +238,33 @@ function showVisitorForm(){
 // Visitor Form Submit
 document.getElementById('formVisitor').addEventListener('submit', function(e){
   e.preventDefault();
-  const appointmentNo = 'APPT-' + Date.now();
-  const now = new Date();
-  const dateTime = now.toLocaleString();
   const visitorData = {
-    appointmentNo,
-    visitorName: document.getElementById('visitorName').value,
-    fatherName: document.getElementById('fatherName').value,
-    dob: document.getElementById('dob').value,
-    address: document.getElementById('address').value,
-    country: document.getElementById('country').value,
-    visitDate: document.getElementById('visitDate').value,
-    visitTime: document.getElementById('visitTime').value,
-    contactNumber: document.getElementById('contactNumber').value,
-    passport: document.getElementById('passport').value,
-    email: document.getElementById('email').value,
-    dateTime
+    "Visitor Name": document.getElementById('visitorName').value,
+    "Father Name": document.getElementById('fatherName').value,
+    "Visitor DOB": document.getElementById('dob').value,
+    "Visitor Address": document.getElementById('address').value,
+    "Country": document.getElementById('country').value,
+    "Visit Date": document.getElementById('visitDate').value,
+    "Visit Time": document.getElementById('visitTime').value,
+    "Contact Number": document.getElementById('contactNumber').value,
+    "Passport Number": document.getElementById('passport').value,
+    "Email": document.getElementById('email').value,
+    "Appointment Number": 'APPT-' + Date.now()
   };
 
   fetch(WEB_APP_URL, {
-    method:'POST',
+    method: 'POST',
     body: JSON.stringify(visitorData),
     headers:{ 'Content-Type':'application/json' }
   })
   .then(res=>res.json())
   .then(res=>{
-    if(res.success){
-      alert(`Appointment sent Successfully. Your Number: ${appointmentNo}`);
+    if(res.status === "success"){
+      alert("Appointment submitted successfully! Appointment No: " + visitorData["Appointment Number"]);
       document.getElementById('formVisitor').reset();
 
-      // WhatsApp link
       const adminNumber = "+971506309833";
-      const message = `New Visitor Submission:\nName: ${visitorData.visitorName}\nAppointment No: ${appointmentNo}\nVisit Date: ${visitorData.visitDate} at ${visitorData.visitTime}\nContact: ${visitorData.contactNumber}`;
+      const message = `New Visitor Submission:\nName: ${visitorData["Visitor Name"]}\nAppointment No: ${visitorData["Appointment Number"]}\nVisit Date: ${visitorData["Visit Date"]} at ${visitorData["Visit Time"]}\nContact: ${visitorData["Contact Number"]}`;
       const waButton = document.getElementById('whatsappButton');
       waButton.href = `https://wa.me/${adminNumber}?text=${encodeURIComponent(message)}`;
       waButton.style.display = "block";
@@ -302,24 +272,22 @@ document.getElementById('formVisitor').addEventListener('submit', function(e){
       // Print receipt
       const printContent = `<html><body>
         <h2>Visitor Appointment Receipt</h2>
-        <p><strong>Appointment No:</strong> ${appointmentNo}</p>
-        <p><strong>Name:</strong> ${visitorData.visitorName}</p>
-        <p><strong>Father:</strong> ${visitorData.fatherName}</p>
-        <p><strong>DOB:</strong> ${visitorData.dob}</p>
-        <p><strong>Address:</strong> ${visitorData.address}</p>
-        <p><strong>Country:</strong> ${visitorData.country}</p>
-        <p><strong>Visit Date & Time:</strong> ${visitorData.visitDate} ${visitorData.visitTime}</p>
-        <p><strong>Contact:</strong> ${visitorData.contactNumber}</p>
-        <p><strong>Email:</strong> ${visitorData.email}</p>
-        <p><strong>Submitted At:</strong> ${dateTime}</p>
+        <p><strong>Appointment No:</strong> ${visitorData["Appointment Number"]}</p>
+        <p><strong>Name:</strong> ${visitorData["Visitor Name"]}</p>
+        <p><strong>Father:</strong> ${visitorData["Father Name"]}</p>
+        <p><strong>DOB:</strong> ${visitorData["Visitor DOB"]}</p>
+        <p><strong>Address:</strong> ${visitorData["Visitor Address"]}</p>
+        <p><strong>Country:</strong> ${visitorData["Country"]}</p>
+        <p><strong>Visit Date & Time:</strong> ${visitorData["Visit Date"]} ${visitorData["Visit Time"]}</p>
+        <p><strong>Contact:</strong> ${visitorData["Contact Number"]}</p>
+        <p><strong>Email:</strong> ${visitorData["Email"]}</p>
       </body></html>`;
       const pw = window.open('','Print','height=600,width=800');
       pw.document.write(printContent);
       pw.document.close();
       pw.print();
-
     } else {
-      alert("Error sending appointment: "+res.message);
+      alert("Error submitting: " + res.message);
     }
   })
   .catch(err=>{

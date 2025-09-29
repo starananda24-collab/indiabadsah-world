@@ -49,7 +49,7 @@ th { background: rgba(0,0,0,0.6);}
   <a href="#adminLogin">Admin Login</a>
 </nav>
 
-<!-- Visitor Form -->
+<!-- ---------- Visitor Form Section ---------- -->
 <section id="visitorFormSection" style="display:none;">
 <h2>Visitor Appointment Form</h2>
 <form id="formVisitor">
@@ -90,7 +90,7 @@ th { background: rgba(0,0,0,0.6);}
 <a id="whatsappButton" href="#" target="_blank" style="display:none;">Send Submission to WhatsApp</a>
 </section>
 
-<!-- Personal Details -->
+<!-- ---------- Personal Details ---------- -->
 <section id="personalDetails">
   <h2>About Me</h2>
   <p><strong>Name:</strong> BHOLA NATH BASAK</p>
@@ -101,20 +101,25 @@ th { background: rgba(0,0,0,0.6);}
   <p><strong>Religion:</strong> Hindu</p>
 
   <h3>Education</h3>
-  <p>I completed higher education in India, focusing on computer science and business management...</p>
+  <p>I completed higher education in India, focusing on computer science and business management. My studies helped me develop analytical thinking, problem-solving skills, and a strong foundation in technology and entrepreneurship, preparing me for diverse professional challenges.</p>
+
   <h3>Culture</h3>
-  <p>Growing up in Krishnagar...</p>
+  <p>Growing up in Krishnagar, I was influenced by the rich Bengali culture, music, arts, and festivals. I cherish traditions while embracing modernity, blending cultural heritage with contemporary lifestyle and professional approach.</p>
+
   <h3>Achievements</h3>
-  <p>Over the years, I have received recognition in programming, project management...</p>
+  <p>Over the years, I have received recognition in programming, project management, and community service. Each milestone motivates me to pursue higher goals, improve skills, and contribute meaningfully to society and professional networks.</p>
+
   <h3>Hobbies</h3>
-  <p>I enjoy reading, traveling, exploring technology...</p>
+  <p>I enjoy reading, traveling, exploring technology, and creating digital art. These hobbies keep me creative, inspired, and constantly learning new skills that enrich my personal and professional life.</p>
+
   <h3>Interests</h3>
-  <p>My interests include technology, education, social impact projects...</p>
+  <p>My interests include technology, education, social impact projects, and global cultural exchange. I enjoy learning languages, connecting with people, and exploring innovative solutions to real-world problems.</p>
+
   <h3>Thought</h3>
-  <p>"Life is a continuous journey of learning, growth, and contribution..."</p>
+  <p>"Life is a continuous journey of learning, growth, and contribution. Every action should create value for oneself and others, leaving a positive mark on the world."</p>
 </section>
 
-<!-- Contact -->
+<!-- ---------- Contact Section ---------- -->
 <section id="contact">
   <h2>Contact</h2>
   <p>Phone / WhatsApp: +971506309833</p>
@@ -126,7 +131,7 @@ th { background: rgba(0,0,0,0.6);}
   </div>
 </section>
 
-<!-- Admin Login -->
+<!-- ---------- Admin Login ---------- -->
 <section id="adminLogin">
   <h2>Admin Login</h2>
   <form id="formAdmin">
@@ -167,6 +172,7 @@ function showVisitorForm(){
   document.getElementById('visitorFormSection').scrollIntoView({ behavior: 'smooth' });
 }
 
+// Visitor Form Submit
 document.getElementById('formVisitor').addEventListener('submit', function(e){
   e.preventDefault();
   const appointmentNo = 'APPT-' + Date.now();
@@ -194,7 +200,7 @@ document.getElementById('formVisitor').addEventListener('submit', function(e){
   .then(res => res.json())
   .then(res => {
     if(res.status === "success"){
-      alert("Appointment submitted successfully!\nAppointment No: " + appointmentNo);
+      alert("Appointment submitted!\nAppointment No: " + appointmentNo);
       document.getElementById('formVisitor').reset();
       const waButton = document.getElementById('whatsappButton');
       const waLink = `https://wa.me/971506309833?text=${encodeURIComponent(

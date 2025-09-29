@@ -49,7 +49,7 @@ th { background: rgba(0,0,0,0.6);}
   <a href="#adminLogin">Admin Login</a>
 </nav>
 
-<!-- ---------- Visitor Form Section ---------- -->
+<!-- Visitor Form -->
 <section id="visitorFormSection" style="display:none;">
 <h2>Visitor Appointment Form</h2>
 <form id="formVisitor">
@@ -90,7 +90,7 @@ th { background: rgba(0,0,0,0.6);}
 <a id="whatsappButton" href="#" target="_blank" style="display:none;">Send Submission to WhatsApp</a>
 </section>
 
-<!-- ---------- Personal Details ---------- -->
+<!-- Personal Details -->
 <section id="personalDetails">
   <h2>About Me</h2>
   <p><strong>Name:</strong> BHOLA NATH BASAK</p>
@@ -101,25 +101,20 @@ th { background: rgba(0,0,0,0.6);}
   <p><strong>Religion:</strong> Hindu</p>
 
   <h3>Education</h3>
-  <p>I completed higher education in India, focusing on computer science and business management. My studies helped me develop analytical thinking, problem-solving skills, and a strong foundation in technology and entrepreneurship, preparing me for diverse professional challenges.</p>
-
+  <p>I completed higher education in India, focusing on computer science and business management...</p>
   <h3>Culture</h3>
-  <p>Growing up in Krishnagar, I was influenced by the rich Bengali culture, music, arts, and festivals. I cherish traditions while embracing modernity, blending cultural heritage with contemporary lifestyle and professional approach.</p>
-
+  <p>Growing up in Krishnagar...</p>
   <h3>Achievements</h3>
-  <p>Over the years, I have received recognition in programming, project management, and community service. Each milestone motivates me to pursue higher goals, improve skills, and contribute meaningfully to society and professional networks.</p>
-
+  <p>Over the years, I have received recognition in programming, project management...</p>
   <h3>Hobbies</h3>
-  <p>I enjoy reading, traveling, exploring technology, and creating digital art. These hobbies keep me creative, inspired, and constantly learning new skills that enrich my personal and professional life.</p>
-
+  <p>I enjoy reading, traveling, exploring technology...</p>
   <h3>Interests</h3>
-  <p>My interests include technology, education, social impact projects, and global cultural exchange. I enjoy learning languages, connecting with people, and exploring innovative solutions to real-world problems.</p>
-
+  <p>My interests include technology, education, social impact projects...</p>
   <h3>Thought</h3>
-  <p>"Life is a continuous journey of learning, growth, and contribution. Every action should create value for oneself and others, leaving a positive mark on the world."</p>
+  <p>"Life is a continuous journey of learning, growth, and contribution..."</p>
 </section>
 
-<!-- ---------- Contact Section ---------- -->
+<!-- Contact -->
 <section id="contact">
   <h2>Contact</h2>
   <p>Phone / WhatsApp: +971506309833</p>
@@ -131,7 +126,7 @@ th { background: rgba(0,0,0,0.6);}
   </div>
 </section>
 
-<!-- ---------- Admin Login ---------- -->
+<!-- Admin Login -->
 <section id="adminLogin">
   <h2>Admin Login</h2>
   <form id="formAdmin">
@@ -162,7 +157,7 @@ th { background: rgba(0,0,0,0.6);}
 </footer>
 
 <script>
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwKXH6_0V2k7irYzmVRVs_5xpochgK1DQZiwDxhGg9Ek6zWD4PlGHkt2IjhdK1r9MmFBA/exec";
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyyxWeahc0NvHY3WSjLVkTw2ywwHCekhZEXTAuzKW9_agqD1hLLWXXD416CTMCN8crjyQ/exec";
 
 document.getElementById('dob').max = new Date().toISOString().split("T")[0];
 document.getElementById('visitDate').min = new Date().toISOString().split("T")[0];
@@ -223,7 +218,6 @@ document.getElementById('formAdmin').addEventListener('submit', function(e){
     alert("Admin login successful");
     document.getElementById('formAdmin').style.display="none";
     document.getElementById('adminDashboard').style.display="block";
-    // Fetch visitors from Apps Script if needed
   } else {
     alert("Access denied");
   }

@@ -177,19 +177,18 @@ document.getElementById('formVisitor').addEventListener('submit', function(e){
   e.preventDefault();
   const appointmentNo = 'APPT-' + Date.now();
   const visitorData = {
-    "Timestamp": new Date().toLocaleString(),
-    "Visitor Name": document.getElementById('visitorName').value,
-    "Father Name": document.getElementById('fatherName').value,
-    "Visitor DOB": document.getElementById('dob').value,
-    "Visitor Address": document.getElementById('address').value,
-    "Country": document.getElementById('country').value,
-    "Visit Date": document.getElementById('visitDate').value,
-    "Visit Time": document.getElementById('visitTime').value,
-    "Contact Number": document.getElementById('contactNumber').value,
-    "Passport Number": document.getElementById('passport').value,
-    "Email": document.getElementById('email').value,
-    "Appointment Number": appointmentNo,
-    "Status": "Pending"
+    "visitorName": document.getElementById('visitorName').value,
+    "fatherName": document.getElementById('fatherName').value,
+    "dob": document.getElementById('dob').value,
+    "address": document.getElementById('address').value,
+    "country": document.getElementById('country').value,
+    "visitDate": document.getElementById('visitDate').value,
+    "visitTime": document.getElementById('visitTime').value,
+    "contactNumber": document.getElementById('contactNumber').value,
+    "passport": document.getElementById('passport').value,
+    "email": document.getElementById('email').value,
+    "appointmentNumber": appointmentNo,
+    "status": "Pending"
   };
 
   fetch(WEB_APP_URL, {
@@ -199,12 +198,12 @@ document.getElementById('formVisitor').addEventListener('submit', function(e){
   })
   .then(res => res.json())
   .then(res => {
-    if(res.status === "success"){
+    if(res.success){
       alert("Appointment submitted!\nAppointment No: " + appointmentNo);
       document.getElementById('formVisitor').reset();
       const waButton = document.getElementById('whatsappButton');
       const waLink = `https://wa.me/971506309833?text=${encodeURIComponent(
-        `New Visitor Appointment:\nAppointment No: ${appointmentNo}\nName: ${visitorData["Visitor Name"]}\nContact: ${visitorData["Contact Number"]}\nVisit Date: ${visitorData["Visit Date"]} ${visitorData["Visit Time"]}`
+        `New Visitor Appointment:\nAppointment No: ${appointmentNo}\nName: ${visitorData.visitorName}\nContact: ${visitorData.contactNumber}\nVisit Date: ${visitorData.visitDate} ${visitorData.visitTime}`
       )}`;
       waButton.href = waLink;
       waButton.style.display = "block";

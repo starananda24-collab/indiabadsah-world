@@ -1,233 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BHOLA NATH BASAK</title>
-<style>
-body { margin:0; font-family:Arial,sans-serif; background:linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d); color:white;}
-header { text-align:center; padding:20px; background:rgba(0,0,0,0.6);}
-header img { width:180px; height:180px; object-fit:cover; border-radius:50%; border:5px solid #fff;}
-nav { display:flex; justify-content:center; background:rgba(0,0,0,0.8); flex-wrap:wrap;}
-nav a { color:white; text-decoration:none; padding:15px 20px;}
-nav a:hover { background:#fbd46d; color:black; border-radius:5px;}
-section { padding:20px; max-width:900px; margin:20px auto; background:rgba(255,255,255,0.1); border-radius:12px;}
-h2 { color:#ffe66d;}
-input, select { width:95%; padding:10px; margin:8px 0; border-radius:5px; border:none;}
-button { padding:10px 20px; margin:10px 5px; border:none; border-radius:5px; cursor:pointer;}
-button.submit-btn { background:#4CAF50; color:white;}
-button.cancel-btn { background:#f44336; color:white;}
-footer { text-align:center; padding:10px; font-size:14px; background:rgba(0,0,0,0.7); position:relative; width:100%;}
-footer a { color:#fbd46d; margin:0 8px; text-decoration:none; font-weight:bold;}
-footer a:hover { color:white;}
-table { width:100%; border-collapse: collapse; margin-top:15px;}
-th,td { border:1px solid #fff; padding:8px; text-align:left;}
-th { background: rgba(0,0,0,0.6);}
-.status-pending { background:pink;}
-.status-accepted { background:green; color:white;}
-.status-rejected { background:red; color:white;}
-#whatsappButton { display:block; padding:10px 15px; margin-top:10px; background:#25D366; color:white; text-decoration:none; border-radius:5px; text-align:center;}
-#whatsappButton:hover { background:#128C7E; }
-</style>
+  <meta charset="UTF-8">
+  <title>Visitor Appointment</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f5f7fa; margin: 0; padding: 0; }
+    header { background: linear-gradient(90deg,#0062E6,#33AEFF); padding: 20px; color: white; text-align: center; }
+    main { max-width: 800px; margin: 20px auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    h2 { color: #0062E6; }
+    label { display: block; margin-top: 10px; font-weight: bold; }
+    input, select { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; }
+    button { margin-top: 15px; padding: 10px 20px; border: none; border-radius: 5px; background: #0062E6; color: white; cursor: pointer; }
+    button:hover { background: #004bb5; }
+    #whatsappButton { display: none; margin-top: 15px; background: #25D366; }
+    #adminDashboard { display: none; margin-top: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+    table, th, td { border: 1px solid #ccc; }
+    th, td { padding: 8px; text-align: left; }
+  </style>
 </head>
 <body>
+  <header>
+    <h1>Visitor Appointment System</h1>
+  </header>
 
-<header>
-  <img src="myphoto.jpg" alt="BHOLA NATH BASAK">
-  <h1>BHOLA NATH BASAK</h1>
-  <div class="social-links">
-    <a href="https://facebook.com/" target="_blank">Facebook</a>
-    <a href="https://linkedin.com/" target="_blank">LinkedIn</a>
-    <a href="https://instagram.com/" target="_blank">Instagram</a>
-  </div>
-</header>
+  <main>
+    <!-- Visitor Form -->
+    <section>
+      <h2>Book an Appointment</h2>
+      <form id="formVisitor">
+        <label>Visitor Name</label>
+        <input type="text" id="visitorName" required>
 
-<nav>
-  <a onclick="showVisitorForm()">Visitor Form</a>
-  <a href="#personalDetails">About Me</a>
-  <a href="#contact">Contact</a>
-  <a href="#adminLogin">Admin Login</a>
-</nav>
+        <label>Visitor DOB</label>
+        <input type="date" id="visitorDOB" required>
 
-<!-- ---------- Visitor Form Section ---------- -->
-<section id="visitorFormSection" style="display:none;">
-<h2>Visitor Appointment Form</h2>
-<form id="formVisitor">
-    <label>Visitor Name</label>
-    <input type="text" id="visitorName" required>
-    <label>Father Name</label>
-    <input type="text" id="fatherName" required>
-    <label>Visitor DOB</label>
-    <input type="date" id="dob" required>
-    <label>Visitor Address</label>
-    <input type="text" id="address" required>
-    <label>Country</label>
-    <select id="country" required>
-      <option value="India (+91)">India (+91)</option>
-      <option value="USA (+1)">USA (+1)</option>
-      <option value="UK (+44)">UK (+44)</option>
-      <option value="Canada (+1)">Canada (+1)</option>
-      <option value="Australia (+61)">Australia (+61)</option>
-      <option value="Germany (+49)">Germany (+49)</option>
-      <option value="France (+33)">France (+33)</option>
-      <option value="UAE (+971)">UAE (+971)</option>
-      <option value="Saudi Arabia (+966)">Saudi Arabia (+966)</option>
-      <option value="Other">Other</option>
-    </select>
-    <label>Visit Date</label>
-    <input type="date" id="visitDate" required>
-    <label>Visit Time</label>
-    <input type="time" id="visitTime" required>
-    <label>Contact Number</label>
-    <input type="tel" id="contactNumber" required>
-    <label>Passport Number</label>
-    <input type="text" id="passport">
-    <label>Email</label>
-    <input type="email" id="email" required>
-    <button type="submit" class="submit-btn">Submit</button>
-    <button type="button" class="cancel-btn" onclick="document.getElementById('formVisitor').reset()">Cancel</button>
-</form>
-<a id="whatsappButton" href="#" target="_blank" style="display:none;">Send Submission to WhatsApp</a>
-</section>
+        <label>Father Name</label>
+        <input type="text" id="fatherName" required>
 
-<!-- ---------- Personal Details ---------- -->
-<section id="personalDetails">
-  <h2>About Me</h2>
-  <p><strong>Name:</strong> BHOLA NATH BASAK</p>
-  <p><strong>Email:</strong> starananda24@gmail.com</p>
-  <p><strong>DOB:</strong> 24-03-1988</p>
-  <p><strong>Location:</strong> Nadia, Krishnagar, India</p>
-  <p><strong>Nationality:</strong> Indian</p>
-  <p><strong>Religion:</strong> Hindu</p>
+        <label>Visitor Address</label>
+        <input type="text" id="visitorAddress" required>
 
-  <h3>Education</h3>
-  <p>I completed higher education in India, focusing on computer science and business management. My studies helped me develop analytical thinking, problem-solving skills, and a strong foundation in technology and entrepreneurship, preparing me for diverse professional challenges.</p>
+        <label>Country</label>
+        <input type="text" id="country" required>
 
-  <h3>Culture</h3>
-  <p>Growing up in Krishnagar, I was influenced by the rich Bengali culture, music, arts, and festivals. I cherish traditions while embracing modernity, blending cultural heritage with contemporary lifestyle and professional approach.</p>
+        <label>Visit Date</label>
+        <input type="date" id="visitDate" required>
 
-  <h3>Achievements</h3>
-  <p>Over the years, I have received recognition in programming, project management, and community service. Each milestone motivates me to pursue higher goals, improve skills, and contribute meaningfully to society and professional networks.</p>
+        <label>Visit Time</label>
+        <input type="time" id="visitTime" required>
 
-  <h3>Hobbies</h3>
-  <p>I enjoy reading, traveling, exploring technology, and creating digital art. These hobbies keep me creative, inspired, and constantly learning new skills that enrich my personal and professional life.</p>
+        <label>Contact Number</label>
+        <input type="text" id="contactNumber" required>
 
-  <h3>Interests</h3>
-  <p>My interests include technology, education, social impact projects, and global cultural exchange. I enjoy learning languages, connecting with people, and exploring innovative solutions to real-world problems.</p>
+        <label>Passport Number</label>
+        <input type="text" id="passportNumber" required>
 
-  <h3>Thought</h3>
-  <p>"Life is a continuous journey of learning, growth, and contribution. Every action should create value for oneself and others, leaving a positive mark on the world."</p>
-</section>
+        <label>Email</label>
+        <input type="email" id="email" required>
 
-<!-- ---------- Contact Section ---------- -->
-<section id="contact">
-  <h2>Contact</h2>
-  <p>Phone / WhatsApp: +971506309833</p>
-  <p>Email: starananda24@gmail.com</p>
-  <div class="social-links">
-    <a href="https://facebook.com/" target="_blank">Facebook</a>
-    <a href="https://linkedin.com/" target="_blank">LinkedIn</a>
-    <a href="https://instagram.com/" target="_blank">Instagram</a>
-  </div>
-</section>
+        <button type="submit">Submit Appointment</button>
+      </form>
 
-<!-- ---------- Admin Login ---------- -->
-<section id="adminLogin">
-  <h2>Admin Login</h2>
-  <form id="formAdmin">
-    <label>Username</label><input type="text" id="adminUsername" required>
-    <label>Password</label><input type="password" id="adminPassword" required>
-    <button type="submit">Login</button>
-  </form>
-  <div id="adminDashboard" style="display:none;">
-    <h2>Visitor Details</h2>
-    <table id="visitorTable">
-      <thead>
-        <tr>
-          <th>Appointment</th><th>Name</th><th>Father</th><th>DOB</th>
-          <th>Address</th><th>Country</th><th>Visit Date</th><th>Visit Time</th>
-          <th>Contact</th><th>Passport</th><th>Email</th><th>Status</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </div>
-</section>
+      <a id="whatsappButton" target="_blank">Send via WhatsApp</a>
+    </section>
 
-<footer>
-  © 2025 Personal Website BHOLA NATH BASAK | Follow Me:
-  <a href="https://facebook.com/" target="_blank">Facebook</a>
-  <a href="https://linkedin.com/" target="_blank">LinkedIn</a>
-  <a href="https://instagram.com/" target="_blank">Instagram</a>
-</footer>
+    <!-- Admin Login -->
+    <section>
+      <h2>Admin Login</h2>
+      <form id="formAdmin">
+        <label>Username</label>
+        <input type="text" id="adminUsername" required>
 
-<script>
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzrfjaonySDdP_7sAaXF8f6jz7de5gliHu7xwZWXgffRMZflcA3qz4EcWBWXV0y_n-bGg/exec";
+        <label>Password</label>
+        <input type="password" id="adminPassword" required>
 
-document.getElementById('dob').max = new Date().toISOString().split("T")[0];
-document.getElementById('visitDate').min = new Date().toISOString().split("T")[0];
+        <button type="submit">Login</button>
+      </form>
+    </section>
 
-function showVisitorForm(){
-  document.getElementById('visitorFormSection').style.display = 'block';
-  document.getElementById('visitorFormSection').scrollIntoView({ behavior: 'smooth' });
-}
+    <!-- Admin Dashboard -->
+    <section id="adminDashboard">
+      <h2>Visitor Details</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Appointment No</th>
+            <th>Visitor Name</th>
+            <th>DOB</th>
+            <th>Father Name</th>
+            <th>Address</th>
+            <th>Country</th>
+            <th>Visit Date</th>
+            <th>Visit Time</th>
+            <th>Contact</th>
+            <th>Passport</th>
+            <th>Email</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="visitorTableBody"></tbody>
+      </table>
+    </section>
+  </main>
 
-// Visitor Form Submit
-document.getElementById('formVisitor').addEventListener('submit', function(e){
-  e.preventDefault();
-  const appointmentNo = 'APPT-' + Date.now();
-  const visitorData = {
-    "visitorName": document.getElementById('visitorName').value,
-    "fatherName": document.getElementById('fatherName').value,
-    "dob": document.getElementById('dob').value,
-    "address": document.getElementById('address').value,
-    "country": document.getElementById('country').value,
-    "visitDate": document.getElementById('visitDate').value,
-    "visitTime": document.getElementById('visitTime').value,
-    "contactNumber": document.getElementById('contactNumber').value,
-    "passport": document.getElementById('passport').value,
-    "email": document.getElementById('email').value,
-    "appointmentNumber": appointmentNo,
-    "status": "Pending"
-  };
+  <script>
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzrfjaonySDdP_7sAaXF8f6jz7de5gliHu7xwZWXgffRMZflcA3qz4EcWBWXV0y_n-bGg/exec";
 
-  fetch(WEB_APP_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(visitorData)
-  })
-  .then(res => res.json())
-  .then(res => {
-    if(res.success){
-      alert("Appointment submitted!\nAppointment No: " + appointmentNo);
-      document.getElementById('formVisitor').reset();
-      const waButton = document.getElementById('whatsappButton');
-      const waLink = `https://wa.me/971506309833?text=${encodeURIComponent(
-        `New Visitor Appointment:\nAppointment No: ${appointmentNo}\nName: ${visitorData.visitorName}\nContact: ${visitorData.contactNumber}\nVisit Date: ${visitorData.visitDate} ${visitorData.visitTime}`
-      )}`;
-      waButton.href = waLink;
-      waButton.style.display = "block";
-    } else {
-      alert("Error: " + res.message);
+    // Submit Visitor Form
+    document.getElementById("formVisitor").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const appointmentNo = "APPT-" + Date.now();
+      const data = {
+        visitorName: document.getElementById("visitorName").value,
+        visitorDOB: document.getElementById("visitorDOB").value,
+        fatherName: document.getElementById("fatherName").value,
+        visitorAddress: document.getElementById("visitorAddress").value,
+        country: document.getElementById("country").value,
+        visitDate: document.getElementById("visitDate").value,
+        visitTime: document.getElementById("visitTime").value,
+        contactNumber: document.getElementById("contactNumber").value,
+        passportNumber: document.getElementById("passportNumber").value,
+        email: document.getElementById("email").value,
+        appointmentNo: appointmentNo,
+        status: "Pending"
+      };
+
+      fetch(WEB_APP_URL, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" }
+      })
+      .then(res => res.json())
+      .then(res => {
+        if (res.success) {
+          alert("Appointment submitted successfully!\nYour Appointment No: " + appointmentNo);
+          document.getElementById("formVisitor").reset();
+          const waLink = `https://wa.me/971506309833?text=${encodeURIComponent(
+            `New Visitor Appointment:\nAppointment No: ${appointmentNo}\nName: ${data.visitorName}\nContact: ${data.contactNumber}\nVisit Date: ${data.visitDate} ${data.visitTime}`
+          )}`;
+          const waBtn = document.getElementById("whatsappButton");
+          waBtn.href = waLink;
+          waBtn.style.display = "inline-block";
+        } else {
+          alert("Error: " + res.message);
+        }
+      })
+      .catch(err => alert("Failed to fetch: " + err.message));
+    });
+
+    // Admin Login
+    document.getElementById("formAdmin").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const user = document.getElementById("adminUsername").value;
+      const pass = document.getElementById("adminPassword").value;
+      if (user === "admin1" && pass === "Password123") {
+        alert("Login Successful");
+        document.getElementById("formAdmin").style.display = "none";
+        document.getElementById("adminDashboard").style.display = "block";
+        loadVisitors();
+      } else {
+        alert("Access Denied");
+      }
+    });
+
+    // Load Visitors in Admin Dashboard
+    function loadVisitors() {
+      fetch(WEB_APP_URL)
+        .then(res => res.json())
+        .then(data => {
+          const tbody = document.getElementById("visitorTableBody");
+          tbody.innerHTML = "";
+          data.forEach(row => {
+            const tr = document.createElement("tr");
+            row.forEach(cell => {
+              const td = document.createElement("td");
+              td.textContent = cell;
+              tr.appendChild(td);
+            });
+            tbody.appendChild(tr);
+          });
+        });
     }
-  })
-  .catch(err => alert("Failed to fetch: " + err.message));
-});
-
-// Admin Login
-document.getElementById('formAdmin').addEventListener('submit', function(e){
-  e.preventDefault();
-  const username = document.getElementById('adminUsername').value;
-  const password = document.getElementById('adminPassword').value;
-  if(username==="admin1" && password==="Password123"){
-    alert("Admin login successful");
-    document.getElementById('formAdmin').style.display="none";
-    document.getElementById('adminDashboard').style.display="block";
-  } else {
-    alert("Access denied");
-  }
-});
-</script>
-
+  </script>
 </body>
 </html>

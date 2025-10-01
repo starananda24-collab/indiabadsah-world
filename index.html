@@ -9,7 +9,7 @@ body { margin:0; font-family:Arial,sans-serif; background:linear-gradient(to rig
 header { text-align:center; padding:20px; background:rgba(0,0,0,0.6);}
 header img { width:180px; height:180px; object-fit:cover; border-radius:50%; border:5px solid #fff;}
 nav { display:flex; justify-content:center; background:rgba(0,0,0,0.8); flex-wrap:wrap;}
-nav a { color:white; text-decoration:none; padding:15px 20px; cursor:pointer;}
+nav a { color:white; text-decoration:none; padding:15px 20px;}
 nav a:hover { background:#fbd46d; color:black; border-radius:5px;}
 section { padding:20px; max-width:900px; margin:20px auto; background:rgba(255,255,255,0.1); border-radius:12px;}
 h2 { color:#ffe66d;}
@@ -55,16 +55,12 @@ th { background: rgba(0,0,0,0.6);}
 <form id="formVisitor">
     <label>Visitor Name</label>
     <input type="text" id="visitorName" required>
-    
     <label>Father's Name</label>
     <input type="text" id="fatherName" required>
-    
     <label>Visitor DOB</label>
     <input type="date" id="dob" required>
-    
     <label>Address</label>
     <input type="text" id="address" required>
-    
     <label>Country</label>
     <select id="country" required>
       <option value="India (+91)">India (+91)</option>
@@ -78,25 +74,18 @@ th { background: rgba(0,0,0,0.6);}
       <option value="Saudi Arabia (+966)">Saudi Arabia (+966)</option>
       <option value="Other">Other</option>
     </select>
-    
     <label>Visit Date</label>
     <input type="date" id="visitDate" required>
-    
     <label>Visit Time</label>
     <input type="time" id="visitTime" required>
-    
     <label>Virtual Visit Purpose</label>
     <input type="text" id="purpose" required>
-    
     <label>Contact Number</label>
     <input type="tel" id="contactNumber" required>
-    
     <label>Passport Number (If Available)</label>
     <input type="text" id="passport">
-    
     <label>Email ID</label>
     <input type="email" id="email" required>
-    
     <button type="submit" class="submit-btn">Submit</button>
     <button type="button" class="cancel-btn" onclick="document.getElementById('formVisitor').reset()">Cancel</button>
 </form>
@@ -112,7 +101,7 @@ th { background: rgba(0,0,0,0.6);}
   <p><strong>Location:</strong> Nadia, Krishnagar, India</p>
   <p><strong>Nationality:</strong> Indian</p>
   <p><strong>Religion:</strong> Hindu</p>
-  <!-- Additional details -->
+  <!-- Education, Culture, Achievements, Hobbies, Interests, Thought sections remain unchanged -->
 </section>
 
 <!-- ---------- Contact Section ---------- -->
@@ -120,6 +109,11 @@ th { background: rgba(0,0,0,0.6);}
   <h2>Contact</h2>
   <p>Phone / WhatsApp: +971506309833</p>
   <p>Email: starananda24@gmail.com</p>
+  <div class="social-links">
+    <a href="https://facebook.com/" target="_blank">Facebook</a>
+    <a href="https://linkedin.com/" target="_blank">LinkedIn</a>
+    <a href="https://instagram.com/" target="_blank">Instagram</a>
+  </div>
 </section>
 
 <!-- ---------- Admin Login ---------- -->
@@ -135,10 +129,9 @@ th { background: rgba(0,0,0,0.6);}
     <table id="visitorTable">
       <thead>
         <tr>
-          <th>Timestamp</th><th>Visitor Name</th><th>Visitor DOB</th><th>Father's Name</th>
+          <th>Appointment</th><th>Name</th><th>Father</th><th>DOB</th>
           <th>Address</th><th>Country</th><th>Visit Date</th><th>Visit Time</th>
-          <th>Virtual Visit Purpose</th><th>Contact Number</th><th>Passport Number (If Available)</th><th>Email ID</th>
-          <th>Score</th><th>Appointment Number</th><th>Status</th>
+          <th>Contact</th><th>Passport</th><th>Email</th><th>Status</th>
         </tr>
       </thead>
       <tbody></tbody>
@@ -147,20 +140,25 @@ th { background: rgba(0,0,0,0.6);}
 </section>
 
 <footer>
-  © 2025 Personal Website BHOLA NATH BASAK
+  © 2025 Personal Website BHOLA NATH BASAK | Follow Me:
+  <a href="https://facebook.com/" target="_blank">Facebook</a>
+  <a href="https://linkedin.com/" target="_blank">LinkedIn</a>
+  <a href="https://instagram.com/" target="_blank">Instagram</a>
 </footer>
 
 <script>
+// Set max/min dates for DOB and Visit Date
 document.getElementById('dob').max = new Date().toISOString().split("T")[0];
 document.getElementById('visitDate').min = new Date().toISOString().split("T")[0];
 
-function showVisitorForm(){
+// Show Visitor Form
+function showVisitorForm() {
   document.getElementById('visitorFormSection').style.display = 'block';
   document.getElementById('visitorFormSection').scrollIntoView({ behavior: 'smooth' });
 }
 
-// Visitor Form Submit
-document.getElementById('formVisitor').addEventListener('submit', function(e){
+// Visitor Form Submit with WhatsApp redirect
+document.getElementById('formVisitor').addEventListener('submit', function(e) {
   e.preventDefault();
   const appointmentNo = 'APPT-' + Date.now();
   const visitorData = {
@@ -177,31 +175,43 @@ document.getElementById('formVisitor').addEventListener('submit', function(e){
     "Email ID": document.getElementById('email').value
   };
 
-  google.script.run.withSuccessHandler(function(res){
-    if(res.success){
-      alert("Appointment submitted!\nAppointment No: " + appointmentNo);
+  google.script.run.withSuccessHandler(function(res) {
+    if(res.success) {
+      alert(
+        "Visitor submitted successfully!\n" +
+        "Appointment Number: " + appointmentNo + "\n" +
+        "Name: " + visitorData["Visitor Name"] + "\n" +
+        "Visit Date: " + visitorData["Visit Date"] + " " + visitorData["Visit Time"]
+      );
+
+      // Reset form
       document.getElementById('formVisitor').reset();
-      const waButton = document.getElementById('whatsappButton');
+
+      // WhatsApp redirect for admin
       const waLink = `https://wa.me/971506309833?text=${encodeURIComponent(
-        `New Visitor Appointment:\nAppointment No: ${appointmentNo}\nName: ${visitorData["Visitor Name"]}\nContact: ${visitorData["Contact Number"]}\nVisit Date: ${visitorData["Visit Date"]} ${visitorData["Visit Time"]}`
+        `New Visitor Appointment:\nAppointment Number: ${appointmentNo}\n` +
+        `Visitor Name: ${visitorData["Visitor Name"]}\nFather's Name: ${visitorData["Father's Name"]}\n` +
+        `DOB: ${visitorData["Visitor DOB"]}\nAddress: ${visitorData["Address"]}\nCountry: ${visitorData["Country"]}\n` +
+        `Visit Date & Time: ${visitorData["Visit Date"]} ${visitorData["Visit Time"]}\n` +
+        `Virtual Visit Purpose: ${visitorData["Virtual Visit Purpose"]}\nContact: ${visitorData["Contact Number"]}\n` +
+        `Passport: ${visitorData["Passport Number (If Available)"]}\nEmail: ${visitorData["Email ID"]}`
       )}`;
-      waButton.href = waLink;
-      waButton.style.display = "block";
+      window.open(waLink, "_blank");
     } else {
-      alert("Error: " + res.message);
+      alert("Error submitting: " + res.message);
     }
   }).submitVisitor(visitorData);
 });
 
 // Admin Login
-document.getElementById('formAdmin').addEventListener('submit', function(e){
+document.getElementById('formAdmin').addEventListener('submit', function(e) {
   e.preventDefault();
   const username = document.getElementById('adminUsername').value;
   const password = document.getElementById('adminPassword').value;
-  if(username==="admin1" && password==="Password123"){
+  if(username === "admin1" && password === "Password123") {
     alert("Admin login successful");
-    document.getElementById('formAdmin').style.display="none";
-    document.getElementById('adminDashboard').style.display="block";
+    document.getElementById('formAdmin').style.display = "none";
+    document.getElementById('adminDashboard').style.display = "block";
   } else {
     alert("Access denied");
   }

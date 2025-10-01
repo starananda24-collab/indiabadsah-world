@@ -1,79 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Visitor Form</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INDIA BADSAH</title>
 <style>
-body { font-family: Arial, sans-serif; background: #f0f0f0; margin: 0; padding: 20px;}
-section { background: white; padding: 20px; border-radius: 8px; max-width: 600px; margin:auto;}
-input, select { width: 100%; padding: 10px; margin: 8px 0; border-radius: 5px; border:1px solid #ccc;}
-button { padding: 10px 20px; border:none; border-radius:5px; background: #28a745; color:white; cursor:pointer;}
-button:hover { background: #218838; }
-#whatsappButton { display:block; padding:10px 15px; margin-top:10px; background:#25D366; color:white; text-decoration:none; border-radius:5px; text-align:center;}
-#whatsappButton:hover { background:#128C7E; }
+body {
+margin: 0;
+font-family: Arial, sans-serif;
+color: white;
+background-color: #121212;
+}
+header, nav, section, footer { padding: 10px; margin: 0 auto; }
+header img { width: 100px; border-radius: 50%; }
+nav a { color: white; margin: 0 10px; text-decoration: none; }
+nav a:hover { color: #fbd46d; }
+.profile-panel {
+  background: #0d47a1;
+  color: white;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  line-height: 1.5;
+}
+.profile-panel h3 {
+  background: #ffffff;
+  color: #0d47a1;
+  padding: 8px;
+  border-radius: 5px;
+}
+#visitorFormPanel { display: none; background: linear-gradient(145deg, #1a2a6c, #fbd46d); padding: 20px; margin-top: 20px; border-radius: 15px; box-shadow: 0px 0px 25px rgba(0,0,0,0.6);}
+#adminDashboard { display: none; }
 </style>
 </head>
-<body>
+<body id="home">
 
-<section id="visitorFormSection">
+<header>
+<img src="myphoto.jpg" alt="India Badsah">
+<h1>BHOLA NATH BASAK</h1>
+<div class="social-links">
+<a href="https://facebook.com/" target="_blank">Facebook</a>
+<a href="https://linkedin.com/" target="_blank">LinkedIn</a>
+<a href="https://instagram.com/" target="_blank">Instagram</a>
+</div>
+</header>
+
+<nav>
+<a id="linkVisitorForm">Visitor Form</a>
+<a href="#profile">Profile</a>
+<a href="#contact">Contact</a>
+</nav>
+
+<!-- ====== Visitor Form Section ====== -->
+<section id="visitorFormPanel">
 <h2>Visitor Appointment Form</h2>
 <form id="formVisitor">
-    <label>Visitor Name</label>
-    <input type="text" id="visitorName" required>
-    
-    <label>Visitor DOB</label>
-    <input type="date" id="dob" required>
-    
-    <label>Father's Name</label>
-    <input type="text" id="fatherName" required>
-    
-    <label>Address</label>
-    <input type="text" id="address" required>
-    
-    <label>Country</label>
-    <select id="country" required>
-      <option>India (+91)</option>
-      <option>USA (+1)</option>
-      <option>UK (+44)</option>
-      <option>UAE (+971)</option>
-      <option>Other</option>
-    </select>
-    
-    <label>Visit Date</label>
-    <input type="date" id="visitDate" required>
-    
-    <label>Visit Time</label>
-    <input type="time" id="visitTime" required>
-    
-    <label>Virtual Visit Purpose</label>
-    <input type="text" id="purpose" required>
-    
-    <label>Contact Number</label>
-    <input type="tel" id="contactNumber" required>
-    
-    <label>Passport Number (If Available)</label>
-    <input type="text" id="passport">
-    
-    <label>Email ID</label>
-    <input type="email" id="email" required>
-    
-    <button type="submit">Submit</button>
+<label>Visitor Name</label>
+<input type="text" id="visitorName" required>
+<label>Father's Name</label>
+<input type="text" id="fatherName" required>
+<label>Visitor DOB</label>
+<input type="date" id="dob" required>
+<label>Address</label>
+<input type="text" id="address" required>
+<label>Country</label>
+<select id="country">
+<option value="India (+91)">India (+91)</option>
+<option value="UAE (+971)">UAE (+971)</option>
+<option value="USA (+1)">USA (+1)</option>
+</select>
+<label>Visit Date</label>
+<input type="date" id="visitDate" required>
+<label>Visit Time</label>
+<input type="time" id="visitTime" required>
+<label>Virtual Visit Purpose</label>
+<input type="text" id="purpose" required>
+<label>Contact Number</label>
+<input type="text" id="contactNumber" required>
+<label>Passport Number (If Available)</label>
+<input type="text" id="passport">
+<label>Email ID</label>
+<input type="email" id="email" required>
+<button type="submit" class="submit-btn">Submit</button>
+<button type="button" class="cancel-btn" onclick="hideVisitorForm()">Cancel</button>
 </form>
-<a id="whatsappButton" href="#" target="_blank" style="display:none;">Send Submission to WhatsApp</a>
 </section>
 
+<!-- ====== Profile Section ====== -->
+<section id="profile">
+<h2>Admin Profile</h2>
+
+<div class="profile-panel">
+<h3>Education</h3>
+<p>The admin has pursued a diverse and comprehensive education, combining formal academic study with practical, hands-on experience. From early schooling to advanced higher education, they have consistently aimed to develop critical thinking, analytical abilities, and problem-solving skills. This educational journey includes participation in specialized courses, workshops, and training programs that enhanced both technical and interpersonal capabilities. The admin values lifelong learning and continuously seeks opportunities to expand knowledge, adapt to new technologies, and apply insights in real-world contexts. Their educational foundation supports a strong intellectual framework that informs decision-making, strategic planning, and leadership roles. Beyond academics, the admin emphasizes practical application of learning, ensuring knowledge is translated into meaningful contributions in both professional and community settings. This combination of theory and practice reflects a disciplined, curious, and adaptive approach, making the admin well-prepared to navigate challenges, mentor others, and contribute positively to any initiative or organization they are part of.</p>
+</div>
+
+<div class="profile-panel">
+<h3>Culture</h3>
+<p>The admin is deeply rooted in their cultural heritage and embraces the traditions and values that shape identity and community. Growing up in a rich cultural environment, they actively engage with festivals, arts, music, and literature, appreciating the diversity and depth of cultural expression. This engagement fosters respect, empathy, and understanding of different perspectives, creating a well-rounded worldview. The admin believes that cultural knowledge is essential for personal growth and social awareness, guiding behavior in both professional and personal settings. By participating in community events and supporting cultural initiatives, they demonstrate leadership and social responsibility. Their cultural orientation also enhances creativity, communication skills, and adaptability, allowing them to navigate cross-cultural situations effectively. The admin balances modernity with tradition, integrating contemporary insights with timeless values. Overall, this cultural foundation empowers them to contribute meaningfully to society while preserving and celebrating heritage, encouraging inclusivity, and inspiring others to appreciate diverse perspectives and traditions.</p>
+</div>
+
+<div class="profile-panel">
+<h3>Thought</h3>
+<p>The admin’s philosophy is centered on integrity, perseverance, and vision. They believe that every action has consequences and that thoughtful decision-making is essential to personal and professional success. Their approach emphasizes continuous self-improvement, ethical conduct, and responsible leadership. The admin values curiosity and critical thinking, constantly analyzing situations to derive meaningful insights and make informed choices. Resilience in the face of challenges is a cornerstone of their thought process, viewing obstacles as opportunities for growth and learning. They also prioritize knowledge-sharing, mentorship, and collaboration, understanding that collective intelligence drives sustainable progress. Mindfulness, reflection, and adaptability guide their daily life and professional endeavors, fostering balance and clarity. Their thought process integrates logic with empathy, ensuring that decisions are both rational and human-centered. Overall, the admin’s mindset reflects a harmonious blend of strategic vision, ethical commitment, and forward-thinking perspective, enabling them to lead effectively, inspire confidence, and positively influence their environment.</p>
+</div>
+
+<div class="profile-panel">
+<h3>Interests</h3>
+<p>The admin has a wide range of interests that reflect curiosity, creativity, and engagement with the world. They are deeply invested in education, social development, and technological innovation, constantly seeking new knowledge and solutions. Exploring different fields enables the admin to gain a holistic perspective, connecting diverse insights for better problem-solving. They enjoy engaging with people, learning from their experiences, and sharing knowledge through mentoring or collaborative projects. Creative pursuits, such as arts, writing, or cultural exploration, allow them to express ideas innovatively while stimulating imagination and critical thinking. The admin is also interested in global trends, sustainability, and community initiatives, aligning personal passions with broader societal impact. Their interests encourage adaptability, continuous learning, and active participation in both professional and social contexts. Overall, these pursuits reflect a balanced approach to life, combining intellectual growth, creative expression, and meaningful contributions to society, ensuring both personal fulfillment and positive influence on others.</p>
+</div>
+
+<div class="profile-panel">
+<h3>Hobbies</h3>
+<p>The admin’s hobbies are diverse and reflect a commitment to personal growth, relaxation, and creative exploration. Reading is a primary hobby, spanning topics from technology and science to philosophy and culture, fostering continuous learning and critical thinking. They enjoy writing, which provides a medium to articulate ideas, reflect on experiences, and share knowledge with others. Traveling is another passion, offering exposure to different cultures, traditions, and perspectives, enhancing empathy and global awareness. The admin also engages in technology exploration, experimenting with new tools, software, and innovations, which keeps them updated and adaptable. Additionally, hobbies like music, art, or cultural participation provide relaxation and mental refreshment, balancing work and personal life. Physical activities or sports may also be part of their routine to maintain health and vitality. Together, these hobbies contribute to well-rounded personal development, creativity, and resilience, ensuring the admin remains intellectually stimulated, culturally aware, and inspired in both personal and professional spheres.</p>
+</div>
+
+</section>
+
+<!-- ====== Contact Section ====== -->
+<section id="contact">
+<h2>Contact</h2>
+<div class="contact-panel">
+<p>Phone/WhatsApp: +971506309833</p>
+<p>Email: starananda24@gmail.com</p>
+<p><a href="https://facebook.com/" target="_blank">Facebook</a> | <a href="https://linkedin.com/" target="_blank">LinkedIn</a> | <a href="https://instagram.com/" target="_blank">Instagram</a></p>
+</div>
+</section>
+
+<!-- ====== Admin Dashboard (Hidden by default) ====== -->
+<section id="adminDashboard">
+<h2>Visitor Details</h2>
+<button onclick="adminLogout()">Logout</button>
+<table id="visitorTable">
+<thead>
+<tr>
+<th>Appointment</th><th>Name</th><th>Father</th><th>DOB</th><th>Address</th><th>Country</th><th>Visit Date</th><th>Visit Time</th><th>Contact</th><th>Passport</th><th>Email</th><th>Status</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+</section>
+
+<footer style="text-align:center; padding:15px; background:rgba(0,0,0,0.7);">
+&copy; 2025 Personal Website BHOLA NATH BASAK
+</footer>
+
 <script>
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzJCFyw0gK-n93j3Ck8xSGPJbzwro2nSZsiuqYMpu56M9chuWmiFeVs6zTv2wP-jDyGDQ/exec";
+
+// Date limits
 document.getElementById('dob').max = new Date().toISOString().split("T")[0];
 document.getElementById('visitDate').min = new Date().toISOString().split("T")[0];
 
+// Visitor Form show/hide
+document.getElementById('linkVisitorForm').addEventListener('click', function(){
+  document.getElementById('visitorFormPanel').style.display = "block";
+  document.getElementById('visitorFormPanel').scrollIntoView({behavior:"smooth"});
+});
+function hideVisitorForm(){ document.getElementById('visitorFormPanel').style.display = "none"; }
+
+// Visitor Form Submit
 document.getElementById('formVisitor').addEventListener('submit', function(e){
   e.preventDefault();
-  const appointmentNo = 'APPT-' + Date.now();
-  const visitorData = {
+  const data = {
     "Visitor Name": document.getElementById('visitorName').value,
+    "Father Name": document.getElementById('fatherName').value,
     "Visitor DOB": document.getElementById('dob').value,
-    "Father's Name": document.getElementById('fatherName').value,
     "Address": document.getElementById('address').value,
     "Country": document.getElementById('country').value,
     "Visit Date": document.getElementById('visitDate').value,
@@ -84,21 +175,20 @@ document.getElementById('formVisitor').addEventListener('submit', function(e){
     "Email ID": document.getElementById('email').value
   };
 
-  google.script.run.withSuccessHandler(function(res){
+  fetch(WEB_APP_URL, { method:'POST', body: JSON.stringify(data) })
+  .then(res=>res.json())
+  .then(res=>{
     if(res.success){
-      alert("Appointment submitted!\nAppointment No: " + appointmentNo);
+      alert(`Appointment sent Successfully. Your Number: ${res.appointmentNo}`);
+      window.open(`https://wa.me/971506309833?text=New Visitor Submitted: Name: ${data["Visitor Name"]}, Appointment No: ${res.appointmentNo}`, '_blank');
       document.getElementById('formVisitor').reset();
-      const waButton = document.getElementById('whatsappButton');
-      const waLink = `https://wa.me/971506309833?text=${encodeURIComponent(
-        `New Visitor Appointment:\nAppointment No: ${appointmentNo}\nName: ${visitorData["Visitor Name"]}\nContact: ${visitorData["Contact Number"]}\nVisit Date: ${visitorData["Visit Date"]} ${visitorData["Visit Time"]}\nPurpose: ${visitorData["Virtual Visit Purpose"]}`
-      )}`;
-      waButton.href = waLink;
-      waButton.style.display = "block";
-    } else {
-      alert("Error: " + res.message);
-    }
-  }).submitVisitor(visitorData);
+      hideVisitorForm();
+    } else { alert("Error sending appointment: "+res.message); }
+  }).catch(err=>alert("Failed to fetch: "+err.message));
 });
+
+// Admin logout
+function adminLogout(){ localStorage.removeItem('adminToken'); document.getElementById('adminDashboard').style.display="none"; window.location.href="#home"; }
 </script>
 
 </body>

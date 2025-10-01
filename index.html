@@ -1,102 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Visitor Form</title>
-  <style>
-    body { font-family: Arial, sans-serif; padding: 20px; }
-    section { max-width: 600px; margin: auto; }
-    input, select { width: 100%; padding: 8px; margin: 6px 0; }
-    button { padding: 10px 20px; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BHOLA NATH BASAK</title>
+<style>
+body { margin:0; font-family:Arial,sans-serif; background:linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d); color:white;}
+header { text-align:center; padding:20px; background:rgba(0,0,0,0.6);}
+header img { width:180px; height:180px; object-fit:cover; border-radius:50%; border:5px solid #fff;}
+nav { display:flex; justify-content:center; background:rgba(0,0,0,0.8); flex-wrap:wrap;}
+nav a { color:white; text-decoration:none; padding:15px 20px; cursor:pointer;}
+nav a:hover { background:#fbd46d; color:black; border-radius:5px;}
+section { padding:20px; max-width:900px; margin:20px auto; background:rgba(255,255,255,0.1); border-radius:12px;}
+h2 { color:#ffe66d;}
+input, select { width:95%; padding:10px; margin:8px 0; border-radius:5px; border:none;}
+button { padding:10px 20px; margin:10px 5px; border:none; border-radius:5px; cursor:pointer;}
+button.submit-btn { background:#4CAF50; color:white;}
+button.cancel-btn { background:#f44336; color:white;}
+footer { text-align:center; padding:10px; font-size:14px; background:rgba(0,0,0,0.7); position:relative; width:100%;}
+footer a { color:#fbd46d; margin:0 8px; text-decoration:none; font-weight:bold;}
+footer a:hover { color:white;}
+table { width:100%; border-collapse: collapse; margin-top:15px;}
+th,td { border:1px solid #fff; padding:8px; text-align:left;}
+th { background: rgba(0,0,0,0.6);}
+.status-pending { background:pink;}
+.status-accepted { background:green; color:white;}
+.status-rejected { background:red; color:white;}
+#whatsappButton { display:block; padding:10px 15px; margin-top:10px; background:#25D366; color:white; text-decoration:none; border-radius:5px; text-align:center;}
+#whatsappButton:hover { background:#128C7E; }
+</style>
 </head>
 <body>
 
-<section id="visitorFormSection">
-  <h2>Visitor Appointment Form</h2>
-  <form id="formVisitor">
+<header>
+  <img src="myphoto.jpg" alt="BHOLA NATH BASAK">
+  <h1>BHOLA NATH BASAK</h1>
+  <div class="social-links">
+    <a href="https://facebook.com/" target="_blank">Facebook</a>
+    <a href="https://linkedin.com/" target="_blank">LinkedIn</a>
+    <a href="https://instagram.com/" target="_blank">Instagram</a>
+  </div>
+</header>
+
+<nav>
+  <a onclick="showVisitorForm()">Visitor Form</a>
+  <a href="#personalDetails">About Me</a>
+  <a href="#contact">Contact</a>
+  <a href="#adminLogin">Admin Login</a>
+</nav>
+
+<!-- ---------- Visitor Form Section ---------- -->
+<section id="visitorFormSection" style="display:none;">
+<h2>Visitor Appointment Form</h2>
+<form id="formVisitor">
     <label>Visitor Name</label>
-    <input type="text" id="Visitor Name" required>
-
-    <label>Visitor DOB</label>
-    <input type="date" id="Visitor DOB" required>
-
+    <input type="text" id="visitorName" required>
+    
     <label>Father's Name</label>
-    <input type="text" id="Father's Name" required>
-
+    <input type="text" id="fatherName" required>
+    
+    <label>Visitor DOB</label>
+    <input type="date" id="dob" required>
+    
     <label>Address</label>
-    <input type="text" id="Address" required>
-
+    <input type="text" id="address" required>
+    
     <label>Country</label>
-    <input type="text" id="Country" required>
-
+    <select id="country" required>
+      <option value="India (+91)">India (+91)</option>
+      <option value="USA (+1)">USA (+1)</option>
+      <option value="UK (+44)">UK (+44)</option>
+      <option value="Canada (+1)">Canada (+1)</option>
+      <option value="Australia (+61)">Australia (+61)</option>
+      <option value="Germany (+49)">Germany (+49)</option>
+      <option value="France (+33)">France (+33)</option>
+      <option value="UAE (+971)">UAE (+971)</option>
+      <option value="Saudi Arabia (+966)">Saudi Arabia (+966)</option>
+      <option value="Other">Other</option>
+    </select>
+    
     <label>Visit Date</label>
-    <input type="date" id="Visit Date" required>
-
+    <input type="date" id="visitDate" required>
+    
     <label>Visit Time</label>
-    <input type="time" id="Visit Time" required>
-
+    <input type="time" id="visitTime" required>
+    
     <label>Virtual Visit Purpose</label>
-    <input type="text" id="Virtual Visit Purpose" required>
-
+    <input type="text" id="purpose" required>
+    
     <label>Contact Number</label>
-    <input type="tel" id="Contact Number" required>
-
+    <input type="tel" id="contactNumber" required>
+    
     <label>Passport Number (If Available)</label>
-    <input type="text" id="Passport Number (If Available)">
-
-    <label>Email D</label>
-    <input type="email" id="Email D" required>
-
-    <button type="submit">Submit</button>
-  </form>
-
-  <a id="whatsappButton" href="#" style="display:none; margin-top:10px;">Send via WhatsApp</a>
+    <input type="text" id="passport">
+    
+    <label>Email ID</label>
+    <input type="email" id="email" required>
+    
+    <button type="submit" class="submit-btn">Submit</button>
+    <button type="button" class="cancel-btn" onclick="document.getElementById('formVisitor').reset()">Cancel</button>
+</form>
+<a id="whatsappButton" href="#" target="_blank" style="display:none;">Send Submission to WhatsApp</a>
 </section>
 
+<!-- ---------- Personal Details ---------- -->
+<section id="personalDetails">
+  <h2>About Me</h2>
+  <p><strong>Name:</strong> BHOLA NATH BASAK</p>
+  <p><strong>Email:</strong> starananda24@gmail.com</p>
+  <p><strong>DOB:</strong> 24-03-1988</p>
+  <p><strong>Location:</strong> Nadia, Krishnagar, India</p>
+  <p><strong>Nationality:</strong> Indian</p>
+  <p><strong>Religion:</strong> Hindu</p>
+  <!-- Additional details -->
+</section>
+
+<!-- ---------- Contact Section ---------- -->
+<section id="contact">
+  <h2>Contact</h2>
+  <p>Phone / WhatsApp: +971506309833</p>
+  <p>Email: starananda24@gmail.com</p>
+</section>
+
+<!-- ---------- Admin Login ---------- -->
+<section id="adminLogin">
+  <h2>Admin Login</h2>
+  <form id="formAdmin">
+    <label>Username</label><input type="text" id="adminUsername" required>
+    <label>Password</label><input type="password" id="adminPassword" required>
+    <button type="submit">Login</button>
+  </form>
+  <div id="adminDashboard" style="display:none;">
+    <h2>Visitor Details</h2>
+    <table id="visitorTable">
+      <thead>
+        <tr>
+          <th>Timestamp</th><th>Visitor Name</th><th>Visitor DOB</th><th>Father's Name</th>
+          <th>Address</th><th>Country</th><th>Visit Date</th><th>Visit Time</th>
+          <th>Virtual Visit Purpose</th><th>Contact Number</th><th>Passport Number (If Available)</th><th>Email ID</th>
+          <th>Score</th><th>Appointment Number</th><th>Status</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</section>
+
+<footer>
+  © 2025 Personal Website BHOLA NATH BASAK
+</footer>
+
 <script>
-// Show visitor form (no hiding now, we show section by default)
-function showVisitorForm() {
+document.getElementById('dob').max = new Date().toISOString().split("T")[0];
+document.getElementById('visitDate').min = new Date().toISOString().split("T")[0];
+
+function showVisitorForm(){
   document.getElementById('visitorFormSection').style.display = 'block';
+  document.getElementById('visitorFormSection').scrollIntoView({ behavior: 'smooth' });
 }
 
-// Handle success callback
-function onSuccess(res, visitorData) {
-  if (res.success) {
-    alert("Form submitted! Thank you.");
-    document.getElementById('formVisitor').reset();
-    const waButton = document.getElementById('whatsappButton');
-    const waLink = `https://wa.me/971506309833?text=${encodeURIComponent(
-      `New Visitor Appointment\nName: ${visitorData["Visitor Name"]}\nContact: ${visitorData["Contact Number"]}`
-    )}`;
-    waButton.href = waLink;
-    waButton.style.display = "block";
-  } else {
-    alert("Error: " + res.message);
-  }
-}
-
-// Form submit listener
-document.getElementById('formVisitor').addEventListener('submit', function(e) {
+// Visitor Form Submit
+document.getElementById('formVisitor').addEventListener('submit', function(e){
   e.preventDefault();
+  const appointmentNo = 'APPT-' + Date.now();
   const visitorData = {
-    "Visitor Name": document.getElementById('Visitor Name').value,
-    "Visitor DOB": document.getElementById('Visitor DOB').value,
-    "Father's Name": document.getElementById("Father's Name").value,
-    "Address": document.getElementById('Address').value,
-    "Country": document.getElementById('Country').value,
-    "Visit Date": document.getElementById('Visit Date').value,
-    "Visit Time": document.getElementById('Visit Time').value,
-    "Virtual Visit Purpose": document.getElementById('Virtual Visit Purpose').value,
-    "Contact Number": document.getElementById('Contact Number').value,
-    "Passport Number (If Available)": document.getElementById('Passport Number (If Available)').value,
-    "Email D": document.getElementById('Email D').value
+    "Visitor Name": document.getElementById('visitorName').value,
+    "Visitor DOB": document.getElementById('dob').value,
+    "Father's Name": document.getElementById('fatherName').value,
+    "Address": document.getElementById('address').value,
+    "Country": document.getElementById('country').value,
+    "Visit Date": document.getElementById('visitDate').value,
+    "Visit Time": document.getElementById('visitTime').value,
+    "Virtual Visit Purpose": document.getElementById('purpose').value,
+    "Contact Number": document.getElementById('contactNumber').value,
+    "Passport Number (If Available)": document.getElementById('passport').value,
+    "Email ID": document.getElementById('email').value
   };
 
-  google.script.run.withSuccessHandler(function(res) {
-    onSuccess(res, visitorData);
+  google.script.run.withSuccessHandler(function(res){
+    if(res.success){
+      alert("Appointment submitted!\nAppointment No: " + appointmentNo);
+      document.getElementById('formVisitor').reset();
+      const waButton = document.getElementById('whatsappButton');
+      const waLink = `https://wa.me/971506309833?text=${encodeURIComponent(
+        `New Visitor Appointment:\nAppointment No: ${appointmentNo}\nName: ${visitorData["Visitor Name"]}\nContact: ${visitorData["Contact Number"]}\nVisit Date: ${visitorData["Visit Date"]} ${visitorData["Visit Time"]}`
+      )}`;
+      waButton.href = waLink;
+      waButton.style.display = "block";
+    } else {
+      alert("Error: " + res.message);
+    }
   }).submitVisitor(visitorData);
+});
+
+// Admin Login
+document.getElementById('formAdmin').addEventListener('submit', function(e){
+  e.preventDefault();
+  const username = document.getElementById('adminUsername').value;
+  const password = document.getElementById('adminPassword').value;
+  if(username==="admin1" && password==="Password123"){
+    alert("Admin login successful");
+    document.getElementById('formAdmin').style.display="none";
+    document.getElementById('adminDashboard').style.display="block";
+  } else {
+    alert("Access denied");
+  }
 });
 </script>
 

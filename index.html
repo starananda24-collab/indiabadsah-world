@@ -46,7 +46,6 @@ th, td{padding:8px;text-align:center;}
   <a onclick="showSection('achievements')">Achievements</a>
   <a onclick="showSection('hobbies')">Hobbies</a>
   <a onclick="showSection('visitor')">Visitor Form</a>
-  <a onclick="showSection('adminLogin')">Admin Login</a>
   <input type="text" id="statusSearch" placeholder="Visitor Status: Enter Appt No" onkeypress="if(event.key==='Enter'){checkStatus();}">
 </nav>
 <div id="statusResult"></div>
@@ -74,25 +73,6 @@ th, td{padding:8px;text-align:center;}
     <label>Purpose* <input type="text" id="Purpose" name="Purpose" required></label>
     <button type="submit" class="btn">Submit</button>
   </form>
-</section>
-
-<!-- Admin Login -->
-<section id="adminLogin" class="hidden">
-  <h2>Admin Login</h2>
-  <div class="form-box">
-    <label>Username <input type="text" id="adminUser"></label>
-    <label>Password <input type="password" id="adminPass"></label>
-    <button onclick="adminLogin()" class="btn">Login</button>
-  </div>
-</section>
-
-<!-- Admin Dashboard -->
-<section id="adminDashboard" class="hidden">
-  <h2>Admin Dashboard</h2>
-  <button onclick="adminLogout()" class="btn">Logout</button>
-  <div id="adminVisitorList">
-    <p>Visitor data will appear here after login.</p>
-  </div>
 </section>
 
 <footer>
@@ -162,59 +142,7 @@ function checkStatus(){
     })
     .catch(err=>alert("Error fetching status: " + err));
 }
-
-// ------------------- Admin Login -------------------
-function adminLogin(){
-  let username = document.getElementById("adminUser").value;
-  let password = document.getElementById("adminPass").value;
-
-  if(username === "admin" && password === "admin"){
-    showSection("adminDashboard");
-    fetchAllVisitors();
-  } else {
-    alert("Invalid Credentials");
-  }
-}
-
-function adminLogout(){
-  showSection("profile");
-}
-
-// ------------------- Fetch All Visitors -------------------
-async function fetchAllVisitors(){
-  const url = "https://script.google.com/macros/s/AKfycbykK4bbtA1EmKpByRKXBXRQU7jvfM-4zjasawpUyL7rCLgr2s-VZSuWyoQtJb3ft0U/exec";
-  try{
-    const response = await fetch(url);
-    const data = await response.json();
-    const container = document.getElementById("adminVisitorList");
-    container.innerHTML = "";
-
-    if(data.error){
-      container.innerHTML = "<p>" + data.error + "</p>";
-      return;
-    }
-
-    data.forEach(v => {
-      let colorClass = "pink";
-      if(v.Status === "Accepted") colorClass = "green";
-      else if(v.Status === "Rejected") colorClass = "red";
-
-      container.innerHTML += `
-        <div style="background:white;color:black;padding:10px;margin-bottom:8px;border-radius:8px;">
-          <p><strong>Appt No:</strong> ${v["Appointment Number"]}</p>
-          <p><strong>Name:</strong> ${v.Name}</p>
-          <p><strong>Date:</strong> ${v["Visit Date"]}</p>
-          <p><strong>Time:</strong> ${v["Visit Time"]}</p>
-          <p><strong>Phone:</strong> ${v["Phone Number"]}</p>
-          <p><strong>Purpose:</strong> ${v.Purpose}</p>
-          <p><strong>Status:</strong> <span class="${colorClass}">${v.Status}</span></p>
-        </div>
-      `;
-    });
-  } catch(err){
-    alert("Error fetching visitors: " + err);
-  }
-}
 </script>
+
 </body>
 </html>

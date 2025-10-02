@@ -30,6 +30,8 @@ th, td{padding:8px;text-align:center;}
 .pink{background:#ff69b4;color:white;}
 .yellow{background:#ffc107;color:white;}
 .grey{background:#6c757d;color:white;}
+.deep-green{background:#196619;color:white;}
+.deep-red{background:#8b0000;color:white;}
 .hidden{display:none;}
 @media (max-width: 600px) {
   .form-box input, .form-box select, .form-box button {width:100% !important; font-size:16px; margin-top:5px;}
@@ -60,29 +62,37 @@ th, td{padding:8px;text-align:center;}
 <div id="statusResult"></div>
 
 <!-- Sections -->
-<section id="profile"><h2>Profile</h2><p>I am INDIA BADSAH, a passionate learner and explorer of life’s endless opportunities. I aim to inspire others while growing myself in every possible field.</p></section>
-<section id="education"><h2>Education</h2><p>Education is the foundation of growth. I gather knowledge from books and real-life experiences shaping problem-solving abilities.</p></section>
-<section id="culture"><h2>Culture</h2><p>I embrace traditions, values, and respect for diversity while blending it with modern ideas for a balanced lifestyle.</p></section>
-<section id="achievements"><h2>Achievements</h2><p>Every step of life is an achievement — from personal milestones to professional success, reflecting perseverance, hard work, and dedication.</p></section>
-<section id="hobbies"><h2>Hobbies</h2><p>I enjoy creative and recreational activities — sports, art, music, technology. Hobbies give me balance and energy.</p></section>
-<section id="interested"><h2>Interested About</h2><p>Deeply interested in innovation, leadership, and cultural understanding. Exploring new ideas and connecting with people excites me.</p></section>
-<section id="thoughts"><h2>Thoughts</h2><p>“Life is not about waiting for opportunities, it is about creating them.” Determination and honesty make anything possible.</p></section>
+<section id="profile"><h2>Profile</h2><p>I am INDIA BADSAH, a passionate learner and explorer of life’s endless opportunities...</p></section>
+<section id="education"><h2>Education</h2><p>Education is the foundation of growth...</p></section>
+<section id="culture"><h2>Culture</h2><p>I embrace traditions, values, and respect for diversity...</p></section>
+<section id="achievements"><h2>Achievements</h2><p>Every step of life is an achievement...</p></section>
+<section id="hobbies"><h2>Hobbies</h2><p>I enjoy creative and recreational activities...</p></section>
+<section id="interested"><h2>Interested About</h2><p>Deeply interested in innovation, leadership, and cultural understanding...</p></section>
+<section id="thoughts"><h2>Thoughts</h2><p>“Life is not about waiting for opportunities, it is about creating them.”</p></section>
 
 <!-- Visitor Form -->
 <section id="visitor" class="hidden">
   <h2>E_Appointment Visitor Form</h2>
-  <form id="visitorForm" class="form-box">
-    <label>Name* <input type="text" name="Name" required></label>
-    <label>Address* <input type="text" name="Address" required></label>
-    <label>Date of Birth* <input type="date" name="DateOfBirth" required></label>
-    <label>Country* <input type="text" name="Country" required></label>
-    <label>Father's Name <input type="text" name="FathersName"></label>
-    <label>Visit Date* <input type="date" name="VisitDate" required></label>
-    <label>Visit Time* <input type="time" name="VisitTime" required></label>
-    <label>Phone Number* <input type="tel" name="PhoneNumber" required></label>
-    <label>Email ID* <input type="email" name="EmailID" required></label>
-    <label>Passport <input type="text" name="Passport"></label>
-    <label>Purpose* <input type="text" name="Purpose" required></label>
+  <form id="appointmentForm" class="form-box">
+    <label>Visitor Name* <input type="text" name="name" required></label>
+    <label>Visitor Address <input type="text" name="address"></label>
+    <label>From Country <input type="text" name="country"></label>
+    <label>Date of Birth <input type="date" name="dob"></label>
+    <label>Father's Name <input type="text" name="father"></label>
+    <label>Virtual Visit Date* <input type="date" name="visit_date" required></label>
+    <label>Time Availability* <input type="time" name="visit_time" required></label>
+    <label>Contact Number* <input type="tel" name="phone" required></label>
+    <label>Purpose
+      <select name="purpose">
+        <option value="Visit Abroad">Visit Abroad</option>
+        <option value="Student Visa in Abroad">Student Visa in Abroad</option>
+        <option value="Job in Abroad">Job in Abroad</option>
+        <option value="Education system in Abroad">Education system in Abroad</option>
+        <option value="Counseling for Education in Abroad">Counseling for Education in Abroad</option>
+      </select>
+    </label>
+    <label>Passport <input type="text" name="passport"></label>
+    <label>Email ID <input type="email" name="email" required></label>
     <button type="submit" class="btn">Submit</button>
   </form>
 </section>
@@ -121,14 +131,18 @@ function showSection(id){
 }
 
 // ------------------- Visitor Form Submit -------------------
-const form = document.getElementById("visitorForm");
-form.addEventListener("submit", async e => {
+document.getElementById("appointmentForm").addEventListener("submit", async function(e){
   e.preventDefault();
-  const data = new URLSearchParams(new FormData(form));
+  const form = e.target;
+  const formData = new FormData(form);
+  const params = new URLSearchParams();
+  for (const pair of formData) params.append(pair[0], pair[1]);
+
   try {
     const res = await fetch("https://script.google.com/macros/s/AKfycbykK4bbtA1EmKpByRKXBXRQU7jvfM-4zjasawpUyL7rCLgr2s-VZSuWyoQtJb3ft0U/exec", {
       method: "POST",
-      body: data
+      headers: {"Content-Type": "application/x-www-form-urlencoded"},
+      body: params.toString()
     });
     const result = await res.json();
     if(result.success){
@@ -146,15 +160,15 @@ form.addEventListener("submit", async e => {
 function checkStatus(){ 
   const apptNo = document.getElementById("statusSearch").value.trim();
   if(!apptNo){ alert("Please enter your Appointment Number"); return; }
-  const url = "https://script.google.com/macros/s/AKfycbykK4bbtA1EmKpByRKXBXRQU7jvfM-4zjasawpUyL7rCLgr2s-VZSuWyoQtJb3ft0U/exec?appt_no=" + encodeURIComponent(apptNo);
-  fetch(url)
-    .then(res => res.json())
-    .then(data => {
+
+  fetch("https://script.google.com/macros/s/AKfycbykK4bbtA1EmKpByRKXBXRQU7jvfM-4zjasawpUyL7rCLgr2s-VZSuWyoQtJb3ft0U/exec?appt_no="+encodeURIComponent(apptNo))
+    .then(res=>res.json())
+    .then(data=>{
       const resDiv = document.getElementById("statusResult");
-      if(data.error){ resDiv.innerHTML = "❌ " + data.error; return; }
-      let colorClass = "pink";
-      if(data.Status === "Accepted") colorClass="green";
-      else if(data.Status === "Rejected") colorClass="red";
+      if(data.error){ resDiv.innerHTML="❌ "+data.error; return; }
+      let colorClass="pink";
+      if(data.Status==="Accepted") colorClass="green";
+      else if(data.Status==="Rejected") colorClass="red";
       resDiv.innerHTML = `
         <div style="padding:15px;border-radius:8px;background:white;color:black;">
           <p><strong>Appt No:</strong> ${data["Appointment Number"]}</p>
@@ -173,40 +187,37 @@ function checkStatus(){
         </div>
       `;
     })
-    .catch(err => alert("Error fetching status: " + err));
+    .catch(err=>alert("Error fetching status: "+err));
 }
 
 // ------------------- Admin -------------------
 function adminLogin(){
-  let u = document.getElementById("adminUser").value;
-  let p = document.getElementById("adminPass").value;
-  if(u==="admin" && p==="admin"){ showAdminDashboard(); }
-  else alert("Invalid Credentials");
+  let u=document.getElementById("adminUser").value;
+  let p=document.getElementById("adminPass").value;
+  if(u==="admin" && p==="admin"){ 
+    showSection("adminDashboard");
+    renderTable();
+  } else alert("Invalid Credentials");
 }
+function adminLogout(){ showSection("profile"); }
 
-function showAdminDashboard(){
-  showSection("adminDashboard");
-  const tbody = document.querySelector("#visitorTable tbody");
+function renderTable(){
+  const tbody=document.querySelector("#visitorTable tbody");
   tbody.innerHTML="";
   fetch("https://script.google.com/macros/s/AKfycbykK4bbtA1EmKpByRKXBXRQU7jvfM-4zjasawpUyL7rCLgr2s-VZSuWyoQtJb3ft0U/exec")
-    .then(res => res.json())
-    .then(data => {
-      if(data.visitors){
-        Object.keys(data.visitors).forEach(apptNo=>{
-          let v = data.visitors[apptNo];
-          let colorClass = "pink";
-          if(v.Status==="Accepted") colorClass="green";
-          else if(v.Status==="Rejected") colorClass="red";
-          let row = document.createElement("tr");
-          row.innerHTML = `<td>${apptNo}</td><td>${v.Name}</td><td>${v.VisitDate}</td><td>${v.VisitTime}</td><td>${v.PhoneNumber}</td><td>${v.Purpose}</td><td><span class="${colorClass}">${v.Status}</span></td>`;
-          tbody.appendChild(row);
-        });
-      }
-    })
-    .catch(err => alert("Error fetching visitors: "+err));
+    .then(res=>res.json())
+    .then(data=>{
+      data.forEach(v=>{
+        let colorClass="pink";
+        if(v.Status==="Accepted") colorClass="green";
+        else if(v.Status==="Rejected") colorClass="red";
+        let row=document.createElement("tr");
+        row.innerHTML=`<td>${v["Appointment Number"]}</td><td>${v.Name}</td><td>${v["Visit Date"]}</td><td>${v["Visit Time"]}</td><td>${v["Phone Number"]}</td><td>${v.Purpose}</td>
+          <td><span class="${colorClass}">${v.Status}</span></td>`;
+        tbody.appendChild(row);
+      });
+    });
 }
-
-function adminLogout(){ showSection("profile"); }
 </script>
 </body>
 </html>

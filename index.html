@@ -1,195 +1,328 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>INDIA BADSAH</title>
 <style>
-body {
-margin: 0;
-font-family: Arial, sans-serif;
-color: white;
-background-color: #121212;
+body {margin:0; font-family: Arial, sans-serif; background:linear-gradient(to right,#1a2a6c,#b21f1f,#fdbb2d); color:white; line-height:1.6;}
+header{text-align:center; padding:20px; background:rgba(0,0,0,0.6);}
+header img{width:180px;height:180px;object-fit:cover;border-radius:50%;border:5px solid #fff;transition: transform 0.4s;}
+header img:hover{transform: scale(1.05) rotate(2deg);}
+header h1{margin:15px 0 0; font-size:2.5em;color:#fbd46d;text-shadow:2px 2px 5px black;}
+nav{display:flex;justify-content:center;background:rgba(0,0,0,0.8);flex-wrap:wrap;align-items:center;}
+nav a{color:white;text-decoration:none;padding:10px 15px;display:block;transition:background 0.3s,color 0.3s;cursor:pointer;}
+nav a:hover{background:#fbd46d;color:black;border-radius:5px;}
+#statusSearch {margin-left:10px;padding:5px;border-radius:5px;border:none;}
+#statusResult {margin-left:10px;}
+section{padding:40px 20px;max-width:900px;margin:auto;background:rgba(255,255,255,0.1);margin-bottom:30px;border-radius:12px;box-shadow:0px 4px 15px rgba(0,0,0,0.5);}
+section h2{color:#ffe66d;margin-bottom:15px;}
+.form-box{background:rgba(0,0,0,0.7);padding:20px;border-radius:12px;color:white;max-width:500px;margin:auto;}
+.form-box label{display:block;margin-bottom:10px;}
+.form-box input, .form-box select{width:100%;padding:5px;margin-top:3px;border-radius:5px;border:none;}
+.btn{background:#fbd46d;color:black;padding:8px 12px;border:none;border-radius:5px;cursor:pointer;margin-top:10px;}
+.btn:hover{background:white;}
+table{width:100%;border-collapse:collapse;color:black;background:white;margin-top:20px;}
+table, th, td{border:1px solid #000;}
+th, td{padding:8px;text-align:center;}
+.green{background:#28a745;color:white;}
+.red{background:#dc3545;color:white;}
+.pink{background:#ff69b4;color:white;}
+.yellow{background:#ffc107;color:white;}
+.grey{background:#6c757d;color:white;}
+.deep-green{background:#196619;color:white;}
+.deep-red{background:#8b0000;color:white;}
+.hidden{display:none;}
+@media (max-width: 600px) {
+  .form-box input, .form-box select, .form-box button {width:100% !important; font-size:16px; margin-top:5px;}
+  nav {flex-direction: column; align-items: flex-start;}
+  #statusSearch {width:90%; margin:10px;}
 }
-header, nav, section, footer { padding: 10px; margin: 0 auto; }
-header img { width: 100px; border-radius: 50%; }
-nav a { color: white; margin: 0 10px; text-decoration: none; }
-nav a:hover { color: #fbd46d; }
-.profile-panel {
-  background: #0d47a1;
-  color: white;
-  padding: 15px;
-  margin-bottom: 15px;
-  border-radius: 10px;
-  line-height: 1.5;
-}
-.profile-panel h3 {
-  background: #ffffff;
-  color: #0d47a1;
-  padding: 8px;
-  border-radius: 5px;
-}
-#visitorFormPanel { display: none; background: linear-gradient(145deg, #1a2a6c, #fbd46d); padding: 20px; margin-top: 20px; border-radius: 15px; box-shadow: 0px 0px 25px rgba(0,0,0,0.6);}
-#adminDashboard { display: none; }
 </style>
+
+<!-- jsPDF for PDF generation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 </head>
-<body id="home">
+<body>
 
 <header>
-<img src="myphoto.jpg" alt="India Badsah">
-<h1>BHOLA NATH BASAK</h1>
-<div class="social-links">
-<a href="https://facebook.com/" target="_blank">Facebook</a>
-<a href="https://linkedin.com/" target="_blank">LinkedIn</a>
-<a href="https://instagram.com/" target="_blank">Instagram</a>
-</div>
+  <img src="myphoto.jpg" alt="India Badsah Photo">
+  <h1>INDIA BADSAH</h1>
 </header>
 
 <nav>
-<a id="linkVisitorForm">Visitor Form</a>
-<a href="#profile">Profile</a>
-<a href="#contact">Contact</a>
+  <a onclick="showSection('profile')">Profile</a>
+  <a onclick="showSection('education')">Education</a>
+  <a onclick="showSection('culture')">Culture</a>
+  <a onclick="showSection('achievements')">Achievements</a>
+  <a onclick="showSection('hobbies')">Hobbies</a>
+  <a onclick="showSection('interested')">Interested About</a>
+  <a onclick="showSection('thoughts')">Thoughts</a>
+  <a onclick="showSection('visitor')">Visitor Form</a>
+  <a onclick="showSection('adminLogin')">Admin Login</a>
+  <input type="text" id="statusSearch" placeholder="Visitor Status: Enter Appt No" onkeypress="if(event.key==='Enter'){checkStatus();}">
 </nav>
+<div id="statusResult"></div>
 
-<!-- ====== Visitor Form Section ====== -->
-<section id="visitorFormPanel">
-<h2>Visitor Appointment Form</h2>
-<form id="formVisitor">
-<label>Visitor Name</label>
-<input type="text" id="visitorName" required>
-<label>Father's Name</label>
-<input type="text" id="fatherName" required>
-<label>Visitor DOB</label>
-<input type="date" id="dob" required>
-<label>Address</label>
-<input type="text" id="address" required>
-<label>Country</label>
-<select id="country">
-<option value="India (+91)">India (+91)</option>
-<option value="UAE (+971)">UAE (+971)</option>
-<option value="USA (+1)">USA (+1)</option>
-</select>
-<label>Visit Date</label>
-<input type="date" id="visitDate" required>
-<label>Visit Time</label>
-<input type="time" id="visitTime" required>
-<label>Virtual Visit Purpose</label>
-<input type="text" id="purpose" required>
-<label>Contact Number</label>
-<input type="text" id="contactNumber" required>
-<label>Passport Number (If Available)</label>
-<input type="text" id="passport">
-<label>Email ID</label>
-<input type="email" id="email" required>
-<button type="submit" class="submit-btn">Submit</button>
-<button type="button" class="cancel-btn" onclick="hideVisitorForm()">Cancel</button>
-</form>
+<!-- Profile Sections -->
+<section id="profile"><h2>Profile</h2><p>I am INDIA BADSAH, a passionate learner and explorer of life’s endless opportunities. I aim to inspire others while growing myself in every possible field.</p></section>
+<section id="education"><h2>Education</h2><p>Education is the foundation of growth. I gather knowledge from books and real-life experiences shaping problem-solving abilities.</p></section>
+<section id="culture"><h2>Culture</h2><p>I embrace traditions, values, and respect for diversity while blending it with modern ideas for a balanced lifestyle.</p></section>
+<section id="achievements"><h2>Achievements</h2><p>Every step of life is an achievement — from personal milestones to professional success, reflecting perseverance, hard work, and dedication.</p></section>
+<section id="hobbies"><h2>Hobbies</h2><p>I enjoy creative and recreational activities — sports, art, music, technology. Hobbies give me balance and energy.</p></section>
+<section id="interested"><h2>Interested About</h2><p>Deeply interested in innovation, leadership, and cultural understanding. Exploring new ideas and connecting with people excites me.</p></section>
+<section id="thoughts"><h2>Thoughts</h2><p>“Life is not about waiting for opportunities, it is about creating them.” Determination and honesty make anything possible.</p></section>
+
+<!-- Visitor Form -->
+<section id="visitor" class="hidden">
+  <h2>E_Appointment Visitor Form</h2>
+  <form id="appointmentForm" class="form-box">
+    <label>Visitor Name* <input type="text" id="vname" required></label>
+    <label>Visitor Address <input type="text" id="vaddress"></label>
+    <label>From Country <input type="text" id="vcountry"></label>
+    <label>Date of Birth <input type="date" id="vdob"></label>
+    <label>Virtual Visit Date* <input type="date" id="vdate" required></label>
+    <label>Time Availability* <input type="time" id="vtime" required></label>
+    <label>Contact Number* 
+      <select id="ccode">
+        <option value="+91">India (+91)</option>
+        <option value="+1">USA (+1)</option>
+        <option value="+880">Bangladesh (+880)</option>
+        <option value="+92">Pakistan (+92)</option>
+        <option value="+94">Sri Lanka (+94)</option>
+        <option value="+60">Malaysia (+60)</option>
+        <option value="+65">Singapore (+65)</option>
+        <option value="+44">UK (+44)</option>
+        <option value="+61">Australia (+61)</option>
+        <option value="+1">Canada (+1)</option>
+      </select>
+      <input type="tel" id="vphone" required>
+    </label>
+    <label>Purpose of Visit
+      <select id="vpurpose">
+        <option value="Visit Abroad">Visit Abroad</option>
+        <option value="Student Visa in Abroad">Student Visa in Abroad</option>
+        <option value="Job in Abroad">Job in Abroad</option>
+        <option value="Education system in Abroad">Education system in Abroad</option>
+        <option value="Counseling for Education in Abroad">Counseling for Education in Abroad</option>
+      </select>
+    </label>
+    <label>Passport Number <input type="text" id="vpassport"></label>
+    <label>Email ID 
+      <input type="text" id="vemail" placeholder="yourname" required>
+      <select id="emaildomain">
+        <option value="@gmail.com">@gmail.com</option>
+        <option value="@rediffmail.com">@rediffmail.com</option>
+        <option value="@yahoo.com">@yahoo.com</option>
+      </select>
+    </label>
+    <button type="submit" class="btn">Submit</button>
+  </form>
 </section>
 
-<!-- ====== Profile Section ====== -->
-<section id="profile">
-<h2>Admin Profile</h2>
-
-<div class="profile-panel">
-<h3>Education</h3>
-<p>The admin has pursued a diverse and comprehensive education, combining formal academic study with practical, hands-on experience. From early schooling to advanced higher education, they have consistently aimed to develop critical thinking, analytical abilities, and problem-solving skills. This educational journey includes participation in specialized courses, workshops, and training programs that enhanced both technical and interpersonal capabilities. The admin values lifelong learning and continuously seeks opportunities to expand knowledge, adapt to new technologies, and apply insights in real-world contexts. Their educational foundation supports a strong intellectual framework that informs decision-making, strategic planning, and leadership roles. Beyond academics, the admin emphasizes practical application of learning, ensuring knowledge is translated into meaningful contributions in both professional and community settings. This combination of theory and practice reflects a disciplined, curious, and adaptive approach, making the admin well-prepared to navigate challenges, mentor others, and contribute positively to any initiative or organization they are part of.</p>
-</div>
-
-<div class="profile-panel">
-<h3>Culture</h3>
-<p>The admin is deeply rooted in their cultural heritage and embraces the traditions and values that shape identity and community. Growing up in a rich cultural environment, they actively engage with festivals, arts, music, and literature, appreciating the diversity and depth of cultural expression. This engagement fosters respect, empathy, and understanding of different perspectives, creating a well-rounded worldview. The admin believes that cultural knowledge is essential for personal growth and social awareness, guiding behavior in both professional and personal settings. By participating in community events and supporting cultural initiatives, they demonstrate leadership and social responsibility. Their cultural orientation also enhances creativity, communication skills, and adaptability, allowing them to navigate cross-cultural situations effectively. The admin balances modernity with tradition, integrating contemporary insights with timeless values. Overall, this cultural foundation empowers them to contribute meaningfully to society while preserving and celebrating heritage, encouraging inclusivity, and inspiring others to appreciate diverse perspectives and traditions.</p>
-</div>
-
-<div class="profile-panel">
-<h3>Thought</h3>
-<p>The admin’s philosophy is centered on integrity, perseverance, and vision. They believe that every action has consequences and that thoughtful decision-making is essential to personal and professional success. Their approach emphasizes continuous self-improvement, ethical conduct, and responsible leadership. The admin values curiosity and critical thinking, constantly analyzing situations to derive meaningful insights and make informed choices. Resilience in the face of challenges is a cornerstone of their thought process, viewing obstacles as opportunities for growth and learning. They also prioritize knowledge-sharing, mentorship, and collaboration, understanding that collective intelligence drives sustainable progress. Mindfulness, reflection, and adaptability guide their daily life and professional endeavors, fostering balance and clarity. Their thought process integrates logic with empathy, ensuring that decisions are both rational and human-centered. Overall, the admin’s mindset reflects a harmonious blend of strategic vision, ethical commitment, and forward-thinking perspective, enabling them to lead effectively, inspire confidence, and positively influence their environment.</p>
-</div>
-
-<div class="profile-panel">
-<h3>Interests</h3>
-<p>The admin has a wide range of interests that reflect curiosity, creativity, and engagement with the world. They are deeply invested in education, social development, and technological innovation, constantly seeking new knowledge and solutions. Exploring different fields enables the admin to gain a holistic perspective, connecting diverse insights for better problem-solving. They enjoy engaging with people, learning from their experiences, and sharing knowledge through mentoring or collaborative projects. Creative pursuits, such as arts, writing, or cultural exploration, allow them to express ideas innovatively while stimulating imagination and critical thinking. The admin is also interested in global trends, sustainability, and community initiatives, aligning personal passions with broader societal impact. Their interests encourage adaptability, continuous learning, and active participation in both professional and social contexts. Overall, these pursuits reflect a balanced approach to life, combining intellectual growth, creative expression, and meaningful contributions to society, ensuring both personal fulfillment and positive influence on others.</p>
-</div>
-
-<div class="profile-panel">
-<h3>Hobbies</h3>
-<p>The admin’s hobbies are diverse and reflect a commitment to personal growth, relaxation, and creative exploration. Reading is a primary hobby, spanning topics from technology and science to philosophy and culture, fostering continuous learning and critical thinking. They enjoy writing, which provides a medium to articulate ideas, reflect on experiences, and share knowledge with others. Traveling is another passion, offering exposure to different cultures, traditions, and perspectives, enhancing empathy and global awareness. The admin also engages in technology exploration, experimenting with new tools, software, and innovations, which keeps them updated and adaptable. Additionally, hobbies like music, art, or cultural participation provide relaxation and mental refreshment, balancing work and personal life. Physical activities or sports may also be part of their routine to maintain health and vitality. Together, these hobbies contribute to well-rounded personal development, creativity, and resilience, ensuring the admin remains intellectually stimulated, culturally aware, and inspired in both personal and professional spheres.</p>
-</div>
-
+<!-- Admin Login -->
+<section id="adminLogin" class="hidden">
+  <h2>Admin Login</h2>
+  <div class="form-box">
+    <label>Username <input type="text" id="adminUser"></label>
+    <label>Password <input type="password" id="adminPass"></label>
+    <button onclick="adminLogin()" class="btn">Login</button>
+  </div>
 </section>
 
-<!-- ====== Contact Section ====== -->
-<section id="contact">
-<h2>Contact</h2>
-<div class="contact-panel">
-<p>Phone/WhatsApp: +971506309833</p>
-<p>Email: starananda24@gmail.com</p>
-<p><a href="https://facebook.com/" target="_blank">Facebook</a> | <a href="https://linkedin.com/" target="_blank">LinkedIn</a> | <a href="https://instagram.com/" target="_blank">Instagram</a></p>
-</div>
+<!-- Admin Dashboard -->
+<section id="adminDashboard" class="hidden">
+  <h2>Admin Dashboard</h2>
+  <button onclick="adminLogout()" class="btn">Logout</button>
+  <table id="visitorTable">
+    <thead><tr>
+      <th>Appt No</th><th>Name</th><th>Date</th><th>Time</th><th>Contact</th><th>Purpose</th><th>Status</th><th>Action</th>
+    </tr></thead>
+    <tbody></tbody>
+  </table>
 </section>
 
-<!-- ====== Admin Dashboard (Hidden by default) ====== -->
-<section id="adminDashboard">
-<h2>Visitor Details</h2>
-<button onclick="adminLogout()">Logout</button>
-<table id="visitorTable">
-<thead>
-<tr>
-<th>Appointment</th><th>Name</th><th>Father</th><th>DOB</th><th>Address</th><th>Country</th><th>Visit Date</th><th>Visit Time</th><th>Contact</th><th>Passport</th><th>Email</th><th>Status</th>
-</tr>
-</thead>
-<tbody></tbody>
-</table>
-</section>
-
-<footer style="text-align:center; padding:15px; background:rgba(0,0,0,0.7);">
-&copy; 2025 Personal Website BHOLA NATH BASAK
+<footer>
+  <p>© 2025 INDIA BADSAH | Personal Biography Website</p>
 </footer>
 
 <script>
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzJCFyw0gK-n93j3Ck8xSGPJbzwro2nSZsiuqYMpu56M9chuWmiFeVs6zTv2wP-jDyGDQ/exec";
+// ------------------- Firebase Configuration -------------------
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+  databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT_ID.appspot.com",
+  messagingSenderId: "SENDER_ID",
+  appId: "APP_ID"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
 
-// Date limits
-document.getElementById('dob').max = new Date().toISOString().split("T")[0];
-document.getElementById('visitDate').min = new Date().toISOString().split("T")[0];
+// ------------------- Section Show -------------------
+function showSection(id){
+  document.querySelectorAll("section").forEach(s=>s.classList.add("hidden"));
+  document.getElementById(id).classList.remove("hidden");
+}
 
-// Visitor Form show/hide
-document.getElementById('linkVisitorForm').addEventListener('click', function(){
-  document.getElementById('visitorFormPanel').style.display = "block";
-  document.getElementById('visitorFormPanel').scrollIntoView({behavior:"smooth"});
-});
-function hideVisitorForm(){ document.getElementById('visitorFormPanel').style.display = "none"; }
+// ------------------- Unique Appointment Number -------------------
+function getNextAppointmentNumber(callback){
+  const counterRef = db.ref("counter/lastApptNo");
+  counterRef.transaction(current => {
+    return (current||0) + 1;
+  }, (err, committed, snapshot) => {
+    if(err){ alert("Error generating Appt No"); return; }
+    callback("APMTWBNB" + String(snapshot.val()).padStart(2,"0"));
+  });
+}
 
-// Visitor Form Submit
-document.getElementById('formVisitor').addEventListener('submit', function(e){
+// ------------------- Visitor Form Submit -------------------
+document.getElementById("appointmentForm").addEventListener("submit", function(e){
   e.preventDefault();
-  const data = {
-    "Visitor Name": document.getElementById('visitorName').value,
-    "Father Name": document.getElementById('fatherName').value,
-    "Visitor DOB": document.getElementById('dob').value,
-    "Address": document.getElementById('address').value,
-    "Country": document.getElementById('country').value,
-    "Visit Date": document.getElementById('visitDate').value,
-    "Visit Time": document.getElementById('visitTime').value,
-    "Virtual Visit Purpose": document.getElementById('purpose').value,
-    "Contact Number": document.getElementById('contactNumber').value,
-    "Passport Number (If Available)": document.getElementById('passport').value,
-    "Email ID": document.getElementById('email').value
-  };
+  let name = document.getElementById("vname").value.trim();
+  let date = document.getElementById("vdate").value;
+  let time = document.getElementById("vtime").value;
+  let phone = document.getElementById("vphone").value.trim();
+  if(!name || !date || !time || !phone){ alert("Please fill mandatory fields"); return; }
 
-  fetch(WEB_APP_URL, { method:'POST', body: JSON.stringify(data) })
-  .then(res=>res.json())
-  .then(res=>{
-    if(res.success){
-      alert(`Appointment sent Successfully. Your Number: ${res.appointmentNo}`);
-      window.open(`https://wa.me/971506309833?text=New Visitor Submitted: Name: ${data["Visitor Name"]}, Appointment No: ${res.appointmentNo}`, '_blank');
-      document.getElementById('formVisitor').reset();
-      hideVisitorForm();
-    } else { alert("Error sending appointment: "+res.message); }
-  }).catch(err=>alert("Failed to fetch: "+err.message));
+  getNextAppointmentNumber(apptNo => {
+    let visitorData = {
+      name:name,
+      date:date,
+      time:time,
+      phone:document.getElementById("ccode").value + phone,
+      address:document.getElementById("vaddress").value,
+      country:document.getElementById("vcountry").value,
+      dob:document.getElementById("vdob").value,
+      purpose:document.getElementById("vpurpose").value,
+      passport:document.getElementById("vpassport").value||"NA",
+      email:document.getElementById("vemail").value+document.getElementById("emaildomain").value,
+      status:"Pending",
+      submitted:new Date().toLocaleString(),
+      chat:[]
+    };
+    db.ref("visitors/"+apptNo).set(visitorData);
+    alert("Appointment sent successfully: " + apptNo);
+    document.getElementById("appointmentForm").reset();
+  });
 });
 
-// Admin logout
-function adminLogout(){ localStorage.removeItem('adminToken'); document.getElementById('adminDashboard').style.display="none"; window.location.href="#home"; }
-</script>
+// ------------------- Check Visitor Status -------------------
+function showVisitorDetails(apptNo){
+  const resDiv = document.getElementById("statusResult");
+  db.ref("visitors/"+apptNo).once("value", snapshot => {
+    const v = snapshot.val();
+    if(!v){ resDiv.innerHTML = "❌ No Appointment Found"; return; }
+    let colorClass = "pink";
+    if(v.status==="Accepted") colorClass="green";
+    else if(v.status==="Rejected") colorClass="red";
 
+    resDiv.innerHTML = `
+      <div style="padding:15px;border-radius:8px;background:white;color:black;">
+        <p><strong>Appt No:</strong> ${apptNo}</p>
+        <p><strong>Name:</strong> ${v.name}</p>
+        <p><strong>Address:</strong> ${v.address}</p>
+        <p><strong>Country:</strong> ${v.country}</p>
+        <p><strong>DOB:</strong> ${v.dob}</p>
+        <p><strong>Visit to:</strong> BHOLA NATH BASAK</p>
+        <p><strong>Visit Date:</strong> ${v.date}</p>
+        <p><strong>Visit Time:</strong> ${v.time}</p>
+        <p><strong>Phone:</strong> ${v.phone}</p>
+        <p><strong>Purpose:</strong> ${v.purpose}</p>
+        <p><strong>Passport:</strong> ${v.passport}</p>
+        <p><strong>Email:</strong> ${v.email}</p>
+        <p><strong>Status:</strong> ${v.status}</p>
+      </div>
+      <div id="visitorChat" style="display:none;margin-top:10px;">
+        <h4>Messenger with Admin</h4>
+        <div id="chatBox" style="width:100%;height:150px;border:1px solid #ccc;padding:5px;overflow-y:auto;background:white;color:black;"></div>
+        <input type="text" id="chatInput" placeholder="Type message..." style="width:80%;padding:5px;">
+        <button onclick="sendVisitorMessage('${apptNo}')">Send</button>
+      </div>
+    `;
+    // Activate chat if accepted and meet time passed
+    if(v.status==="Accepted"){
+      let meetDateTime = new Date(v.date + " " + v.time);
+      let now = new Date();
+      if(now >= meetDateTime){
+        setTimeout(()=>{ document.getElementById("visitorChat").style.display="block"; renderChat(apptNo); }, 1000);
+      }
+    }
+  });
+}
+
+function checkStatus(){ 
+  const apptNo = document.getElementById("statusSearch").value.trim();
+  showVisitorDetails(apptNo);
+}
+
+// ------------------- Chat -------------------
+function sendVisitorMessage(apptNo){
+  let input = document.getElementById("chatInput");
+  if(!input || input.value.trim()==="") return;
+  let chatRef = db.ref("visitors/"+apptNo+"/chat");
+  chatRef.push({sender:"Visitor",msg:input.value});
+  input.value="";
+  renderChat(apptNo);
+}
+
+function renderChat(apptNo){
+  const chatBox = document.getElementById("chatBox");
+  if(!chatBox) return;
+  chatBox.innerHTML="";
+  db.ref("visitors/"+apptNo+"/chat").once("value", snapshot=>{
+    snapshot.forEach(snap=>{
+      let c = snap.val();
+      chatBox.innerHTML+=`<p><strong>${c.sender}:</strong> ${c.msg}</p>`;
+    });
+    chatBox.scrollTop = chatBox.scrollHeight;
+  });
+}
+
+// ------------------- Admin -------------------
+function adminLogin(){
+  let u = document.getElementById("adminUser").value;
+  let p = document.getElementById("adminPass").value;
+  if(u==="admin" && p==="admin"){ showSection("adminDashboard"); renderTable(); }
+  else alert("Invalid Credentials");
+}
+function adminLogout(){ showSection("profile"); }
+
+function renderTable(){
+  const tbody = document.querySelector("#visitorTable tbody");
+  tbody.innerHTML="";
+  db.ref("visitors").once("value", snapshot=>{
+    snapshot.forEach(snap=>{
+      let apptNo = snap.key;
+      let v = snap.val();
+      let colorClass = "pink";
+      if(v.status==="Accepted") colorClass="green";
+      else if(v.status==="Rejected") colorClass="red";
+
+      let row=document.createElement("tr");
+      row.innerHTML = `<td>${apptNo}</td><td>${v.name}</td><td>${v.date}</td><td>${v.time}</td><td>${v.phone}</td><td>${v.purpose}</td>
+        <td><button class="${colorClass}">${v.status}</button></td>
+        <td>
+          <button onclick="accept('${apptNo}')" ${v.status!=="Pending"?'disabled':''}>Accept</button>
+          <button onclick="reject('${apptNo}')" ${v.status!=="Pending"?'disabled':''}>Reject</button>
+        </td>`;
+      tbody.appendChild(row);
+    });
+  });
+}
+
+function accept(apptNo){
+  db.ref("visitors/"+apptNo).update({status:"Accepted"});
+  renderTable();
+}
+function reject(apptNo){
+  db.ref("visitors/"+apptNo).update({status:"Rejected"});
+  renderTable();
+}
+</script>
 </body>
 </html>

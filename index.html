@@ -5,16 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>INDIA BADSAH</title>
 <style>
-body {margin:0;font-family:Arial,sans-serif;background:linear-gradient(to right,#1a2a6c,#b21f1f,#fdbb2d);color:white;line-height:1.6;}
-header{text-align:center;padding:20px;background:rgba(0,0,0,0.6);}
+body {margin:0; font-family: Arial, sans-serif; background:linear-gradient(to right,#1a2a6c,#b21f1f,#fdbb2d); color:white; line-height:1.6;}
+header{text-align:center; padding:20px; background:rgba(0,0,0,0.6);}
 header img{width:180px;height:180px;object-fit:cover;border-radius:50%;border:5px solid #fff;transition: transform 0.4s;}
 header img:hover{transform: scale(1.05) rotate(2deg);}
-header h1{margin:15px 0 0;font-size:2.5em;color:#fbd46d;text-shadow:2px 2px 5px black;}
+header h1{margin:15px 0 0; font-size:2.5em;color:#fbd46d;text-shadow:2px 2px 5px black;}
 nav{display:flex;justify-content:center;background:rgba(0,0,0,0.8);flex-wrap:wrap;align-items:center;}
 nav a{color:white;text-decoration:none;padding:10px 15px;display:block;transition:background 0.3s,color 0.3s;cursor:pointer;}
 nav a:hover{background:#fbd46d;color:black;border-radius:5px;}
-#statusSearch{margin-left:10px;padding:5px;border-radius:5px;border:none;}
-#statusResult{margin-left:10px;}
+#statusSearch {margin-left:10px;padding:5px;border-radius:5px;border:none;}
+#statusResult {margin-left:10px;}
 section{padding:40px 20px;max-width:900px;margin:auto;background:rgba(255,255,255,0.1);margin-bottom:30px;border-radius:12px;box-shadow:0px 4px 15px rgba(0,0,0,0.5);}
 section h2{color:#ffe66d;margin-bottom:15px;}
 .form-box{background:rgba(0,0,0,0.7);padding:20px;border-radius:12px;color:white;max-width:500px;margin:auto;}
@@ -28,8 +28,14 @@ th, td{padding:8px;text-align:center;}
 .green{background:#28a745;color:white;}
 .red{background:#dc3545;color:white;}
 .pink{background:#ff69b4;color:white;}
+.yellow{background:#ffc107;color:white;}
+.grey{background:#6c757d;color:white;}
 .hidden{display:none;}
-@media(max-width:600px){.form-box input,.form-box select,.form-box button{width:100%!important;font-size:16px;margin-top:5px;} nav{flex-direction:column;align-items:flex-start;} #statusSearch{width:90%;margin:10px;}}
+@media (max-width: 600px) {
+  .form-box input, .form-box select, .form-box button {width:100% !important; font-size:16px; margin-top:5px;}
+  nav {flex-direction: column; align-items: flex-start;}
+  #statusSearch {width:90%; margin:10px;}
+}
 </style>
 </head>
 <body>
@@ -45,17 +51,22 @@ th, td{padding:8px;text-align:center;}
   <a onclick="showSection('culture')">Culture</a>
   <a onclick="showSection('achievements')">Achievements</a>
   <a onclick="showSection('hobbies')">Hobbies</a>
+  <a onclick="showSection('interested')">Interested About</a>
+  <a onclick="showSection('thoughts')">Thoughts</a>
   <a onclick="showSection('visitor')">Visitor Form</a>
   <a onclick="showSection('adminLogin')">Admin Login</a>
   <input type="text" id="statusSearch" placeholder="Visitor Status: Enter Appt No" onkeypress="if(event.key==='Enter'){checkStatus();}">
 </nav>
 <div id="statusResult"></div>
 
-<section id="profile"><h2>Profile</h2><p>I am INDIA BADSAH, a passionate learner and explorer of life’s endless opportunities.</p></section>
-<section id="education"><h2>Education</h2><p>Education is the foundation of growth.</p></section>
-<section id="culture"><h2>Culture</h2><p>I embrace traditions, values, and respect for diversity while blending it with modern ideas.</p></section>
-<section id="achievements"><h2>Achievements</h2><p>Every step of life is an achievement.</p></section>
-<section id="hobbies"><h2>Hobbies</h2><p>I enjoy creative and recreational activities — sports, art, music, technology.</p></section>
+<!-- Sections -->
+<section id="profile"><h2>Profile</h2><p>I am INDIA BADSAH, a passionate learner and explorer of life’s endless opportunities. I aim to inspire others while growing myself in every possible field.</p></section>
+<section id="education"><h2>Education</h2><p>Education is the foundation of growth. I gather knowledge from books and real-life experiences shaping problem-solving abilities.</p></section>
+<section id="culture"><h2>Culture</h2><p>I embrace traditions, values, and respect for diversity while blending it with modern ideas for a balanced lifestyle.</p></section>
+<section id="achievements"><h2>Achievements</h2><p>Every step of life is an achievement — from personal milestones to professional success, reflecting perseverance, hard work, and dedication.</p></section>
+<section id="hobbies"><h2>Hobbies</h2><p>I enjoy creative and recreational activities — sports, art, music, technology. Hobbies give me balance and energy.</p></section>
+<section id="interested"><h2>Interested About</h2><p>Deeply interested in innovation, leadership, and cultural understanding. Exploring new ideas and connecting with people excites me.</p></section>
+<section id="thoughts"><h2>Thoughts</h2><p>“Life is not about waiting for opportunities, it is about creating them.” Determination and honesty make anything possible.</p></section>
 
 <!-- Visitor Form -->
 <section id="visitor" class="hidden">
@@ -90,7 +101,12 @@ th, td{padding:8px;text-align:center;}
 <section id="adminDashboard" class="hidden">
   <h2>Admin Dashboard</h2>
   <button onclick="adminLogout()" class="btn">Logout</button>
-  <div id="adminVisitorList"></div>
+  <table id="visitorTable">
+    <thead><tr>
+      <th>Appt No</th><th>Name</th><th>Date</th><th>Time</th><th>Contact</th><th>Purpose</th><th>Status</th>
+    </tr></thead>
+    <tbody></tbody>
+  </table>
 </section>
 
 <footer>
@@ -98,95 +114,99 @@ th, td{padding:8px;text-align:center;}
 </footer>
 
 <script>
-// Show section
+// ------------------- Section Show -------------------
 function showSection(id){
   document.querySelectorAll("section").forEach(s=>s.classList.add("hidden"));
   document.getElementById(id).classList.remove("hidden");
 }
 
-// Visitor form submit
-const form=document.getElementById("visitorForm");
-form.addEventListener("submit", async e=>{
+// ------------------- Visitor Form Submit -------------------
+const form = document.getElementById("visitorForm");
+form.addEventListener("submit", async e => {
   e.preventDefault();
-  const data=Object.fromEntries(new FormData(form).entries());
-  try{
-    const res=await fetch("https://script.google.com/macros/s/AKfycbykK4bbtA1EmKpByRKXBXRQU7jvfM-4zjasawpUyL7rCLgr2s-VZSuWyoQtJb3ft0U/exec",{
-      method:"POST",
-      body:new URLSearchParams(data)
+  const data = new URLSearchParams(new FormData(form));
+  try {
+    const res = await fetch("https://script.google.com/macros/s/AKfycbykK4bbtA1EmKpByRKXBXRQU7jvfM-4zjasawpUyL7rCLgr2s-VZSuWyoQtJb3ft0U/exec", {
+      method: "POST",
+      body: data
     });
-    const result=await res.json();
-    if(result.success){ alert("Appointment submitted! Appt No: "+result.apptNo); form.reset(); }
-    else alert("Error: "+result.error);
-  }catch(err){ alert("Submission error: "+err); }
+    const result = await res.json();
+    if(result.success){
+      alert("Appointment submitted successfully!\nAppointment Number: " + result.apptNo);
+      form.reset();
+    } else {
+      alert("Error: " + result.error);
+    }
+  } catch(err){
+    alert("Submission failed: " + err);
+  }
 });
 
-// Check visitor status
-function checkStatus(){
-  const apptNo=document.getElementById("statusSearch").value.trim();
-  if(!apptNo){ alert("Enter Appointment Number"); return; }
-  const url="https://script.google.com/macros/s/AKfycbykK4bbtA1EmKpByRKXBXRQU7jvfM-4zjasawpUyL7rCLgr2s-VZSuWyoQtJb3ft0U/exec?appt_no="+encodeURIComponent(apptNo);
-  fetch(url).then(r=>r.json()).then(data=>{
-    const resDiv=document.getElementById("statusResult");
-    if(data.error){ resDiv.innerHTML="❌ "+data.error; return; }
-    let color="pink";
-    if(data.Status==="Accepted") color="green";
-    else if(data.Status==="Rejected") color="red";
-    resDiv.innerHTML=`<div style="padding:15px;border-radius:8px;background:white;color:black;">
-      <p><strong>Appt No:</strong>${data["Appointment Number"]}</p>
-      <p><strong>Name:</strong>${data.Name}</p>
-      <p><strong>Address:</strong>${data.Address}</p>
-      <p><strong>Country:</strong>${data.Country}</p>
-      <p><strong>Date of Birth:</strong>${data["Date Of Birth"]}</p>
-      <p><strong>Father's Name:</strong>${data["Father's Name"]}</p>
-      <p><strong>Visit Date:</strong>${data["Visit Date"]}</p>
-      <p><strong>Visit Time:</strong>${data["Visit Time"]}</p>
-      <p><strong>Phone:</strong>${data["Phone Number"]}</p>
-      <p><strong>Purpose:</strong>${data.Purpose}</p>
-      <p><strong>Passport:</strong>${data.Passport}</p>
-      <p><strong>Email:</strong>${data["Email ID"]}</p>
-      <p><strong>Status:</strong><span class="${color}">${data.Status}</span></p>
-    </div>`;
-  }).catch(err=>alert("Error: "+err));
+// ------------------- Check Visitor Status -------------------
+function checkStatus(){ 
+  const apptNo = document.getElementById("statusSearch").value.trim();
+  if(!apptNo){ alert("Please enter your Appointment Number"); return; }
+  const url = "https://script.google.com/macros/s/AKfycbykK4bbtA1EmKpByRKXBXRQU7jvfM-4zjasawpUyL7rCLgr2s-VZSuWyoQtJb3ft0U/exec?appt_no=" + encodeURIComponent(apptNo);
+  fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      const resDiv = document.getElementById("statusResult");
+      if(data.error){ resDiv.innerHTML = "❌ " + data.error; return; }
+      let colorClass = "pink";
+      if(data.Status === "Accepted") colorClass="green";
+      else if(data.Status === "Rejected") colorClass="red";
+      resDiv.innerHTML = `
+        <div style="padding:15px;border-radius:8px;background:white;color:black;">
+          <p><strong>Appt No:</strong> ${data["Appointment Number"]}</p>
+          <p><strong>Name:</strong> ${data.Name}</p>
+          <p><strong>Address:</strong> ${data.Address}</p>
+          <p><strong>Country:</strong> ${data.Country}</p>
+          <p><strong>Date of Birth:</strong> ${data["Date Of Birth"]}</p>
+          <p><strong>Father's Name:</strong> ${data["Father's Name"]}</p>
+          <p><strong>Visit Date:</strong> ${data["Visit Date"]}</p>
+          <p><strong>Visit Time:</strong> ${data["Visit Time"]}</p>
+          <p><strong>Phone:</strong> ${data["Phone Number"]}</p>
+          <p><strong>Purpose:</strong> ${data.Purpose}</p>
+          <p><strong>Passport:</strong> ${data["Passport (If Available)"]}</p>
+          <p><strong>Email:</strong> ${data["Email ID"]}</p>
+          <p><strong>Status:</strong> <span class="${colorClass}">${data.Status}</span></p>
+        </div>
+      `;
+    })
+    .catch(err => alert("Error fetching status: " + err));
 }
 
-// Admin login
+// ------------------- Admin -------------------
 function adminLogin(){
-  const u=document.getElementById("adminUser").value;
-  const p=document.getElementById("adminPass").value;
-  if(u==="admin" && p==="admin"){
-    showSection("adminDashboard");
-    fetchVisitors();
-  }else alert("Invalid credentials");
+  let u = document.getElementById("adminUser").value;
+  let p = document.getElementById("adminPass").value;
+  if(u==="admin" && p==="admin"){ showAdminDashboard(); }
+  else alert("Invalid Credentials");
 }
+
+function showAdminDashboard(){
+  showSection("adminDashboard");
+  const tbody = document.querySelector("#visitorTable tbody");
+  tbody.innerHTML="";
+  fetch("https://script.google.com/macros/s/AKfycbykK4bbtA1EmKpByRKXBXRQU7jvfM-4zjasawpUyL7rCLgr2s-VZSuWyoQtJb3ft0U/exec")
+    .then(res => res.json())
+    .then(data => {
+      if(data.visitors){
+        Object.keys(data.visitors).forEach(apptNo=>{
+          let v = data.visitors[apptNo];
+          let colorClass = "pink";
+          if(v.Status==="Accepted") colorClass="green";
+          else if(v.Status==="Rejected") colorClass="red";
+          let row = document.createElement("tr");
+          row.innerHTML = `<td>${apptNo}</td><td>${v.Name}</td><td>${v.VisitDate}</td><td>${v.VisitTime}</td><td>${v.PhoneNumber}</td><td>${v.Purpose}</td><td><span class="${colorClass}">${v.Status}</span></td>`;
+          tbody.appendChild(row);
+        });
+      }
+    })
+    .catch(err => alert("Error fetching visitors: "+err));
+}
+
 function adminLogout(){ showSection("profile"); }
-
-// Fetch visitors for admin
-async function fetchVisitors(){
-  try{
-    const res=await fetch("https://script.google.com/macros/s/AKfycbykK4bbtA1EmKpByRKXBXRQU7jvfM-4zjasawpUyL7rCLgr2s-VZSuWyoQtJb3ft0U/exec?all_visitors=1");
-    const data=await res.json();
-    const container=document.getElementById("adminVisitorList");
-    if(data.error){ container.innerHTML="Error: "+data.error; return; }
-    let html="<table><tr><th>Appt No</th><th>Name</th><th>Date</th><th>Time</th><th>Phone</th><th>Purpose</th><th>Status</th></tr>";
-    for(const v of data.visitors){
-      let color="pink";
-      if(v.Status==="Accepted") color="green";
-      else if(v.Status==="Rejected") color="red";
-      html+=`<tr>
-        <td>${v["Appointment Number"]}</td>
-        <td>${v.Name}</td>
-        <td>${v["Visit Date"]}</td>
-        <td>${v["Visit Time"]}</td>
-        <td>${v["Phone Number"]}</td>
-        <td>${v.Purpose}</td>
-        <td><span class="${color}">${v.Status}</span></td>
-      </tr>`;
-    }
-    html+="</table>";
-    container.innerHTML=html;
-  }catch(err){ alert("Error fetching visitors: "+err); }
-}
 </script>
-
 </body>
 </html>

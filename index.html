@@ -203,8 +203,51 @@ function checkStatus(){
 }
 
 // ------------------- Admin login/logout -------------------
-function adminLogin(){ /* existing code, unchanged */ }
-function adminLogout(){ /* existing code, unchanged */ }
+const ADMIN_CREDENTIALS = { username: "admin", password: "admin123" }; // <-- set your admin username & password here
+
+function adminLogin() {
+  const user = document.getElementById("adminUser").value.trim();
+  const pass = document.getElementById("adminPass").value.trim();
+  if(user === ADMIN_CREDENTIALS.username && pass === ADMIN_CREDENTIALS.password){
+    alert("Login successful!");
+    showSection('adminDashboard');
+    loadVisitorData();
+  } else {
+    alert("Invalid username or password");
+  }
+}
+
+function adminLogout() {
+  showSection('adminLogin');
+  document.getElementById("adminUser").value = "";
+  document.getElementById("adminPass").value = "";
+  document.getElementById("visitorTable").querySelector("tbody").innerHTML = "";
+}
+
+function loadVisitorData(){
+  fetch("https://script.google.com/macros/s/AKfycbxabjEMeIHXJiw8jDVINmPJ59FcdfP_q_6mAgD84aI4Umh1EAbyIqR1g72i0hCzNh-3/exec")
+  .then(res=>res.json())
+  .then(data=>{
+    const tbody = document.getElementById("visitorTable").querySelector("tbody");
+    tbody.innerHTML = "";
+    data.forEach(v=>{
+      let colorClass="pink";
+      if(v.Status === "Accepted") colorClass="green";
+      else if(v.Status === "Rejected") colorClass="red";
+
+      tbody.innerHTML += `<tr>
+        <td>${v["Appointment Number"]}</td>
+        <td>${v.Name}</td>
+        <td>${v["Visit Date"]}</td>
+        <td>${v["Visit Time"]}</td>
+        <td>${v["Phone Number"]}</td>
+        <td>${v.Purpose}</td>
+        <td class="${colorClass}">${v.Status}</td>
+      </tr>`;
+    });
+  })
+  .catch(err=>alert("Error fetching visitor data: "+err.message));
+}
 </script>
 </body>
 </html>

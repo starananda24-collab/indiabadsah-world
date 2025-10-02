@@ -28,10 +28,6 @@ th, td{padding:8px;text-align:center;}
 .green{background:#28a745;color:white;}
 .red{background:#dc3545;color:white;}
 .pink{background:#ff69b4;color:white;}
-.yellow{background:#ffc107;color:white;}
-.grey{background:#6c757d;color:white;}
-.deep-green{background:#196619;color:white;}
-.deep-red{background:#8b0000;color:white;}
 .hidden{display:none;}
 @media (max-width: 600px) {
   .form-box input, .form-box select, .form-box button, .form-box textarea {width:100% !important; font-size:16px; margin-top:5px;}
@@ -76,7 +72,7 @@ th, td{padding:8px;text-align:center;}
   <form id="appointmentForm" class="form-box">
     <label>Name* <input type="text" id="Name" name="Name" required></label>
     <label>Address <input type="text" id="Address" name="Address"></label>
-    <label>Date of Birth <input type="date" id="DateOfBirth" name="Date Of Birth"></label>
+    <label>Date Of Birth <input type="date" id="DateOfBirth" name="Date Of Birth"></label>
     <label>Country <input type="text" id="Country" name="Country"></label>
     <label>Father's Name <input type="text" id="FathersName" name="Father's Name"></label>
     <label>Visit Date* <input type="date" id="VisitDate" name="Visit Date" required></label>
@@ -117,12 +113,13 @@ th, td{padding:8px;text-align:center;}
 </footer>
 
 <script>
+// ------------------- Section Show -------------------
 function showSection(id){
   document.querySelectorAll("section").forEach(s=>s.classList.add("hidden"));
   document.getElementById(id).classList.remove("hidden");
 }
 
-// Visitor Form Submit
+// ------------------- Visitor Form Submit -------------------
 document.getElementById("appointmentForm").addEventListener("submit", function(e){
   e.preventDefault();
   const form = e.target;
@@ -130,7 +127,7 @@ document.getElementById("appointmentForm").addEventListener("submit", function(e
   const params = new URLSearchParams();
   formData.forEach((v,k) => params.append(k,v));
 
-  fetch("https://script.google.com/macros/s/AKfycbyxabjEMeIHXJiw8jDVINmPJ59FcdfP_q_6mAgD84aI4Umh1EAbyIqR1g72i0hCzNh-3/exec", {
+  fetch("https://script.google.com/macros/s/AKfycbykK4bbtA1EmKpByRKXBXRQU7jvfM-4zjasawpUyL7rCLgr2s-VZSuWyoQtJb3ft0U/exec", {
     method:"POST",
     body: params
   })
@@ -158,37 +155,81 @@ document.getElementById("appointmentForm").addEventListener("submit", function(e
   });
 });
 
-// Check Status
+// ------------------- Check Visitor Status -------------------
 function checkStatus(){ 
   const apptNo = document.getElementById("statusSearch").value.trim();
   if(!apptNo){ alert("Please enter your Appointment Number"); return; }
+  const url = "https://script.google.com/macros/s/AKfycbykK4bbtA1EmKpByRKXBXRQU7jvfM-4zjasawpUyL7rCLgr2s-VZSuWyoQtJb3ft0U/exec?appt_no=" + encodeURIComponent(apptNo);
 
-  fetch("https://script.google.com/macros/s/AKfycbyxabjEMeIHXJiw8jDVINmPJ59FcdfP_q_6mAgD84aI4Umh1EAbyIqR1g72i0hCzNh-3/exec?appt_no=" + encodeURIComponent(apptNo))
-  .then(res=>res.json())
-  .then(data=>{
-    const resDiv = document.getElementById("statusResult");
-    if(data.error){ resDiv.innerHTML = "❌ "+data.error; return; }
-    let colorClass="pink";
-    if(data.Status==="Accepted") colorClass="green";
-    else if(data.Status==="Rejected") colorClass="red";
-    resDiv.innerHTML = `<div style="padding:15px;border-radius:8px;background:white;color:black;">
-      <p><strong>Appt No:</strong> ${data["Appointment Number"]}</p>
-      <p><strong>Name:</strong> ${data.Name}</p>
-      <p><strong>Address:</strong> ${data.Address}</p>
-      <p><strong>Country:</strong> ${data.Country}</p>
-      <p><strong>Date of Birth:</strong> ${data["Date Of Birth"]}</p>
-      <p><strong>Father's Name:</strong> ${data["Father's Name"]}</p>
-      <p><strong>Visit Date:</strong> ${data["Visit Date"]}</p>
-      <p><strong>Visit Time:</strong> ${data["Visit Time"]}</p>
-      <p><strong>Phone:</strong> ${data["Phone Number"]}</p>
-      <p><strong>Purpose:</strong> ${data.Purpose}</p>
-      <p><strong>Passport:</strong> ${data["Passport (If Available)"]}</p>
-      <p><strong>Email:</strong> ${data["Email ID"]}</p>
-      <p><strong>Status:</strong> <span class="${colorClass}">${data.Status}</span></p>
-    </div>`;
-  })
-  .catch(err=>alert("Error fetching status: "+err));
+  fetch(url)
+    .then(res=>res.json())
+    .then(data=>{
+      const resDiv = document.getElementById("statusResult");
+      if(data.error){
+        resDiv.innerHTML = "❌ " + data.error;
+        return;
+      }
+      let colorClass="pink";
+      if(data.Status==="Accepted") colorClass="green";
+      else if(data.Status==="Rejected") colorClass="red";
+
+      resDiv.innerHTML = `
+        <div style="padding:15px;border-radius:8px;background:white;color:black;">
+          <p><strong>Appt No:</strong> ${data["Appointment Number"]}</p>
+          <p><strong>Name:</strong> ${data.Name}</p>
+          <p><strong>Address:</strong> ${data.Address}</p>
+          <p><strong>Country:</strong> ${data.Country}</p>
+          <p><strong>Date Of Birth:</strong> ${data["Date Of Birth"]}</p>
+          <p><strong>Father's Name:</strong> ${data["Father's Name"]}</p>
+          <p><strong>Visit Date:</strong> ${data["Visit Date"]}</p>
+          <p><strong>Visit Time:</strong> ${data["Visit Time"]}</p>
+          <p><strong>Phone:</strong> ${data["Phone Number"]}</p>
+          <p><strong>Purpose:</strong> ${data.Purpose}</p>
+          <p><strong>Passport:</strong> ${data["Passport (If Available)"]}</p>
+          <p><strong>Email:</strong> ${data["Email ID"]}</p>
+          <p><strong>Status:</strong> <span class="${colorClass}">${data.Status}</span></p>
+        </div>
+      `;
+    })
+    .catch(err=>alert("Error fetching status: "+err));
+}
+
+// ------------------- Admin Login -------------------
+function adminLogin(){
+  const user=document.getElementById("adminUser").value;
+  const pass=document.getElementById("adminPass").value;
+  if(user==="admin" && pass==="admin123"){
+    showSection("adminDashboard");
+    loadVisitors();
+  } else alert("Invalid username or password");
+}
+
+function adminLogout(){
+  showSection("profile");
+}
+
+// ------------------- Load Visitors for Admin -------------------
+function loadVisitors(){
+  fetch("https://script.google.com/macros/s/AKfycbykK4bbtA1EmKpByRKXBXRQU7jvfM-4zjasawpUyL7rCLgr2s-VZSuWyoQtJb3ft0U/exec")
+    .then(res=>res.json())
+    .then(data=>{
+      const tbody=document.querySelector("#visitorTable tbody");
+      tbody.innerHTML="";
+      data.forEach(v=>{
+        tbody.innerHTML+=`<tr>
+          <td>${v["Appointment Number"]}</td>
+          <td>${v.Name}</td>
+          <td>${v["Visit Date"]}</td>
+          <td>${v["Visit Time"]}</td>
+          <td>${v["Phone Number"]}</td>
+          <td>${v.Purpose}</td>
+          <td>${v.Status}</td>
+        </tr>`;
+      });
+    })
+    .catch(err=>console.error("Error loading visitors:",err));
 }
 </script>
+
 </body>
 </html>

@@ -28,10 +28,6 @@ th, td{padding:8px;text-align:center;}
 .green{background:#28a745;color:white;}
 .red{background:#dc3545;color:white;}
 .pink{background:#ff69b4;color:white;}
-.yellow{background:#ffc107;color:white;}
-.grey{background:#6c757d;color:white;}
-.deep-green{background:#196619;color:white;}
-.deep-red{background:#8b0000;color:white;}
 .hidden{display:none;}
 @media (max-width: 600px) {
   .form-box input, .form-box select, .form-box button {width:100% !important; font-size:16px; margin-top:5px;}
@@ -39,12 +35,6 @@ th, td{padding:8px;text-align:center;}
   #statusSearch {width:90%; margin:10px;}
 }
 </style>
-
-<!-- jsPDF for PDF generation -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<!-- Firebase SDKs -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 </head>
 <body>
 
@@ -62,12 +52,10 @@ th, td{padding:8px;text-align:center;}
   <a onclick="showSection('interested')">Interested About</a>
   <a onclick="showSection('thoughts')">Thoughts</a>
   <a onclick="showSection('visitor')">Visitor Form</a>
-  <a onclick="showSection('adminLogin')">Admin Login</a>
   <input type="text" id="statusSearch" placeholder="Visitor Status: Enter Appt No" onkeypress="if(event.key==='Enter'){checkStatus();}">
 </nav>
 <div id="statusResult"></div>
 
-<!-- Profile Sections -->
 <section id="profile"><h2>Profile</h2><p>I am INDIA BADSAH, a passionate learner and explorer of life’s endless opportunities. I aim to inspire others while growing myself in every possible field.</p></section>
 <section id="education"><h2>Education</h2><p>Education is the foundation of growth. I gather knowledge from books and real-life experiences shaping problem-solving abilities.</p></section>
 <section id="culture"><h2>Culture</h2><p>I embrace traditions, values, and respect for diversity while blending it with modern ideas for a balanced lifestyle.</p></section>
@@ -76,73 +64,23 @@ th, td{padding:8px;text-align:center;}
 <section id="interested"><h2>Interested About</h2><p>Deeply interested in innovation, leadership, and cultural understanding. Exploring new ideas and connecting with people excites me.</p></section>
 <section id="thoughts"><h2>Thoughts</h2><p>“Life is not about waiting for opportunities, it is about creating them.” Determination and honesty make anything possible.</p></section>
 
-<!-- Visitor Form -->
+<!-- Visitor Form Section -->
 <section id="visitor" class="hidden">
   <h2>E_Appointment Visitor Form</h2>
   <form id="appointmentForm" class="form-box">
-    <label>Visitor Name* <input type="text" id="vname" required></label>
-    <label>Visitor Address <input type="text" id="vaddress"></label>
-    <label>From Country <input type="text" id="vcountry"></label>
-    <label>Date of Birth <input type="date" id="vdob"></label>
-    <label>Virtual Visit Date* <input type="date" id="vdate" required></label>
-    <label>Time Availability* <input type="time" id="vtime" required></label>
-    <label>Contact Number* 
-      <select id="ccode">
-        <option value="+91">India (+91)</option>
-        <option value="+1">USA (+1)</option>
-        <option value="+880">Bangladesh (+880)</option>
-        <option value="+92">Pakistan (+92)</option>
-        <option value="+94">Sri Lanka (+94)</option>
-        <option value="+60">Malaysia (+60)</option>
-        <option value="+65">Singapore (+65)</option>
-        <option value="+44">UK (+44)</option>
-        <option value="+61">Australia (+61)</option>
-        <option value="+1">Canada (+1)</option>
-      </select>
-      <input type="tel" id="vphone" required>
-    </label>
-    <label>Purpose of Visit
-      <select id="vpurpose">
-        <option value="Visit Abroad">Visit Abroad</option>
-        <option value="Student Visa in Abroad">Student Visa in Abroad</option>
-        <option value="Job in Abroad">Job in Abroad</option>
-        <option value="Education system in Abroad">Education system in Abroad</option>
-        <option value="Counseling for Education in Abroad">Counseling for Education in Abroad</option>
-      </select>
-    </label>
-    <label>Passport Number <input type="text" id="vpassport"></label>
-    <label>Email ID 
-      <input type="text" id="vemail" placeholder="yourname" required>
-      <select id="emaildomain">
-        <option value="@gmail.com">@gmail.com</option>
-        <option value="@rediffmail.com">@rediffmail.com</option>
-        <option value="@yahoo.com">@yahoo.com</option>
-      </select>
-    </label>
+    <label>Visitor Name* <input type="text" id="vname" name="Name" required></label>
+    <label>Address <input type="text" id="vaddress" name="Address"></label>
+    <label>Date Of Birth <input type="date" id="vdob" name="Date Of Birth"></label>
+    <label>Country <input type="text" id="vcountry" name="Country"></label>
+    <label>Father's Name <input type="text" id="vfather" name="Father's Name"></label>
+    <label>Visit Date* <input type="date" id="vdate" name="Visit Date" required></label>
+    <label>Visit Time* <input type="time" id="vtime" name="Visit Time" required></label>
+    <label>Phone Number* <input type="tel" id="vphone" name="Phone Number" required></label>
+    <label>Email ID* <input type="email" id="vemail" name="Email ID" required></label>
+    <label>Passport (If Available) <input type="text" id="vpassport" name="Passport (If Available)"></label>
+    <label>Purpose <input type="text" id="vpurpose" name="Purpose"></label>
     <button type="submit" class="btn">Submit</button>
   </form>
-</section>
-
-<!-- Admin Login -->
-<section id="adminLogin" class="hidden">
-  <h2>Admin Login</h2>
-  <div class="form-box">
-    <label>Username <input type="text" id="adminUser"></label>
-    <label>Password <input type="password" id="adminPass"></label>
-    <button onclick="adminLogin()" class="btn">Login</button>
-  </div>
-</section>
-
-<!-- Admin Dashboard -->
-<section id="adminDashboard" class="hidden">
-  <h2>Admin Dashboard</h2>
-  <button onclick="adminLogout()" class="btn">Logout</button>
-  <table id="visitorTable">
-    <thead><tr>
-      <th>Appt No</th><th>Name</th><th>Date</th><th>Time</th><th>Contact</th><th>Purpose</th><th>Status</th><th>Action</th>
-    </tr></thead>
-    <tbody></tbody>
-  </table>
 </section>
 
 <footer>
@@ -150,178 +88,75 @@ th, td{padding:8px;text-align:center;}
 </footer>
 
 <script>
-// ------------------- Firebase Configuration -------------------
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "SENDER_ID",
-  appId: "APP_ID"
-};
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
+const webAppUrl = "https://script.google.com/macros/s/AKfycbyFisa1BPxaQw5nbBPW4gkIndYCtRU_dRRs55XhgeKejSc54F0XGa7TulUXbwgfIMql/exec";
 
-// ------------------- Section Show -------------------
 function showSection(id){
   document.querySelectorAll("section").forEach(s=>s.classList.add("hidden"));
   document.getElementById(id).classList.remove("hidden");
 }
 
-// ------------------- Unique Appointment Number -------------------
-function getNextAppointmentNumber(callback){
-  const counterRef = db.ref("counter/lastApptNo");
-  counterRef.transaction(current => {
-    return (current||0) + 1;
-  }, (err, committed, snapshot) => {
-    if(err){ alert("Error generating Appt No"); return; }
-    callback("APMTWBNB" + String(snapshot.val()).padStart(2,"0"));
-  });
-}
-
-// ------------------- Visitor Form Submit -------------------
+// ---------------- Form Submit ----------------
 document.getElementById("appointmentForm").addEventListener("submit", function(e){
   e.preventDefault();
-  let name = document.getElementById("vname").value.trim();
-  let date = document.getElementById("vdate").value;
-  let time = document.getElementById("vtime").value;
-  let phone = document.getElementById("vphone").value.trim();
-  if(!name || !date || !time || !phone){ alert("Please fill mandatory fields"); return; }
-
-  getNextAppointmentNumber(apptNo => {
-    let visitorData = {
-      name:name,
-      date:date,
-      time:time,
-      phone:document.getElementById("ccode").value + phone,
-      address:document.getElementById("vaddress").value,
-      country:document.getElementById("vcountry").value,
-      dob:document.getElementById("vdob").value,
-      purpose:document.getElementById("vpurpose").value,
-      passport:document.getElementById("vpassport").value||"NA",
-      email:document.getElementById("vemail").value+document.getElementById("emaildomain").value,
-      status:"Pending",
-      submitted:new Date().toLocaleString(),
-      chat:[]
-    };
-    db.ref("visitors/"+apptNo).set(visitorData);
-    alert("Appointment sent successfully: " + apptNo);
-    document.getElementById("appointmentForm").reset();
-  });
+  const formData = new FormData(this);
+  fetch(webAppUrl, {
+    method: "POST",
+    body: new URLSearchParams(formData)
+  })
+  .then(res => res.json())
+  .then(resp => {
+    if(resp.success){
+      alert("Appointment booked! Your Appt No: "+resp.apptNo);
+      this.reset();
+    } else {
+      alert("Error: "+resp.error);
+    }
+  })
+  .catch(err => alert("Network Error: "+err));
 });
 
-// ------------------- Check Visitor Status -------------------
-function showVisitorDetails(apptNo){
-  const resDiv = document.getElementById("statusResult");
-  db.ref("visitors/"+apptNo).once("value", snapshot => {
-    const v = snapshot.val();
-    if(!v){ resDiv.innerHTML = "❌ No Appointment Found"; return; }
-    let colorClass = "pink";
-    if(v.status==="Accepted") colorClass="green";
-    else if(v.status==="Rejected") colorClass="red";
-
-    resDiv.innerHTML = `
-      <div style="padding:15px;border-radius:8px;background:white;color:black;">
-        <p><strong>Appt No:</strong> ${apptNo}</p>
-        <p><strong>Name:</strong> ${v.name}</p>
-        <p><strong>Address:</strong> ${v.address}</p>
-        <p><strong>Country:</strong> ${v.country}</p>
-        <p><strong>DOB:</strong> ${v.dob}</p>
-        <p><strong>Visit to:</strong> BHOLA NATH BASAK</p>
-        <p><strong>Visit Date:</strong> ${v.date}</p>
-        <p><strong>Visit Time:</strong> ${v.time}</p>
-        <p><strong>Phone:</strong> ${v.phone}</p>
-        <p><strong>Purpose:</strong> ${v.purpose}</p>
-        <p><strong>Passport:</strong> ${v.passport}</p>
-        <p><strong>Email:</strong> ${v.email}</p>
-        <p><strong>Status:</strong> ${v.status}</p>
-      </div>
-      <div id="visitorChat" style="display:none;margin-top:10px;">
-        <h4>Messenger with Admin</h4>
-        <div id="chatBox" style="width:100%;height:150px;border:1px solid #ccc;padding:5px;overflow-y:auto;background:white;color:black;"></div>
-        <input type="text" id="chatInput" placeholder="Type message..." style="width:80%;padding:5px;">
-        <button onclick="sendVisitorMessage('${apptNo}')">Send</button>
-      </div>
-    `;
-    // Activate chat if accepted and meet time passed
-    if(v.status==="Accepted"){
-      let meetDateTime = new Date(v.date + " " + v.time);
-      let now = new Date();
-      if(now >= meetDateTime){
-        setTimeout(()=>{ document.getElementById("visitorChat").style.display="block"; renderChat(apptNo); }, 1000);
-      }
-    }
-  });
-}
-
+// ---------------- Check Visitor Status ----------------
 function checkStatus(){ 
   const apptNo = document.getElementById("statusSearch").value.trim();
-  showVisitorDetails(apptNo);
-}
+  if(!apptNo){
+    alert("Please enter your Appointment Number");
+    return;
+  }
 
-// ------------------- Chat -------------------
-function sendVisitorMessage(apptNo){
-  let input = document.getElementById("chatInput");
-  if(!input || input.value.trim()==="") return;
-  let chatRef = db.ref("visitors/"+apptNo+"/chat");
-  chatRef.push({sender:"Visitor",msg:input.value});
-  input.value="";
-  renderChat(apptNo);
-}
+  const url = webAppUrl + "?appt_no=" + encodeURIComponent(apptNo);
 
-function renderChat(apptNo){
-  const chatBox = document.getElementById("chatBox");
-  if(!chatBox) return;
-  chatBox.innerHTML="";
-  db.ref("visitors/"+apptNo+"/chat").once("value", snapshot=>{
-    snapshot.forEach(snap=>{
-      let c = snap.val();
-      chatBox.innerHTML+=`<p><strong>${c.sender}:</strong> ${c.msg}</p>`;
-    });
-    chatBox.scrollTop = chatBox.scrollHeight;
-  });
-}
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      const resDiv = document.getElementById("statusResult");
+      if(data.error){
+        resDiv.innerHTML = "❌ " + data.error;
+        return;
+      }
 
-// ------------------- Admin -------------------
-function adminLogin(){
-  let u = document.getElementById("adminUser").value;
-  let p = document.getElementById("adminPass").value;
-  if(u==="admin" && p==="admin"){ showSection("adminDashboard"); renderTable(); }
-  else alert("Invalid Credentials");
-}
-function adminLogout(){ showSection("profile"); }
-
-function renderTable(){
-  const tbody = document.querySelector("#visitorTable tbody");
-  tbody.innerHTML="";
-  db.ref("visitors").once("value", snapshot=>{
-    snapshot.forEach(snap=>{
-      let apptNo = snap.key;
-      let v = snap.val();
       let colorClass = "pink";
-      if(v.status==="Accepted") colorClass="green";
-      else if(v.status==="Rejected") colorClass="red";
+      if(data.Status === "Accepted") colorClass="green";
+      else if(data.Status === "Rejected") colorClass="red";
 
-      let row=document.createElement("tr");
-      row.innerHTML = `<td>${apptNo}</td><td>${v.name}</td><td>${v.date}</td><td>${v.time}</td><td>${v.phone}</td><td>${v.purpose}</td>
-        <td><button class="${colorClass}">${v.status}</button></td>
-        <td>
-          <button onclick="accept('${apptNo}')" ${v.status!=="Pending"?'disabled':''}>Accept</button>
-          <button onclick="reject('${apptNo}')" ${v.status!=="Pending"?'disabled':''}>Reject</button>
-        </td>`;
-      tbody.appendChild(row);
-    });
-  });
-}
-
-function accept(apptNo){
-  db.ref("visitors/"+apptNo).update({status:"Accepted"});
-  renderTable();
-}
-function reject(apptNo){
-  db.ref("visitors/"+apptNo).update({status:"Rejected"});
-  renderTable();
+      resDiv.innerHTML = `
+        <div style="padding:15px;border-radius:8px;background:white;color:black;">
+          <p><strong>Appt No:</strong> ${data["Appointment Number"]}</p>
+          <p><strong>Name:</strong> ${data.Name}</p>
+          <p><strong>Address:</strong> ${data.Address}</p>
+          <p><strong>Country:</strong> ${data.Country}</p>
+          <p><strong>Date of Birth:</strong> ${data["Date Of Birth"]}</p>
+          <p><strong>Father's Name:</strong> ${data["Father's Name"]}</p>
+          <p><strong>Visit Date:</strong> ${data["Visit Date"]}</p>
+          <p><strong>Visit Time:</strong> ${data["Visit Time"]}</p>
+          <p><strong>Phone:</strong> ${data["Phone Number"]}</p>
+          <p><strong>Purpose:</strong> ${data.Purpose}</p>
+          <p><strong>Passport:</strong> ${data["Passport (If Available)"]}</p>
+          <p><strong>Email:</strong> ${data["Email ID"]}</p>
+          <p><strong>Status:</strong> <span class="${colorClass}">${data.Status}</span></p>
+        </div>
+      `;
+    })
+    .catch(err => alert("Error fetching status: " + err));
 }
 </script>
 </body>

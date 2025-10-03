@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>INDIA BADSAH</title>
+<title>BHOLA NATH BASAK</title>
 <style>
 body {margin:0; font-family: Arial, sans-serif; background:linear-gradient(to right,#1a2a6c,#b21f1f,#fdbb2d); color:white; line-height:1.6;}
 header{text-align:center; padding:20px; background:rgba(0,0,0,0.6);}
@@ -28,11 +28,10 @@ th, td{padding:8px;text-align:center;}
 .green{background:#28a745;color:white;}
 .red{background:#dc3545;color:white;}
 .pink{background:#ff69b4;color:white;}
-.yellow{background:#ffc107;color:white;}
-.grey{background:#6c757d;color:white;}
-.deep-green{background:#196619;color:white;}
-.deep-red{background:#8b0000;color:white;}
 .hidden{display:none;}
+.social-box{background:#333;padding:15px;margin:20px auto;border-radius:12px;max-width:400px;text-align:center;}
+.social-box h3{margin-bottom:10px;color:#fbd46d;}
+.social-box a{margin:0 10px;color:white;text-decoration:none;font-weight:bold;}
 @media (max-width: 600px) {
   .form-box input, .form-box select, .form-box button, .form-box textarea {width:100% !important; font-size:16px; margin-top:5px;}
   nav {flex-direction: column; align-items: flex-start;}
@@ -43,8 +42,8 @@ th, td{padding:8px;text-align:center;}
 <body>
 
 <header>
-  <img src="myphoto.jpg" alt="India Badsah Photo">
-  <h1>INDIA BADSAH</h1>
+  <img src="myphoto.jpg" alt="Bhola Nath Basak Photo">
+  <h1>BHOLA NATH BASAK</h1>
 </header>
 
 <nav>
@@ -62,7 +61,7 @@ th, td{padding:8px;text-align:center;}
 <div id="statusResult"></div>
 
 <!-- Profile Sections -->
-<section id="profile"><h2>Profile</h2><p>I am INDIA BADSAH, a passionate learner and explorer of life’s endless opportunities. I aim to inspire others while growing myself in every possible field.</p></section>
+<section id="profile"><h2>Profile</h2><p>I am BHOLA NATH BASAK, a passionate learner and explorer of life’s endless opportunities. I aim to inspire others while growing myself in every possible field.</p></section>
 <section id="education"><h2>Education</h2><p>Education is the foundation of growth. I gather knowledge from books and real-life experiences shaping problem-solving abilities.</p></section>
 <section id="culture"><h2>Culture</h2><p>I embrace traditions, values, and respect for diversity while blending it with modern ideas for a balanced lifestyle.</p></section>
 <section id="achievements"><h2>Achievements</h2><p>Every step of life is an achievement — from personal milestones to professional success, reflecting perseverance, hard work, and dedication.</p></section>
@@ -71,7 +70,7 @@ th, td{padding:8px;text-align:center;}
 <section id="thoughts"><h2>Thoughts</h2><p>“Life is not about waiting for opportunities, it is about creating them.” Determination and honesty make anything possible.</p></section>
 
 <!-- Visitor Form -->
-<section id="visitor" class="hidden">
+<section id="visitor" class="hidden" style="background:#1a2a6c;padding:40px;">
   <h2>E_Appointment Visitor Form</h2>
   <form id="appointmentForm" class="form-box">
     <label>Name* <input type="text" id="Name" name="Name" required></label>
@@ -86,6 +85,7 @@ th, td{padding:8px;text-align:center;}
     <label>Passport (If Available) <input type="text" id="Passport" name="Passport (If Available)"></label>
     <label>Purpose <textarea id="Purpose" name="Purpose"></textarea></label>
     <button type="submit" class="btn">Submit</button>
+    <button type="button" class="btn" onclick="cancelVisitorForm()">Cancel</button>
   </form>
   <div id="responseMessage" style="display:none;margin-top:10px;padding:10px;border-radius:5px;"></div>
 </section>
@@ -105,15 +105,26 @@ th, td{padding:8px;text-align:center;}
   <h2>Admin Dashboard</h2>
   <button onclick="adminLogout()" class="btn">Logout</button>
   <table id="visitorTable">
-    <thead><tr>
-      <th>Appt No</th><th>Name</th><th>Date</th><th>Time</th><th>Phone</th><th>Purpose</th><th>Status</th>
-    </tr></thead>
+    <thead>
+      <tr>
+        <th>Appointment Number</th><th>Name</th><th>Address</th><th>Date Of Birth</th><th>Country</th><th>Father's Name</th><th>Visit Date</th><th>Visit Time</th><th>Phone Number</th><th>Email ID</th><th>Passport (If Available)</th><th>Purpose</th><th>Status</th><th>Submitted</th><th>Actions</th>
+      </tr>
+    </thead>
     <tbody></tbody>
   </table>
 </section>
 
+<!-- Admin Social -->
+<div class="social-box">
+  <h3>COMMUNICATIONS</h3>
+  <a href="#">Facebook</a>
+  <a href="#">Instagram</a>
+  <a href="#">LinkedIn</a>
+  <a href="tel:+1234567890">Phone</a>
+</div>
+
 <footer>
-  <p>© 2025 INDIA BADSAH | Personal Biography Website</p>
+  <p>© 2025 BHOLA NATH BASAK | Personal Biography Website</p>
 </footer>
 
 <script>
@@ -123,13 +134,20 @@ function showSection(id){
   document.getElementById(id).classList.remove("hidden");
 }
 
+// ------------------- Cancel Visitor Form -------------------
+function cancelVisitorForm(){
+  document.getElementById('appointmentForm').reset();
+  window.scrollTo(0,0);
+  showSection('profile');
+}
+
 // ------------------- Visitor Form Submit -------------------
 document.getElementById("appointmentForm").addEventListener("submit", function(e){
   e.preventDefault();
   const form = e.target;
   const formData = new FormData(form);
   const params = new URLSearchParams();
-  formData.forEach((v,k) => params.append(k,v));
+  formData.forEach((v,k)=>params.append(k,v));
 
   fetch("https://script.google.com/macros/s/AKfycbxabjEMeIHXJiw8jDVINmPJ59FcdfP_q_6mAgD84aI4Umh1EAbyIqR1g72i0hCzNh-3/exec", {
     method:"POST",
@@ -140,21 +158,19 @@ document.getElementById("appointmentForm").addEventListener("submit", function(e
     const msgDiv = document.getElementById("responseMessage");
     if(data.success){
       msgDiv.textContent = "Appointment submitted successfully! Appointment No: " + data.apptNo;
-      msgDiv.style.background="#4CAF50";
-      msgDiv.style.color="white";
+      msgDiv.style.background="#4CAF50"; msgDiv.style.color="white";
       form.reset();
+      printVisitorForm(data); // Generate print
     } else {
       msgDiv.textContent = "Error: " + data.error;
-      msgDiv.style.background="#f44336";
-      msgDiv.style.color="white";
+      msgDiv.style.background="#f44336"; msgDiv.style.color="white";
     }
     msgDiv.style.display="block";
   })
   .catch(err=>{
     const msgDiv = document.getElementById("responseMessage");
     msgDiv.textContent = "Submission failed: " + err.message;
-    msgDiv.style.background="#f44336";
-    msgDiv.style.color="white";
+    msgDiv.style.background="#f44336"; msgDiv.style.color="white";
     msgDiv.style.display="block";
   });
 });
@@ -170,83 +186,95 @@ function checkStatus(){
     .then(res=>res.json())
     .then(data=>{
       const resDiv = document.getElementById("statusResult");
-      if(data.error){
-        resDiv.innerHTML = "❌ " + data.error;
-        return;
-      }
+      if(data.error){ resDiv.innerHTML = "❌ " + data.error; return; }
 
-      let colorClass = "pink";
-      if(data.Status === "Accepted") colorClass="green";
-      else if(data.Status === "Rejected") colorClass="red";
+      let colorClass="pink";
+      if(data.Status==="Accepted") colorClass="green";
+      else if(data.Status==="Rejected") colorClass="red";
 
-      resDiv.innerHTML = `
-        <div style="padding:15px;border-radius:8px;background:white;color:black;">
-          <p><strong>Appt No:</strong> ${data["Appointment Number"]}</p>
-          <p><strong>Name:</strong> ${data.Name}</p>
-          <p><strong>Address:</strong> ${data.Address}</p>
-          <p><strong>Date of Birth:</strong> ${data["Date Of Birth"]}</p>
-          <p><strong>Country:</strong> ${data.Country}</p>
-          <p><strong>Father's Name:</strong> ${data["Father's Name"]}</p>
-          <p><strong>Visit Date:</strong> ${data["Visit Date"]}</p>
-          <p><strong>Visit Time:</strong> ${data["Visit Time"]}</p>
-          <p><strong>Phone:</strong> ${data["Phone Number"]}</p>
-          <p><strong>Purpose:</strong> ${data.Purpose}</p>
-          <p><strong>Passport:</strong> ${data["Passport (If Available)"]}</p>
-          <p><strong>Email:</strong> ${data["Email ID"]}</p>
-          <p><strong>Status:</strong> <span class="${colorClass}">${data.Status}</span></p>
-        </div>
-      `;
+      resDiv.innerHTML = `<div style="padding:15px;border-radius:8px;background:white;color:black;">
+        <p><strong>Appt No:</strong> ${data["Appointment Number"]}</p>
+        <p><strong>Name:</strong> ${data.Name}</p>
+        <p><strong>Visit Date:</strong> ${data["Visit Date"]}</p>
+        <p><strong>Visit Time:</strong> ${data["Visit Time"]}</p>
+        <p><strong>Status:</strong> <span class="${colorClass}">${data.Status}</span></p>
+      </div>`;
     })
     .catch(err=>{
       document.getElementById("statusResult").innerHTML = "❌ Error fetching status: " + err.message;
     });
 }
 
-// ------------------- Admin login/logout -------------------
-const ADMIN_CREDENTIALS = { username: "admin", password: "admin123" }; // <-- set your admin username & password here
-
-function adminLogin() {
-  const user = document.getElementById("adminUser").value.trim();
-  const pass = document.getElementById("adminPass").value.trim();
-  if(user === ADMIN_CREDENTIALS.username && pass === ADMIN_CREDENTIALS.password){
-    alert("Login successful!");
+// ------------------- Admin Login / Logout -------------------
+function adminLogin(){
+  const user = document.getElementById("adminUser").value;
+  const pass = document.getElementById("adminPass").value;
+  // hardcoded credentials
+  if(user==="admin" && pass==="admin123"){
     showSection('adminDashboard');
-    loadVisitorData();
-  } else {
-    alert("Invalid username or password");
-  }
+    loadVisitorTable();
+  } else alert("Invalid username or password");
+}
+function adminLogout(){
+  showSection('profile');
 }
 
-function adminLogout() {
-  showSection('adminLogin');
-  document.getElementById("adminUser").value = "";
-  document.getElementById("adminPass").value = "";
-  document.getElementById("visitorTable").querySelector("tbody").innerHTML = "";
-}
-
-function loadVisitorData(){
+// ------------------- Load Visitor Table -------------------
+function loadVisitorTable(){
+  const tableBody = document.querySelector("#visitorTable tbody");
+  tableBody.innerHTML="";
   fetch("https://script.google.com/macros/s/AKfycbxabjEMeIHXJiw8jDVINmPJ59FcdfP_q_6mAgD84aI4Umh1EAbyIqR1g72i0hCzNh-3/exec")
-  .then(res=>res.json())
-  .then(data=>{
-    const tbody = document.getElementById("visitorTable").querySelector("tbody");
-    tbody.innerHTML = "";
-    data.forEach(v=>{
-      let colorClass="pink";
-      if(v.Status === "Accepted") colorClass="green";
-      else if(v.Status === "Rejected") colorClass="red";
-
-      tbody.innerHTML += `<tr>
-        <td>${v["Appointment Number"]}</td>
-        <td>${v.Name}</td>
-        <td>${v["Visit Date"]}</td>
-        <td>${v["Visit Time"]}</td>
-        <td>${v["Phone Number"]}</td>
-        <td>${v.Purpose}</td>
-        <td class="${colorClass}">${v.Status}</td>
-      </tr>`;
+    .then(res=>res.json())
+    .then(data=>{
+      if(!Array.isArray(data)) return;
+      data.forEach(row=>{
+        const tr = document.createElement("tr");
+        const visitDate = new Date(row["Visit Date"]);
+        const visitTime = row["Visit Time"];
+        const formattedDate = visitDate.getDate().toString().padStart(2,"0")+"-"+(visitDate.getMonth()+1).toString().padStart(2,"0")+"-"+visitDate.getFullYear();
+        tr.innerHTML=`
+          <td>${row["Appointment Number"]}</td><td>${row.Name}</td><td>${row.Address}</td>
+          <td>${row["Date Of Birth"]}</td><td>${row.Country}</td><td>${row["Father's Name"]}</td>
+          <td>${formattedDate}</td><td>${visitTime}</td><td>${row["Phone Number"]}</td><td>${row["Email ID"]}</td>
+          <td>${row["Passport (If Available)"]}</td><td>${row.Purpose}</td>
+          <td class="${row.Status==="Accepted"?"green":row.Status==="Rejected"?"red":"pink"}">${row.Status}</td>
+          <td>${row.Submitted}</td>
+          <td>
+            <button onclick="acceptVisitor(this)" ${row.Status==="Rejected"?"disabled":""}>Accept</button>
+            <button onclick="rejectVisitor(this)" ${row.Status==="Accepted"?"disabled":""}>Reject</button>
+            <button onclick="deleteVisitor(this)">Delete</button>
+          </td>`;
+        tableBody.appendChild(tr);
+      });
     });
-  })
-  .catch(err=>alert("Error fetching visitor data: "+err.message));
+}
+
+// ------------------- Admin Actions -------------------
+function acceptVisitor(btn){
+  const row = btn.closest("tr");
+  row.querySelector("td:nth-child(13)").textContent="Accepted";
+  row.querySelector("td:nth-child(13)").className="green";
+  row.querySelector("button:nth-child(1)").disabled=true;
+  row.querySelector("button:nth-child(2)").disabled=true;
+}
+function rejectVisitor(btn){
+  const row = btn.closest("tr");
+  row.querySelector("td:nth-child(13)").textContent="Rejected";
+  row.querySelector("td:nth-child(13)").className="red";
+  row.querySelector("button:nth-child(1)").disabled=true;
+  row.querySelector("button:nth-child(2)").disabled=true;
+}
+function deleteVisitor(btn){
+  btn.closest("tr").remove();
+}
+
+// ------------------- Print Visitor -------------------
+function printVisitorForm(data){
+  const newWin = window.open();
+  newWin.document.write("<h2>Appointment Details</h2>");
+  newWin.document.write("<p>Appointment No: "+data.apptNo+"</p>");
+  for(const k in data){ if(k!=="success" && k!=="apptNo") newWin.document.write("<p>"+k+": "+data[k]+"</p>"); }
+  newWin.print();
 }
 </script>
 </body>

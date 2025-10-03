@@ -10,7 +10,7 @@ body {margin:0; font-family: Arial, sans-serif; background:linear-gradient(to ri
 header{text-align:center; padding:20px; background:rgba(0,0,0,0.6);}
 header img{width:180px;height:180px;object-fit:cover;border-radius:50%;border:5px solid #fff;transition: transform 0.4s;}
 header img:hover{transform: scale(1.05) rotate(2deg);}
-header h1{margin:15px 0 0; font-size:2.5em;color:#fbd46d;text-shadow:2px 2px 5px black;}
+header h1{margin:15px 0 0; font-size:2.5em;color:#fbd46d;text-shadow:2px 2px 5px black; font-family:'Arial Black', sans-serif;}
 nav{display:flex;justify-content:center;background:rgba(0,0,0,0.8);flex-wrap:wrap;align-items:center;}
 nav a{color:white;text-decoration:none;padding:10px 15px;display:block;transition:background 0.3s,color 0.3s;cursor:pointer;}
 nav a:hover{background:#fbd46d;color:black;border-radius:5px;}
@@ -55,6 +55,7 @@ th, td{padding:8px;text-align:center;}
   <a onclick="showSection('hobbies')">Hobbies</a>
   <a onclick="showSection('interested')">Interested About</a>
   <a onclick="showSection('thoughts')">Thoughts</a>
+  <a onclick="showSection('loverelation')">Love Relation</a>
   <a onclick="showSection('visitor')">Visitor Form</a>
   <a onclick="showSection('adminLogin')">Admin Login</a>
   <input id="statusSearch" type="text" placeholder="Visitor Status: Enter Appt No" onkeypress="if(event.key==='Enter'){checkStatus();}" />
@@ -63,13 +64,140 @@ th, td{padding:8px;text-align:center;}
 <div id="statusResult"></div>
 
 <!-- Profile -->
-<section id="profile"><h2>Profile</h2><p>I am BHOLA NATH BASAK, a passionate learner and explorer of life’s endless opportunities. I aim to inspire others while growing myself in every possible field.</p></section>
-<section id="education"><h2>Education</h2><p>Education is the foundation of growth. I gather knowledge from books and real-life experiences shaping problem-solving abilities.</p></section>
-<section id="culture"><h2>Culture</h2><p>I embrace traditions, values, and respect for diversity while blending it with modern ideas for a balanced lifestyle.</p></section>
-<section id="achievements"><h2>Achievements</h2><p>Every step of life is an achievement — from personal milestones to professional success, reflecting perseverance, hard work, and dedication.</p></section>
-<section id="hobbies"><h2>Hobbies</h2><p>I enjoy creative and recreational activities — sports, art, music, technology. Hobbies give me balance and energy.</p></section>
-<section id="interested"><h2>Interested About</h2><p>Deeply interested in innovation, leadership, and cultural understanding. Exploring new ideas and connecting with people excites me.</p></section>
-<section id="thoughts"><h2>Thoughts</h2><p>“Life is not about waiting for opportunities, it is about creating them.” Determination and honesty make anything possible.</p></section>
+<section id="profile">
+  <h2>Profile</h2>
+  <p style="font-family:'Arial Black', sans-serif; font-weight:bold; font-size:1.2em;">
+    Personal Data: <br>
+    Name: BHOLA NATH BASAK <br>
+    Date of Birth: 24-03-1988 <br>
+    Father's Name: <a href="#" onclick="showFatherInfo(event)">Late Sankar Lal Basak</a> <span id="fatherPopup" style="display:none;position:absolute;background:#fff;color:#000;padding:10px;border:1px solid #333;border-radius:8px;max-width:250px;z-index:1000;">Born in Krishnagar, Nadia, India, on 1934, 12th August - 16th June, 2016</span><br>
+    Mother's Name: Anima Basak <br>
+    Marriage: Love Marriage with Asha Basak, met July 2016, married September 2016 <br>
+    Daughter: Sonaskhi Basak
+  </p>
+  <p>
+    Bhola Nath Basak is a person whose life is an inspiring journey of passion, perseverance, and personal growth. From early childhood, he demonstrated an unquenchable curiosity about the world, fostering a love for learning that has guided every stage of his development. Growing up in a family that valued education and moral principles, he imbibed strong foundational values that shaped his character and interpersonal relationships. Through his experiences, Bhola has learned the importance of resilience, integrity, and consistent self-improvement. He believes in approaching every challenge as an opportunity to grow, and in encouraging others to recognize and realize their potential. His profile reflects a dedication not only to professional success but also to fostering meaningful connections and nurturing community values. Bhola’s personal philosophy intertwines ambition with compassion, aiming to balance personal achievements with contributing positively to society. His hobbies, interests, and cultural engagement further highlight his multidimensional personality, painting a comprehensive picture of a man committed to continuous learning, creativity, and inspiring others through actions as well as words. Over the years, he has developed a framework of discipline, empathy, and intellectual curiosity that guides his personal and professional decisions. Each accomplishment is viewed not only as a milestone but also as a stepping stone for future aspirations. Bhola’s journey embodies the principles of thoughtful reflection, proactive learning, and purposeful living. He has consistently sought to integrate traditional wisdom with modern innovation, emphasizing the importance of adaptability in a fast-evolving world. His relationships with family, friends, and colleagues reflect a deep commitment to honesty, loyalty, and respect. As an individual, he is driven by both the desire to achieve excellence and the aspiration to make a meaningful impact on those around him. This section captures the essence of Bhola’s character, highlighting a holistic view of his personal life, experiences, and guiding philosophy.
+  </p>
+</section>
+
+<!-- Education -->
+<section id="education">
+  <h2>Education</h2>
+  <p style="font-family:'Arial Black', sans-serif; font-weight:bold; font-size:1.2em;">
+    Personal Data: <br>
+    Name: BHOLA NATH BASAK <br>
+    Date of Birth: 24-03-1988 <br>
+    Father's Name: <a href="#" onclick="showFatherInfo(event)">Late Sankar Lal Basak</a><br>
+    Mother's Name: Anima Basak <br>
+    Marriage: Love Marriage with Asha Basak <br>
+    Daughter: Sonaskhi Basak
+  </p>
+  <p>
+    Education has played a pivotal role in shaping Bhola Nath Basak’s intellectual and personal development. From primary school to higher education, he has approached learning with a passion and discipline that underscore his lifelong commitment to knowledge acquisition. His academic journey was marked by curiosity, diligence, and an eagerness to engage deeply with diverse subjects. Whether in scientific inquiry, literary exploration, or social studies, Bhola sought to understand underlying principles and connect theoretical knowledge with practical application. Education for him is not merely a pursuit of degrees or certifications, but a comprehensive journey that includes the cultivation of critical thinking, problem-solving, creativity, and emotional intelligence. He actively participated in academic projects, seminars, and collaborative learning environments, enhancing not only his knowledge but also his communication and leadership skills. Beyond formal schooling, Bhola pursued self-directed learning, reading extensively across disciplines and engaging in continuous skill development. This approach has allowed him to adapt to changing circumstances, embrace new technologies, and remain relevant in an evolving global landscape. Bhola’s educational philosophy emphasizes holistic development—intellectual growth combined with ethical grounding, social awareness, and cultural sensitivity. He believes that true education equips individuals to make informed decisions, contribute meaningfully to society, and lead fulfilling lives. In every stage of his academic pursuit, he has sought opportunities to mentor peers, share insights, and cultivate a spirit of curiosity in others. Education has not only empowered him with knowledge but also instilled a sense of responsibility to apply that knowledge for the betterment of community and society at large. His achievements in education are reflected in both formal accolades and the intangible growth of wisdom, discipline, and perspective, making him a lifelong learner committed to continuous personal and professional development.
+  </p>
+</section>
+
+<!-- Culture -->
+<section id="culture">
+  <h2>Culture</h2>
+  <p style="font-family:'Arial Black', sans-serif; font-weight:bold; font-size:1.2em;">
+    Personal Data: <br>
+    Name: BHOLA NATH BASAK <br>
+    Date of Birth: 24-03-1988 <br>
+    Father's Name: <a href="#" onclick="showFatherInfo(event)">Late Sankar Lal Basak</a><br>
+    Mother's Name: Anima Basak <br>
+    Marriage: Love Marriage with Asha Basak <br>
+    Daughter: Sonaskhi Basak
+  </p>
+  <p>
+    Culture forms the core of Bhola Nath Basak’s worldview and daily practices. Rooted in traditions while embracing modernity, he understands culture as a living, evolving entity that shapes identity, values, and interpersonal relationships. His upbringing in a family that respected heritage instilled in him an appreciation for rituals, celebrations, and community cohesion. Simultaneously, exposure to global ideas and innovations has allowed him to blend traditional wisdom with contemporary perspectives. Bhola engages with cultural arts, literature, music, and festivals, seeing them as avenues to nurture creativity, emotional intelligence, and social cohesion. His approach to culture is inclusive and adaptive, recognizing the importance of diversity, empathy, and cross-cultural understanding in an interconnected world. Through participation in community events, mentoring younger generations, and promoting cultural awareness, he exemplifies how cultural engagement fosters personal growth and collective harmony. Bhola believes that cultural literacy extends beyond mere participation—it requires reflection, learning, and active contribution. By integrating lessons from heritage and experience, he continuously cultivates a balanced lifestyle that honors the past, thrives in the present, and inspires future innovation. The way he expresses himself—through attire, communication, celebrations, and civic engagement—demonstrates a harmonious alignment between personal values and cultural consciousness. Culture for Bhola is not static; it evolves with interaction, learning, and creativity, serving as a compass guiding ethical choices, artistic expression, and social responsibility. His life illustrates that culture, when embraced thoughtfully, becomes a source of identity, resilience, and inspiration, allowing him to connect meaningfully with diverse communities while fostering personal fulfillment.
+  </p>
+</section>
+
+<!-- Achievements -->
+<section id="achievements">
+  <h2>Achievements</h2>
+  <p style="font-family:'Arial Black', sans-serif; font-weight:bold; font-size:1.2em;">
+    Personal Data: <br>
+    Name: BHOLA NATH BASAK <br>
+    Date of Birth: 24-03-1988 <br>
+    Father's Name: <a href="#" onclick="showFatherInfo(event)">Late Sankar Lal Basak</a><br>
+    Mother's Name: Anima Basak <br>
+    Marriage: Love Marriage with Asha Basak <br>
+    Daughter: Sonaskhi Basak
+  </p>
+  <p>
+    Throughout his life, Bhola Nath Basak has achieved milestones that reflect dedication, perseverance, and a relentless pursuit of excellence. From academic successes to professional accomplishments, each achievement symbolizes the culmination of effort, learning, and resilience. Bhola values not only tangible recognition but also the intangible satisfaction derived from mastering new skills, overcoming challenges, and contributing meaningfully to his community. His accomplishments span personal growth, social engagement, professional development, and creative exploration, demonstrating a holistic approach to success. He approaches goals with strategic planning, discipline, and adaptability, recognizing that persistence in the face of obstacles is essential to achieving long-term objectives. Each award, certification, or recognition represents more than just external validation—it embodies lessons learned, experiences gained, and relationships nurtured along the journey. Bhola’s achievements also include fostering initiatives that benefit others, mentoring individuals, and supporting collaborative projects that have a lasting impact. He believes that true achievement encompasses ethical conduct, social contribution, and personal fulfillment, creating a legacy that inspires others. By maintaining a balance between ambition and empathy, Bhola ensures that his successes resonate not only within his personal sphere but also across communities he interacts with. This dedication to excellence, combined with humility and a growth mindset, allows him to continuously redefine goals, set new benchmarks, and remain committed to lifelong learning and meaningful contributions. His achievements exemplify a life lived with purpose, determination, and integrity.
+  </p>
+</section>
+
+<!-- Hobbies -->
+<section id="hobbies">
+  <h2>Hobbies</h2>
+  <p style="font-family:'Arial Black', sans-serif; font-weight:bold; font-size:1.2em;">
+    Personal Data: <br>
+    Name: BHOLA NATH BASAK <br>
+    Date of Birth: 24-03-1988 <br>
+    Father's Name: <a href="#" onclick="showFatherInfo(event)">Late Sankar Lal Basak</a><br>
+    Mother's Name: Anima Basak <br>
+    Marriage: Love Marriage with Asha Basak <br>
+    Daughter: Sonaskhi Basak
+  </p>
+  <p>
+    Bhola Nath Basak engages in a variety of hobbies that nourish his mind, body, and spirit. He enjoys reading, sports, music, technology, and artistic expression, all of which contribute to his well-rounded personality. Reading allows him to explore new ideas, enhance creativity, and develop critical thinking. Sports and physical activities maintain health, discipline, and teamwork skills. Music and art provide avenues for relaxation, emotional expression, and aesthetic appreciation. Technology fascinates him, offering endless opportunities to innovate and connect with global trends. Each hobby complements the other, creating a balance between mental stimulation, physical activity, and creative exploration. Through hobbies, Bhola cultivates focus, perseverance, and joy, fostering a harmonious lifestyle. His engagement in diverse recreational activities also strengthens social bonds, encourages lifelong learning, and provides inspiration for professional and personal growth. Hobbies are not merely leisure for Bhola—they are integral to his identity, creativity, and ongoing journey of self-discovery.
+  </p>
+</section>
+
+<!-- Interested -->
+<section id="interested">
+  <h2>Interested About</h2>
+  <p style="font-family:'Arial Black', sans-serif; font-weight:bold; font-size:1.2em;">
+    Personal Data: <br>
+    Name: BHOLA NATH BASAK <br>
+    Date of Birth: 24-03-1988 <br>
+    Father's Name: <a href="#" onclick="showFatherInfo(event)">Late Sankar Lal Basak</a><br>
+    Mother's Name: Anima Basak <br>
+    Marriage: Love Marriage with Asha Basak <br>
+    Daughter: Sonaskhi Basak
+  </p>
+  <p>
+    Bhola Nath Basak’s interests span leadership, innovation, culture, technology, and human development. He seeks to explore new ideas, understand global trends, and contribute to meaningful initiatives. His curiosity drives engagement in learning, networking, and problem-solving, fostering growth in personal and professional domains. By pursuing diverse interests, he nurtures creativity, strategic thinking, and adaptability. Bhola’s active exploration of cultural, technological, and leadership dimensions enables him to bridge knowledge and action, implementing insights in practical contexts. These interests align with his vision of continuous learning, collaboration, and creating value for communities. Through exploration and engagement, he cultivates a mindset open to possibilities, innovation, and personal fulfillment.
+  </p>
+</section>
+
+<!-- Thoughts -->
+<section id="thoughts">
+  <h2>Thoughts</h2>
+  <p style="font-family:'Arial Black', sans-serif; font-weight:bold; font-size:1.2em;">
+    Personal Data: <br>
+    Name: BHOLA NATH BASAK <br>
+    Date of Birth: 24-03-1988 <br>
+    Father's Name: <a href="#" onclick="showFatherInfo(event)">Late Sankar Lal Basak</a><br>
+    Mother's Name: Anima Basak <br>
+    Marriage: Love Marriage with Asha Basak <br>
+    Daughter: Sonaskhi Basak
+  </p>
+  <p>
+    Bhola Nath Basak believes in proactive, purposeful living. He views life as a canvas of opportunities, emphasizing integrity, determination, and empathy in every decision. His thoughts reflect reflection, strategic planning, and ethical judgment. Bhola often contemplates personal growth, social responsibility, and the balance between ambition and compassion. These guiding principles shape interactions, choices, and contributions to society, forming a philosophy rooted in resilience, curiosity, and meaningful engagement.
+  </p>
+</section>
+
+<!-- Love Relation -->
+<section id="loverelation">
+  <h2>Love Relation</h2>
+  <p style="font-family:'Arial Black', sans-serif; font-weight:bold; font-size:1.2em;">
+    Personal Data: <br>
+    Name: BHOLA NATH BASAK <br>
+    Date of Birth: 24-03-1988 <br>
+    Father's Name: <a href="#" onclick="showFatherInfo(event)">Late Sankar Lal Basak</a><br>
+    Mother's Name: Anima Basak <br>
+    Marriage: Love Marriage with Asha Basak, met July 2016, married September 2016 <br>
+    Daughter: Sonaskhi Basak
+  </p>
+  <p>
+    Bhola Nath Basak met Asha Basak in July 2016, and their connection was immediate and profound. Their love blossomed through mutual respect, shared values, and a deep understanding of each other’s aspirations. Within months, they chose to marry in September 2016, celebrating a partnership built on trust, affection, and commitment. Their relationship exemplifies harmony, mutual growth, and the joy of shared experiences. Together, they navigate life’s challenges, nurture their daughter Sonaskhi, and cultivate a family environment grounded in love, respect, and shared dreams. Their journey illustrates the power of connection, patience, and enduring commitment in personal relationships.
+  </p>
+</section>
 
 <!-- Visitor Form (full-screen style) -->
 <section id="visitor" class="hidden" style="background:#1a2a6c;padding:40px;">
@@ -198,10 +326,9 @@ document.getElementById("appointmentForm").addEventListener("submit", function(e
 function adminLogin(){
   const u = document.getElementById("adminUser").value.trim();
   const p = document.getElementById("adminPass").value.trim();
-  // you can change credentials here
   if(u === "admin" && p === "1234"){
     showSection('adminDashboard');
-    loadVisitors(); // load persisted visitors from sheet
+    loadVisitors();
   } else {
     alert("Invalid username or password");
   }
@@ -225,17 +352,15 @@ function loadVisitors(){
         return;
       }
       data.forEach(row => {
-        // Format Visit Date -> DD-MM-YYYY if possible
         let visitDateStr = row["Visit Date"] || "";
         let formattedVisitDate = visitDateStr;
         try {
           const d = new Date(visitDateStr);
           if(!isNaN(d)) formattedVisitDate = String(d.getDate()).padStart(2,'0') + "-" + String(d.getMonth()+1).padStart(2,'0') + "-" + d.getFullYear();
-        } catch(e){ /* leave as is */ }
+        } catch(e){}
 
         const tr = document.createElement('tr');
         tr.id = row["Appointment Number"];
-        // status-based class
         const statusClass = (row.Status === "Accepted" || row.Status === "Accept") ? "green" : (row.Status === "Rejected" || row.Status === "Reject") ? "red" : "pink";
         tr.className = statusClass;
 
@@ -257,118 +382,58 @@ function loadVisitors(){
           <td>
             <button class="btn accept-btn" onclick="changeStatusPersist('${encodeURIComponent(row['Appointment Number'])}','Accepted')" ${row.Status && row.Status !== "Pending" ? "disabled" : ""}>Accept</button>
             <button class="btn reject-btn" onclick="changeStatusPersist('${encodeURIComponent(row['Appointment Number'])}','Rejected')" ${row.Status && row.Status !== "Pending" ? "disabled" : ""}>Reject</button>
-            <button class="btn delete-btn" onclick="deleteVisitorPersist('${encodeURIComponent(row['Appointment Number'])}')">Delete</button>
           </td>
         `;
         tbody.appendChild(tr);
       });
-    })
-    .catch(err=>{
-      tbody.innerHTML = "<tr><td colspan='15'>Error loading visitors: "+escapeHtml(err.message)+"</td></tr>";
     });
 }
 
-// Persistent status change: Accept / Reject
-function changeStatusPersist(encodedApptNo, newStatus){
-  const apptNo = decodeURIComponent(encodedApptNo);
-  if(!confirm("Set status to '"+newStatus+"' for "+apptNo+" ?")) return;
-  const params = new URLSearchParams();
-  params.append("action","status");
-  params.append("apptNo", apptNo);
-  params.append("status", newStatus);
-  fetch(SCRIPT_URL, { method: "POST", body: params })
-    .then(r=>r.json())
-    .then(res=>{
-      if(res && res.success){
-        // reload table to reflect persisted state
-        loadVisitors();
-      } else {
-        alert("Failed to update status");
-      }
-    })
-    .catch(err=>{
-      alert("Error updating status: "+err.message);
-    });
-}
-
-// Persistent delete
-function deleteVisitorPersist(encodedApptNo){
-  const apptNo = decodeURIComponent(encodedApptNo);
-  if(!confirm("Permanently delete visitor "+apptNo+" ? This cannot be undone.")) return;
-  const params = new URLSearchParams();
-  params.append("action","delete");
-  params.append("apptNo", apptNo);
-  fetch(SCRIPT_URL, { method: "POST", body: params })
-    .then(r=>r.json())
-    .then(res=>{
-      if(res && res.success){
-        // reload table; delete is permanent on sheet
-        loadVisitors();
-      } else {
-        alert("Failed to delete visitor");
-      }
-    })
-    .catch(err=>{
-      alert("Error deleting visitor: "+err.message);
-    });
-}
-
-// Check status (search by appt no) — shows real-time status or Visitor Omitted
+// Visitor status check
 function checkStatus(){
-  const appt = document.getElementById("statusSearch").value.trim();
-  if(!appt){ alert("Please enter your Appointment Number"); return; }
-  fetch(SCRIPT_URL + "?appt_no=" + encodeURIComponent(appt))
+  const val = document.getElementById("statusSearch").value.trim();
+  if(!val) return;
+  fetch(`${SCRIPT_URL}?action=checkStatus&apptNo=${encodeURIComponent(val)}`)
     .then(r=>r.json())
-    .then(data=>{
-      const out = document.getElementById("statusResult");
-      if(!data || data.error){
-        out.innerHTML = "<div style='padding:15px;border-radius:8px;background:white;color:black;'>❌ Visitor Omitted</div>";
-        return;
-      }
-      const status = data.Status || "Pending";
-      const cls = (status==="Accepted" || status==="Accept") ? "green" : (status==="Rejected" || status==="Reject") ? "red" : "pink";
-      out.innerHTML = `
-        <div style="padding:15px;border-radius:8px;background:white;color:black;">
-          <p><strong>Appt No:</strong> ${escapeHtml(data["Appointment Number"]||"")}</p>
-          <p><strong>Name:</strong> ${escapeHtml(data.Name||"")}</p>
-          <p><strong>Visit Date:</strong> ${escapeHtml(data["Visit Date"]||"")}</p>
-          <p><strong>Visit Time:</strong> ${escapeHtml((data["Visit Time"]||"").slice(0,5))}</p>
-          <p><strong>Status:</strong> <span class="${cls}">${escapeHtml(status)}</span></p>
-        </div>
-      `;
-    })
-    .catch(err=>{
-      document.getElementById("statusResult").innerHTML = "<div style='padding:15px;border-radius:8px;background:white;color:black;'>❌ Error: "+escapeHtml(err.message)+"</div>";
+    .then(resp=>{
+      const div = document.getElementById("statusResult");
+      if(resp && resp.Status){
+        div.innerHTML = `Appointment No: ${val} Status: <strong>${resp.Status}</strong>`;
+      } else div.innerHTML = "No appointment found for this number.";
     });
 }
 
-// Print appointment popup (called after submit)
-function printAppointmentPopup(resp){
-  const w = window.open("", "_blank", "width=700,height=800");
-  const now = new Date();
-  const submitted = now.getDate().toString().padStart(2,"0")+"-"+(now.getMonth()+1).toString().padStart(2,"0")+"-"+now.getFullYear()+" "+now.getHours().toString().padStart(2,"0")+":"+now.getMinutes().toString().padStart(2,"0");
-  const details = resp.details || {}; // some appscripts return details; fallback to form fields
-  w.document.write("<html><head><title>Appointment Print</title></head><body>");
-  w.document.write("<h2>Appointment Printout</h2>");
-  w.document.write("<p><strong>Appointment No:</strong> "+escapeHtml(resp.apptNo || "")+"</p>");
-  // include any available returned fields
-  for(const k in details){
-    if(Object.prototype.hasOwnProperty.call(details,k)){
-      w.document.write("<p><strong>"+escapeHtml(k)+":</strong> "+escapeHtml(details[k])+"</p>");
-    }
-  }
-  w.document.write("<p><strong>Submitted:</strong> "+escapeHtml(submitted)+"</p>");
-  w.document.write("</body></html>");
-  w.document.close();
-  w.focus();
-  setTimeout(()=>w.print(),250);
+// Helper: change status and persist
+function changeStatusPersist(appt,status){
+  fetch(`${SCRIPT_URL}?action=updateStatus&apptNo=${appt}&status=${status}`)
+    .then(r=>r.json())
+    .then(resp=>loadVisitors())
+    .catch(err=>alert("Error updating status: "+err.message));
 }
 
-// small helper to avoid XSS when injecting strings
-function escapeHtml(str){
-  if(str === null || str === undefined) return "";
-  return String(str).replace(/[&<>"']/g, function(m){ return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]; });
+// Escape html
+function escapeHtml(text){if(!text) return ""; return text.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+
+// Print popup
+function printAppointmentPopup(data){
+  const w = window.open("", "_blank", "width=600,height=400");
+  w.document.write(`<h2>Appointment Confirmation</h2>
+  <p>Appointment Number: ${data.apptNo}</p>
+  <p>Name: ${escapeHtml(data.Name)}</p>
+  <p>Visit Date: ${escapeHtml(data["Visit Date"])}</p>
+  <p>Visit Time: ${escapeHtml(data["Visit Time"])}</p>
+  <button onclick="window.print()">Print</button>`);
+}
+
+// Father info hover popup
+function showFatherInfo(event){
+  const popup = document.getElementById("fatherPopup");
+  popup.style.display = "block";
+  popup.style.left = event.pageX + 10 + "px";
+  popup.style.top = event.pageY + 10 + "px";
+  setTimeout(()=>{popup.style.display="none";},5000);
 }
 </script>
+
 </body>
 </html>

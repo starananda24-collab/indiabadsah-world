@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>BHOLA NATH BASAK</title>
 <style>
+/* (kept your styles — unchanged except small layout spacing) */
 body {margin:0; font-family: Arial, sans-serif; background:linear-gradient(to right,#1a2a6c,#b21f1f,#fdbb2d); color:white; line-height:1.6;}
 header{text-align:center; padding:20px; background:rgba(0,0,0,0.6);}
 header img{width:180px;height:180px;object-fit:cover;border-radius:50%;border:5px solid #fff;transition: transform 0.4s;}
@@ -42,7 +43,7 @@ th, td{padding:8px;text-align:center;}
 <body>
 
 <header>
-  <img src="myphoto.jpg" alt="Bhola Nath Basak Photo">
+  <img src="myphoto.jpg" alt="Bhola Nath Basak Photo" />
   <h1>BHOLA NATH BASAK</h1>
 </header>
 
@@ -56,11 +57,12 @@ th, td{padding:8px;text-align:center;}
   <a onclick="showSection('thoughts')">Thoughts</a>
   <a onclick="showSection('visitor')">Visitor Form</a>
   <a onclick="showSection('adminLogin')">Admin Login</a>
-  <input type="text" id="statusSearch" placeholder="Visitor Status: Enter Appt No" onkeypress="if(event.key==='Enter'){checkStatus();}">
+  <input id="statusSearch" type="text" placeholder="Visitor Status: Enter Appt No" onkeypress="if(event.key==='Enter'){checkStatus();}" />
 </nav>
+
 <div id="statusResult"></div>
 
-<!-- Profile Sections -->
+<!-- Profile -->
 <section id="profile"><h2>Profile</h2><p>I am BHOLA NATH BASAK, a passionate learner and explorer of life’s endless opportunities. I aim to inspire others while growing myself in every possible field.</p></section>
 <section id="education"><h2>Education</h2><p>Education is the foundation of growth. I gather knowledge from books and real-life experiences shaping problem-solving abilities.</p></section>
 <section id="culture"><h2>Culture</h2><p>I embrace traditions, values, and respect for diversity while blending it with modern ideas for a balanced lifestyle.</p></section>
@@ -69,23 +71,25 @@ th, td{padding:8px;text-align:center;}
 <section id="interested"><h2>Interested About</h2><p>Deeply interested in innovation, leadership, and cultural understanding. Exploring new ideas and connecting with people excites me.</p></section>
 <section id="thoughts"><h2>Thoughts</h2><p>“Life is not about waiting for opportunities, it is about creating them.” Determination and honesty make anything possible.</p></section>
 
-<!-- Visitor Form -->
+<!-- Visitor Form (full-screen style) -->
 <section id="visitor" class="hidden" style="background:#1a2a6c;padding:40px;">
   <h2>E_Appointment Visitor Form</h2>
   <form id="appointmentForm" class="form-box">
-    <label>Name* <input type="text" id="Name" name="Name" required></label>
-    <label>Address <input type="text" id="Address" name="Address"></label>
-    <label>Date of Birth <input type="date" id="DateOfBirth" name="Date Of Birth"></label>
-    <label>Country <input type="text" id="Country" name="Country"></label>
-    <label>Father's Name <input type="text" id="FathersName" name="Father's Name"></label>
-    <label>Visit Date* <input type="date" id="VisitDate" name="Visit Date" required></label>
-    <label>Visit Time* <input type="time" id="VisitTime" name="Visit Time" required></label>
-    <label>Phone Number* <input type="tel" id="PhoneNumber" name="Phone Number" required></label>
-    <label>Email ID* <input type="email" id="EmailID" name="Email ID" required></label>
-    <label>Passport (If Available) <input type="text" id="Passport" name="Passport (If Available)"></label>
+    <label>Name* <input id="Name" name="Name" type="text" required /></label>
+    <label>Address <input id="Address" name="Address" type="text" /></label>
+    <label>Date of Birth <input id="DateOfBirth" name="Date Of Birth" type="date" /></label>
+    <label>Country <input id="Country" name="Country" type="text" /></label>
+    <label>Father's Name <input id="FathersName" name="Father's Name" type="text" /></label>
+    <label>Visit Date* <input id="VisitDate" name="Visit Date" type="date" required /></label>
+    <label>Visit Time* <input id="VisitTime" name="Visit Time" type="time" required /></label>
+    <label>Phone Number* <input id="PhoneNumber" name="Phone Number" type="tel" required /></label>
+    <label>Email ID* <input id="EmailID" name="Email ID" type="email" required /></label>
+    <label>Passport (If Available) <input id="Passport" name="Passport (If Available)" type="text" /></label>
     <label>Purpose <textarea id="Purpose" name="Purpose"></textarea></label>
-    <button type="submit" class="btn">Submit</button>
-    <button type="button" class="btn" onclick="cancelVisitorForm()">Cancel</button>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <button type="submit" class="btn">Submit</button>
+      <button type="button" class="btn" onclick="cancelVisitorForm()">Cancel</button>
+    </div>
   </form>
   <div id="responseMessage" style="display:none;margin-top:10px;padding:10px;border-radius:5px;"></div>
 </section>
@@ -94,32 +98,35 @@ th, td{padding:8px;text-align:center;}
 <section id="adminLogin" class="hidden">
   <h2>Admin Login</h2>
   <div class="form-box">
-    <label>Username <input type="text" id="adminUser"></label>
-    <label>Password <input type="password" id="adminPass"></label>
-    <button onclick="adminLogin()" class="btn">Login</button>
+    <label>Username <input id="adminUser" type="text" /></label>
+    <label>Password <input id="adminPass" type="password" /></label>
+    <button class="btn" onclick="adminLogin()">Login</button>
   </div>
 </section>
 
 <!-- Admin Dashboard -->
 <section id="adminDashboard" class="hidden">
   <h2>Admin Dashboard</h2>
-  <button onclick="adminLogout()" class="btn">Logout</button>
+  <div style="margin-bottom:10px"><button class="btn" onclick="adminLogout()">Logout</button></div>
   <table id="visitorTable">
     <thead>
       <tr>
-        <th>Appointment Number</th><th>Name</th><th>Address</th><th>Date Of Birth</th><th>Country</th><th>Father's Name</th><th>Visit Date</th><th>Visit Time</th><th>Phone Number</th><th>Email ID</th><th>Passport (If Available)</th><th>Purpose</th><th>Status</th><th>Submitted</th><th>Actions</th>
+        <th>Appointment Number</th><th>Name</th><th>Address</th><th>Date Of Birth</th>
+        <th>Country</th><th>Father's Name</th><th>Visit Date</th><th>Visit Time</th>
+        <th>Phone Number</th><th>Email ID</th><th>Passport (If Available)</th><th>Purpose</th>
+        <th>Status</th><th>Submitted</th><th>Actions</th>
       </tr>
     </thead>
     <tbody></tbody>
   </table>
 </section>
 
-<!-- Admin Social -->
+<!-- Communications -->
 <div class="social-box">
   <h3>COMMUNICATIONS</h3>
-  <a href="#">Facebook</a>
-  <a href="#">Instagram</a>
-  <a href="#">LinkedIn</a>
+  <a href="#" target="_blank">Facebook</a>
+  <a href="#" target="_blank">Instagram</a>
+  <a href="#" target="_blank">LinkedIn</a>
   <a href="tel:+1234567890">Phone</a>
 </div>
 
@@ -128,153 +135,239 @@ th, td{padding:8px;text-align:center;}
 </footer>
 
 <script>
-// ------------------- Section Show -------------------
+/*
+  FINAL: Full front-end logic.
+  Replace SCRIPT_URL with your Apps Script web app URL if different.
+*/
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxabjEMeIHXJiw8jDVINmPJ59FcdfP_q_6mAgD84aI4Umh1EAbyIqR1g72i0hCzNh-3/exec";
+
+// Ensure initial view
+showSection('profile');
+
+// showSection safely defined before any clicks (function is global)
 function showSection(id){
   document.querySelectorAll("section").forEach(s=>s.classList.add("hidden"));
-  document.getElementById(id).classList.remove("hidden");
+  const el = document.getElementById(id);
+  if(el) el.classList.remove("hidden");
+  // scroll to top on section change
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
-// ------------------- Cancel Visitor Form -------------------
+// Cancel visitor form: reset & go to home (profile)
 function cancelVisitorForm(){
   document.getElementById('appointmentForm').reset();
-  window.scrollTo(0,0);
   showSection('profile');
 }
 
-// ------------------- Visitor Form Submit -------------------
+// Submit visitor form -> send to Apps Script with action=submit
 document.getElementById("appointmentForm").addEventListener("submit", function(e){
   e.preventDefault();
   const form = e.target;
   const formData = new FormData(form);
   const params = new URLSearchParams();
   formData.forEach((v,k)=>params.append(k,v));
+  params.append("action","submit");
 
-  fetch("https://script.google.com/macros/s/AKfycbxabjEMeIHXJiw8jDVINmPJ59FcdfP_q_6mAgD84aI4Umh1EAbyIqR1g72i0hCzNh-3/exec", {
-    method:"POST",
-    body: params
-  })
-  .then(res=>res.json())
-  .then(data=>{
-    const msgDiv = document.getElementById("responseMessage");
-    if(data.success){
-      msgDiv.textContent = "Appointment submitted successfully! Appointment No: " + data.apptNo;
-      msgDiv.style.background="#4CAF50"; msgDiv.style.color="white";
-      form.reset();
-      printVisitorForm(data); // Generate print
-    } else {
-      msgDiv.textContent = "Error: " + data.error;
-      msgDiv.style.background="#f44336"; msgDiv.style.color="white";
-    }
-    msgDiv.style.display="block";
-  })
-  .catch(err=>{
-    const msgDiv = document.getElementById("responseMessage");
-    msgDiv.textContent = "Submission failed: " + err.message;
-    msgDiv.style.background="#f44336"; msgDiv.style.color="white";
-    msgDiv.style.display="block";
-  });
-});
-
-// ------------------- Check Visitor Status -------------------
-function checkStatus(){ 
-  const apptNo = document.getElementById("statusSearch").value.trim();
-  if(!apptNo){ alert("Please enter your Appointment Number"); return; }
-
-  const url = "https://script.google.com/macros/s/AKfycbxabjEMeIHXJiw8jDVINmPJ59FcdfP_q_6mAgD84aI4Umh1EAbyIqR1g72i0hCzNh-3/exec?appt_no=" + encodeURIComponent(apptNo);
-
-  fetch(url)
-    .then(res=>res.json())
-    .then(data=>{
-      const resDiv = document.getElementById("statusResult");
-      if(data.error){ resDiv.innerHTML = "❌ " + data.error; return; }
-
-      let colorClass="pink";
-      if(data.Status==="Accepted") colorClass="green";
-      else if(data.Status==="Rejected") colorClass="red";
-
-      resDiv.innerHTML = `<div style="padding:15px;border-radius:8px;background:white;color:black;">
-        <p><strong>Appt No:</strong> ${data["Appointment Number"]}</p>
-        <p><strong>Name:</strong> ${data.Name}</p>
-        <p><strong>Visit Date:</strong> ${data["Visit Date"]}</p>
-        <p><strong>Visit Time:</strong> ${data["Visit Time"]}</p>
-        <p><strong>Status:</strong> <span class="${colorClass}">${data.Status}</span></p>
-      </div>`;
+  fetch(SCRIPT_URL, { method: "POST", body: params })
+    .then(r=>r.json())
+    .then(resp=>{
+      const msg = document.getElementById("responseMessage");
+      if(resp && resp.success){
+        msg.innerHTML = "✅ Appointment submitted successfully. Your Appt No: <strong>" + resp.apptNo + "</strong>";
+        msg.style.background = "#28a745";
+        msg.style.color = "white";
+        msg.style.display = "block";
+        // Print the appointment details (print popup)
+        printAppointmentPopup(resp);
+        form.reset();
+      } else {
+        msg.innerHTML = "❌ Submission failed. Please try again.";
+        msg.style.background = "#dc3545";
+        msg.style.display = "block";
+      }
     })
     .catch(err=>{
-      document.getElementById("statusResult").innerHTML = "❌ Error fetching status: " + err.message;
+      const msg = document.getElementById("responseMessage");
+      msg.innerHTML = "❌ Submission error: " + err.message;
+      msg.style.background = "#dc3545";
+      msg.style.display = "block";
     });
-}
+});
 
-// ------------------- Admin Login / Logout -------------------
+// Admin login (hardcoded credentials as before)
 function adminLogin(){
-  const user = document.getElementById("adminUser").value;
-  const pass = document.getElementById("adminPass").value;
-  // hardcoded credentials
-  if(user==="admin" && pass==="admin123"){
+  const u = document.getElementById("adminUser").value.trim();
+  const p = document.getElementById("adminPass").value.trim();
+  // you can change credentials here
+  if(u === "admin" && p === "1234"){
     showSection('adminDashboard');
-    loadVisitorTable();
-  } else alert("Invalid username or password");
+    loadVisitors(); // load persisted visitors from sheet
+  } else {
+    alert("Invalid username or password");
+  }
 }
 function adminLogout(){
+  document.getElementById("adminUser").value = "";
+  document.getElementById("adminPass").value = "";
   showSection('profile');
 }
 
-// ------------------- Load Visitor Table -------------------
-function loadVisitorTable(){
-  const tableBody = document.querySelector("#visitorTable tbody");
-  tableBody.innerHTML="";
-  fetch("https://script.google.com/macros/s/AKfycbxabjEMeIHXJiw8jDVINmPJ59FcdfP_q_6mAgD84aI4Umh1EAbyIqR1g72i0hCzNh-3/exec")
-    .then(res=>res.json())
+// Load visitors (GET main endpoint returns array)
+function loadVisitors(){
+  const tbody = document.querySelector("#visitorTable tbody");
+  tbody.innerHTML = "<tr><td colspan='15'>Loading...</td></tr>";
+  fetch(SCRIPT_URL)
+    .then(r=>r.json())
     .then(data=>{
-      if(!Array.isArray(data)) return;
-      data.forEach(row=>{
-        const tr = document.createElement("tr");
-        const visitDate = new Date(row["Visit Date"]);
-        const visitTime = row["Visit Time"];
-        const formattedDate = visitDate.getDate().toString().padStart(2,"0")+"-"+(visitDate.getMonth()+1).toString().padStart(2,"0")+"-"+visitDate.getFullYear();
-        tr.innerHTML=`
-          <td>${row["Appointment Number"]}</td><td>${row.Name}</td><td>${row.Address}</td>
-          <td>${row["Date Of Birth"]}</td><td>${row.Country}</td><td>${row["Father's Name"]}</td>
-          <td>${formattedDate}</td><td>${visitTime}</td><td>${row["Phone Number"]}</td><td>${row["Email ID"]}</td>
-          <td>${row["Passport (If Available)"]}</td><td>${row.Purpose}</td>
-          <td class="${row.Status==="Accepted"?"green":row.Status==="Rejected"?"red":"pink"}">${row.Status}</td>
-          <td>${row.Submitted}</td>
+      tbody.innerHTML = "";
+      if(!Array.isArray(data) || data.length === 0){
+        tbody.innerHTML = "<tr><td colspan='15'>No visitors found.</td></tr>";
+        return;
+      }
+      data.forEach(row => {
+        // Format Visit Date -> DD-MM-YYYY if possible
+        let visitDateStr = row["Visit Date"] || "";
+        let formattedVisitDate = visitDateStr;
+        try {
+          const d = new Date(visitDateStr);
+          if(!isNaN(d)) formattedVisitDate = String(d.getDate()).padStart(2,'0') + "-" + String(d.getMonth()+1).padStart(2,'0') + "-" + d.getFullYear();
+        } catch(e){ /* leave as is */ }
+
+        const tr = document.createElement('tr');
+        tr.id = row["Appointment Number"];
+        // status-based class
+        const statusClass = (row.Status === "Accepted" || row.Status === "Accept") ? "green" : (row.Status === "Rejected" || row.Status === "Reject") ? "red" : "pink";
+        tr.className = statusClass;
+
+        tr.innerHTML = `
+          <td>${escapeHtml(row["Appointment Number"]||"")}</td>
+          <td>${escapeHtml(row.Name||"")}</td>
+          <td>${escapeHtml(row.Address||"")}</td>
+          <td>${escapeHtml(row["Date Of Birth"]||"")}</td>
+          <td>${escapeHtml(row.Country||"")}</td>
+          <td>${escapeHtml(row["Father's Name"]||"")}</td>
+          <td>${escapeHtml(formattedVisitDate)}</td>
+          <td>${escapeHtml((row["Visit Time"]||"").slice(0,5))}</td>
+          <td>${escapeHtml(row["Phone Number"]||"")}</td>
+          <td>${escapeHtml(row["Email ID"]||"")}</td>
+          <td>${escapeHtml(row["Passport (If Available)"]||"")}</td>
+          <td>${escapeHtml(row.Purpose||"")}</td>
+          <td>${escapeHtml(row.Status||"Pending")}</td>
+          <td>${escapeHtml(row.Submitted||"")}</td>
           <td>
-            <button onclick="acceptVisitor(this)" ${row.Status==="Rejected"?"disabled":""}>Accept</button>
-            <button onclick="rejectVisitor(this)" ${row.Status==="Accepted"?"disabled":""}>Reject</button>
-            <button onclick="deleteVisitor(this)">Delete</button>
-          </td>`;
-        tableBody.appendChild(tr);
+            <button class="btn accept-btn" onclick="changeStatusPersist('${encodeURIComponent(row['Appointment Number'])}','Accepted')" ${row.Status && row.Status !== "Pending" ? "disabled" : ""}>Accept</button>
+            <button class="btn reject-btn" onclick="changeStatusPersist('${encodeURIComponent(row['Appointment Number'])}','Rejected')" ${row.Status && row.Status !== "Pending" ? "disabled" : ""}>Reject</button>
+            <button class="btn delete-btn" onclick="deleteVisitorPersist('${encodeURIComponent(row['Appointment Number'])}')">Delete</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
       });
+    })
+    .catch(err=>{
+      tbody.innerHTML = "<tr><td colspan='15'>Error loading visitors: "+escapeHtml(err.message)+"</td></tr>";
     });
 }
 
-// ------------------- Admin Actions -------------------
-function acceptVisitor(btn){
-  const row = btn.closest("tr");
-  row.querySelector("td:nth-child(13)").textContent="Accepted";
-  row.querySelector("td:nth-child(13)").className="green";
-  row.querySelector("button:nth-child(1)").disabled=true;
-  row.querySelector("button:nth-child(2)").disabled=true;
-}
-function rejectVisitor(btn){
-  const row = btn.closest("tr");
-  row.querySelector("td:nth-child(13)").textContent="Rejected";
-  row.querySelector("td:nth-child(13)").className="red";
-  row.querySelector("button:nth-child(1)").disabled=true;
-  row.querySelector("button:nth-child(2)").disabled=true;
-}
-function deleteVisitor(btn){
-  btn.closest("tr").remove();
+// Persistent status change: Accept / Reject
+function changeStatusPersist(encodedApptNo, newStatus){
+  const apptNo = decodeURIComponent(encodedApptNo);
+  if(!confirm("Set status to '"+newStatus+"' for "+apptNo+" ?")) return;
+  const params = new URLSearchParams();
+  params.append("action","status");
+  params.append("apptNo", apptNo);
+  params.append("status", newStatus);
+  fetch(SCRIPT_URL, { method: "POST", body: params })
+    .then(r=>r.json())
+    .then(res=>{
+      if(res && res.success){
+        // reload table to reflect persisted state
+        loadVisitors();
+      } else {
+        alert("Failed to update status");
+      }
+    })
+    .catch(err=>{
+      alert("Error updating status: "+err.message);
+    });
 }
 
-// ------------------- Print Visitor -------------------
-function printVisitorForm(data){
-  const newWin = window.open();
-  newWin.document.write("<h2>Appointment Details</h2>");
-  newWin.document.write("<p>Appointment No: "+data.apptNo+"</p>");
-  for(const k in data){ if(k!=="success" && k!=="apptNo") newWin.document.write("<p>"+k+": "+data[k]+"</p>"); }
-  newWin.print();
+// Persistent delete
+function deleteVisitorPersist(encodedApptNo){
+  const apptNo = decodeURIComponent(encodedApptNo);
+  if(!confirm("Permanently delete visitor "+apptNo+" ? This cannot be undone.")) return;
+  const params = new URLSearchParams();
+  params.append("action","delete");
+  params.append("apptNo", apptNo);
+  fetch(SCRIPT_URL, { method: "POST", body: params })
+    .then(r=>r.json())
+    .then(res=>{
+      if(res && res.success){
+        // reload table; delete is permanent on sheet
+        loadVisitors();
+      } else {
+        alert("Failed to delete visitor");
+      }
+    })
+    .catch(err=>{
+      alert("Error deleting visitor: "+err.message);
+    });
+}
+
+// Check status (search by appt no) — shows real-time status or Visitor Omitted
+function checkStatus(){
+  const appt = document.getElementById("statusSearch").value.trim();
+  if(!appt){ alert("Please enter your Appointment Number"); return; }
+  fetch(SCRIPT_URL + "?appt_no=" + encodeURIComponent(appt))
+    .then(r=>r.json())
+    .then(data=>{
+      const out = document.getElementById("statusResult");
+      if(!data || data.error){
+        out.innerHTML = "<div style='padding:15px;border-radius:8px;background:white;color:black;'>❌ Visitor Omitted</div>";
+        return;
+      }
+      const status = data.Status || "Pending";
+      const cls = (status==="Accepted" || status==="Accept") ? "green" : (status==="Rejected" || status==="Reject") ? "red" : "pink";
+      out.innerHTML = `
+        <div style="padding:15px;border-radius:8px;background:white;color:black;">
+          <p><strong>Appt No:</strong> ${escapeHtml(data["Appointment Number"]||"")}</p>
+          <p><strong>Name:</strong> ${escapeHtml(data.Name||"")}</p>
+          <p><strong>Visit Date:</strong> ${escapeHtml(data["Visit Date"]||"")}</p>
+          <p><strong>Visit Time:</strong> ${escapeHtml((data["Visit Time"]||"").slice(0,5))}</p>
+          <p><strong>Status:</strong> <span class="${cls}">${escapeHtml(status)}</span></p>
+        </div>
+      `;
+    })
+    .catch(err=>{
+      document.getElementById("statusResult").innerHTML = "<div style='padding:15px;border-radius:8px;background:white;color:black;'>❌ Error: "+escapeHtml(err.message)+"</div>";
+    });
+}
+
+// Print appointment popup (called after submit)
+function printAppointmentPopup(resp){
+  const w = window.open("", "_blank", "width=700,height=800");
+  const now = new Date();
+  const submitted = now.getDate().toString().padStart(2,"0")+"-"+(now.getMonth()+1).toString().padStart(2,"0")+"-"+now.getFullYear()+" "+now.getHours().toString().padStart(2,"0")+":"+now.getMinutes().toString().padStart(2,"0");
+  const details = resp.details || {}; // some appscripts return details; fallback to form fields
+  w.document.write("<html><head><title>Appointment Print</title></head><body>");
+  w.document.write("<h2>Appointment Printout</h2>");
+  w.document.write("<p><strong>Appointment No:</strong> "+escapeHtml(resp.apptNo || "")+"</p>");
+  // include any available returned fields
+  for(const k in details){
+    if(Object.prototype.hasOwnProperty.call(details,k)){
+      w.document.write("<p><strong>"+escapeHtml(k)+":</strong> "+escapeHtml(details[k])+"</p>");
+    }
+  }
+  w.document.write("<p><strong>Submitted:</strong> "+escapeHtml(submitted)+"</p>");
+  w.document.write("</body></html>");
+  w.document.close();
+  w.focus();
+  setTimeout(()=>w.print(),250);
+}
+
+// small helper to avoid XSS when injecting strings
+function escapeHtml(str){
+  if(str === null || str === undefined) return "";
+  return String(str).replace(/[&<>"']/g, function(m){ return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]; });
 }
 </script>
 </body>

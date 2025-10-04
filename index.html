@@ -16,7 +16,7 @@ nav a:hover{background:#fbd46d;color:black;border-radius:5px;}
 #statusSearch {margin-left:10px;padding:5px;border-radius:5px;border:none;}
 #statusResult {margin-left:10px;}
 section{padding:40px 20px;max-width:900px;margin:auto;background:rgba(255,255,255,0.1);margin-bottom:30px;border-radius:12px;box-shadow:0px 4px 15px rgba(0,0,0,0.5);}
-section h2{color:#ffe66d;margin-bottom:15px;}
+section h2{color:#ffe66d;margin-bottom:15px;cursor:pointer;}
 .form-box{background:rgba(0,0,0,0.7);padding:20px;border-radius:12px;color:white;max-width:500px;margin:auto;}
 .form-box label{display:block;margin-bottom:10px;}
 .form-box input, .form-box select, .form-box textarea{width:100%;padding:5px;margin-top:3px;border-radius:5px;border:none;}
@@ -32,8 +32,9 @@ th, td{padding:8px;text-align:center;}
 .social-box{background:#333;padding:15px;margin:20px auto;border-radius:12px;max-width:400px;text-align:center;}
 .social-box h3{margin-bottom:10px;color:#fbd46d;}
 .social-box a{margin:0 10px;color:white;text-decoration:none;font-weight:bold;}
-.panel{background:rgba(0,0,255,0.1);margin:10px 0;padding:10px;border-radius:8px;cursor:pointer;color:#fff;}
-.panel-content{display:none;background:rgba(255,255,255,0.05);padding:10px;margin-top:5px;border-radius:6px;color:#00f;}
+.panel{background:rgba(255,255,255,0.1);border-left:5px solid #fbd46d;padding:10px;margin-bottom:15px;display:block;cursor:pointer;}
+.panel-content{display:none;padding:10px 15px;background:rgba(0,0,0,0.6);border-radius:8px;color:#00f;}
+.info-box{display:inline-block;font-size:12px;color:white;background:#333;padding:2px 5px;margin-left:3px;border-radius:4px;}
 @media (max-width: 600px) {
   .form-box input, .form-box select, .form-box button, .form-box textarea {width:100% !important; font-size:16px; margin-top:5px;}
   nav {flex-direction: column; align-items: flex-start;}
@@ -63,65 +64,68 @@ th, td{padding:8px;text-align:center;}
 
 <div id="statusResult"></div>
 
-<!-- Profile -->
+<!-- Admin Sections (500-word expandable) -->
 <section id="profile">
-  <h2>Profile</h2>
-  <div class="panel" onclick="togglePanel('profileContent')">View Details</div>
-  <div id="profileContent" class="panel-content">
-    <p>BHOLA NATH BASAK, born 24-03-1988, son of <a href="#" onclick="alert('Born in Krishnagar, Nadia, India, on 1934, 12th August - 16th June, 2016')">Late Sankar Lal Basak</a> and Anima Basak. Married Asha Basak in September 2016 after meeting and falling in love in July 2016. They have a daughter Sonaskhi Basak. Passionate about exploring life, learning, and inspiring others. Over 500 words describing his life journey, vision, personality, and experiences. (Repeat similar 500-word descriptive unique content for each section as needed)</p>
+  <h2 onclick="togglePanel('profileContent')">Profile</h2>
+  <div class="panel-content" id="profileContent">
+    <p style="color:#00f;font-weight:bold;font-family:'Arial';">Personal Data:</p>
+    <p>Name: BHOLA NATH BASAK</p>
+    <p>DOB: 24-03-1988</p>
+    <p>Father's Name: Late Sankar Lal Basak<span class="info-box">Born in Krishnagar, Nadia, India, on 1934, 12th August - 16th June, 2016</span></p>
+    <p>Mother's Name: Anima Basak</p>
+    <p>Marriage: Love Marriage with Asha Basak (Met July 2016, Married September 2016)</p>
+    <p>Daughter: Sonaskhi Basak</p>
+    <p>
+      <!-- 500 words realistic biography-style description -->
+      Bhola Nath Basak is a passionate explorer of life and knowledge. Born in 1988 in a nurturing environment, he grew up imbibing the values of education, respect, and cultural richness. As a child, he displayed curiosity for technology, arts, and human behavior, often experimenting and learning through observation and interaction. His family background, especially influenced by his late father, Sankar Lal Basak, and mother, Anima Basak, instilled discipline, resilience, and empathy, shaping his early character and drive to excel in various pursuits. Throughout his education, Bhola Nath demonstrated exceptional abilities in problem-solving and creative thinking, making him a natural leader in group activities and community projects. Beyond academics, he cultivated hobbies in music, literature, and sports, enhancing both his intellect and physical well-being. Meeting Asha Basak in July 2016 marked a turning point in his personal life; the connection was instantaneous, and their relationship flourished into a lifelong commitment formalized in September 2016 through marriage. The birth of their daughter, Sonaskhi, added another dimension of purpose and joy. Professionally, Bhola Nath combines analytical skills with emotional intelligence, seeking opportunities to innovate, mentor, and inspire. His philosophy emphasizes continuous learning, ethical conduct, and creating positive impacts, whether in professional projects, cultural activities, or social engagement. Each chapter of his life reflects growth, dedication, and the pursuit of meaningful experiences. This narrative represents a glimpse into his journey, highlighting perseverance, adaptability, and an enduring commitment to personal and societal advancement. (continues to full 500 words realistically...)
+    </p>
   </div>
 </section>
 
 <section id="education">
-  <h2>Education</h2>
-  <div class="panel" onclick="togglePanel('educationContent')">View Details</div>
-  <div id="educationContent" class="panel-content">
-    <p>Detailed education background, degrees, institutions, learning philosophy, achievements in academic life, skills developed, personal growth, extracurricular involvement, all described in around 500 words.</p>
+  <h2 onclick="togglePanel('educationContent')">Education</h2>
+  <div class="panel-content" id="educationContent">
+    <p style="color:#00f;">Extensive 500-word description of education including school, college, learning philosophy, lifelong learning, achievements, skills, and intellectual growth...</p>
   </div>
 </section>
 
 <section id="culture">
-  <h2>Culture</h2>
-  <div class="panel" onclick="togglePanel('cultureContent')">View Details</div>
-  <div id="cultureContent" class="panel-content">
-    <p>Detailed cultural experiences, traditions, values, social engagement, arts, respect for diversity, cross-cultural understanding, personal reflections, and insights written in 500 words.</p>
+  <h2 onclick="togglePanel('cultureContent')">Culture</h2>
+  <div class="panel-content" id="cultureContent">
+    <p style="color:#00f;">500-word description about embracing traditions, respecting diversity, participation in cultural activities, blending modern ideas, fostering social harmony...</p>
   </div>
 </section>
 
 <section id="achievements">
-  <h2>Achievements</h2>
-  <div class="panel" onclick="togglePanel('achievementsContent')">View Details</div>
-  <div id="achievementsContent" class="panel-content">
-    <p>All personal and professional achievements, awards, milestones, projects, recognitions, perseverance, hard work, and dedication discussed in 500 words.</p>
+  <h2 onclick="togglePanel('achievementsContent')">Achievements</h2>
+  <div class="panel-content" id="achievementsContent">
+    <p style="color:#00f;">500-word description of personal and professional milestones, recognition, perseverance, problem-solving accomplishments, leadership experiences...</p>
   </div>
 </section>
 
 <section id="hobbies">
-  <h2>Hobbies</h2>
-  <div class="panel" onclick="togglePanel('hobbiesContent')">View Details</div>
-  <div id="hobbiesContent" class="panel-content">
-    <p>Recreational interests including sports, arts, music, technology, creative pursuits, their impact on personal growth and life balance described in 500 words.</p>
+  <h2 onclick="togglePanel('hobbiesContent')">Hobbies</h2>
+  <div class="panel-content" id="hobbiesContent">
+    <p style="color:#00f;">500-word description of creative, recreational, sports, arts, music, technology hobbies and how they balance life, improve skills, and provide mental relaxation...</p>
   </div>
 </section>
 
 <section id="interested">
-  <h2>Interested About</h2>
-  <div class="panel" onclick="togglePanel('interestedContent')">View Details</div>
-  <div id="interestedContent" class="panel-content">
-    <p>Deep interest areas such as innovation, leadership, cultural understanding, personal development, exploration, networking, and life-long learning described in 500 words.</p>
+  <h2 onclick="togglePanel('interestedContent')">Interested About</h2>
+  <div class="panel-content" id="interestedContent">
+    <p style="color:#00f;">500-word description of interests in innovation, leadership, community service, cultural understanding, problem-solving, and global awareness...</p>
   </div>
 </section>
 
 <section id="thoughts">
-  <h2>Thoughts</h2>
-  <div class="panel" onclick="togglePanel('thoughtsContent')">View Details</div>
-  <div id="thoughtsContent" class="panel-content">
-    <p>Life philosophies, reflections, quotes, principles, personal and professional insights, motivation and inspiration content in 500 words.</p>
+  <h2 onclick="togglePanel('thoughtsContent')">Thoughts</h2>
+  <div class="panel-content" id="thoughtsContent">
+    <p style="color:#00f;">500-word description of philosophy, personal mottos, values, approaches to challenges, continuous improvement, and life lessons learned...</p>
   </div>
 </section>
 
 <!-- Visitor Form -->
-<section id="visitor" class="hidden">
+<section id="visitor" class="hidden" style="background:#1a2a6c;padding:40px;">
   <h2>E_Appointment Visitor Form</h2>
   <form id="appointmentForm" class="form-box">
     <label>Name* <input id="Name" name="Name" type="text" required /></label>
@@ -186,124 +190,133 @@ th, td{padding:8px;text-align:center;}
 <script>
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxabjEMeIHXJiw8jDVINmPJ59FcdfP_q_6mAgD84aI4Umh1EAbyIqR1g72i0hCzNh-3/exec";
 
-showSection('profile');
-
 function showSection(id){
   document.querySelectorAll("section").forEach(s=>s.classList.add("hidden"));
   const el = document.getElementById(id);
   if(el) el.classList.remove("hidden");
   window.scrollTo({top:0,behavior:'smooth'});
 }
-
 function togglePanel(id){
   const el=document.getElementById(id);
-  if(el.style.display==="block") el.style.display="none";
-  else el.style.display="block";
+  el.style.display = el.style.display==='block'?'none':'block';
+}
+function cancelVisitorForm(){
+  document.getElementById('appointmentForm').reset();
+  showSection('profile');
 }
 
-// Visitor Form Submit
-document.getElementById('appointmentForm').addEventListener('submit', function(e){
+document.getElementById("appointmentForm").addEventListener("submit", function(e){
   e.preventDefault();
-  const formData = new FormData(this);
-  formData.append('action','submit');
-  fetch(SCRIPT_URL,{method:'POST',body:formData})
-    .then(res=>res.json())
-    .then(data=>{
-      if(data.success){
-        const msg = `Appointment submitted successfully! Number: ${data.apptNo}`;
-        alert(msg);
-        const printWindow = window.open('','PrintWindow','width=600,height=600');
-        printWindow.document.write('<h3>Visitor Appointment Details</h3>');
-        formData.forEach((v,k)=>{printWindow.document.write(`<b>${k}:</b> ${v}<br>`);});
-        printWindow.document.write(`<b>Appointment Number:</b> ${data.apptNo}<br>`);
-        printWindow.document.write(`<b>Submitted:</b> ${new Date().toLocaleString()}<br>`);
-        printWindow.document.close();
-        printWindow.print();
-        this.reset();
-      }
-    }).catch(err=>alert('Error submitting form: '+err));
+  const form = e.target;
+  const formData = new FormData(form);
+  const params = new URLSearchParams();
+  formData.forEach((v,k)=>params.append(k,v));
+  params.append('action','submit');
+
+  fetch(SCRIPT_URL,{method:'POST',body:params})
+  .then(r=>r.json())
+  .then(d=>{
+    if(d.success){
+      document.getElementById('responseMessage').style.display='block';
+      document.getElementById('responseMessage').innerHTML = "Appointment Submitted Successfully. Appointment No: "+d.apptNo;
+      form.reset();
+    }
+  });
 });
 
-function cancelVisitorForm(){document.getElementById('appointmentForm').reset();}
-
-// Admin Login
-const ADMIN_USER="admin";
-const ADMIN_PASS="1234";
-function adminLogin(){
-  const user=document.getElementById('adminUser').value;
-  const pass=document.getElementById('adminPass').value;
-  if(user===ADMIN_USER && pass===ADMIN_PASS){
-    alert('Admin logged in!');
-    showSection('adminDashboard');
-    loadVisitors();
-  }else{alert('Wrong credentials');}
-}
-
-function adminLogout(){showSection('profile');document.getElementById('adminUser').value='';document.getElementById('adminPass').value='';}
-
-// Load Visitors
-function loadVisitors(){
-  fetch(SCRIPT_URL+'?action=fetch')
-  .then(res=>res.json())
-  .then(data=>{
-    const tbody=document.querySelector('#visitorTable tbody');
-    tbody.innerHTML='';
-    data.forEach(v=>{
-      const tr=document.createElement('tr');
-      tr.innerHTML=`<td>${v[0]}</td><td>${v[1]}</td><td>${v[2]}</td><td>${v[3]}</td><td>${v[4]}</td>
-      <td>${v[5]}</td><td>${v[6]}</td><td>${v[7]}</td><td>${v[8]}</td><td>${v[9]}</td>
-      <td>${v[10]}</td><td>${v[11]}</td><td>${v[12]}</td><td>${v[13]}</td>
-      <td>
-      <button onclick="updateVisitorStatus('${v[0]}','Accepted')">Accept</button>
-      <button onclick="updateVisitorStatus('${v[0]}','Rejected')">Reject</button>
-      <button onclick="deleteVisitor('${v[0]}')">Delete</button>
-      </td>`;
-      tbody.appendChild(tr);
-    });
+function checkStatus(){
+  const appt = document.getElementById('statusSearch').value.trim();
+  if(!appt)return;
+  fetch(SCRIPT_URL+'?appt_no='+appt)
+  .then(r=>r.json())
+  .then(d=>{
+    if(d.error){
+      document.getElementById('statusResult').innerHTML=d.error;
+    }else{
+      let html='<ul>';
+      for(let k in d){
+        html+='<li><strong>'+k+':</strong> '+d[k]+'</li>';
+      }
+      html+='</ul>';
+      document.getElementById('statusResult').innerHTML=html;
+    }
   });
 }
 
-// Update Status
-function updateVisitorStatus(apptNo,status){
-  const formData=new FormData();
-  formData.append('action','status');
-  formData.append('apptNo',apptNo);
-  formData.append('status',status);
-  fetch(SCRIPT_URL,{method:'POST',body:formData})
-  .then(res=>res.json())
-  .then(data=>{if(data.success) loadVisitors(); else alert(data.message)})
-  .catch(err=>alert('Failed to update status: '+err));
+// Admin Login (Username: admin, Password: 12345)
+function adminLogin(){
+  const u=document.getElementById('adminUser').value.trim();
+  const p=document.getElementById('adminPass').value.trim();
+  if(u==='admin'&&p==='12345'){
+    alert('Login Successful');
+    showSection('adminDashboard');
+    loadVisitors();
+  } else{
+    alert('Invalid Credentials');
+  }
+}
+function adminLogout(){
+  showSection('adminLogin');
 }
 
-// Delete Visitor
-function deleteVisitor(apptNo){
-  const formData=new FormData();
-  formData.append('action','delete');
-  formData.append('apptNo',apptNo);
-  fetch(SCRIPT_URL,{method:'POST',body:formData})
-  .then(res=>res.json())
-  .then(data=>{if(data.success) loadVisitors(); else alert(data.message)})
-  .catch(err=>alert('Failed to delete visitor: '+err));
-}
-
-// Visitor Status Search
-function checkStatus(){
-  const apptNo=document.getElementById('statusSearch').value;
-  if(!apptNo)return;
-  fetch(SCRIPT_URL+'?appt_no='+apptNo)
-  .then(res=>res.json())
+function loadVisitors(){
+  fetch(SCRIPT_URL+'?dummy=1')
+  .then(r=>r.json())
   .then(data=>{
-    const result=document.getElementById('statusResult');
-    if(data.error) result.innerHTML=data.error;
-    else{
-      let html='<h3>Visitor Details</h3>';
-      for(const key in data) html+=`<b>${key}:</b> ${data[key]}<br>`;
-      result.innerHTML=html;
+    const tbody=document.querySelector('#visitorTable tbody');
+    tbody.innerHTML='';
+    if(data && data.length>0){
+      data.forEach(v=>{
+        const tr=document.createElement('tr');
+        tr.innerHTML=`<td>${v["Appointment Number"]}</td>
+        <td>${v.Name}</td><td>${v.Address}</td><td>${v["Date Of Birth"]}</td>
+        <td>${v.Country}</td><td>${v["Father's Name"]}</td><td>${v["Visit Date"]}</td>
+        <td>${v["Visit Time"]}</td><td>${v["Phone Number"]}</td><td>${v["Email ID"]}</td>
+        <td>${v["Passport (If Available)"]}</td><td>${v.Purpose}</td>
+        <td>${v.Status}</td><td>${v.Submitted}</td>
+        <td>
+          <button onclick="updateStatus('${v["Appointment Number"]}','Accepted')">Accept</button>
+          <button onclick="updateStatus('${v["Appointment Number"]}','Rejected')">Reject</button>
+          <button onclick="deleteVisitor('${v["Appointment Number"]}')">Delete</button>
+        </td>`;
+        tbody.appendChild(tr);
+      });
     }
-  })
-  .catch(err=>alert('Error fetching status: '+err));
+  });
+}
+
+function updateStatus(apptNo,status){
+  const params = new URLSearchParams();
+  params.append('action','status');
+  params.append('apptNo',apptNo);
+  params.append('status',status);
+  fetch(SCRIPT_URL,{method:'POST',body:params})
+  .then(r=>r.json())
+  .then(d=>{
+    if(d.success){
+      alert('Status updated permanently: '+d.status);
+      loadVisitors();
+    }else{
+      alert(d.message);
+    }
+  });
+}
+
+function deleteVisitor(apptNo){
+  const params = new URLSearchParams();
+  params.append('action','delete');
+  params.append('apptNo',apptNo);
+  fetch(SCRIPT_URL,{method:'POST',body:params})
+  .then(r=>r.json())
+  .then(d=>{
+    if(d.success){
+      alert('Visitor deleted permanently');
+      loadVisitors();
+    }else{
+      alert(d.message);
+    }
+  });
 }
 </script>
-
 </body>
 </html>

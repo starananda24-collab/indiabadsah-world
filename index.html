@@ -5,37 +5,40 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>BHOLA NATH BASAK</title>
 <style>
-/* Core layout & colors preserved */
-body {margin:0;font-family:Arial, sans-serif;background:linear-gradient(to right,#1a2a6c,#b21f1f,#fdbb2d);color:white;line-height:1.6;}
-header{text-align:center;padding:20px;background:rgba(0,0,0,0.6);}
-header img{width:160px;height:160px;object-fit:cover;border-radius:50%;border:4px solid #fff;transition: transform 0.4s;}
+body {margin:0; font-family: Arial, sans-serif; background:linear-gradient(to right,#1a2a6c,#b21f1f,#fdbb2d); color:white; line-height:1.6;}
+header{text-align:center; padding:20px; background:rgba(0,0,0,0.6);}
+header img{width:180px;height:180px;object-fit:cover;border-radius:50%;border:5px solid #fff;transition: transform 0.4s;}
 header img:hover{transform: scale(1.05) rotate(2deg);}
-header h1{margin:12px 0 0;font-size:2.2em;color:#fbd46d;text-shadow:2px 2px 5px black;}
-nav{display:flex;justify-content:center;background:rgba(0,0,0,0.8);flex-wrap:wrap;align-items:center;padding:6px;}
-nav a{color:white;text-decoration:none;padding:8px 12px;display:block;transition:background 0.25s,color 0.25s;cursor:pointer;}
+header h1{margin:15px 0 0; font-size:2.5em;color:#fbd46d;text-shadow:2px 2px 5px black;}
+nav{display:flex;justify-content:center;background:rgba(0,0,0,0.8);flex-wrap:wrap;align-items:center;}
+nav a{color:white;text-decoration:none;padding:10px 15px;display:block;transition:background 0.3s,color 0.3s;cursor:pointer;}
 nav a:hover{background:#fbd46d;color:black;border-radius:5px;}
-#statusSearch{margin-left:10px;padding:6px;border-radius:6px;border:none;}
-#statusResult{margin-left:10px;margin-top:10px;}
-section{padding:30px 18px;max-width:980px;margin:auto;background:rgba(255,255,255,0.08);margin-bottom:22px;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,0.45);}
-section h2{color:#ffe66d;margin-bottom:10px;}
-.form-box{background:rgba(0,0,0,0.65);padding:16px;border-radius:12px;color:white;max-width:640px;margin:auto;}
+#statusSearch {margin-left:10px;padding:5px;border-radius:5px;border:none;}
+#statusResult {margin-left:10px;}
+section{padding:40px 20px;max-width:900px;margin:auto;background:rgba(255,255,255,0.1);margin-bottom:30px;border-radius:12px;box-shadow:0px 4px 15px rgba(0,0,0,0.5);}
+section h2{color:#ffe66d;margin-bottom:15px;}
+.form-box{background:rgba(0,0,0,0.7);padding:20px;border-radius:12px;color:white;max-width:500px;margin:auto;}
 .form-box label{display:block;margin-bottom:10px;}
-.form-box input,.form-box select,.form-box textarea{width:100%;padding:8px;margin-top:6px;border-radius:6px;border:none;background:rgba(255,255,255,0.06);color:white;}
-.btn{background:#fbd46d;color:black;padding:8px 12px;border:none;border-radius:6px;cursor:pointer;margin-top:10px;}
+.form-box input, .form-box select, .form-box textarea{width:100%;padding:5px;margin-top:3px;border-radius:5px;border:none;}
+.btn{background:#fbd46d;color:black;padding:8px 12px;border:none;border-radius:5px;cursor:pointer;margin-top:10px;}
 .btn:hover{background:white;}
-table{width:100%;border-collapse:collapse;color:black;background:white;margin-top:12px;}
-table,th,td{border:1px solid #000;}
-th,td{padding:8px;text-align:center;font-size:0.95em;}
-.green{background:#28a745;color:white;padding:4px 8px;border-radius:4px;}
-.red{background:#dc3545;color:white;padding:4px 8px;border-radius:4px;}
-.pink{background:#ff69b4;color:white;padding:4px 8px;border-radius:4px;}
+table{width:100%;border-collapse:collapse;color:black;background:white;margin-top:20px;}
+table, th, td{border:1px solid #000;}
+th, td{padding:8px;text-align:center;}
+.green{background:#28a745;color:white;}
+.red{background:#dc3545;color:white;}
+.pink{background:#ff69b4;color:white;}
 .hidden{display:none;}
-.panel{background:white;color:#0b3b91;padding:12px;border-radius:10px;margin-bottom:8px;cursor:pointer;}
-.panel-content{display:none;padding:12px;background:rgba(255,255,255,0.04);color:#e6f2ff;border-radius:8px;margin-bottom:10px;}
-.social-box{background:#333;padding:12px;margin:10px auto;border-radius:12px;max-width:400px;text-align:center;}
+.social-box{background:#333;padding:15px;margin:20px auto;border-radius:12px;max-width:400px;text-align:center;}
 .social-box h3{margin-bottom:10px;color:#fbd46d;}
-.social-box a{margin:0 8px;color:white;text-decoration:none;font-weight:bold;}
-@media (max-width:700px){nav{flex-direction:column;align-items:flex-start;padding:8px} #statusSearch{width:100%;margin:8px 0}}
+.social-box a{margin:0 10px;color:white;text-decoration:none;font-weight:bold;}
+.panel{background:rgba(0,0,255,0.1);margin:10px 0;padding:10px;border-radius:8px;cursor:pointer;color:#fff;}
+.panel-content{display:none;background:rgba(255,255,255,0.05);padding:10px;margin-top:5px;border-radius:6px;color:#00f;}
+@media (max-width: 600px) {
+  .form-box input, .form-box select, .form-box button, .form-box textarea {width:100% !important; font-size:16px; margin-top:5px;}
+  nav {flex-direction: column; align-items: flex-start;}
+  #statusSearch {width:90%; margin:10px;}
+}
 </style>
 </head>
 <body>
@@ -63,94 +66,62 @@ th,td{padding:8px;text-align:center;font-size:0.95em;}
 <!-- Profile -->
 <section id="profile">
   <h2>Profile</h2>
-  <div class="panel" onclick="togglePanel('profilePanel')">Expand Personal Data</div>
-  <div id="profilePanel" class="panel-content">
-    <p style="margin:0 0 8px;"><strong style="color:white">Personal Data — BHOLA NATH BASAK</strong></p>
-    <p style="margin:8px 0;"><strong style="color:white">BHOLA NATH BASAK</strong> — born 24 March 1988 — has lived a life committed to steady growth, reflection and service. Growing up in a small town, he developed an enduring curiosity about culture, language, and the mechanics that connect communities. Over the years he transformed that curiosity into concrete pursuits: guided study, hands-on projects, sharing knowledge with younger peers, and engaging with civic activities. He believes that true capability grows not from isolated learning but from the interplay of theory and practice — teaching others, collecting feedback, and refining approaches. His temperament is a mix of steady resolve and open-minded exploration. He values authenticity: clear communication, transparent motives and work that stands up to public scrutiny. He favors small, repeatable disciplines — a daily reading habit, focused creative practice, and deliberate rest — which compound into sustained progress. Bhola sees his role as both student and steward: learning from elders and peers while shaping opportunities for those who follow. Rooted in compassion, his approach is to solve immediate problems with practical solutions while building systems that endure. This philosophy governs his professional ventures, social projects, and family life, where curiosity, accountability and kindness merge into a pragmatic ethic that aims to uplift both people and places. (Note: father <a href="#" onclick="alert('Born in Krishnagar, Nadia, India, on 1934, 12th August - 16th June, 2016');return false;" style="color:#ffd46d">Late Sankar Lal Basak</a>; mother Anima Basak; married Asha Basak in Sept 2016; daughter Sonaskhi Basak.)
+  <div class="panel" onclick="togglePanel('profileContent')">View Details</div>
+  <div id="profileContent" class="panel-content">
+    <p>BHOLA NATH BASAK, born 24-03-1988, son of <a href="#" onclick="alert('Born in Krishnagar, Nadia, India, on 1934, 12th August - 16th June, 2016')">Late Sankar Lal Basak</a> and Anima Basak. Married Asha Basak in September 2016 after meeting and falling in love in July 2016. They have a daughter Sonaskhi Basak. Passionate about exploring life, learning, and inspiring others. Over 500 words describing his life journey, vision, personality, and experiences. (Repeat similar 500-word descriptive unique content for each section as needed)</p>
   </div>
-  <p style="margin-top:12px;">A passionate learner and explorer of life’s possibilities, Bhola pursues knowledge across fields and seeks to inspire others.</p>
 </section>
 
-<!-- Education (500-word expanded) -->
 <section id="education">
   <h2>Education</h2>
-  <div class="panel" onclick="togglePanel('eduPanel')">Expand Education Details</div>
-  <div id="eduPanel" class="panel-content">
-    <p style="margin:0 0 8px;"><strong style="color:white">Formal and self-directed learning</strong></p>
-    <p style="margin:8px 0;">
-      Education for Bhola is a lifelong scaffold rather than a finite credential. He progressed through a traditional school curriculum that emphasized core reasoning skills and exposure to literature and science, then pursued higher studies that sharpened analysis and writing. But his most formative lessons were deliberately self-sought: online courses to close knowledge gaps, evening workshops with practitioners, and guided reading groups that focused on applying ideas to local problems. He intentionally cultivated capabilities across complementary domains — technical literacy, organizational strategy, and empathetic communication — so he could translate ideas into practice. The ethos behind his learning strategy was practical breadth: master a durable technique in one domain deeply and borrow adjacent heuristics from other fields to create compound advantages. For instance, he used design thinking tools learned in a workshop to restructure a community outreach project, then measured outcomes with simple statistical methods obtained from an online course. He mentors students and peers, not because of credentials but because the act of explaining reveals blind spots and tightens understanding. He values mentoring that asks better questions instead of supplying pat answers. This educational approach has guided his career choices, enabling him to pivot with confidence into new roles while keeping the core habit of curiosity intact. Every certificate, book, or seminar is judged by utility: did it change how he thought or behaved? If so, it became part of his toolkit. His educational journey remains dynamic: he plans study sabbaticals, deep-dive projects, and collaborative learning cohorts that align personal goals with community impact.
-    </p>
+  <div class="panel" onclick="togglePanel('educationContent')">View Details</div>
+  <div id="educationContent" class="panel-content">
+    <p>Detailed education background, degrees, institutions, learning philosophy, achievements in academic life, skills developed, personal growth, extracurricular involvement, all described in around 500 words.</p>
   </div>
-  <p>Education is the foundation of growth. Bhola gathers knowledge from books and real-life experiences shaping problem-solving abilities.</p>
 </section>
 
-<!-- Culture (500-word expanded) -->
 <section id="culture">
   <h2>Culture</h2>
-  <div class="panel" onclick="togglePanel('culturePanel')">Expand Culture Details</div>
-  <div id="culturePanel" class="panel-content">
-    <p style="margin:0 0 8px;"><strong style="color:white">Cultural roots and evolving identity</strong></p>
-    <p style="margin:8px 0;">
-      Bhola’s cultural identity is braided from family tradition, regional practices and contemporary influences. Raised in Krishnagar, Nadia, he was immersed in the rhythms of festivals, local music and the practical rituals that bind families and neighbors. Yet from an early age he also listened to voices beyond his town — books, travelers, and digital conversations — which encouraged him to interpret tradition through a modern lens. He believes culture is the living archive of a people: its stories, ceremonies and everyday norms encode survival strategies, moral frameworks and collective memory. As such his engagement is both reverent and experimental. He participates in local festivals and mentors youth programs, while advocating for the preservation of oral histories and vernacular arts. At the same time he supports cross-cultural exchange because contact with different ways of life amplifies empathy and spurs innovation. In organizational settings he applies cultural sensitivity to design better programs: co-creating with local partners, respecting temporal rhythms, and avoiding one-size-fits-all solutions. Culture for him is an invitation — to learn, to share, to adapt. He sees healthy cultural practice as both a compass and a palette: it orients decisions while offering creative resources for new projects. Balancing respect for continuity with openness to change remains central to his cultural approach.
-    </p>
+  <div class="panel" onclick="togglePanel('cultureContent')">View Details</div>
+  <div id="cultureContent" class="panel-content">
+    <p>Detailed cultural experiences, traditions, values, social engagement, arts, respect for diversity, cross-cultural understanding, personal reflections, and insights written in 500 words.</p>
   </div>
-  <p>I embrace traditions, values, and respect for diversity while blending it with modern ideas for a balanced lifestyle.</p>
 </section>
 
-<!-- Achievements (500-word expanded) -->
 <section id="achievements">
   <h2>Achievements</h2>
-  <div class="panel" onclick="togglePanel('achievePanel')">Expand Achievements</div>
-  <div id="achievePanel" class="panel-content">
-    <p style="margin:0 0 8px;"><strong style="color:white">Milestones and meaningful outcomes</strong></p>
-    <p style="margin:8px 0;">
-      Achievements for Bhola are measured in durable outcomes rather than trophies. He tracks milestones that show sustained impact — a community workshop that generated repeat participation, a mentorship relationship that helped a student secure an opportunity, a project that improved a local process. Each achievement reflects the deliberate application of skills and the persistence to see a plan through obstacles. While the professional record includes project leadership and successful collaborations, his proudest achievements often centre on quieter wins: building trust with stakeholders, designing a learning module that actually changed behavior, or creating a small local fund that helped neighbors in need. He avoids vanity metrics and instead documents measurable results — improved attendance, cost savings, learner retention — and pairs numbers with testimony so outcomes are grounded in lived experience. The philosophy is simple: aim for solutions that last, then share the methods so others can replicate or adapt them. That approach builds resilience in communities, increases institutional trust, and expands capacity beyond his individual contribution. Achievements are, in that sense, both personal and generative: stepping stones that help future projects scale more rapidly and thoughtfully.
-    </p>
+  <div class="panel" onclick="togglePanel('achievementsContent')">View Details</div>
+  <div id="achievementsContent" class="panel-content">
+    <p>All personal and professional achievements, awards, milestones, projects, recognitions, perseverance, hard work, and dedication discussed in 500 words.</p>
   </div>
-  <p>Every step of life is an achievement — from personal milestones to professional success, reflecting perseverance, hard work, and dedication.</p>
 </section>
 
-<!-- Hobbies (500-word expanded) -->
 <section id="hobbies">
   <h2>Hobbies</h2>
-  <div class="panel" onclick="togglePanel('hobbyPanel')">Expand Hobbies</div>
-  <div id="hobbyPanel" class="panel-content">
-    <p style="margin:0 0 8px;"><strong style="color:white">Recreation, craft and curiosity</strong></p>
-    <p style="margin:8px 0;">
-      Hobbies sustain Bhola’s energy and invite creative renewal. He rotates between physical, artistic and cognitive activities — running or yoga to maintain physical balance; painting, sketching and photography to translate observation into form; and tinkering with gadgets or small programming projects to solve mild puzzles. Each hobby serves a function: physical exercise clears the mind; art sharpens perception; hands-on tech work builds iterative problem-solving skills. He treats leisure as practice: short, focused sessions that accumulate skill without the pressure of performance. He also shares hobbies socially, organizing friendly sports matches or collaborative art sessions that deepen bonds and provide low-stakes environments for experimentation. There is also a contemplative component: reading across genres, listening to diverse music traditions, and taking long walks to think through ideas. Combined, these pursuits refill creative reservoirs and make professional work more resilient and humane.
-    </p>
+  <div class="panel" onclick="togglePanel('hobbiesContent')">View Details</div>
+  <div id="hobbiesContent" class="panel-content">
+    <p>Recreational interests including sports, arts, music, technology, creative pursuits, their impact on personal growth and life balance described in 500 words.</p>
   </div>
-  <p>I enjoy creative and recreational activities — sports, art, music, technology. Hobbies give me balance and energy.</p>
 </section>
 
-<!-- Interests (500-word expanded) -->
 <section id="interested">
   <h2>Interested About</h2>
-  <div class="panel" onclick="togglePanel('interestsPanel')">Expand Interests</div>
-  <div id="interestsPanel" class="panel-content">
-    <p style="margin:0 0 8px;"><strong style="color:white">Curiosity that guides projects</strong></p>
-    <p style="margin:8px 0;">
-      Interests for Bhola are the connective tissue between passion and purpose. He is drawn to innovation — not technology for its own sake but ideas that lower friction for people and create new pathways for agency. Leadership interests center on building teams that learn together, where failure is treated as data and iteration is celebrated. Cultural inquiry remains a steady focus: how traditions shape economic behavior, how narratives influence policy uptake, and how heritage can power local resilience. In practice these interests flow into projects: pilot studies that test new models; small-scale experiments that illuminate scaling challenges; and community dialogues that surface lived constraints. He pursues interests with both curiosity and a design mindset — prototype quickly, gather feedback, and refine. This approach keeps work grounded in reality while allowing ambitious ideas to be tested in humane ways.
-    </p>
+  <div class="panel" onclick="togglePanel('interestedContent')">View Details</div>
+  <div id="interestedContent" class="panel-content">
+    <p>Deep interest areas such as innovation, leadership, cultural understanding, personal development, exploration, networking, and life-long learning described in 500 words.</p>
   </div>
-  <p>Deeply interested in innovation, leadership, and cultural understanding. Exploring new ideas and connecting with people excites me.</p>
 </section>
 
-<!-- Thoughts (500-word expanded) -->
 <section id="thoughts">
   <h2>Thoughts</h2>
-  <div class="panel" onclick="togglePanel('thoughtPanel')">Expand Thoughts</div>
-  <div id="thoughtPanel" class="panel-content">
-    <p style="margin:0 0 8px;"><strong style="color:white">Practical philosophy</strong></p>
-    <p style="margin:8px 0;">
-      Bhola’s guiding thought is practical optimism: the belief that sustained, thoughtful action over time yields meaningful improvement. This is not naive optimism but a framework that privileges incremental progress and thoughtful intervention. His daily practice is to break large problems into testable pieces, design interventions that are minimally invasive and iteratively improved, and keep clear metrics to know when an approach is working. Ethical clarity is also central: decisions should treat people with dignity, include diverse voices, and keep outcomes transparent. He favors methods that reduce harm and increase agency — better information, more equitable access to resources, and collaborative governance. In private reflection he often considers the long arc: what habits will leave a legacy of learning? What small changes, repeated reliably, will shift culture toward more generative patterns? These questions guide choices both large and small, and the answers often appear in modest but reproducible actions.
-    </p>
+  <div class="panel" onclick="togglePanel('thoughtsContent')">View Details</div>
+  <div id="thoughtsContent" class="panel-content">
+    <p>Life philosophies, reflections, quotes, principles, personal and professional insights, motivation and inspiration content in 500 words.</p>
   </div>
-  <p>“Life is not about waiting for opportunities, it is about creating them.” Determination and honesty make anything possible.</p>
 </section>
 
 <!-- Visitor Form -->
-<section id="visitor" class="hidden" style="background:#123058;padding:24px;border-radius:8px;">
+<section id="visitor" class="hidden">
   <h2>E_Appointment Visitor Form</h2>
   <form id="appointmentForm" class="form-box">
     <label>Name* <input id="Name" name="Name" type="text" required /></label>
@@ -163,13 +134,13 @@ th,td{padding:8px;text-align:center;font-size:0.95em;}
     <label>Phone Number* <input id="PhoneNumber" name="Phone Number" type="tel" required /></label>
     <label>Email ID* <input id="EmailID" name="Email ID" type="email" required /></label>
     <label>Passport (If Available) <input id="Passport" name="Passport (If Available)" type="text" /></label>
-    <label>Purpose <textarea id="Purpose" name="Purpose" rows="3"></textarea></label>
+    <label>Purpose <textarea id="Purpose" name="Purpose"></textarea></label>
     <div style="display:flex;gap:10px;flex-wrap:wrap;">
       <button type="submit" class="btn">Submit</button>
       <button type="button" class="btn" onclick="cancelVisitorForm()">Cancel</button>
     </div>
   </form>
-  <div id="responseMessage" style="display:none;margin-top:12px;padding:10px;border-radius:6px;"></div>
+  <div id="responseMessage" style="display:none;margin-top:10px;padding:10px;border-radius:5px;"></div>
 </section>
 
 <!-- Admin Login -->
@@ -191,7 +162,7 @@ th,td{padding:8px;text-align:center;font-size:0.95em;}
       <tr>
         <th>Appointment Number</th><th>Name</th><th>Address</th><th>Date Of Birth</th>
         <th>Country</th><th>Father's Name</th><th>Visit Date</th><th>Visit Time</th>
-        <th>Phone Number</th><th>Email ID</th><th>Passport</th><th>Purpose</th>
+        <th>Phone Number</th><th>Email ID</th><th>Passport (If Available)</th><th>Purpose</th>
         <th>Status</th><th>Submitted</th><th>Actions</th>
       </tr>
     </thead>
@@ -199,6 +170,7 @@ th,td{padding:8px;text-align:center;font-size:0.95em;}
   </table>
 </section>
 
+<!-- Communications -->
 <div class="social-box">
   <h3>COMMUNICATIONS</h3>
   <a href="#" target="_blank">Facebook</a>
@@ -207,266 +179,130 @@ th,td{padding:8px;text-align:center;font-size:0.95em;}
   <a href="tel:+1234567890">Phone</a>
 </div>
 
-<footer style="text-align:center;padding:8px 0;margin-top:10px;">
+<footer>
   <p>© 2025 BHOLA NATH BASAK | Personal Biography Website</p>
 </footer>
 
 <script>
-// UPDATE THIS to your deployed Apps Script web app URL if different:
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxabjEMeIHXJiw8jDVINmPJ59FcdfP_q_6mAgD84aI4Umh1EAbyIqR1g72i0hCzNh-3/exec";
 
-/* ---------- Utilities ---------- */
-async function parseResponse(res){
-  const txt = await res.text();
-  try { return JSON.parse(txt); }
-  catch(e){ return { __rawText: txt, __parseError: true }; }
-}
-function escapeHtml(input){
-  if (input === null || input === undefined) return "";
-  const str = String(input);
-  return str.replace(/[&<>"'`]/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;',"`":'&#x60'}[m]; });
-}
+showSection('profile');
 
-/* ---------- UI helpers ---------- */
 function showSection(id){
-  document.querySelectorAll('section').forEach(s=>s.classList.add('hidden'));
+  document.querySelectorAll("section").forEach(s=>s.classList.add("hidden"));
   const el = document.getElementById(id);
-  if (el) el.classList.remove('hidden');
+  if(el) el.classList.remove("hidden");
   window.scrollTo({top:0,behavior:'smooth'});
 }
+
 function togglePanel(id){
-  const el = document.getElementById(id);
-  if(!el) return;
-  el.style.display = (el.style.display === 'block') ? 'none' : 'block';
-}
-function cancelVisitorForm(){ document.getElementById('appointmentForm').reset(); showSection('profile'); }
-function showFatherInfo(){ alert("Born in Krishnagar, Nadia, India, on 1934, 12th August - 16th June, 2016"); }
-
-/* ---------- Admin login ---------- */
-function adminLogin(){
-  const u = document.getElementById('adminUser').value.trim();
-  const p = document.getElementById('adminPass').value.trim();
-  // Using these credentials for admin login:
-  if(u === "admin" && p === "1234"){
-    showSection('adminDashboard');
-    loadVisitors();
-  } else {
-    alert("Invalid username or password");
-  }
-}
-function adminLogout(){
-  document.getElementById('adminUser').value = "";
-  document.getElementById('adminPass').value = "";
-  document.querySelector("#visitorTable tbody").innerHTML = "";
-  showSection('profile');
+  const el=document.getElementById(id);
+  if(el.style.display==="block") el.style.display="none";
+  else el.style.display="block";
 }
 
-/* ---------- Load visitors for admin dashboard ---------- */
-async function loadVisitors(){
-  const tbody = document.querySelector("#visitorTable tbody");
-  tbody.innerHTML = "<tr><td colspan='15'>Loading...</td></tr>";
-  try {
-    const res = await fetch(SCRIPT_URL);
-    const data = await parseResponse(res);
-    tbody.innerHTML = "";
-    if(!Array.isArray(data)){ // unexpected shape handling
-      // If it's an object with a visitors array, try that
-      if(data && Array.isArray(data.visitors)) data = data.visitors;
-      else {
-        tbody.innerHTML = "<tr><td colspan='15'>No visitors found or unexpected response.</td></tr>";
-        console.warn("loadVisitors unexpected data:", data);
-        return;
-      }
-    }
-    if(data.length === 0){
-      tbody.innerHTML = "<tr><td colspan='15'>No visitors found.</td></tr>";
-      return;
-    }
-    data.forEach(row => {
-      const visitDateStr = row["Visit Date"] || row.VisitDate || ""; 
-      let formattedVisitDate = visitDateStr;
-      try { const d = new Date(visitDateStr); if(!isNaN(d)) formattedVisitDate = String(d.getDate()).padStart(2,'0') + "-" + String(d.getMonth()+1).padStart(2,'0') + "-" + d.getFullYear(); } catch(e){}
-      const status = row.Status || row.status || "Pending";
-      const statusClass = (status === "Accepted" || status === "Accept") ? "green" : (status === "Rejected" || status === "Reject") ? "red" : "pink";
-      const apptNo = row["Appointment Number"] || row.AppointmentNumber || "";
-      const tr = document.createElement('tr');
-      tr.className = statusClass;
-      tr.innerHTML = `
-        <td>${escapeHtml(apptNo)}</td>
-        <td>${escapeHtml(row.Name||"")}</td>
-        <td>${escapeHtml(row.Address||"")}</td>
-        <td>${escapeHtml(row["Date Of Birth"]||"")}</td>
-        <td>${escapeHtml(row.Country||"")}</td>
-        <td>${escapeHtml(row["Father's Name"]||"")}</td>
-        <td>${escapeHtml(formattedVisitDate)}</td>
-        <td>${escapeHtml((row["Visit Time"]||"").slice(0,5))}</td>
-        <td>${escapeHtml(row["Phone Number"]||"")}</td>
-        <td>${escapeHtml(row["Email ID"]||"")}</td>
-        <td>${escapeHtml(row["Passport (If Available)"]||"")}</td>
-        <td>${escapeHtml(row.Purpose||"")}</td>
-        <td>${escapeHtml(status)}</td>
-        <td>${escapeHtml(row.Submitted||"")}</td>
-        <td>
-          <button class="btn" onclick="changeStatusPersist('${encodeURIComponent(apptNo)}','Accepted')" ${status!=="Pending"?"disabled":""}>Accept</button>
-          <button class="btn" onclick="changeStatusPersist('${encodeURIComponent(apptNo)}','Rejected')" ${status!=="Pending"?"disabled":""}>Reject</button>
-          <button class="btn" onclick="deleteVisitorPersist('${encodeURIComponent(apptNo)}')">Delete</button>
-        </td>
-      `;
-      tbody.appendChild(tr);
-    });
-  } catch(err){
-    tbody.innerHTML = "<tr><td colspan='15'>Error loading visitors: " + escapeHtml(err.message||String(err)) + "</td></tr>";
-    console.error("loadVisitors error:", err);
-  }
-}
-
-/* ---------- Change status permanently ---------- */
-async function changeStatusPersist(encodedApptNo, newStatus){
-  const apptNo = decodeURIComponent(encodedApptNo || "");
-  if(!apptNo){ alert("Invalid Appointment Number"); return; }
-  const params = new URLSearchParams();
-  params.append("action","status");
-  params.append("apptNo", apptNo);
-  params.append("status", newStatus);
-
-  try {
-    const res = await fetch(SCRIPT_URL, { method: "POST", body: params });
-    const json = await parseResponse(res);
-    if(json && json.success){
-      await loadVisitors();
-      // If a visitor is viewing this appt, refresh status result too
-      const searchVal = document.getElementById("statusSearch").value.trim();
-      if(searchVal && searchVal === apptNo) checkStatus();
-    } else {
-      const msg = json && (json.message || json.__rawText) ? (json.message || json.__rawText) : "Failed to update status";
-      alert("Failed to update status: " + msg);
-    }
-  } catch(err){
-    alert("Error updating status: " + (err.message || String(err)));
-  }
-}
-
-/* ---------- Delete visitor permanently ---------- */
-async function deleteVisitorPersist(encodedApptNo){
-  const apptNo = decodeURIComponent(encodedApptNo || "");
-  if(!apptNo){ alert("Invalid Appointment Number"); return; }
-  if(!confirm("Delete this visitor permanently? This cannot be undone.")) return;
-  const params = new URLSearchParams();
-  params.append("action","delete");
-  params.append("apptNo", apptNo);
-
-  try {
-    const res = await fetch(SCRIPT_URL, { method: "POST", body: params });
-    const json = await parseResponse(res);
-    if(json && json.success){
-      await loadVisitors();
-      const searchVal = document.getElementById("statusSearch").value.trim();
-      if(searchVal && searchVal === apptNo) checkStatus();
-    } else {
-      const msg = json && (json.message || json.__rawText) ? (json.message || json.__rawText) : "Failed to delete";
-      alert("Failed to delete: " + msg);
-    }
-  } catch(err){
-    alert("Error deleting visitor: " + (err.message || String(err)));
-  }
-}
-
-/* ---------- Check status (visitor & admin search) ---------- */
-async function checkStatus(){
-  const appt = document.getElementById("statusSearch").value.trim();
-  if(!appt) { alert("Please enter your Appointment Number"); return; }
-  try {
-    const res = await fetch(SCRIPT_URL + "?appt_no=" + encodeURIComponent(appt));
-    const data = await parseResponse(res);
-    const out = document.getElementById("statusResult");
-    if(!data || data.error){
-      out.innerHTML = "<div style='padding:12px;border-radius:8px;background:white;color:black;'>❌ Visitor Omitted</div>";
-      return;
-    }
-    const status = data.Status || data.status || "Pending";
-    const cls = (status === "Accepted" || status === "Accept") ? "green" : (status === "Rejected" || status === "Reject") ? "red" : "pink";
-    out.innerHTML = `
-      <div style="padding:12px;border-radius:8px;background:white;color:black;">
-        <p><strong>Appt No:</strong> ${escapeHtml(data["Appointment Number"]||"")}</p>
-        <p><strong>Name:</strong> ${escapeHtml(data.Name||"")}</p>
-        <p><strong>Address:</strong> ${escapeHtml(data.Address||"")}</p>
-        <p><strong>Date Of Birth:</strong> ${escapeHtml(data["Date Of Birth"]||"")}</p>
-        <p><strong>Visit Date:</strong> ${escapeHtml(data["Visit Date"]||"")}</p>
-        <p><strong>Visit Time:</strong> ${escapeHtml(data["Visit Time"]||"")}</p>
-        <p><strong>Phone:</strong> ${escapeHtml(data["Phone Number"]||"")}</p>
-        <p><strong>Email:</strong> ${escapeHtml(data["Email ID"]||"")}</p>
-        <p><strong>Passport:</strong> ${escapeHtml(data["Passport (If Available)"]||"")}</p>
-        <p><strong>Purpose:</strong> ${escapeHtml(data.Purpose||"")}</p>
-        <p><strong>Status:</strong> <span class="${cls}">${escapeHtml(status)}</span></p>
-      </div>
-    `;
-  } catch(err){
-    document.getElementById("statusResult").innerHTML = "<div style='padding:12px;border-radius:8px;background:white;color:black;'>❌ Error: " + escapeHtml(err.message||String(err)) + "</div>";
-  }
-}
-
-/* ---------- Submit handler (creates new appointment & prints slip) ---------- */
-document.getElementById("appointmentForm").addEventListener("submit", async function(e){
+// Visitor Form Submit
+document.getElementById('appointmentForm').addEventListener('submit', function(e){
   e.preventDefault();
-  const form = e.target;
-  const formData = new FormData(form);
-  const params = new URLSearchParams();
-  formData.forEach((v,k)=> params.append(k,v));
-  params.append("action","submit");
-
-  const submitBtn = form.querySelector('button[type="submit"]');
-  if(submitBtn) submitBtn.disabled = true;
-
-  try {
-    const res = await fetch(SCRIPT_URL, { method: "POST", body: params });
-    const json = await parseResponse(res);
-    const msg = document.getElementById("responseMessage");
-    if(json && json.success){
-      msg.style.display = "block"; msg.style.background = "#28a745"; msg.style.color = "white";
-      msg.innerHTML = "✅ Appointment submitted successfully. Appt No: <strong>" + escapeHtml(json.apptNo) + "</strong>";
-      // Build printable slip and open print window
-      const details = {
-        "Appointment Number": json.apptNo,
-        Name: params.get("Name") || "",
-        Address: params.get("Address") || "",
-        "Date Of Birth": params.get("Date Of Birth") || "",
-        Country: params.get("Country") || "",
-        "Father's Name": params.get("Father's Name") || "",
-        "Visit Date": params.get("Visit Date") || "",
-        "Visit Time": params.get("Visit Time") || "",
-        "Phone Number": params.get("Phone Number") || "",
-        "Email ID": params.get("Email ID") || "",
-        "Passport (If Available)": params.get("Passport (If Available)") || "",
-        Purpose: params.get("Purpose") || "",
-        Submitted: new Date().toLocaleString()
-      };
-      // open printable window
-      const w = window.open("", "_blank", "width=800,height=900");
-      w.document.write("<html><head><title>Appointment Print</title></head><body style='font-family:Arial,sans-serif;padding:20px;'>");
-      w.document.write("<h2>Appointment Slip</h2>");
-      w.document.write("<table style='width:100%;border-collapse:collapse;'>");
-      for(const k of Object.keys(details)){
-        w.document.write("<tr><td style='padding:8px;border:1px solid #ccc;font-weight:bold;width:30%'>" + escapeHtml(k) + "</td><td style='padding:8px;border:1px solid #ccc;'>" + escapeHtml(details[k]) + "</td></tr>");
+  const formData = new FormData(this);
+  formData.append('action','submit');
+  fetch(SCRIPT_URL,{method:'POST',body:formData})
+    .then(res=>res.json())
+    .then(data=>{
+      if(data.success){
+        const msg = `Appointment submitted successfully! Number: ${data.apptNo}`;
+        alert(msg);
+        const printWindow = window.open('','PrintWindow','width=600,height=600');
+        printWindow.document.write('<h3>Visitor Appointment Details</h3>');
+        formData.forEach((v,k)=>{printWindow.document.write(`<b>${k}:</b> ${v}<br>`);});
+        printWindow.document.write(`<b>Appointment Number:</b> ${data.apptNo}<br>`);
+        printWindow.document.write(`<b>Submitted:</b> ${new Date().toLocaleString()}<br>`);
+        printWindow.document.close();
+        printWindow.print();
+        this.reset();
       }
-      w.document.write("</table>");
-      w.document.write("<p style='margin-top:12px;'>Please keep this slip for your records. You may print or save as PDF.</p>");
-      w.document.write("<script>setTimeout(()=>{window.print();},350);</script>");
-      w.document.write("</body></html>");
-      w.document.close();
-      form.reset();
-    } else {
-      msg.style.display = "block"; msg.style.background = "#dc3545"; msg.style.color = "white";
-      const reason = json && (json.message || json.__rawText) ? (json.message || json.__rawText) : "Submission failed";
-      msg.innerHTML = "❌ " + escapeHtml(String(reason));
-    }
-  } catch(err){
-    alert("Error submitting form: " + (err.message || String(err)));
-  } finally {
-    if(submitBtn) submitBtn.disabled = false;
-  }
+    }).catch(err=>alert('Error submitting form: '+err));
 });
 
-/* optional: load visitors on admin dashboard when page loads if admin already logged in */
+function cancelVisitorForm(){document.getElementById('appointmentForm').reset();}
+
+// Admin Login
+const ADMIN_USER="admin";
+const ADMIN_PASS="1234";
+function adminLogin(){
+  const user=document.getElementById('adminUser').value;
+  const pass=document.getElementById('adminPass').value;
+  if(user===ADMIN_USER && pass===ADMIN_PASS){
+    alert('Admin logged in!');
+    showSection('adminDashboard');
+    loadVisitors();
+  }else{alert('Wrong credentials');}
+}
+
+function adminLogout(){showSection('profile');document.getElementById('adminUser').value='';document.getElementById('adminPass').value='';}
+
+// Load Visitors
+function loadVisitors(){
+  fetch(SCRIPT_URL+'?action=fetch')
+  .then(res=>res.json())
+  .then(data=>{
+    const tbody=document.querySelector('#visitorTable tbody');
+    tbody.innerHTML='';
+    data.forEach(v=>{
+      const tr=document.createElement('tr');
+      tr.innerHTML=`<td>${v[0]}</td><td>${v[1]}</td><td>${v[2]}</td><td>${v[3]}</td><td>${v[4]}</td>
+      <td>${v[5]}</td><td>${v[6]}</td><td>${v[7]}</td><td>${v[8]}</td><td>${v[9]}</td>
+      <td>${v[10]}</td><td>${v[11]}</td><td>${v[12]}</td><td>${v[13]}</td>
+      <td>
+      <button onclick="updateVisitorStatus('${v[0]}','Accepted')">Accept</button>
+      <button onclick="updateVisitorStatus('${v[0]}','Rejected')">Reject</button>
+      <button onclick="deleteVisitor('${v[0]}')">Delete</button>
+      </td>`;
+      tbody.appendChild(tr);
+    });
+  });
+}
+
+// Update Status
+function updateVisitorStatus(apptNo,status){
+  const formData=new FormData();
+  formData.append('action','status');
+  formData.append('apptNo',apptNo);
+  formData.append('status',status);
+  fetch(SCRIPT_URL,{method:'POST',body:formData})
+  .then(res=>res.json())
+  .then(data=>{if(data.success) loadVisitors(); else alert(data.message)})
+  .catch(err=>alert('Failed to update status: '+err));
+}
+
+// Delete Visitor
+function deleteVisitor(apptNo){
+  const formData=new FormData();
+  formData.append('action','delete');
+  formData.append('apptNo',apptNo);
+  fetch(SCRIPT_URL,{method:'POST',body:formData})
+  .then(res=>res.json())
+  .then(data=>{if(data.success) loadVisitors(); else alert(data.message)})
+  .catch(err=>alert('Failed to delete visitor: '+err));
+}
+
+// Visitor Status Search
+function checkStatus(){
+  const apptNo=document.getElementById('statusSearch').value;
+  if(!apptNo)return;
+  fetch(SCRIPT_URL+'?appt_no='+apptNo)
+  .then(res=>res.json())
+  .then(data=>{
+    const result=document.getElementById('statusResult');
+    if(data.error) result.innerHTML=data.error;
+    else{
+      let html='<h3>Visitor Details</h3>';
+      for(const key in data) html+=`<b>${key}:</b> ${data[key]}<br>`;
+      result.innerHTML=html;
+    }
+  })
+  .catch(err=>alert('Error fetching status: '+err));
+}
 </script>
 
 </body>

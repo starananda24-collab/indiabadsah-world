@@ -7,28 +7,36 @@
 <style>
 body {margin:0; font-family: Arial, sans-serif; background:linear-gradient(to right,#1a2a6c,#b21f1f,#fdbb2d); color:white; line-height:1.6;}
 header{text-align:center; padding:20px; background:blue;}
-header img{width:180px;height:180px;object-fit:cover;border-radius:0; border:5px solid #fff;}
+header img{width:180px;height:180px;object-fit:cover;border-radius:5px;border:5px solid #fff;transition: transform 0.4s;}
+header img:hover{transform: scale(1.05) rotate(2deg);}
 header h1{margin:15px 0 0; font-size:2.5em;color:#fbd46d;text-shadow:2px 2px 5px black;}
 nav{display:flex;justify-content:center;background:rgba(0,0,0,0.8);flex-wrap:wrap;align-items:center;}
 nav a{color:white;text-decoration:none;padding:10px 15px;display:block;transition:background 0.3s,color 0.3s;cursor:pointer;}
 nav a:hover{background:#fbd46d;color:black;border-radius:5px;}
 #statusSearch {margin-left:10px;padding:5px;border-radius:5px;border:none;}
 #statusResult {margin-left:10px;}
+
 section{padding:40px 20px;max-width:900px;margin:auto;background:white;color:black;margin-bottom:30px;border-radius:12px;box-shadow:0px 4px 15px rgba(0,0,0,0.5);}
 section h2{color:#0044cc;margin-bottom:15px;}
-.panel {background:white;color:#0044cc;border-radius:8px;margin-bottom:15px;padding:10px;}
+.panel {margin-bottom:15px;}
 .panel-label {font-weight:bold;color:white;background:#0044cc;padding:5px;border-radius:5px;cursor:pointer;}
-.panel-content {display:block;color:black;margin-top:5px;text-align:justify;line-height:1.6;}
-.hidden{display:none;}
-.modal {position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;z-index:1000;}
-.modal-content{background:#fff;color:#000;padding:20px;border-radius:12px;max-width:500px;width:90%;position:relative;}
-.modal-content h3{margin-top:0;}
-.modal-content button{margin-top:10px;padding:8px 12px;border:none;border-radius:5px;cursor:pointer;}
-.modal-content .cancel-btn{background:red;color:white;margin-left:10px;}
+.panel-content {display:block;margin-top:5px;text-align:justify;line-height:1.6;}
+
+.form-box{background:rgba(0,0,0,0.7);padding:20px;border-radius:12px;color:white;max-width:500px;margin:auto;}
+.form-box label{display:block;margin-bottom:10px;}
+.form-box input, .form-box select, .form-box textarea{width:100%;padding:5px;margin-top:3px;border-radius:5px;border:none;}
+.btn{background:#fbd46d;color:black;padding:8px 12px;border:none;border-radius:5px;cursor:pointer;margin-top:10px;}
+.btn:hover{background:white;}
+
 .social-box{background:#333;padding:15px;margin:20px auto;border-radius:12px;max-width:400px;text-align:center;}
 .social-box h3{margin-bottom:10px;color:#fbd46d;}
 .social-box a{margin:0 10px;color:white;text-decoration:none;font-weight:bold;}
-footer{text-align:center;padding:15px;background:rgba(0,0,0,0.8);color:white;}
+
+#overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;}
+#visitorModal, #adminModal, #visitorPrint{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:white;color:black;padding:20px;border-radius:12px;z-index:1010;width:90%;max-width:600px;max-height:90%;overflow:auto;}
+
+#visitorPrint h2{color:#0044cc;text-align:center;}
+#visitorPrint button{margin:5px;}
 </style>
 </head>
 <body>
@@ -46,7 +54,7 @@ footer{text-align:center;padding:15px;background:rgba(0,0,0,0.8);color:white;}
   <a onclick="showSection('hobbies')">Hobbies</a>
   <a onclick="showSection('interested')">Interested About</a>
   <a onclick="showSection('thoughts')">Thoughts</a>
-  <a onclick="openVisitorForm()">Visitor Form</a>
+  <a onclick="openVisitorForm()">E_Appointment Form</a>
   <a onclick="openAdminLogin()">Admin Login</a>
   <input id="statusSearch" type="text" placeholder="Visitor Status: Enter Appt No" onkeypress="if(event.key==='Enter'){checkStatus();}" />
 </nav>
@@ -54,18 +62,19 @@ footer{text-align:center;padding:15px;background:rgba(0,0,0,0.8);color:white;}
 <div id="statusResult"></div>
 
 <!-- Sections always visible -->
-<section id="profile"><h2>Profile</h2><p><!-- 500-word profile description --></p></section>
-<section id="education"><h2>Education</h2><p><!-- 500-word education description --></p></section>
-<section id="culture"><h2>Culture</h2><p><!-- 500-word culture description --></p></section>
-<section id="achievements"><h2>Achievements</h2><p><!-- 500-word achievements description --></p></section>
-<section id="hobbies"><h2>Hobbies</h2><p><!-- 500-word hobbies description --></p></section>
-<section id="interested"><h2>Interested About</h2><p><!-- 500-word interested description --></p></section>
-<section id="thoughts"><h2>Thoughts</h2><p><!-- 500-word thoughts description --></p></section>
+<section id="profile"><h2>Profile</h2><p>(500 words detailed profile description here…)</p></section>
+<section id="education"><h2>Education</h2><p>(500 words detailed education description here…)</p></section>
+<section id="culture"><h2>Culture</h2><p>(500 words detailed culture description here…)</p></section>
+<section id="achievements"><h2>Achievements</h2><p>(500 words detailed achievements description here…)</p></section>
+<section id="hobbies"><h2>Hobbies</h2><p>(500 words detailed hobbies description here…)</p></section>
+<section id="interested"><h2>Interested About</h2><p>(500 words detailed interested description here…)</p></section>
+<section id="thoughts"><h2>Thoughts</h2><p>(500 words detailed thoughts description here…)</p></section>
 
 <!-- Visitor Form Modal -->
-<div id="visitorModal" class="modal hidden">
-  <div class="modal-content">
-    <h3>E_Appointment Form</h3>
+<div id="overlay"></div>
+<div id="visitorModal">
+  <h2>E_Appointment Form</h2>
+  <div class="form-box">
     <label>Name<input type="text" id="vName" /></label>
     <label>Address<textarea id="vAddress"></textarea></label>
     <label>Date Of Birth<input type="date" id="vDob"/></label>
@@ -77,136 +86,87 @@ footer{text-align:center;padding:15px;background:rgba(0,0,0,0.8);color:white;}
     <label>Email ID<input type="email" id="vEmail"/></label>
     <label>Passport (if available)<input type="text" id="vPassport"/></label>
     <label>Purpose<textarea id="vPurpose"></textarea></label>
-    <button onclick="submitVisitor()">Submit</button>
-    <button class="cancel-btn" onclick="cancelVisitorForm()">Cancel</button>
-    <div id="visitorPrint" class="hidden"></div>
+    <button class="btn" onclick="submitVisitorForm()">Submit</button>
+    <button class="btn" onclick="closeVisitorForm()">Cancel</button>
   </div>
 </div>
 
+<!-- Visitor Print Preview -->
+<div id="visitorPrint">
+  <h2>E_Appointment Submission</h2>
+  <div id="printContent"></div>
+  <p id="printDate"></p>
+  <button class="btn" onclick="printForm()">Print</button>
+  <button class="btn" onclick="closePrintPreview()">Close</button>
+</div>
+
 <!-- Admin Login Modal -->
-<div id="adminModal" class="modal hidden">
-  <div class="modal-content">
-    <h3>Admin Login</h3>
+<div id="adminModal">
+  <h2>Admin Login</h2>
+  <div class="form-box">
     <label>Username<input type="text" id="adminUser"/></label>
     <label>Password<input type="password" id="adminPass"/></label>
-    <button onclick="adminLogin()">Login</button>
-    <button class="cancel-btn" onclick="cancelAdminLogin()">Cancel</button>
-    <div id="adminPanel" class="hidden"></div>
+    <button class="btn" onclick="adminLogin()">Login</button>
+    <button class="btn" onclick="closeAdminLogin()">Cancel</button>
   </div>
+  <div id="adminPanel"></div>
 </div>
+
+<!-- Contact Details -->
+<div class="social-box">
+  <h3>Contact Details</h3>
+  <p>Facebook: <a href="https://www.facebook.com/share/17HAzeWpsW/" target="_blank">Link</a></p>
+  <p>LinkedIn: <a href="https://www.linkedin.com/in/bhola-nath-basak-3b6684242?trk=contact-info" target="_blank">Link</a></p>
+  <p>Email: <a href="mailto:starananda24@gmail.com">starananda24@gmail.com</a></p>
+  <p>Phone: +971 506309833</p>
+</div>
+
+<p style="text-align:center;margin-bottom:20px;">&copy;2025 Personal website Bhola Nath Basak</p>
 
 <script>
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxvgC7SEgrnduD7htaIJmYwH84eGvzpPLhlNFuLJz03L4excZxtN07s_aZx5rcO8Tc1/exec";
 
-// Sections
-function showSection(id){
-  document.querySelectorAll('section').forEach(s=>s.classList.add('hidden'));
-  document.getElementById(id).classList.remove('hidden');
+function showSection(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
+function openVisitorForm(){document.getElementById('visitorModal').style.display='block';document.getElementById('overlay').style.display='block';}
+function closeVisitorForm(){document.getElementById('visitorModal').style.display='none';document.getElementById('overlay').style.display='none';}
+function openAdminLogin(){document.getElementById('adminModal').style.display='block';document.getElementById('overlay').style.display='block';}
+function closeAdminLogin(){document.getElementById('adminModal').style.display='none';document.getElementById('overlay').style.display='none';}
+
+// Visitor Form Submit
+function submitVisitorForm(){
+  const data={action:'submit', Name:document.getElementById('vName').value, Address:document.getElementById('vAddress').value, "Date Of Birth":document.getElementById('vDob').value, Country:document.getElementById('vCountry').value, "Father's Name":document.getElementById('vFather').value, "Visit Date":document.getElementById('vVisitDate').value, "Visit Time":document.getElementById('vVisitTime').value, "Phone Number":document.getElementById('vPhone').value, "Email ID":document.getElementById('vEmail').value, "Passport (If Available)":document.getElementById('vPassport').value, Purpose:document.getElementById('vPurpose').value};
+  fetch(SCRIPT_URL,{method:'POST',body:new URLSearchParams(data)}).then(r=>r.json()).then(r=>{
+    if(r.success){
+      const content = `<p><strong>Appointment Number:</strong> ${r.apptNo}</p><p><strong>Name:</strong> ${data.Name}</p><p><strong>Address:</strong> ${data.Address}</p><p><strong>DOB:</strong> ${data["Date Of Birth"]}</p><p><strong>Country:</strong> ${data.Country}</p><p><strong>Father's Name:</strong> ${data["Father's Name"]}</p><p><strong>Visit Date:</strong> ${data["Visit Date"]}</p><p><strong>Visit Time:</strong> ${data["Visit Time"]}</p><p><strong>Phone:</strong> ${data["Phone Number"]}</p><p><strong>Email:</strong> ${data["Email ID"]}</p><p><strong>Passport:</strong> ${data["Passport (If Available)"]}</p><p><strong>Purpose:</strong> ${data.Purpose}</p>`;
+      document.getElementById('printContent').innerHTML=content;
+      document.getElementById('printDate').innerText="Submission Date: "+new Date().toLocaleString();
+      document.getElementById('visitorPrint').style.display='block';
+      closeVisitorForm();
+    } else alert("Error submitting form");
+  });
 }
+function printForm(){const w=window.open('','_blank','width=800,height=600');w.document.write('<html><head><title>Print</title></head><body>'+document.getElementById('visitorPrint').innerHTML+'</body></html>');w.document.close();w.print();}
+function closePrintPreview(){document.getElementById('visitorPrint').style.display='none';}
 
-// Visitor Form
-function openVisitorForm(){document.getElementById('visitorModal').classList.remove('hidden');}
-function cancelVisitorForm(){
-  document.getElementById('visitorModal').classList.add('hidden');
-  document.getElementById('vName').value='';document.getElementById('vAddress').value='';
-  document.getElementById('vDob').value='';document.getElementById('vCountry').value='';
-  document.getElementById('vFather').value='';document.getElementById('vVisitDate').value='';
-  document.getElementById('vVisitTime').value='';document.getElementById('vPhone').value='';
-  document.getElementById('vEmail').value='';document.getElementById('vPassport').value='';
-  document.getElementById('vPurpose').value='';document.getElementById('visitorPrint').classList.add('hidden');
-}
-
-// Admin Login
-function openAdminLogin(){document.getElementById('adminModal').classList.remove('hidden');}
-function cancelAdminLogin(){document.getElementById('adminModal').classList.add('hidden');document.getElementById('adminPanel').classList.add('hidden');}
-
+// Admin login
 function adminLogin(){
   const user=document.getElementById('adminUser').value;
   const pass=document.getElementById('adminPass').value;
-  if(user==='admin' && pass==='admin123'){
-    alert('Admin Logged In!');
-    document.getElementById('adminPanel').classList.remove('hidden');
-    loadAdminDashboard();
-  }else{alert('Invalid Credentials');}
+  if(user==="admin" && pass==="1234"){
+    document.getElementById('adminPanel').innerHTML='<h3>Admin Dashboard</h3><div id="visitorsTable"></div>';
+    fetchVisitors();
+  } else alert("Invalid credentials");
 }
 
-// Visitor Submission
-function submitVisitor(){
-  const data={
-    action:'submit',
-    Name: document.getElementById('vName').value,
-    Address: document.getElementById('vAddress').value,
-    "Date Of Birth": document.getElementById('vDob').value,
-    Country: document.getElementById('vCountry').value,
-    "Father's Name": document.getElementById('vFather').value,
-    "Visit Date": document.getElementById('vVisitDate').value,
-    "Visit Time": document.getElementById('vVisitTime').value,
-    "Phone Number": document.getElementById('vPhone').value,
-    "Email ID": document.getElementById('vEmail').value,
-    "Passport (If Available)": document.getElementById('vPassport').value,
-    Purpose: document.getElementById('vPurpose').value
-  };
-  fetch(SCRIPT_URL,{method:'POST',body:new URLSearchParams(data)})
-    .then(r=>r.json()).then(res=>{
-      if(res.success){
-        alert('Visitor Submitted! Appointment No: '+res.apptNo);
-        cancelVisitorForm();
-      }else alert('Failed to submit');
-    }).catch(e=>alert('Error:'+e));
-}
-
-// Visitor Status Search
-function checkStatus(){
-  const apptNo=document.getElementById('statusSearch').value;
-  if(!apptNo) return;
-  fetch(SCRIPT_URL,{method:'POST',body:new URLSearchParams({appt_no:apptNo})})
-    .then(r=>r.json()).then(res=>{
-      if(res.error){document.getElementById('statusResult').innerText=res.error;}
-      else{document.getElementById('statusResult').innerHTML=
-        `<p>Appointment: ${res["Appointment Number"]} | Name: ${res.Name} | Status: ${res.Status} | Message: ${res["Admin Message"]} | Submitted: ${res.Submitted}</p>`;}
-    }).catch(e=>document.getElementById('statusResult').innerText='Error fetching visitor');
-}
-
-// Admin Dashboard
-function loadAdminDashboard(){
-  fetch(SCRIPT_URL)
-    .then(r=>r.json())
-    .then(visitors=>{
-      if(visitors.error){document.getElementById('adminPanel').innerText='Error loading visitors'; return;}
-      let html=`<h3>Visitor Dashboard & Chat</h3><table border="1" style="width:100%;border-collapse:collapse;"><tr>`;
-      if(visitors.length>0){
-        html+=Object.keys(visitors[0]).map(k=>`<th>${k}</th>`).join('')+'<th>Send Message</th></tr>';
-        visitors.forEach(v=>{
-          html+=`<tr>${Object.keys(v).map(k=>`<td>${v[k]}</td>`).join('')}
-          <td><input type="text" id="msg_${v['Appointment Number']}" placeholder="Enter message"/>
-          <button onclick="sendMessage('${v['Appointment Number']}')">Send</button></td></tr>`;
-        });
-      } else html+='<tr><td>No visitors yet</td></tr>';
-      html+='</table>';
-      document.getElementById('adminPanel').innerHTML=html;
-    });
-}
-
-function sendMessage(apptNo){
-  const msg=document.getElementById('msg_'+apptNo).value;
-  fetch(SCRIPT_URL,{method:'POST',body:new URLSearchParams({action:'message',apptNo:apptNo,message:msg})})
-    .then(r=>r.json()).then(res=>{
-      if(res.success){alert('Message sent!');loadAdminDashboard();}
-      else alert(res.message);
-    });
+function fetchVisitors(){
+  fetch(SCRIPT_URL,{method:'POST',body:new URLSearchParams({action:'fetch'})}).then(r=>r.json()).then(data=>{
+    let html='<table border="1" cellpadding="5" cellspacing="0" style="color:black;width:100%"><tr>';
+    for(const h in data[0]) html+='<th>'+h+'</th>'; html+='</tr>';
+    data.forEach(r=>{html+='<tr>';for(const h in r) html+='<td>'+r[h]+'</td>';html+='</tr>';});
+    html+='</table>'; document.getElementById('visitorsTable').innerHTML=html;
+  });
 }
 </script>
-
-<!-- Contact Details -->
-<div class="social-box">
-<h3>Contact Details</h3>
-<p>Facebook: <a href="https://www.facebook.com/share/17HAzeWpsW/">Link</a> | LinkedIn: <a href="https://www.linkedin.com/in/bhola-nath-basak-3b6684242?trk=contact-info">Link</a></p>
-<p>Email: starananda24@gmail.com | Phone: +971 506309833</p>
-</div>
-
-<footer>
-  copyright@2025 Personal website Bhola Nath Basak
-</footer>
 
 </body>
 </html>

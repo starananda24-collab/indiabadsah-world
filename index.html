@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>BHOLA NATH BASAK</title>
 <style>
-body {margin:0; font-family: Arial, sans-serif; background:linear-gradient(to right,#1a2a6c,#b21f1f,#fdbb2d); color:white; line-height:1.6;}
-header{text-align:center; padding:20px; background:blue;}
-header img{width:180px;height:180px;object-fit:cover;border-radius:0;border:5px solid #fff;transition: transform 0.4s;}
-header img:hover{transform: scale(1.05) rotate(2deg);}
-header h1{margin:15px 0 0; font-size:2.5em;color:#fbd46d;text-shadow:2px 2px 5px black;}
+body {margin:0;font-family:Arial,sans-serif;background:linear-gradient(to right,#1a2a6c,#b21f1f,#fdbb2d);color:white;line-height:1.6;}
+header{text-align:center;padding:20px;background:#1e90ff;}
+header img{width:180px;height:180px;object-fit:cover;border-radius:0;border:5px solid #fff;transition:transform 0.4s;}
+header img:hover{transform:scale(1.05) rotate(2deg);}
+header h1{margin:15px 0 0;font-size:2.5em;color:#fbd46d;text-shadow:2px 2px 5px black;}
 nav{display:flex;justify-content:center;background:rgba(0,0,0,0.8);flex-wrap:wrap;align-items:center;}
 nav a{color:white;text-decoration:none;padding:10px 15px;display:block;transition:background 0.3s,color 0.3s;cursor:pointer;}
 nav a:hover{background:#fbd46d;color:black;border-radius:5px;}
-#statusSearch {margin-left:10px;padding:5px;border-radius:5px;border:none;}
-#statusResult {margin-left:10px;}
+#statusSearch{margin-left:10px;padding:5px;border-radius:5px;border:none;}
+#statusResult{margin-left:10px;}
 section{padding:40px 20px;max-width:900px;margin:auto;background:white;color:black;margin-bottom:30px;border-radius:12px;box-shadow:0px 4px 15px rgba(0,0,0,0.5);}
-section h2{color:#0044cc;margin-bottom:15px;}
+section h2{color:#1e90ff;margin-bottom:15px;}
 .form-box{background:rgba(0,0,0,0.7);padding:20px;border-radius:12px;color:white;max-width:500px;margin:auto;}
 .form-box label{display:block;margin-bottom:10px;}
 .form-box input, .form-box select, .form-box textarea{width:100%;padding:5px;margin-top:3px;border-radius:5px;border:none;}
@@ -26,15 +26,16 @@ table{width:100%;border-collapse:collapse;color:black;background:white;margin-to
 table, th, td{border:1px solid #000;}
 th, td{padding:8px;text-align:center;}
 .hidden{display:none;}
-.contact-box{background:#333;padding:15px;margin:20px auto;border-radius:12px;max-width:400px;text-align:center;color:white;}
-.contact-box a{color:white;text-decoration:none;font-weight:bold;}
-footer{text-align:center;padding:15px;background:#222;color:white;}
+.social-box{background:#333;padding:15px;margin:20px auto;border-radius:12px;max-width:400px;text-align:center;}
+.social-box h3{margin-bottom:10px;color:#fbd46d;}
+.social-box a{margin:0 10px;color:white;text-decoration:none;font-weight:bold;}
+@media(max-width:600px){.form-box input,.form-box select,.form-box button,.form-box textarea{width:100%!important;font-size:16px;margin-top:5px;}nav{flex-direction:column;align-items:flex-start;}#statusSearch{width:90%;margin:10px;}}
 </style>
 </head>
 <body>
 
 <header>
-  <img src="myphoto.jpg" alt="Bhola Nath Basak Photo" />
+  <img src="myphoto.jpg" alt="Bhola Nath Basak Photo">
   <h1>BHOLA NATH BASAK</h1>
 </header>
 
@@ -46,63 +47,42 @@ footer{text-align:center;padding:15px;background:#222;color:white;}
   <a onclick="showSection('hobbies')">Hobbies</a>
   <a onclick="showSection('interested')">Interested About</a>
   <a onclick="showSection('thoughts')">Thoughts</a>
-  <a onclick="openVisitorForm()">Visitor Form</a>
-  <a onclick="openAdminLogin()">Admin Login</a>
-  <input id="statusSearch" type="text" placeholder="Visitor Status: Enter Appt No" onkeypress="if(event.key==='Enter'){checkStatus();}" />
+  <a onclick="toggleVisitorForm()">E_Appointment Form</a>
+  <a onclick="toggleAdminLogin()">Admin Login</a>
+  <input id="statusSearch" type="text" placeholder="Visitor Status: Enter Appt No" onkeypress="if(event.key==='Enter'){checkStatus();}">
 </nav>
 
 <div id="statusResult"></div>
 
-<!-- Profile to Thoughts always visible -->
-<section id="profile">
-<h2>Profile</h2>
-<p>BHOLA NATH BASAK (DOB: 24-03-1988) is a dedicated individual pursuing personal and professional growth...</p>
-</section>
+<!-- Sections Profile → Thoughts (always visible) -->
+<section id="profile"><h2>Profile</h2><p>Bhola Nath Basak (DOB: 24-03-1988) ... full 500 words description about upbringing, education, philosophy, hobbies, community involvement, technology interests, personal mission and vision, ethics, inspirations, challenges overcome, etc.</p></section>
 
-<section id="education">
-<h2>Education</h2>
-<p>Bhola Nath Basak's education journey reflects a deep commitment to knowledge and skill development...</p>
-</section>
+<section id="education"><h2>Education</h2><p>Education journey with academic, extracurricular, lifelong learning, mentoring, research, recognition ...</p></section>
 
-<section id="culture">
-<h2>Culture</h2>
-<p>Bhola Nath Basak values a blend of tradition and modernity...</p>
-</section>
+<section id="culture"><h2>Culture</h2><p>Cultural values, traditions, modernity, festivals, travel, literature, global perspectives ...</p></section>
 
-<section id="achievements">
-<h2>Achievements</h2>
-<p>Bhola Nath Basak's achievements reflect dedication and perseverance...</p>
-</section>
+<section id="achievements"><h2>Achievements</h2><p>Professional and personal milestones, awards, community service, recognition, learning ...</p></section>
 
-<section id="hobbies">
-<h2>Hobbies</h2>
-<p>Bhola enjoys a variety of hobbies, including art, music, sports, and technology exploration...</p>
-</section>
+<section id="hobbies"><h2>Hobbies</h2><p>Recreational interests, arts, music, sports, technology, travel, volunteering, photography, creativity ...</p></section>
 
-<section id="interested">
-<h2>Interested About</h2>
-<p>Bhola Nath Basak is deeply interested in innovation, leadership, cultural understanding, and technology...</p>
-</section>
+<section id="interested"><h2>Interested About</h2><p>Innovation, leadership, cultural understanding, technology, entrepreneurship, social impact ...</p></section>
 
-<section id="thoughts">
-<h2>Thoughts</h2>
-<p>Bhola Nath Basak's thoughts reflect deep contemplation on life, ethics, culture, and progress...</p>
-</section>
+<section id="thoughts"><h2>Thoughts</h2><p>Personal philosophy, ethics, reflections, lessons learned, inspirations, societal outlook ...</p></section>
 
 <!-- Visitor Form -->
-<section id="visitorFormSection" class="hidden">
+<section id="visitorForm" class="hidden">
 <h2>E_Appointment Form</h2>
 <div class="form-box">
-  <label>Name<input type="text" id="vName" /></label>
+  <label>Name<input type="text" id="vName"></label>
   <label>Address<textarea id="vAddress"></textarea></label>
-  <label>Date Of Birth<input type="date" id="vDob"/></label>
-  <label>Country<input type="text" id="vCountry"/></label>
-  <label>Father's Name<input type="text" id="vFather"/></label>
-  <label>Visit Date<input type="date" id="vVisitDate"/></label>
-  <label>Visit Time<input type="time" id="vVisitTime"/></label>
-  <label>Phone Number<input type="text" id="vPhone"/></label>
-  <label>Email ID<input type="email" id="vEmail"/></label>
-  <label>Passport (if available)<input type="text" id="vPassport"/></label>
+  <label>Date Of Birth<input type="date" id="vDob"></label>
+  <label>Country<input type="text" id="vCountry"></label>
+  <label>Father's Name<input type="text" id="vFather"></label>
+  <label>Visit Date<input type="date" id="vVisitDate"></label>
+  <label>Visit Time<input type="time" id="vVisitTime"></label>
+  <label>Phone Number<input type="text" id="vPhone"></label>
+  <label>Email ID<input type="email" id="vEmail"></label>
+  <label>Passport (if available)<input type="text" id="vPassport"></label>
   <label>Purpose<textarea id="vPurpose"></textarea></label>
   <button class="btn" onclick="submitVisitor()">Submit</button>
   <button class="btn" onclick="clearVisitorForm()">Cancel</button>
@@ -111,97 +91,68 @@ footer{text-align:center;padding:15px;background:#222;color:white;}
 </section>
 
 <!-- Admin Login -->
-<section id="adminLoginSection" class="hidden">
+<section id="adminSection" class="hidden">
 <h2>Admin Login</h2>
 <div class="form-box" id="adminLoginBox">
-  <label>Username<input type="text" id="adminUser"/></label>
-  <label>Password<input type="password" id="adminPass"/></label>
+  <label>Username<input type="text" id="adminUser"></label>
+  <label>Password<input type="password" id="adminPass"></label>
   <button class="btn" onclick="adminLogin()">Login</button>
 </div>
+
 <div id="adminPanel" class="hidden"></div>
 <button id="adminLogoutBtn" class="btn hidden" onclick="adminLogout()">Logout</button>
 </section>
 
-<!-- Contact Details -->
-<div class="contact-box">
-  <h3>Contact Details</h3>
-  <p>Facebook: <a href="https://www.facebook.com/share/17HAzeWpsW/" target="_blank">FB</a> | LinkedIn: <a href="https://www.linkedin.com/in/bhola-nath-basak-3b6684242?trk=contact-info" target="_blank">LinkedIn</a></p>
-  <p>Email: starananda24@gmail.com | Phone: +971 506309833</p>
+<!-- Contact Footer -->
+<div class="social-box">
+<h3>Contact Details</h3>
+<p>Facebook: <a href="https://www.facebook.com/share/17HAzeWpsW/" target="_blank">FB</a></p>
+<p>LinkedIn: <a href="https://www.linkedin.com/in/bhola-nath-basak-3b6684242?trk=contact-info" target="_blank">LinkedIn</a></p>
+<p>Email: <a href="mailto:starananda24@gmail.com">starananda24@gmail.com</a></p>
+<p>Phone: +971 506309833</p>
 </div>
 
-<footer>
-©2025 Personal website Bhola Nath Basak
-</footer>
+<footer style="text-align:center;color:white;padding:15px;background:#1e90ff;">©2025 Personal website Bhola Nath Basak</footer>
 
 <script>
-const SCRIPT_URL = "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxabjEMeIHXJiw8jDVINmPJ59FcdfP_q_6mAgD84aI4Umh1EAbyIqR1g72i0hCzNh-3/exec";
 
-// Section handling
-function showSection(id){
-  document.querySelectorAll('section').forEach(s=>{ if(s.id!=='visitorFormSection' && s.id!=='adminLoginSection') s.style.display='block'; });
-}
+function showSection(id){document.getElementById(id).scrollIntoView({behavior:"smooth"});}
 
-// Visitor Form
-function openVisitorForm(){
-  document.getElementById('visitorFormSection').classList.remove('hidden');
-  clearVisitorForm();
-}
-function clearVisitorForm(){
-  ['vName','vAddress','vDob','vCountry','vFather','vVisitDate','vVisitTime','vPhone','vEmail','vPassport','vPurpose'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('visitorPrint').classList.add('hidden');
-}
+function toggleVisitorForm(){const v=document.getElementById('visitorForm');v.classList.toggle('hidden');}
+function toggleAdminLogin(){document.getElementById('adminSection').classList.remove('hidden');document.getElementById('adminLoginBox').classList.remove('hidden');document.getElementById('adminPanel').classList.add('hidden');document.getElementById('adminLogoutBtn').classList.add('hidden');}
+
+function clearVisitorForm(){document.getElementById('vName').value='';document.getElementById('vAddress').value='';document.getElementById('vDob').value='';document.getElementById('vCountry').value='';document.getElementById('vFather').value='';document.getElementById('vVisitDate').value='';document.getElementById('vVisitTime').value='';document.getElementById('vPhone').value='';document.getElementById('vEmail').value='';document.getElementById('vPassport').value='';document.getElementById('vPurpose').value='';document.getElementById('visitorPrint').classList.add('hidden');}
+
 function submitVisitor(){
-  const data = {
-    action:'submit',
-    Name: document.getElementById('vName').value,
-    Address: document.getElementById('vAddress').value,
-    "Date Of Birth": document.getElementById('vDob').value,
-    Country: document.getElementById('vCountry').value,
-    "Father's Name": document.getElementById('vFather').value,
-    "Visit Date": document.getElementById('vVisitDate').value,
-    "Visit Time": document.getElementById('vVisitTime').value,
-    "Phone Number": document.getElementById('vPhone').value,
-    "Email ID": document.getElementById('vEmail').value,
-    "Passport (If Available)": document.getElementById('vPassport').value,
-    Purpose: document.getElementById('vPurpose').value
-  };
-  fetch(SCRIPT_URL,{method:'POST',body:new URLSearchParams(data)})
-  .then(r=>r.json()).then(res=>{
-    if(res.success){
-      alert('Visitor Submitted! Appointment No: '+res.apptNo);
-      showPrintout(data,res.apptNo);
-      clearVisitorForm();
-    }else{alert('Failed to submit');}
+  const data={action:'submit',Name:document.getElementById('vName').value,Address:document.getElementById('vAddress').value,"Date Of Birth":document.getElementById('vDob').value,Country:document.getElementById('vCountry').value,"Father's Name":document.getElementById('vFather').value,"Visit Date":document.getElementById('vVisitDate').value,"Visit Time":document.getElementById('vVisitTime').value,"Phone Number":document.getElementById('vPhone').value,"Email ID":document.getElementById('vEmail').value,"Passport (If Available)":document.getElementById('vPassport').value,Purpose:document.getElementById('vPurpose').value};
+  fetch(SCRIPT_URL,{method:'POST',body:new URLSearchParams(data)}).then(r=>r.json()).then(res=>{
+    if(res.success){alert('Visitor Submitted! Appointment No: '+res.apptNo);showPrintout(data,res.apptNo);clearVisitorForm();}
+    else{alert('Failed to submit');}
   }).catch(e=>alert('Error:'+e));
 }
 
 function showPrintout(data,apptNo){
-  const container=document.getElementById('visitorPrint');
-  container.innerHTML=`<h3>Visitor Printout</h3>
-    <p><strong>Appointment No:</strong> ${apptNo}</p>
-    <p><strong>Name:</strong> ${data.Name}</p>
-    <p><strong>Address:</strong> ${data.Address}</p>
-    <p><strong>DOB:</strong> ${data["Date Of Birth"]}</p>
-    <p><strong>Country:</strong> ${data.Country}</p>
-    <p><strong>Father's Name:</strong> ${data["Father's Name"]}</p>
-    <p><strong>Visit Date:</strong> ${data["Visit Date"]}</p>
-    <p><strong>Visit Time:</strong> ${data["Visit Time"]}</p>
-    <p><strong>Phone:</strong> ${data["Phone Number"]}</p>
-    <p><strong>Email:</strong> ${data["Email ID"]}</p>
-    <p><strong>Passport:</strong> ${data["Passport (If Available)"]}</p>
-    <p><strong>Purpose:</strong> ${data.Purpose}</p>
-    <p><strong>Submitted On:</strong> ${new Date().toLocaleString()}</p>
-    <button onclick="window.print()">Print</button>`;
-  container.classList.remove('hidden');
+  const c=document.getElementById('visitorPrint');
+  c.innerHTML=`<h3>Visitor Printout</h3>
+  <p>Appointment No: ${apptNo}</p>
+  <p>Name: ${data.Name}</p>
+  <p>Address: ${data.Address}</p>
+  <p>DOB: ${data["Date Of Birth"]}</p>
+  <p>Country: ${data.Country}</p>
+  <p>Father's Name: ${data["Father's Name"]}</p>
+  <p>Visit Date: ${data["Visit Date"]}</p>
+  <p>Visit Time: ${data["Visit Time"]}</p>
+  <p>Phone: ${data["Phone Number"]}</p>
+  <p>Email: ${data["Email ID"]}</p>
+  <p>Passport: ${data["Passport (If Available)"]}</p>
+  <p>Purpose: ${data.Purpose}</p>
+  <p>Submitted On: ${new Date().toLocaleString()}</p>
+  <button onclick="window.print()">Print</button>`;
+  c.classList.remove('hidden');
 }
 
-// Admin
-function openAdminLogin(){
-  document.getElementById('adminLoginSection').classList.remove('hidden');
-  document.getElementById('adminLoginBox').classList.remove('hidden');
-  document.getElementById('adminPanel').classList.add('hidden');
-  document.getElementById('adminLogoutBtn').classList.add('hidden');
-}
+// Admin login
 function adminLogin(){
   const user=document.getElementById('adminUser').value;
   const pass=document.getElementById('adminPass').value;
@@ -210,65 +161,54 @@ function adminLogin(){
     document.getElementById('adminLoginBox').classList.add('hidden');
     document.getElementById('adminLogoutBtn').classList.remove('hidden');
     loadAdminDashboard();
-  }else{alert('Invalid Credentials');}
-}
-function adminLogout(){
-  document.getElementById('adminLoginBox').classList.remove('hidden');
-  document.getElementById('adminLogoutBtn').classList.add('hidden');
-  document.getElementById('adminPanel').classList.add('hidden');
-  alert('Logged Out Successfully');
+  } else{alert('Invalid Credentials');}
 }
 
-// Admin Dashboard
+function adminLogout(){
+  document.getElementById('adminPanel').classList.add('hidden');
+  document.getElementById('adminLogoutBtn').classList.add('hidden');
+  document.getElementById('adminLoginBox').classList.remove('hidden');
+}
+
+// Admin dashboard
 function loadAdminDashboard(){
   const panel=document.getElementById('adminPanel');
   panel.classList.remove('hidden');
-  fetch(SCRIPT_URL)
-    .then(r=>r.json())
-    .then(visitors=>{
-      if(visitors.error){panel.innerHTML='Error loading visitors'; return;}
-      let html=`<h3>Visitor Dashboard</h3><table border="1" style="width:100%;border-collapse:collapse;"><tr>`;
-      html+=Object.keys(visitors[0]).map(k=>`<th>${k}</th>`).join('');
-      html+='<th>Send Message</th></tr>';
-      visitors.forEach(v=>{
-        html+='<tr>';
-        html+=Object.keys(v).map(k=>`<td>${v[k]}</td>`).join('');
-        html+=`<td>
-                  <input type="text" id="msg-${v['Appointment Number']}" placeholder="Type message" style="width:80%;" />
-                  <button onclick="sendAdminMessageInline('${v['Appointment Number']}')">Send</button>
-               </td>`;
-        html+='</tr>';
-      });
-      html+='</table>';
-      panel.innerHTML=html;
-    }).catch(e=>panel.innerHTML='Error fetching visitors');
-}
-function sendAdminMessageInline(apptNo){
-  const msg=document.getElementById(`msg-${apptNo}`).value.trim();
-  if(!msg)return alert("Please enter a message!");
-  fetch(SCRIPT_URL,{
-    method:'POST',
-    body:new URLSearchParams({action:'message',apptNo:apptNo,message:msg})
-  }).then(r=>r.json()).then(res=>{
-    if(res.success){alert("Message sent!");document.getElementById(`msg-${apptNo}`).value="";}
-    else{alert(res.message);}
-  }).catch(e=>alert("Error sending message: "+e));
+  fetch(SCRIPT_URL).then(r=>r.json()).then(visitors=>{
+    if(visitors.error){panel.innerHTML='Error loading visitors'; return;}
+    let html='<h3>Visitor Dashboard</h3><table><tr>';
+    html+=Object.keys(visitors[0]).map(k=>`<th>${k}</th>`).join('')+'<th>Send Message</th></tr>';
+    visitors.forEach(v=>{
+      html+=`<tr>${Object.keys(v).map(k=>`<td>${v[k]}</td>`).join('')}
+      <td><button onclick="sendMessagePrompt('${v['Appointment Number']}')">Send</button></td></tr>`;
+    });
+    html+='</table>';
+    panel.innerHTML=html;
+  }).catch(e=>panel.innerHTML='Error fetching visitors');
 }
 
-// Visitor Status
+// Admin message
+function sendMessagePrompt(apptNo){
+  const msg=prompt("Enter message for visitor:");
+  if(!msg) return;
+  fetch(SCRIPT_URL,{method:'POST',body:new URLSearchParams({action:'message',apptNo:apptNo,message:msg})})
+    .then(r=>r.json()).then(res=>{if(res.success){alert(res.message);loadAdminDashboard();}else{alert(res.message);}})
+    .catch(e=>alert('Error:'+e));
+}
+
+// Visitor search
 function checkStatus(){
-  const apptNo=document.getElementById('statusSearch').value;
-  if(!apptNo)return;
-  fetch(SCRIPT_URL,{method:'POST',body:new URLSearchParams({appt_no:apptNo})})
-    .then(r=>r.json())
-    .then(res=>{
-      const container=document.getElementById('statusResult');
-      if(res.error){container.innerText=res.error;}
-      else{
-        container.innerHTML=`<p>Appointment: ${res["Appointment Number"]} | Name: ${res.Name} | Status: ${res.Status} | Submitted: ${res.Submitted} | Message: ${res["Admin Message"] || 'No message yet'}</p>`;
-      }
-    }).catch(e=>document.getElementById('statusResult').innerText='Error fetching visitor');
+  const appt=document.getElementById('statusSearch').value.trim();
+  if(!appt) return;
+  fetch(SCRIPT_URL,{method:'POST',body:new URLSearchParams({appt_no:appt})}).then(r=>r.json()).then(res=>{
+    if(res.error){document.getElementById('statusResult').innerHTML=res.error;return;}
+    let html='<h3>Visitor Status</h3><table border=1>';
+    Object.keys(res).forEach(k=>{html+=`<tr><td>${k}</td><td>${res[k]}</td></tr>`;});
+    html+='</table>';
+    document.getElementById('statusResult').innerHTML=html;
+  });
 }
 </script>
+
 </body>
 </html>

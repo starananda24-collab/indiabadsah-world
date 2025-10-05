@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>BHOLA NATH BASAK</title>
 <style>
-body {margin:0; font-family: Arial, sans-serif; background:linear-gradient(to right,#1a2a6c,#b21f1f,#fdbb2d); color:black; line-height:1.6;}
+body {margin:0; font-family: Arial, sans-serif; background:linear-gradient(to right,#1a2a6c,#b21f1f,#fdbb2d); color:white; line-height:1.6;}
 header{text-align:center; padding:20px; background:blue;}
-header img{width:180px;height:180px;object-fit:cover;border-radius:0%;border:5px solid #fff;transition: transform 0.4s;}
+header img{width:180px;height:180px;object-fit:cover;border-radius:0;border:5px solid #fff;transition: transform 0.4s;}
 header img:hover{transform: scale(1.05) rotate(2deg);}
 header h1{margin:15px 0 0; font-size:2.5em;color:#fbd46d;text-shadow:2px 2px 5px black;}
 nav{display:flex;justify-content:center;background:rgba(0,0,0,0.8);flex-wrap:wrap;align-items:center;}
@@ -17,23 +17,18 @@ nav a:hover{background:#fbd46d;color:black;border-radius:5px;}
 #statusResult {margin-left:10px;}
 section{padding:40px 20px;max-width:900px;margin:auto;background:white;color:black;margin-bottom:30px;border-radius:12px;box-shadow:0px 4px 15px rgba(0,0,0,0.5);}
 section h2{color:#0044cc;margin-bottom:15px;}
-.panel {background:#f9f9f9;color:#333;border-radius:8px;margin-bottom:15px;padding:10px;}
-.panel-label {font-weight:bold;color:#0044cc;padding:5px;border-radius:5px;cursor:pointer;}
-.panel-content {display:block;color:#333;margin-top:5px;text-align:justify;line-height:1.6;}
 .form-box{background:rgba(0,0,0,0.7);padding:20px;border-radius:12px;color:white;max-width:500px;margin:auto;}
 .form-box label{display:block;margin-bottom:10px;}
 .form-box input, .form-box select, .form-box textarea{width:100%;padding:5px;margin-top:3px;border-radius:5px;border:none;}
 .btn{background:#fbd46d;color:black;padding:8px 12px;border:none;border-radius:5px;cursor:pointer;margin-top:10px;}
 .btn:hover{background:white;}
-#adminPanel{margin-top:20px;}
+table{width:100%;border-collapse:collapse;color:black;background:white;margin-top:20px;}
+table, th, td{border:1px solid #000;}
+th, td{padding:8px;text-align:center;}
+.hidden{display:none;}
 .contact-box{background:#333;padding:15px;margin:20px auto;border-radius:12px;max-width:400px;text-align:center;color:white;}
-.contact-box a{margin:0 10px;color:#fbd46d;text-decoration:none;font-weight:bold;}
-footer{text-align:center;padding:10px;background:#222;color:white;}
-@media (max-width: 600px) {
-  .form-box input, .form-box select, .form-box button, .form-box textarea {width:100% !important; font-size:16px; margin-top:5px;}
-  nav {flex-direction: column; align-items: flex-start;}
-  #statusSearch {width:90%; margin:10px;}
-}
+.contact-box a{color:white;text-decoration:none;font-weight:bold;}
+footer{text-align:center;padding:15px;background:#222;color:white;}
 </style>
 </head>
 <body>
@@ -58,75 +53,40 @@ footer{text-align:center;padding:10px;background:#222;color:white;}
 
 <div id="statusResult"></div>
 
-<!-- Profile to Thoughts Sections -->
+<!-- Profile to Thoughts always visible -->
 <section id="profile">
 <h2>Profile</h2>
-<div class="panel">
-  <div class="panel-label" onclick="togglePanel(this)">Personal Details</div>
-  <div class="panel-content">
-    <p>BHOLA NATH BASAK (DOB: 24-03-1988) is a dedicated individual pursuing personal and professional growth. His father, Late Sankar Lal Basak, and mother Anima Basak instilled strong values. He married Asha Basak in a love marriage in September 2016 and they have a daughter, Sonaskhi Basak. Bhola is driven by curiosity, leadership, and cultural exploration, always seeking new experiences and knowledge.</p>
-  </div>
-</div>
+<p>BHOLA NATH BASAK (DOB: 24-03-1988) is a dedicated individual pursuing personal and professional growth...</p>
 </section>
 
 <section id="education">
 <h2>Education</h2>
-<div class="panel">
-  <div class="panel-label" onclick="togglePanel(this)">Academic Journey</div>
-  <div class="panel-content">
-    <p>Bhola Nath Basak's education journey reflects a deep commitment to knowledge and skill development. Starting from foundational schooling, he embraced both theoretical and practical learning. Higher education broadened his critical thinking and problem-solving abilities. Continuous self-learning, attending workshops, and exploring interdisciplinary topics enhanced his academic breadth.</p>
-  </div>
-</div>
+<p>Bhola Nath Basak's education journey reflects a deep commitment to knowledge and skill development...</p>
 </section>
 
 <section id="culture">
 <h2>Culture</h2>
-<div class="panel">
-  <div class="panel-label" onclick="togglePanel(this)">Cultural Values</div>
-  <div class="panel-content">
-    <p>Bhola Nath Basak values a blend of tradition and modernity. He respects heritage while embracing innovation. Festivals, rituals, and cultural events are integrated into his life, strengthening family bonds and community ties.</p>
-  </div>
-</div>
+<p>Bhola Nath Basak values a blend of tradition and modernity...</p>
 </section>
 
 <section id="achievements">
 <h2>Achievements</h2>
-<div class="panel">
-  <div class="panel-label" onclick="togglePanel(this)">Professional & Personal Milestones</div>
-  <div class="panel-content">
-    <p>Bhola Nath Basak's achievements reflect dedication and perseverance. From academic accolades to professional recognition, every milestone demonstrates his commitment to excellence. He has successfully led projects, collaborated with teams, and implemented innovative solutions.</p>
-  </div>
-</div>
+<p>Bhola Nath Basak's achievements reflect dedication and perseverance...</p>
 </section>
 
 <section id="hobbies">
 <h2>Hobbies</h2>
-<div class="panel">
-  <div class="panel-label" onclick="togglePanel(this)">Recreational Interests</div>
-  <div class="panel-content">
-    <p>Bhola enjoys a variety of hobbies, including art, music, sports, and technology exploration. Creative activities inspire him and provide balance in life. Participation in physical sports promotes health and teamwork. Experimenting with new technologies fosters innovation.</p>
-  </div>
-</div>
+<p>Bhola enjoys a variety of hobbies, including art, music, sports, and technology exploration...</p>
 </section>
 
 <section id="interested">
 <h2>Interested About</h2>
-<div class="panel">
-  <div class="panel-label" onclick="togglePanel(this)">Focus Areas</div>
-  <div class="panel-content">
-    <p>Bhola Nath Basak is deeply interested in innovation, leadership, cultural understanding, and technology. He explores new ideas, attends seminars, and collaborates with thought leaders.</p>
-  </div>
-</div>
+<p>Bhola Nath Basak is deeply interested in innovation, leadership, cultural understanding, and technology...</p>
 </section>
 
 <section id="thoughts">
 <h2>Thoughts</h2>
-<div class="panel">
-  <div class="panel-label" onclick="togglePanel(this)">Philosophy & Reflections</div>
-  <div class="panel-content">
-    <p>Bhola Nath Basak's thoughts reflect deep contemplation on life, ethics, culture, and progress. He values self-awareness, empathy, and practical wisdom. His reflections guide personal decisions, leadership approaches, and community engagement.</p>
-  </div>
-</div>
+<p>Bhola Nath Basak's thoughts reflect deep contemplation on life, ethics, culture, and progress...</p>
 </section>
 
 <!-- Visitor Form -->
@@ -160,7 +120,6 @@ footer{text-align:center;padding:10px;background:#222;color:white;}
 </div>
 <div id="adminPanel" class="hidden"></div>
 <button id="adminLogoutBtn" class="btn hidden" onclick="adminLogout()">Logout</button>
-
 </section>
 
 <!-- Contact Details -->
@@ -171,24 +130,15 @@ footer{text-align:center;padding:10px;background:#222;color:white;}
 </div>
 
 <footer>
-  ©2025 Personal website Bhola Nath Basak
+©2025 Personal website Bhola Nath Basak
 </footer>
 
 <script>
 const SCRIPT_URL = "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec";
 
-// Toggle panel content
-function togglePanel(el){
-  const content = el.nextElementSibling;
-  content.style.display = content.style.display==='block'?'none':'block';
-}
-
-// Show section
+// Section handling
 function showSection(id){
-  document.querySelectorAll('section').forEach(s=>{
-    if(s.id!=='visitorFormSection' && s.id!=='adminLoginSection') s.style.display='block';
-  });
-  // visitor/admin sections controlled separately
+  document.querySelectorAll('section').forEach(s=>{ if(s.id!=='visitorFormSection' && s.id!=='adminLoginSection') s.style.display='block'; });
 }
 
 // Visitor Form
@@ -215,10 +165,8 @@ function submitVisitor(){
     "Passport (If Available)": document.getElementById('vPassport').value,
     Purpose: document.getElementById('vPurpose').value
   };
-  fetch(SCRIPT_URL,{
-    method:'POST',
-    body: new URLSearchParams(data)
-  }).then(r=>r.json()).then(res=>{
+  fetch(SCRIPT_URL,{method:'POST',body:new URLSearchParams(data)})
+  .then(r=>r.json()).then(res=>{
     if(res.success){
       alert('Visitor Submitted! Appointment No: '+res.apptNo);
       showPrintout(data,res.apptNo);
@@ -228,28 +176,29 @@ function submitVisitor(){
 }
 
 function showPrintout(data,apptNo){
-  const container = document.getElementById('visitorPrint');
-  container.innerHTML = `<h3>Visitor Printout</h3>
-  <p><strong>Appointment No:</strong> ${apptNo}</p>
-  <p><strong>Name:</strong> ${data.Name}</p>
-  <p><strong>Address:</strong> ${data.Address}</p>
-  <p><strong>DOB:</strong> ${data["Date Of Birth"]}</p>
-  <p><strong>Country:</strong> ${data.Country}</p>
-  <p><strong>Father's Name:</strong> ${data["Father's Name"]}</p>
-  <p><strong>Visit Date:</strong> ${data["Visit Date"]}</p>
-  <p><strong>Visit Time:</strong> ${data["Visit Time"]}</p>
-  <p><strong>Phone:</strong> ${data["Phone Number"]}</p>
-  <p><strong>Email:</strong> ${data["Email ID"]}</p>
-  <p><strong>Passport:</strong> ${data["Passport (If Available)"]}</p>
-  <p><strong>Purpose:</strong> ${data.Purpose}</p>
-  <p><strong>Submitted On:</strong> ${new Date().toLocaleString()}</p>
-  <button onclick="window.print()">Print</button>`;
+  const container=document.getElementById('visitorPrint');
+  container.innerHTML=`<h3>Visitor Printout</h3>
+    <p><strong>Appointment No:</strong> ${apptNo}</p>
+    <p><strong>Name:</strong> ${data.Name}</p>
+    <p><strong>Address:</strong> ${data.Address}</p>
+    <p><strong>DOB:</strong> ${data["Date Of Birth"]}</p>
+    <p><strong>Country:</strong> ${data.Country}</p>
+    <p><strong>Father's Name:</strong> ${data["Father's Name"]}</p>
+    <p><strong>Visit Date:</strong> ${data["Visit Date"]}</p>
+    <p><strong>Visit Time:</strong> ${data["Visit Time"]}</p>
+    <p><strong>Phone:</strong> ${data["Phone Number"]}</p>
+    <p><strong>Email:</strong> ${data["Email ID"]}</p>
+    <p><strong>Passport:</strong> ${data["Passport (If Available)"]}</p>
+    <p><strong>Purpose:</strong> ${data.Purpose}</p>
+    <p><strong>Submitted On:</strong> ${new Date().toLocaleString()}</p>
+    <button onclick="window.print()">Print</button>`;
   container.classList.remove('hidden');
 }
 
-// Admin Login
+// Admin
 function openAdminLogin(){
   document.getElementById('adminLoginSection').classList.remove('hidden');
+  document.getElementById('adminLoginBox').classList.remove('hidden');
   document.getElementById('adminPanel').classList.add('hidden');
   document.getElementById('adminLogoutBtn').classList.add('hidden');
 }
@@ -271,14 +220,13 @@ function adminLogout(){
 }
 
 // Admin Dashboard
-function loadAdminDashboard() {
-  const panel = document.getElementById('adminPanel');
+function loadAdminDashboard(){
+  const panel=document.getElementById('adminPanel');
   panel.classList.remove('hidden');
-
   fetch(SCRIPT_URL)
     .then(r=>r.json())
     .then(visitors=>{
-      if(visitors.error){panel.innerHTML='Error loading visitors';return;}
+      if(visitors.error){panel.innerHTML='Error loading visitors'; return;}
       let html=`<h3>Visitor Dashboard</h3><table border="1" style="width:100%;border-collapse:collapse;"><tr>`;
       html+=Object.keys(visitors[0]).map(k=>`<th>${k}</th>`).join('');
       html+='<th>Send Message</th></tr>';
@@ -293,10 +241,8 @@ function loadAdminDashboard() {
       });
       html+='</table>';
       panel.innerHTML=html;
-    })
-    .catch(e=>panel.innerHTML='Error fetching visitors');
+    }).catch(e=>panel.innerHTML='Error fetching visitors');
 }
-
 function sendAdminMessageInline(apptNo){
   const msg=document.getElementById(`msg-${apptNo}`).value.trim();
   if(!msg)return alert("Please enter a message!");
@@ -317,29 +263,12 @@ function checkStatus(){
     .then(r=>r.json())
     .then(res=>{
       const container=document.getElementById('statusResult');
-      if(res.error){container.innerHTML=`<p style="color:red;">${res.error}</p>`;}
+      if(res.error){container.innerText=res.error;}
       else{
-        let html=`<h3>Visitor Status</h3>
-                  <div style="background:#f1f1f1;padding:15px;border-radius:10px;margin-bottom:10px;">
-                  <p><strong>Appointment No:</strong> ${res["Appointment Number"]}</p>
-                  <p><strong>Name:</strong> ${res.Name}</p>
-                  <p><strong>Status:</strong> ${res.Status}</p>
-                  <p><strong>Submitted:</strong> ${new Date(res.Submitted).toLocaleString()}</p>
-                  </div>`;
-        if(res["Admin Message"] && res["Admin Message"].trim()!==""){
-          html+=`<div style="background:#0044cc;color:white;padding:15px;border-radius:10px;margin-top:10px;">
-                  <strong>Admin Message:</strong>
-                  <p>${res["Admin Message"]}</p>
-                 </div>`;
-        }else html+='<p><em>No message from admin yet.</em></p>';
-        container.innerHTML=html;
+        container.innerHTML=`<p>Appointment: ${res["Appointment Number"]} | Name: ${res.Name} | Status: ${res.Status} | Submitted: ${res.Submitted} | Message: ${res["Admin Message"] || 'No message yet'}</p>`;
       }
-    }).catch(e=>document.getElementById('statusResult').innerHTML='<p style="color:red;">Error fetching status</p>');
+    }).catch(e=>document.getElementById('statusResult').innerText='Error fetching visitor');
 }
-
-// Toggle Panel
-function togglePanel(el){const content=el.nextElementSibling;content.style.display=content.style.display==='block'?'none':'block';}
 </script>
-
 </body>
 </html>

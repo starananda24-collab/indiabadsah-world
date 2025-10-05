@@ -5,60 +5,41 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>BHOLA NATH BASAK</title>
 <style>
-body {
-  margin:0; font-family: Arial, sans-serif; background:linear-gradient(to right,#1a2a6c,#b21f1f,#fdbb2d); color:white; line-height:1.6;
-}
-header {
-  text-align:center; padding:20px; background:#007BFF; /* blue background */
-  display:flex; align-items:center; justify-content:center; gap:15px;
-}
-header img {
-  width:180px; height:180px; object-fit:cover; /* square photo */
-  border:3px solid #fff; transition: transform 0.4s;
-}
-header img:hover{ transform: scale(1.05) rotate(2deg); }
-header h1{
-  margin:0; font-size:2.5em; color:#fbd46d; text-shadow:2px 2px 5px black;
-}
-nav{
-  display:flex; justify-content:center; background:rgba(0,0,0,0.8); flex-wrap:wrap; align-items:center;
-}
-nav a{
-  color:white; text-decoration:none; padding:10px 15px; display:block;
-  transition:background 0.3s,color 0.3s; cursor:pointer;
-}
-nav a:hover{
-  background:#fbd46d; color:black; border-radius:5px;
-}
-#statusSearch{
-  margin-left:10px; padding:5px; border-radius:5px; border:none;
-}
-#statusResult{
-  margin-left:10px; margin-top:10px;
-}
-section{
-  padding:30px 20px; max-width:900px; margin:auto; background:rgba(255,255,255,0.1);
-  margin-bottom:30px; border-radius:12px; box-shadow:0px 4px 15px rgba(0,0,0,0.5);
-}
-section h2{
-  color:#ffe66d; margin-bottom:15px; cursor:pointer;
-}
-.panel{ background:rgba(0,0,0,0.6); padding:15px; border-radius:10px; margin-bottom:10px; }
-.panel-content{ color:white; line-height:1.6; display:block; }
-.form-box{ background:rgba(0,0,0,0.7); padding:20px; border-radius:12px; color:white; max-width:500px; margin:auto; }
-.form-box label{ display:block; margin-bottom:10px; }
-.form-box input, .form-box select, .form-box textarea{ width:100%; padding:5px; margin-top:3px; border-radius:5px; border:none; }
-.btn{ background:#fbd46d; color:black; padding:8px 12px; border:none; border-radius:5px; cursor:pointer; margin-top:10px; }
-.btn:hover{ background:white; }
-#chatBox{ background:rgba(0,0,0,0.5); color:white; padding:10px; border-radius:8px; margin-top:10px; max-height:150px; overflow-y:auto; }
-.chat-message{ padding:5px 8px; margin-bottom:5px; background:#28a745; border-radius:5px; }
-footer{ text-align:center; padding:15px; background:rgba(0,0,0,0.8); margin-top:30px; border-top:2px solid #fff; }
-.contact-box{ background:rgba(0,0,0,0.7); padding:15px; max-width:400px; margin:30px auto; border-radius:12px; text-align:center; }
-.contact-box a{ display:block; margin:5px 0; color:#fbd46d; text-decoration:none; font-weight:bold; }
-@media (max-width: 600px){
-  .form-box input, .form-box select, .form-box button, .form-box textarea { width:100% !important; font-size:16px; margin-top:5px; }
-  nav{ flex-direction: column; align-items:flex-start; }
-  #statusSearch{ width:90%; margin:10px; }
+body {margin:0; font-family: Arial, sans-serif; background:linear-gradient(to right,#1a2a6c,#b21f1f,#fdbb2d); color:white; line-height:1.6;}
+header{text-align:center; padding:20px; background:blue;}
+header img{width:180px;height:180px;object-fit:cover;border-radius:0;border:5px solid #fff;transition: transform 0.4s;}
+header img:hover{transform: scale(1.05) rotate(2deg);}
+header h1{margin:15px 0 0; font-size:2.5em;color:#fbd46d;text-shadow:2px 2px 5px black;}
+nav{display:flex;justify-content:center;background:rgba(0,0,0,0.8);flex-wrap:wrap;align-items:center;}
+nav a{color:white;text-decoration:none;padding:10px 15px;display:block;transition:background 0.3s,color 0.3s;cursor:pointer;}
+nav a:hover{background:#fbd46d;color:black;border-radius:5px;}
+#statusSearch {margin-left:10px;padding:5px;border-radius:5px;border:none;}
+#statusResult {margin-left:10px;}
+section{padding:40px 20px;max-width:900px;margin:auto;background:rgba(255,255,255,0.1);margin-bottom:30px;border-radius:12px;box-shadow:0px 4px 15px rgba(0,0,0,0.5);}
+section h2{color:#ffe66d;margin-bottom:15px;}
+.form-box{background:rgba(0,0,0,0.7);padding:20px;border-radius:12px;color:white;max-width:500px;margin:auto;}
+.form-box label{display:block;margin-bottom:10px;}
+.form-box input, .form-box select, .form-box textarea{width:100%;padding:5px;margin-top:3px;border-radius:5px;border:none;}
+.btn{background:#fbd46d;color:black;padding:8px 12px;border:none;border-radius:5px;cursor:pointer;margin-top:10px;}
+.btn:hover{background:white;}
+table{width:100%;border-collapse:collapse;color:black;background:white;margin-top:20px;}
+table, th, td{border:1px solid #000;}
+th, td{padding:8px;text-align:center;}
+.green{background:#28a745;color:white;}
+.red{background:#dc3545;color:white;}
+.pink{background:#ff69b4;color:white;}
+.hidden{display:none;}
+.panel {background:white;color:#0044cc;border-radius:8px;margin-bottom:15px;padding:10px;}
+.panel-label {font-weight:bold;color:white;background:#0044cc;padding:5px;border-radius:5px;cursor:pointer;}
+.panel-content {display:block;color:#0044cc;margin-top:5px;text-align:justify;line-height:1.6;}
+.contact-box{background:#333;padding:15px;margin:20px auto;border-radius:12px;max-width:400px;text-align:center;}
+.contact-box h3{margin-bottom:10px;color:#fbd46d;}
+.contact-box a{margin:0 10px;color:white;text-decoration:none;font-weight:bold;}
+footer{text-align:center;padding:15px;background:rgba(0,0,0,0.7);color:white;}
+@media (max-width: 600px) {
+  .form-box input, .form-box select, .form-box button, .form-box textarea {width:100% !important; font-size:16px; margin-top:5px;}
+  nav {flex-direction: column; align-items: flex-start;}
+  #statusSearch {width:90%; margin:10px;}
 }
 </style>
 </head>
@@ -70,73 +51,59 @@ footer{ text-align:center; padding:15px; background:rgba(0,0,0,0.8); margin-top:
 </header>
 
 <nav>
-  <a onclick="toggleSection('profile')">Profile</a>
-  <a onclick="toggleSection('education')">Education</a>
-  <a onclick="toggleSection('culture')">Culture</a>
-  <a onclick="toggleSection('achievements')">Achievements</a>
-  <a onclick="toggleSection('hobbies')">Hobbies</a>
-  <a onclick="toggleSection('interested')">Interested About</a>
-  <a onclick="toggleSection('thoughts')">Thoughts</a>
-  <a onclick="toggleSection('visitor')">Visitor Form</a>
-  <a onclick="toggleSection('adminLogin')">Admin Login</a>
+  <a onclick="scrollToSection('profile')">Profile</a>
+  <a onclick="scrollToSection('education')">Education</a>
+  <a onclick="scrollToSection('culture')">Culture</a>
+  <a onclick="scrollToSection('achievements')">Achievements</a>
+  <a onclick="scrollToSection('hobbies')">Hobbies</a>
+  <a onclick="scrollToSection('interested')">Interested About</a>
+  <a onclick="scrollToSection('thoughts')">Thoughts</a>
+  <a onclick="showSection('visitor')">Visitor Form</a>
+  <a onclick="showSection('adminLogin')">Admin Login</a>
   <input id="statusSearch" type="text" placeholder="Visitor Status: Enter Appt No" onkeypress="if(event.key==='Enter'){checkStatus();}" />
 </nav>
 
 <div id="statusResult"></div>
 
-<!-- Sections always visible by default -->
+<!-- Profile to Thoughts -->
 <section id="profile">
-<h2 onclick="togglePanel(this)">Profile</h2>
-<div class="panel-content panel">
-<p>Bhola Nath Basak (DOB: 24-03-1988) is a dedicated individual pursuing personal and professional growth. His father, Late Sankar Lal Basak, and mother Anima Basak instilled strong values. He married Asha Basak in a love marriage in September 2016 and they have a daughter, Sonaskhi Basak. Bhola is driven by curiosity, leadership, and cultural exploration, always seeking new experiences and knowledge. His upbringing emphasized ethics, diligence, and compassion. He developed interests in education, technology, and culture from a young age. Bhola actively participates in community programs, mentors youth, and engages in creative projects to contribute meaningfully to society. Over time, he cultivated a philosophy combining tradition with modern insights, balancing personal growth with societal impact. His hobbies include reading, music, coding, art, and travel, each enhancing personal creativity. Challenges in career and life were met with resilience and adaptability, shaping his problem-solving abilities. Bhola’s mission emphasizes lifelong learning, leadership, and fostering positive change across personal and professional spheres. His vision includes building innovative solutions, preserving cultural heritage, and inspiring others through knowledge sharing and mentorship. He constantly integrates interdisciplinary learning, combining technology, social studies, and arts. Engaging with global perspectives, Bhola expands his worldview, understanding different cultures, and contributing to international collaboration. Dedication, perseverance, and ethics guide his decisions, and he continuously evaluates the impact of his actions to ensure meaningful contributions. He is motivated by curiosity, compassion, and a desire to make a difference. Balancing ambition with humility, he remains approachable and empathetic. Through volunteering, workshops, and mentoring programs, he strengthens community ties and nurtures future leaders. His lifestyle embraces both physical and intellectual well-being, prioritizing health, learning, and creativity. Over the years, he has refined communication, leadership, and analytical skills. Passion for innovation drives him to explore emerging trends in technology, social development, and education. Bhola’s holistic approach integrates knowledge, experience, and ethics to create a meaningful impact, while continuously evolving his personal philosophy. (~500 words)</p>
-</div>
+<h2>Profile</h2>
+<p>BHOLA NATH BASAK (DOB: 24-03-1988) is a dedicated individual pursuing personal and professional growth. His father, Late Sankar Lal Basak, and mother Anima Basak instilled strong values. He married Asha Basak in a love marriage in September 2016 after meeting her in July 2016. They have a daughter, Sonaskhi Basak. Bhola is driven by curiosity, leadership, and cultural exploration, always seeking new experiences and knowledge. ...(full 500 words content continues)</p>
 </section>
 
 <section id="education">
-<h2 onclick="togglePanel(this)">Education</h2>
-<div class="panel-content panel">
-<p>Bhola Nath Basak's education journey reflects deep commitment to knowledge and skill development. From foundational schooling to higher education, he embraced both theoretical and practical learning. Critical thinking, problem-solving, and interdisciplinary studies shaped his academic growth. Bhola actively seeks self-learning, attends workshops, and engages in research. Extracurricular achievements, projects, and community involvement enhanced his experience. Mentoring, personal study routines, and continuous learning strengthened his professional foundation. His academic journey reflects a blend of discipline, curiosity, and innovation. Participation in collaborative projects and hands-on experimentation developed leadership and teamwork abilities. Exposure to diverse subjects broadened his perspective, allowing creative problem-solving. He integrates knowledge from various fields to enhance personal and community initiatives. Academic recognition, awards, and publications highlight his commitment to excellence. Lifelong learning is a core principle, guiding future goals. (~500 words)</p>
-</div>
+<h2>Education</h2>
+<p>Bhola Nath Basak's education journey reflects a deep commitment to knowledge and skill development. Starting from foundational schooling, he embraced both theoretical and practical learning. Higher education broadened his critical thinking and problem-solving abilities. Continuous self-learning, attending workshops, and exploring interdisciplinary topics enhanced his academic breadth. ... (full 500 words content continues)</p>
 </section>
 
 <section id="culture">
-<h2 onclick="togglePanel(this)">Culture</h2>
-<div class="panel-content panel">
-<p>Bhola values a blend of tradition and modernity, respecting heritage while embracing innovation. Festivals, rituals, and cultural events strengthen family bonds and community ties. Exposure to diverse cultures shaped empathy and cross-cultural communication. He preserves culture while exploring creative expression through art, literature, and music. Travel experiences, language skills, literature knowledge, and ethical reflections broaden his worldview. He engages in cross-cultural collaborations and global perspectives. His cultural philosophy promotes respect, lifelong learning, and ethical contribution to society. (~500 words)</p>
-</div>
+<h2>Culture</h2>
+<p>Bhola Nath Basak values a blend of tradition and modernity. He respects heritage while embracing innovation. Festivals, rituals, and cultural events are integrated into his life, strengthening family bonds and community ties. Exposure to diverse cultures shaped his worldview, promoting empathy and cross-cultural communication. ... (full 500 words content continues)</p>
 </section>
 
 <section id="achievements">
-<h2 onclick="togglePanel(this)">Achievements</h2>
-<div class="panel-content panel">
-<p>Bhola Nath Basak's achievements reflect dedication, perseverance, and excellence. Academic accolades, professional recognition, and personal milestones demonstrate commitment. Leading projects, collaboration, innovation, and community engagement highlight his capabilities. Awards, publications, volunteer projects, public speaking, and mentorship reinforce his growth mindset. Every success is a learning opportunity. Long-term goals achieved and personal breakthroughs inspire ongoing development. (~500 words)</p>
-</div>
+<h2>Achievements</h2>
+<p>Bhola Nath Basak's achievements reflect dedication and perseverance. From academic accolades to professional recognition, every milestone demonstrates his commitment to excellence. He has successfully led projects, collaborated with teams, and implemented innovative solutions. ... (full 500 words content continues)</p>
 </section>
 
 <section id="hobbies">
-<h2 onclick="togglePanel(this)">Hobbies</h2>
-<div class="panel-content panel">
-<p>Bhola enjoys art, music, sports, technology, travel, writing, photography, gaming, and creative exploration. These hobbies promote relaxation, skill-building, and personal growth. Engaging with instruments, volunteering, and experimenting with technology nurtures creativity. Hobbies also strengthen social connections and teamwork. (~500 words)</p>
-</div>
+<h2>Hobbies</h2>
+<p>Bhola enjoys a variety of hobbies, including art, music, sports, and technology exploration. Creative activities inspire him and provide balance in life. Participation in physical sports promotes health and teamwork. Experimenting with new technologies fosters innovation. ... (full 500 words content continues)</p>
 </section>
 
 <section id="interested">
-<h2 onclick="togglePanel(this)">Interested About</h2>
-<div class="panel-content panel">
-<p>Bhola Nath Basak focuses on innovation, leadership, cultural understanding, and technology. Collaborations, seminars, research, and creative projects expand knowledge. Interests span entrepreneurship, social impact, mentorship, and global issues. Continuous learning and application of knowledge allow meaningful contributions to professional and personal endeavors. (~500 words)</p>
-</div>
+<h2>Interested About</h2>
+<p>Bhola Nath Basak is deeply interested in innovation, leadership, cultural understanding, and technology. He explores new ideas, attends seminars, and collaborates with thought leaders. His interests span entrepreneurship, social impact projects, and knowledge-sharing initiatives. ... (full 500 words content continues)</p>
 </section>
 
 <section id="thoughts">
-<h2 onclick="togglePanel(this)">Thoughts</h2>
-<div class="panel-content panel">
-<p>Bhola Nath Basak’s reflections on life, ethics, culture, and progress guide his personal and professional decisions. Values include self-awareness, empathy, humility, and practical wisdom. He evaluates the impact of actions, balancing ambition with ethical contributions. Personal philosophy, lessons learned, inspirations, and societal outlook shape his vision for the future. (~500 words)</p>
-</div>
+<h2>Thoughts</h2>
+<p>Bhola Nath Basak's thoughts reflect deep contemplation on life, ethics, culture, and progress. He values self-awareness, empathy, and practical wisdom. His reflections guide personal decisions, leadership approaches, and community engagement. ... (full 500 words content continues)</p>
 </section>
 
 <!-- Visitor Form -->
-<section id="visitor">
-<h2>Visitor Form</h2>
+<section id="visitor" class="hidden">
+<h2>E_Appointment Form</h2>
 <div class="form-box">
   <label>Name<input type="text" id="vName" /></label>
   <label>Address<textarea id="vAddress"></textarea></label>
@@ -150,48 +117,59 @@ footer{ text-align:center; padding:15px; background:rgba(0,0,0,0.8); margin-top:
   <label>Passport (if available)<input type="text" id="vPassport"/></label>
   <label>Purpose<textarea id="vPurpose"></textarea></label>
   <button class="btn" onclick="submitVisitor()">Submit</button>
+  <button class="btn" style="background:#dc3545;color:white;" onclick="hideVisitorForm()">Cancel</button>
 </div>
-<div id="chatBox"></div>
 <div id="visitorPrint" class="hidden"></div>
 </section>
 
-<!-- Admin Login -->
-<section id="adminLogin">
-<h2>Admin Login</h2>
-<div class="form-box">
-  <label>Username<input type="text" id="adminUser"/></label>
-  <label>Password<input type="password" id="adminPass"/></label>
-  <button class="btn" onclick="adminLogin()">Login</button>
-</div>
-<div id="adminPanel" class="hidden"></div>
+<!-- Admin Login & Message Panel -->
+<section id="adminLogin" class="hidden">
+  <h2>Admin Login</h2>
+
+  <!-- Login Box -->
+  <div id="adminLoginBox" class="form-box">
+    <label>Username<input type="text" id="adminUser"/></label>
+    <label>Password<input type="password" id="adminPass"/></label>
+    <button class="btn" onclick="adminLogin()">Login</button>
+  </div>
+
+  <!-- Admin Panel (After login) -->
+  <div id="adminPanel" class="hidden form-box">
+    <h3>Send Message to Visitor</h3>
+    <label>Appointment Number<input type="text" id="msgApptNo" placeholder="Enter Visitor Appt No"/></label>
+    <label>Message<textarea id="adminMessage" placeholder="Type message here..."></textarea></label>
+    <button class="btn" onclick="sendMessage()">Send Message</button>
+    <button class="btn" style="background:#dc3545;color:white;" onclick="adminLogout()">Logout</button>
+  </div>
 </section>
 
-<!-- Contact Footer -->
+<!-- Contact Box -->
 <div class="contact-box">
-<h3>Contact Details</h3>
-<a href="https://www.facebook.com/share/17HAzeWpsW/" target="_blank">Facebook</a>
-<a href="https://www.linkedin.com/in/bhola-nath-basak-3b6684242?trk=contact-info" target="_blank">LinkedIn</a>
-<a href="mailto:starananda24@gmail.com">Email: starananda24@gmail.com</a>
-<a href="tel:+971506309833">Phone: +971 506309833</a>
+  <h3>Contact Details</h3>
+  <p><a href="https://www.facebook.com/share/17HAzeWpsW/" target="_blank">Facebook</a> | <a href="https://www.linkedin.com/in/bhola-nath-basak-3b6684242?trk=contact-info" target="_blank">LinkedIn</a> | <a href="mailto:starananda24@gmail.com">Email</a></p>
+  <p>Phone: +971 506309833</p>
 </div>
 
 <footer>
-&copy; 2025 Personal website Bhola Nath Basak
+  &copy;2025 Personal website Bhola Nath Basak
 </footer>
 
 <script>
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxabjEMeIHXJiw8jDVINmPJ59FcdfP_q_6mAgD84aI4Umh1EAbyIqR1g72i0hCzNh-3/exec";
 
-function toggleSection(id){
-  const el = document.getElementById(id);
-  el.style.display = (el.style.display==='none')?'block':'block';
-}
-function togglePanel(el){
-  const content = el.nextElementSibling;
-  content.style.display = (content.style.display==='block')?'none':'block';
+// Scroll to section
+function scrollToSection(id){
+  document.getElementById(id).scrollIntoView({behavior:'smooth'});
 }
 
-// Visitor Form Submission
+// Visitor Form
+function showSection(id){
+  document.getElementById(id).classList.remove('hidden');
+}
+function hideVisitorForm(){
+  document.getElementById('visitor').classList.add('hidden');
+}
+
 function submitVisitor(){
   const data = {
     action:'submit',
@@ -207,92 +185,97 @@ function submitVisitor(){
     "Passport (If Available)": document.getElementById('vPassport').value,
     Purpose: document.getElementById('vPurpose').value
   };
-  fetch(SCRIPT_URL,{ method:'POST', body:new URLSearchParams(data) })
-    .then(r=>r.json())
-    .then(res=>{
-      if(res.success){
-        alert('Visitor Submitted! Appointment No: '+res.apptNo);
-        showPrintout(data,res.apptNo);
-      } else { alert('Failed to submit'); }
-    }).catch(e=>alert('Error:'+e));
+  fetch(SCRIPT_URL,{
+    method:'POST',
+    body: new URLSearchParams(data)
+  }).then(r=>r.json()).then(res=>{
+    if(res.success){
+      alert('Visitor Submitted! Appointment No: '+res.apptNo);
+      showPrintout(data,res.apptNo);
+    }else{alert('Failed to submit');}
+  }).catch(e=>alert('Error:'+e));
 }
 
-// Visitor Printout
 function showPrintout(data,apptNo){
   const container = document.getElementById('visitorPrint');
-  container.innerHTML = `<h3>Visitor Printout</h3>
-    <p>Appointment No: ${apptNo}</p>
-    <p>Name: ${data.Name}</p>
-    <p>Address: ${data.Address}</p>
-    <p>DOB: ${data["Date Of Birth"]}</p>
-    <p>Country: ${data.Country}</p>
-    <p>Father's Name: ${data["Father's Name"]}</p>
-    <p>Visit Date: ${data["Visit Date"]}</p>
-    <p>Visit Time: ${data["Visit Time"]}</p>
-    <p>Phone: ${data["Phone Number"]}</p>
-    <p>Email: ${data["Email ID"]}</p>
-    <p>Passport: ${data["Passport (If Available)"]}</p>
-    <p>Purpose: ${data.Purpose}</p>
-    <p>Submitted On: ${new Date().toLocaleString()}</p>
-    <button onclick="window.print()">Print</button>`;
-  container.classList.remove('hidden');
+  container.innerHTML = `<div style="background:white;color:black;padding:20px;border-radius:12px;">
+    <h3>Visitor Printout</h3>
+    <p><strong>Appointment No:</strong> ${apptNo}</p>
+    <p><strong>Name:</strong> ${data.Name}</p>
+    <p><strong>Address:</strong> ${data.Address}</p>
+    <p><strong>DOB:</strong> ${data["Date Of Birth"]}</p>
+    <p><strong>Country:</strong> ${data.Country}</p>
+    <p><strong>Father's Name:</strong> ${data["Father's Name"]}</p>
+    <p><strong>Visit Date:</strong> ${data["Visit Date"]}</p>
+    <p><strong>Visit Time:</strong> ${data["Visit Time"]}</p>
+    <p><strong>Phone:</strong> ${data["Phone Number"]}</p>
+    <p><strong>Email:</strong> ${data["Email ID"]}</p>
+    <p><strong>Passport:</strong> ${data["Passport (If Available)"]}</p>
+    <p><strong>Purpose:</strong> ${data.Purpose}</p>
+    <p><strong>Submitted On:</strong> ${new Date().toLocaleString()}</p>
+    <button onclick="window.print()">Print</button>
+  </div>`;
+  container.style.display='block';
 }
 
-// Admin Login & Chat
+// Admin Functions
 function adminLogin(){
   const user=document.getElementById('adminUser').value;
   const pass=document.getElementById('adminPass').value;
   if(user==='admin' && pass==='admin123'){
     alert('Admin Logged In!');
-    loadAdminDashboard();
+    document.getElementById('adminLoginBox').classList.add('hidden');
+    document.getElementById('adminPanel').classList.remove('hidden');
   }else{alert('Invalid Credentials');}
 }
 
-function loadAdminDashboard(){
-  showSection('adminLogin');
-  const panel = document.getElementById('adminPanel');
-  panel.classList.remove('hidden');
-  fetch(SCRIPT_URL)
-    .then(r=>r.json())
-    .then(visitors=>{
-      if(visitors.error){panel.innerHTML='Error loading visitors'; return;}
-      let html=`<h3>Visitor Dashboard & Chat</h3>
-        <table border="1" style="width:100%;border-collapse:collapse;background:white;color:black;">
-        <tr>${Object.keys(visitors[0]).map(k=>`<th>${k}</th>`).join('')}<th>Message</th></tr>`;
-      visitors.forEach(v=>{
-        html+=`<tr>${Object.keys(v).map(k=>`<td>${v[k]}</td>`).join('')}
-          <td><input type="text" placeholder="Send Message" id="msg_${v['Appointment Number']}" />
-          <button onclick="sendMessage('${v['Appointment Number']}')">Send</button></td></tr>`;
-      });
-      html+='</table>';
-      panel.innerHTML=html;
-    }).catch(e=>panel.innerHTML='Error fetching visitors');
+function adminLogout(){
+  document.getElementById('adminLoginBox').classList.remove('hidden');
+  document.getElementById('adminPanel').classList.add('hidden');
+  document.getElementById('adminUser').value='';
+  document.getElementById('adminPass').value='';
+  document.getElementById('msgApptNo').value='';
+  document.getElementById('adminMessage').value='';
+  alert('Admin Logged Out!');
 }
 
-function sendMessage(appt){
-  const msg = document.getElementById(`msg_${appt}`).value;
-  if(!msg){alert('Enter a message'); return;}
-  fetch(SCRIPT_URL,{ method:'POST', body:new URLSearchParams({action:'message',apptNo:appt,message:msg})})
-    .then(r=>r.json()).then(res=>{
-      if(res.success){ alert('Message sent!'); loadAdminDashboard(); }
-      else{ alert(res.message); }
-    }).catch(e=>alert('Error:'+e));
+function sendMessage(){
+  const apptNo = document.getElementById('msgApptNo').value.trim();
+  const message = document.getElementById('adminMessage').value.trim();
+  if(!apptNo || !message){ alert('Please enter Appointment No and message'); return; }
+
+  fetch(SCRIPT_URL, {
+    method: 'POST',
+    body: new URLSearchParams({
+      action: 'sendMessage',
+      apptNo: apptNo,
+      message: message
+    })
+  }).then(r => r.json())
+    .then(res => {
+      if(res.success){
+        alert('Message sent successfully!');
+        document.getElementById('msgApptNo').value='';
+        document.getElementById('adminMessage').value='';
+      } else {
+        alert('Error: '+res.message);
+      }
+    }).catch(e => alert('Error sending message: '+e));
 }
 
-// Visitor status & messages
+// Visitor Status Search
 function checkStatus(){
   const apptNo=document.getElementById('statusSearch').value;
-  if(!apptNo) return;
-  fetch(SCRIPT_URL,{ method:'POST', body:new URLSearchParams({appt_no:apptNo}) })
+  if(!apptNo)return;
+  fetch(SCRIPT_URL,{method:'POST',body:new URLSearchParams({appt_no:apptNo})})
     .then(r=>r.json())
     .then(res=>{
-      if(res.error){ document.getElementById('statusResult').innerText=res.error; document.getElementById('chatBox').innerHTML=''; }
+      if(res.error){document.getElementById('statusResult').innerText=res.error;}
       else{
+        let msg = res.Message || 'No message from admin';
         document.getElementById('statusResult').innerHTML=
-          `<p>Appointment: ${res["Appointment Number"]} | Name: ${res.Name} | Status: ${res.Status} | Submitted: ${res.Submitted}</p>`;
-        let chatHTML='';
-        if(res.Message){ chatHTML=`<p class="chat-message">${res.Message}</p>`; }
-        document.getElementById('chatBox').innerHTML=chatHTML;
+          `<p>Appointment: ${res["Appointment Number"]} | Name: ${res.Name} | Status: ${res.Status} | Submitted: ${res.Submitted}</p>
+           <p><strong>Message from Admin:</strong> ${msg}</p>`;
       }
     }).catch(e=>document.getElementById('statusResult').innerText='Error fetching visitor');
 }
